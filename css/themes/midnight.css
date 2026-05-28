@@ -1,0 +1,33 @@
+/* Theme: Midnight - Dark Elegance */
+:root {
+    --brand-50: #1e1b4b;
+    --brand-100: #312e81;
+    --brand-200: #3730a3;
+    --brand-300: #4f46e5;
+    --brand-400: #6366f1;
+    --brand-500: #818cf8;
+    --brand-600: #a5b4fc;
+    --brand-700: #c7d2fe;
+    --brand-800: #e0e7ff;
+    --brand-900: #eef2ff;
+    --surface: #0f0d1a;
+    --ink: #e2e8f0;
+    --accent: #f472b6;
+    --success: #34D399;
+    --danger: #F87171;
+    --warning: #FBBF24;
+    --bg-gradient-from: #0f0d1a;
+    --bg-gradient-to: #1a1030;
+    --card-bg: #1a1630;
+    --card-border: #2d2a4a;
+    --btn-primary-bg: #6366f1;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #818cf8;
+    --header-bg: rgba(15,13,26,0.92);
+    --footer-bg: #0a0914;
+    --footer-text: #c7d2fe;
+    --link-color: #818cf8;
+    --badge-color: #6366f1;
+    --radius: 14px;
+    --shadow: 0 4px 24px rgba(0,0,0,.3);
+}

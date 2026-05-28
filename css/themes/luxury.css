@@ -1,0 +1,33 @@
+/* Theme: Luxury - Premium Gold */
+:root {
+    --brand-50: #fffbeb;
+    --brand-100: #fef3c7;
+    --brand-200: #fde68a;
+    --brand-300: #fcd34d;
+    --brand-400: #fbbf24;
+    --brand-500: #d97706;
+    --brand-600: #b45309;
+    --brand-700: #92400e;
+    --brand-800: #78350f;
+    --brand-900: #451a03;
+    --surface: #fffbee;
+    --ink: #451a03;
+    --accent: #7c3aed;
+    --success: #059669;
+    --danger: #DC2626;
+    --warning: #D97706;
+    --bg-gradient-from: #fffbeb;
+    --bg-gradient-to: #fef3c7;
+    --card-bg: #ffffff;
+    --card-border: #fef3c7;
+    --btn-primary-bg: #78350f;
+    --btn-primary-text: #fffbeb;
+    --btn-primary-hover: #b45309;
+    --header-bg: rgba(255,255,255,0.9);
+    --footer-bg: #451a03;
+    --footer-text: #fef3c7;
+    --link-color: #b45309;
+    --badge-color: #d97706;
+    --radius: 16px;
+    --shadow: 0 6px 30px rgba(217,119,6,.1);
+}

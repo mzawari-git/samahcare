@@ -1,0 +1,33 @@
+/* Theme: Rose (Default) - JeniCare Original */
+:root {
+    --brand-50: #fdf8f9;
+    --brand-100: #fbe8ec;
+    --brand-200: #f7d1d9;
+    --brand-300: #f0adb9;
+    --brand-400: #e38a9a;
+    --brand-500: #d97a8c;
+    --brand-600: #c56174;
+    --brand-700: #a8495c;
+    --brand-800: #8a3a4b;
+    --brand-900: #6d2d3b;
+    --surface: #faf9f8;
+    --ink: #1c1917;
+    --accent: #f59e0b;
+    --success: #10B981;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --bg-gradient-from: #fdf8f9;
+    --bg-gradient-to: #fff1f2;
+    --card-bg: #ffffff;
+    --card-border: #f1f5f9;
+    --btn-primary-bg: #1c1917;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #d97a8c;
+    --header-bg: rgba(255,255,255,0.85);
+    --footer-bg: #1c1917;
+    --footer-text: #faf9f8;
+    --link-color: #c56174;
+    --badge-color: #d97a8c;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(0,0,0,.06);
+}

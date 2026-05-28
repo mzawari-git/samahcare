@@ -1,0 +1,33 @@
+/* Theme: Ocean - Fresh Blue */
+:root {
+    --brand-50: #ecfdf5;
+    --brand-100: #d1fae5;
+    --brand-200: #a7f3d0;
+    --brand-300: #6ee7b7;
+    --brand-400: #34d399;
+    --brand-500: #0d9488;
+    --brand-600: #0f766e;
+    --brand-700: #115e59;
+    --brand-800: #134e4a;
+    --brand-900: #0d3d3a;
+    --surface: #f0fdfa;
+    --ink: #134e4a;
+    --accent: #0284c7;
+    --success: #0d9488;
+    --danger: #DC2626;
+    --warning: #D97706;
+    --bg-gradient-from: #f0fdfa;
+    --bg-gradient-to: #e0f2fe;
+    --card-bg: #ffffff;
+    --card-border: #ccfbf1;
+    --btn-primary-bg: #0f766e;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #0d9488;
+    --header-bg: rgba(255,255,255,0.88);
+    --footer-bg: #134e4a;
+    --footer-text: #ccfbf1;
+    --link-color: #0d9488;
+    --badge-color: #0d9488;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(15,118,110,.08);
+}

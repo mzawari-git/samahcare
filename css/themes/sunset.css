@@ -1,0 +1,33 @@
+/* Theme: Sunset - Warm Vibrant */
+:root {
+    --brand-50: #fff7ed;
+    --brand-100: #ffedd5;
+    --brand-200: #fed7aa;
+    --brand-300: #fdba74;
+    --brand-400: #fb923c;
+    --brand-500: #ea580c;
+    --brand-600: #c2410c;
+    --brand-700: #9a3412;
+    --brand-800: #7c2d12;
+    --brand-900: #431407;
+    --surface: #fff9f5;
+    --ink: #431407;
+    --accent: #db2777;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #ea580c;
+    --bg-gradient-from: #fff7ed;
+    --bg-gradient-to: #fef2f2;
+    --card-bg: #ffffff;
+    --card-border: #ffedd5;
+    --btn-primary-bg: #9a3412;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #ea580c;
+    --header-bg: rgba(255,255,255,0.9);
+    --footer-bg: #431407;
+    --footer-text: #ffedd5;
+    --link-color: #ea580c;
+    --badge-color: #ea580c;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(234,88,12,.08);
+}

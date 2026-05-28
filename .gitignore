@@ -1,0 +1,47 @@
+# Environment files (contain passwords)
+.env
+.env.*
+
+# Dependencies
+/vendor
+/node_modules
+
+# Laravel storage & cache
+/storage
+/bootstrap/cache
+
+# Symlinks
+/public/storage
+/public/hot
+
+# Uploaded files
+/public/storage/*
+
+# Temp & debug files
+/public/fix-*.php
+/public/ping.php
+/public/clear-cache.php
+/public/debug-settings.php
+/public/check-settings.php
+/public/reset-admin.php
+/public/diag.php
+/public/screenshot-*.png
+
+# Root debug files
+/fixall.php
+/fixx.php
+/help.php
+/deploy-fix.php
+
+# Archives
+*.zip
+*.rar
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db

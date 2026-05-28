@@ -1,0 +1,33 @@
+/* Theme: Minimal - Clean Mono */
+:root {
+    --brand-50: #fafafa;
+    --brand-100: #f5f5f5;
+    --brand-200: #e5e5e5;
+    --brand-300: #d4d4d4;
+    --brand-400: #a3a3a3;
+    --brand-500: #737373;
+    --brand-600: #525252;
+    --brand-700: #404040;
+    --brand-800: #262626;
+    --brand-900: #171717;
+    --surface: #fafafa;
+    --ink: #171717;
+    --accent: #404040;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --warning: #eab308;
+    --bg-gradient-from: #fafafa;
+    --bg-gradient-to: #f5f5f5;
+    --card-bg: #ffffff;
+    --card-border: #e5e5e5;
+    --btn-primary-bg: #171717;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #404040;
+    --header-bg: rgba(255,255,255,0.92);
+    --footer-bg: #171717;
+    --footer-text: #fafafa;
+    --link-color: #525252;
+    --badge-color: #737373;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,.08);
+}

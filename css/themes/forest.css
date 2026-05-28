@@ -1,0 +1,33 @@
+/* Theme: Forest - Natural Green */
+:root {
+    --brand-50: #f0fdf4;
+    --brand-100: #dcfce7;
+    --brand-200: #bbf7d0;
+    --brand-300: #86efac;
+    --brand-400: #4ade80;
+    --brand-500: #16a34a;
+    --brand-600: #15803d;
+    --brand-700: #166534;
+    --brand-800: #14532d;
+    --brand-900: #0d3519;
+    --surface: #f7faf7;
+    --ink: #14532d;
+    --accent: #ca8a04;
+    --success: #16a34a;
+    --danger: #DC2626;
+    --warning: #CA8A04;
+    --bg-gradient-from: #f0fdf4;
+    --bg-gradient-to: #fefce8;
+    --card-bg: #ffffff;
+    --card-border: #dcfce7;
+    --btn-primary-bg: #15803d;
+    --btn-primary-text: #ffffff;
+    --btn-primary-hover: #16a34a;
+    --header-bg: rgba(255,255,255,0.88);
+    --footer-bg: #14532d;
+    --footer-text: #dcfce7;
+    --link-color: #16a34a;
+    --badge-color: #16a34a;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(22,163,74,.08);
+}

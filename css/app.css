@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: var(--surface, #faf9f8);
+    color: var(--ink, #1c1917);
+    overflow-x: hidden;
+    font-family: 'Tajawal', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  ::selection { background-color: #d97a8c; color: #fff; }
+}
+
+@layer components {
+  .glass {
+    background: var(--header-bg, rgba(255, 255, 255, 0.75));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .blob {
+    position: absolute;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.6;
+    border-radius: 50%;
+  }
+  .hide-scroll::-webkit-scrollbar { display: none; }
+  .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  .main-content-v2 {
+    min-height: 60vh;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    animation: pageIn 0.35s ease-out;
+  }
+  .header-spacer { height: 72px; }
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+  }
+}
+
+@layer utilities {
+  @media (min-width: 1024px) {
+    .header-spacer { height: 96px; }
+  }
+}
