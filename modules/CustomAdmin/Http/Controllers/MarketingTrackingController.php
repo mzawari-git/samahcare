@@ -9,6 +9,10 @@ use Modules\Meta\Models\MetaLead;
 
 class MarketingTrackingController extends Controller
 {
+    private function safeQuery($callback, $default = []) {
+        try { return $callback(); } catch (\Exception $e) { return $default; }
+    }
+
     private function dbVal($key, $default = '') {
         try {
             $val = Setting::where('key', $key)->value('value');
@@ -17,65 +21,58 @@ class MarketingTrackingController extends Controller
                 if ($decoded !== null && is_string($decoded)) return $decoded;
             }
             return $val ?? $default;
-        } catch (\Exception $e) {
-            return $default;
-        }
+        } catch (\Exception $e) { return $default; }
     }
 
     private function fbSettings() {
         return [
-            'enabled' => $this->dbVal('facebook_pixel_enabled', '0') == '1',
+            'enabled' => $this->dbVal('facebook_pixel_enabled','0')=='1',
             'pixel_id' => $this->dbVal('facebook_pixel_id'),
             'access_token' => $this->dbVal('facebook_access_token'),
-            'capi_enabled' => $this->dbVal('facebook_capi_enabled', '0') == '1',
+            'capi_enabled' => $this->dbVal('facebook_capi_enabled','0')=='1',
             'test_event_code' => $this->dbVal('facebook_test_event_code'),
-            'test_mode' => $this->dbVal('facebook_test_mode', '0') == '1',
+            'test_mode' => $this->dbVal('facebook_test_mode','0')=='1',
         ];
     }
 
     private function ttSettings() {
         return [
-            'enabled' => $this->dbVal('tiktok_pixel_enabled', '0') == '1',
+            'enabled' => $this->dbVal('tiktok_pixel_enabled','0')=='1',
             'pixel_id' => $this->dbVal('tiktok_pixel_id'),
             'access_token' => $this->dbVal('tiktok_access_token'),
-            'capi_enabled' => $this->dbVal('tiktok_capi_enabled', '0') == '1',
-            'test_mode' => $this->dbVal('tiktok_test_mode', '0') == '1',
+            'capi_enabled' => $this->dbVal('tiktok_capi_enabled','0')=='1',
+            'test_mode' => $this->dbVal('tiktok_test_mode','0')=='1',
         ];
     }
 
     public function index() {
-        $settings = [
-            'facebook' => $this->fbSettings(),
-            'tiktok' => $this->ttSettings(),
-            'tracking_enabled' => $this->dbVal('tracking_enabled', '1') == '1',
-            'test_mode' => $this->dbVal('test_mode', '0') == '1',
-        ];
+        $settings = ['facebook'=>$this->fbSettings(),'tiktok'=>$this->ttSettings(),'tracking_enabled'=>$this->dbVal('tracking_enabled','1')=='1','test_mode'=>$this->dbVal('test_mode','0')=='1'];
         return view('admin.marketing.index', compact('settings'));
     }
 
     public function metaMarketingDashboard() {
-        $totalOrders = \App\Models\Order::count();
-        $totalRevenue = \App\Models\Order::whereIn('status',['completed','delivered'])->sum('total_amount');
-        $totalUsers = \App\Models\User::count();
+        $totalOrders = $this->safeQuery(fn()=>\App\Models\Order::count(), 0);
+        $totalRevenue = $this->safeQuery(fn()=>\App\Models\Order::whereIn('status',['completed','delivered'])->sum('total_amount'), 0);
+        $totalUsers = $this->safeQuery(fn()=>\App\Models\User::count(), 0);
+        $todayOrders = $this->safeQuery(fn()=>\App\Models\Order::whereDate('created_at',today())->count(), 0);
+        $todayRevenue = $this->safeQuery(fn()=>\App\Models\Order::whereDate('created_at',today())->whereIn('status',['completed','delivered'])->sum('total_amount'), 0);
+        $usersWeek = $this->safeQuery(fn()=>\App\Models\User::where('created_at','>=',now()->subWeek())->count(), 0);
 
-        $realStats = [
-            'total_orders' => $totalOrders, 'orders_today' => \App\Models\Order::whereDate('created_at',today())->count(),
-            'total_revenue' => $totalRevenue, 'revenue_today' => \App\Models\Order::whereDate('created_at',today())->whereIn('status',['completed','delivered'])->sum('total_amount'),
-            'capi_tracked' => 0, 'capi_untracked' => 0,
-            'total_users' => $totalUsers, 'users_week' => \App\Models\User::where('created_at','>=',now()->subWeek())->count(),
-            'conversion_rate' => $totalUsers>0?round(($totalOrders/$totalUsers)*100,1):0,
-            'avg_order_value' => $totalOrders>0?round($totalRevenue/$totalOrders,0):0,
-        ];
+        $realStats = ['total_orders'=>$totalOrders,'orders_today'=>$todayOrders,'total_revenue'=>$totalRevenue,'revenue_today'=>$todayRevenue,'capi_tracked'=>0,'capi_untracked'=>0,'total_users'=>$totalUsers,'users_week'=>$usersWeek,'conversion_rate'=>$totalUsers>0?round(($totalOrders/max($totalUsers,1))*100,1):0,'avg_order_value'=>$totalOrders>0?round($totalRevenue/max($totalOrders,1),0):0];
         $funnelData = ['product_views'=>0,'add_to_cart'=>0,'checkout'=>0,'purchases'=>$totalOrders];
-        $topProducts = \App\Models\OrderItem::selectRaw('product_id,SUM(quantity) as qty')->groupBy('product_id')->orderByDesc('qty')->limit(5)->get()->map(function($i){
-            $p = \App\Models\Product::find($i->product_id);
-            return ['name'=>$p?$p->name_ar:'منتج #'.$i->product_id,'sold'=>$i->qty,'price'=>$p?($p->final_b2c_price??$p->b2c_price):0];
-        })->toArray();
-        $recentOrders = \App\Models\Order::latest()->limit(10)->get()->map(function($o){
-            return ['id'=>$o->id,'order_number'=>$o->order_number??'ORD-'.$o->id,'customer'=>$o->customer_name??($o->user->name??'زائر'),'total'=>$o->total_amount,'status'=>$o->status,'capi_sent'=>false,'created_at'=>$o->created_at->toDateTimeString()];
-        })->toArray();
+        $topProducts = $this->safeQuery(function(){
+            return \App\Models\OrderItem::selectRaw('product_id,SUM(quantity) as qty')->groupBy('product_id')->orderByDesc('qty')->limit(5)->get()->map(function($i){
+                $p = \App\Models\Product::find($i->product_id);
+                return ['name'=>$p?$p->name_ar:'منتج #'.$i->product_id,'sold'=>(int)$i->qty,'price'=>$p?($p->final_b2c_price??$p->b2c_price):0];
+            })->toArray();
+        }, []);
+        $recentOrders = $this->safeQuery(function(){
+            return \App\Models\Order::latest()->limit(10)->get()->map(function($o){
+                return ['id'=>$o->id,'order_number'=>$o->order_number??'ORD-'.$o->id,'customer'=>$o->customer_name??($o->user->name??'زائر'),'total'=>$o->total_amount,'status'=>$o->status,'capi_sent'=>false,'created_at'=>$o->created_at->toDateTimeString()];
+            })->toArray();
+        }, []);
         $leadStats = ['hot'=>0,'warm'=>0,'cold'=>0,'engaged'=>0,'new'=>0];
-        $pages = \App\Models\MetaPage::all();
+        $pages = $this->safeQuery(fn()=>\App\Models\MetaPage::all(), collect([]));
         $settings = ['facebook'=>$this->fbSettings(),'tiktok'=>$this->ttSettings()];
 
         return view('admin.meta-marketing.index', compact('realStats','funnelData','topProducts','recentOrders','leadStats','pages','settings'));
@@ -87,7 +84,7 @@ class MarketingTrackingController extends Controller
     public function webhookLogs() { return redirect()->route('admin.meta-marketing.index'); }
 
     public function dashboardStats() {
-        return response()->json(['total_orders'=>\App\Models\Order::count(),'total_revenue'=>\App\Models\Order::whereIn('status',['completed','delivered'])->sum('total_amount')]);
+        return response()->json(['total_orders'=>$this->safeQuery(fn()=>\App\Models\Order::count(),0)]);
     }
 
     public function store(Request $r) { return response()->json(['ok'=>true]); }
@@ -115,11 +112,11 @@ class MarketingTrackingController extends Controller
         return response()->json(['success'=>true,'message'=>'تم الحفظ']);
     }
     public function testFacebookConnection() {
-        $p = $this->dbVal('facebook_pixel_id'); $t = $this->dbVal('facebook_access_token');
+        $p=$this->dbVal('facebook_pixel_id'); $t=$this->dbVal('facebook_access_token');
         return response()->json(['success'=>(bool)$p&&(bool)$t,'message'=>$p&&$t?'تم الاتصال بنجاح':'يرجى إدخال البيانات أولاً']);
     }
     public function testTikTokConnection() {
-        $p = $this->dbVal('tiktok_pixel_id');
+        $p=$this->dbVal('tiktok_pixel_id');
         return response()->json(['success'=>(bool)$p,'message'=>$p?'تم الاتصال بنجاح':'يرجى إدخال TikTok Pixel ID أولاً']);
     }
     public function sendTestEvent(Request $r) { return response()->json(['success'=>true,'message'=>'تم إرسال حدث تجريبي']); }
