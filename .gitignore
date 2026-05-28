@@ -14,9 +14,6 @@
 /public/storage
 /public/hot
 
-# Uploaded files
-/public/storage/*
-
 # Temp & debug files
 /public/fix-*.php
 /public/ping.php
@@ -32,6 +29,14 @@
 /fixx.php
 /help.php
 /deploy-fix.php
+/index.php
+
+# Backup files
+*.bak
+*.backup
+
+# Screenshots
+/screenshots
 
 # Archives
 *.zip
