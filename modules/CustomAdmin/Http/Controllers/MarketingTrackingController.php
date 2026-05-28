@@ -54,28 +54,21 @@ class MarketingTrackingController extends Controller
         $totalOrders = $this->safeQuery(fn()=>\App\Models\Order::count(), 0);
         $totalRevenue = $this->safeQuery(fn()=>\App\Models\Order::whereIn('status',['completed','delivered'])->sum('total_amount'), 0);
         $totalUsers = $this->safeQuery(fn()=>\App\Models\User::count(), 0);
-        $todayOrders = $this->safeQuery(fn()=>\App\Models\Order::whereDate('created_at',today())->count(), 0);
-        $todayRevenue = $this->safeQuery(fn()=>\App\Models\Order::whereDate('created_at',today())->whereIn('status',['completed','delivered'])->sum('total_amount'), 0);
-        $usersWeek = $this->safeQuery(fn()=>\App\Models\User::where('created_at','>=',now()->subWeek())->count(), 0);
 
-        $realStats = ['total_orders'=>$totalOrders,'orders_today'=>$todayOrders,'total_revenue'=>$totalRevenue,'revenue_today'=>$todayRevenue,'capi_tracked'=>0,'capi_untracked'=>0,'total_users'=>$totalUsers,'users_week'=>$usersWeek,'conversion_rate'=>$totalUsers>0?round(($totalOrders/max($totalUsers,1))*100,1):0,'avg_order_value'=>$totalOrders>0?round($totalRevenue/max($totalOrders,1),0):0];
-        $funnelData = ['product_views'=>0,'add_to_cart'=>0,'checkout'=>0,'purchases'=>$totalOrders];
-        $topProducts = $this->safeQuery(function(){
-            return \App\Models\OrderItem::selectRaw('product_id,SUM(quantity) as qty')->groupBy('product_id')->orderByDesc('qty')->limit(5)->get()->map(function($i){
-                $p = \App\Models\Product::find($i->product_id);
-                return ['name'=>$p?$p->name_ar:'منتج #'.$i->product_id,'sold'=>(int)$i->qty,'price'=>$p?($p->final_b2c_price??$p->b2c_price):0];
-            })->toArray();
-        }, []);
+        $realStats = [
+            'total_orders' => $totalOrders,
+            'total_revenue' => $totalRevenue,
+            'total_users' => $totalUsers,
+            'conversion_rate' => $totalUsers>0 ? round(($totalOrders/$totalUsers)*100,1) : 0,
+        ];
+        
         $recentOrders = $this->safeQuery(function(){
             return \App\Models\Order::latest()->limit(10)->get()->map(function($o){
-                return ['id'=>$o->id,'order_number'=>$o->order_number??'ORD-'.$o->id,'customer'=>$o->customer_name??($o->user->name??'زائر'),'total'=>$o->total_amount,'status'=>$o->status,'capi_sent'=>false,'created_at'=>$o->created_at->toDateTimeString()];
+                return ['id'=>$o->id,'order_number'=>$o->order_number??'ORD-'.$o->id,'customer'=>$o->customer_name??($o->user->name??'زائر'),'total'=>$o->total_amount,'status'=>$o->status,'created_at'=>$o->created_at->format('d/m/Y')];
             })->toArray();
         }, []);
-        $leadStats = ['hot'=>0,'warm'=>0,'cold'=>0,'engaged'=>0,'new'=>0];
-        $pages = $this->safeQuery(fn()=>\App\Models\MetaPage::all(), collect([]));
-        $settings = ['facebook'=>$this->fbSettings(),'tiktok'=>$this->ttSettings()];
 
-        return view('admin.meta-marketing.index', compact('realStats','funnelData','topProducts','recentOrders','leadStats','pages','settings'));
+        return view('admin.meta-marketing.index', compact('realStats','recentOrders'));
     }
 
     public function conversations() { return redirect()->route('admin.meta-marketing.index'); }
