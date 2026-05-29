@@ -3,6 +3,9 @@
     <div class="max-w-5xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
             <div>
+                @if(!empty($siteSettings['site_logo_url']))
+                <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'JeniCare' }}" class="h-10 w-auto object-contain mb-5">
+                @endif
                 <h4 class="text-xs font-bold uppercase tracking-widest text-ink-dim mb-5">النشرة</h4>
                 <p class="text-ink-dim text-sm leading-relaxed mb-4">{{ $siteSettings['site_description'] ?? 'وجهتك الفاخرة لمنتجات العناية.' }}</p>
                 <form id="newsletterFormV3" class="flex gap-2">
