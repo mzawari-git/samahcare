@@ -473,7 +473,7 @@ if (!empty($slideProductIds)) {
                     <div class="flex items-center justify-end gap-4">
                         <span class="text-2xl font-bold text-brand-500">{{ number_format($bigProduct->b2c_price, 0) }} ₪</span>
                         <button onclick="event.stopPropagation(); addToCart({{ $bigProduct->id }})"
-                                class="w-12 h-12 rounded-full bg-white text-surface flex items-center justify-center hover:shadow-neon transition-all"
+                                class="w-12 h-12 rounded-full bg-white style="color:#0f172a;" flex items-center justify-center hover:shadow-neon transition-all"
                                 aria-label="إضافة للسلة">
                             <i class="fa-solid fa-plus"></i>
                         </button>
@@ -557,7 +557,7 @@ if (!empty($slideProductIds)) {
                     <p class="text-ink-dim text-xs mb-5">{{ $thirdProduct->brand->name }}</p>
                     @endif
                     <button onclick="event.stopPropagation(); addToCart({{ $thirdProduct->id }})"
-                            class="px-6 py-2.5 bg-white text-surface rounded-full font-bold transition-all text-sm hover:shadow-neon hover:scale-105 inline-flex items-center gap-2">
+                            class="px-6 py-2.5 bg-white style="color:#0f172a;" rounded-full font-bold transition-all text-sm hover:shadow-neon hover:scale-105 inline-flex items-center gap-2">
                         <i class="fa-solid fa-plus text-xs"></i> إضافة للمختبر — {{ number_format($thirdProduct->b2c_price, 0) }} ₪
                     </button>
                 </div>
@@ -637,7 +637,7 @@ if (!empty($slideProductIds)) {
                         <span class="pill-brand text-[10px] px-2 py-0.5">جديد</span>
                     </div>
                     <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                        <span class="bg-white text-surface text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                        <span class="bg-white style="color:#0f172a;" text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
                             <i class="fa-solid fa-bag-shopping text-[9px]"></i> تسوق الآن
                         </span>
                     </div>

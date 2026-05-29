@@ -70,7 +70,7 @@
                 @error('security_answer')<p class="text-red-500 text-xs mt-1 flex items-center gap-1"><i class="ph ph-warning-circle"></i> {{ $message }}</p>@enderror
             </div>
 
-            <button type="submit" class="w-full py-3.5 bg-white text-surface rounded-full font-bold hover:bg-brand-500 transition-all shadow-lg flex items-center justify-center gap-2">
+            <button type="submit" class="w-full py-3.5 bg-white style="color:#0f172a;" rounded-full font-bold hover:bg-brand-500 transition-all shadow-lg flex items-center justify-center gap-2">
                 <i class="ph ph-user-plus"></i> إنشاء حساب
             </button>
         </form>

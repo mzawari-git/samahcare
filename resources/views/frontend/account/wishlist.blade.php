@@ -25,7 +25,7 @@
                     </div>
                     <h3 class="text-2xl font-extrabold text-white mb-3">قائمة أمنياتك فارغة</h3>
                     <p class="text-white-dim mb-8 max-w-sm mx-auto leading-relaxed">تصفحي منتجاتنا وأضيفي ما يعجبك إلى المفضلة لتشتريه لاحقاً.</p>
-                    <a href="{{ route('shop') }}" class="inline-flex items-center gap-3 px-10 py-3.5 bg-white text-surface rounded-full font-bold hover:bg-brand-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    <a href="{{ route('shop') }}" class="inline-flex items-center gap-3 px-10 py-3.5 bg-white style="color:#0f172a;" rounded-full font-bold hover:bg-brand-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         <i class="ph ph-arrow-left"></i> تصفحي المتجر
                     </a>
                 </div>

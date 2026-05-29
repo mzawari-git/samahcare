@@ -75,7 +75,7 @@
     <div class="max-w-3xl mx-auto px-4 text-center relative z-10">
         <h2 class="text-2xl md:text-4xl font-black text-white mb-4">جاهز لتطوير أعمالك؟</h2>
         <p class="text-white-dim text-lg mb-8">انضم إلى شركائنا واستمتع بأسعار خاصة ومزايا حصرية</p>
-        <a href="{{ route('register') }}" class="inline-flex items-center gap-2 px-10 py-4 bg-white text-surface rounded-full font-black text-sm hover:shadow-neon transition-all">
+        <a href="{{ route('register') }}" class="inline-flex items-center gap-2 px-10 py-4 bg-white style="color:#0f172a;" rounded-full font-black text-sm hover:shadow-neon transition-all">
             <i class="fas fa-rocket"></i> ابدأ الآن
         </a>
     </div>

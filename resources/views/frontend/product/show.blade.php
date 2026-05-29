@@ -100,7 +100,7 @@
                     <input type="number" id="qty" value="1" min="1" class="w-12 text-center border-x border-white/10 py-3 font-bold text-white bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                     <button onclick="updateQuantity(1)" class="px-4 py-3 hover:bg-white/5 transition-colors text-white font-bold">+</button>
                 </div>
-                <button onclick="addToCart({{ $product->id }}, null, this)" class="flex-1 min-w-[180px] py-3.5 px-8 bg-white text-surface rounded-full font-bold hover:shadow-neon transition-all flex items-center justify-center gap-2">
+                <button onclick="addToCart({{ $product->id }}, null, this)" class="flex-1 min-w-[180px] py-3.5 px-8 bg-white style="color:#0f172a;" rounded-full font-bold hover:shadow-neon transition-all flex items-center justify-center gap-2">
                     <i class="ph ph-shopping-bag text-lg"></i> أضف للسلة
                 </button>
                 <a href="https://wa.me/{{ $siteSettings['whatsapp_number'] ?? '970591234567' }}?text={{ urlencode('السلام عليكم، مهتمة بـ: ' . $product->name_ar . ' - ' . number_format($product->final_b2c_price ?? $product->b2c_price, 2) . ' ₪') }}" target="_blank" class="py-3.5 px-6 border border-green-500/30 text-green-400 rounded-full font-bold hover:bg-green-500 hover:text-white transition-colors flex items-center gap-2 whitespace-nowrap">
@@ -192,7 +192,7 @@
                         <span class="text-base font-extrabold text-brand-500">{{ number_format($related->final_b2c_price ?? $related->b2c_price, 2) }} ₪</span>
                     </div>
                     <div class="flex gap-2 mt-3">
-                        <button onclick="addToCart({{ $related->id }})" class="flex-1 py-2 bg-white text-surface text-xs font-bold rounded-lg hover:bg-brand-500 hover:text-white transition-colors flex items-center justify-center gap-1">
+                        <button onclick="addToCart({{ $related->id }})" class="flex-1 py-2 bg-white style="color:#0f172a;" text-xs font-bold rounded-lg hover:bg-brand-500 hover:text-white transition-colors flex items-center justify-center gap-1">
                             <i class="ph ph-shopping-bag text-sm"></i> أضف للسلة
                         </button>
                         <a href="https://wa.me/{{ $siteSettings['whatsapp_number'] ?? '970591234567' }}?text={{ urlencode('السلام عليكم، مهتمة بـ: ' . $related->name_ar . ' - ' . number_format($related->final_b2c_price ?? $related->b2c_price, 2) . ' ₪') }}" target="_blank" class="py-2 px-2.5 border border-green-500/30 text-green-400 text-xs font-bold rounded-lg hover:bg-green-500 hover:text-white transition-all flex items-center justify-center" title="واتساب" aria-label="واتساب">
@@ -211,7 +211,7 @@
 @if($product->isInStock())
 <div class="fixed bottom-0 left-0 right-0 z-40 lg:hidden p-3" style="background:rgba(5,5,5,0.95); border-top:1px solid var(--glass-border); backdrop-filter:blur(16px);">
     <div class="flex items-center gap-3">
-        <button onclick="addToCart({{ $product->id }}, null, this)" class="flex-1 py-3.5 bg-white text-surface rounded-full font-bold text-sm hover:bg-brand-500 hover:text-white transition-colors flex items-center justify-center gap-2">
+        <button onclick="addToCart({{ $product->id }}, null, this)" class="flex-1 py-3.5 bg-white style="color:#0f172a;" rounded-full font-bold text-sm hover:bg-brand-500 hover:text-white transition-colors flex items-center justify-center gap-2">
             <i class="ph ph-shopping-bag text-lg"></i> أضف للسلة
         </button>
         <a href="https://wa.me/{{ $siteSettings['whatsapp_number'] ?? '970591234567' }}?text={{ urlencode('السلام عليكم، مهتمة بـ: ' . $product->name_ar . ' - ' . number_format($product->final_b2c_price ?? $product->b2c_price, 2) . ' ₪') }}" target="_blank" class="py-3.5 px-4 border border-green-500/30 text-green-400 rounded-full font-bold text-sm hover:bg-green-500 hover:text-white transition-colors flex items-center gap-1 flex-shrink-0">

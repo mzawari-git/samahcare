@@ -92,7 +92,7 @@
                     <div class="mb-4">
                         <div class="flex gap-2">
                             <input type="text" id="couponCode" placeholder="كود الخصم" class="flex-1 bg-white/5 border border-white/10 text-white rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-500 transition-all placeholder:text-white-dim">
-                            <button onclick="applyCoupon()" class="px-4 py-2.5 bg-white text-surface text-sm font-bold rounded-xl hover:bg-brand-500 hover:text-white transition-colors whitespace-nowrap">تطبيق</button>
+                            <button onclick="applyCoupon()" class="px-4 py-2.5 bg-white style="color:#0f172a;" text-sm font-bold rounded-xl hover:bg-brand-500 hover:text-white transition-colors whitespace-nowrap">تطبيق</button>
                         </div>
                         <div id="couponMsg" class="mt-2 text-xs"></div>
                     </div>
