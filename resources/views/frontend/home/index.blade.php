@@ -233,42 +233,35 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
 </script>
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 2: Categories — Compact Professional Grid
+     SECTION 2: Categories — All Categories Centered
      ═══════════════════════════════════════════════════════════════ --}}
 @if($categories->isNotEmpty())
-@php $topCategories = $categories->take(6); @endphp
 <section class="py-16">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-            <div class="text-right md:text-right w-full md:w-auto">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-4">
-                    <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">أقسام المتجر</span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-black mb-2">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
-                <p class="text-ink-dim text-sm md:text-base max-w-lg">اكتشفي منتجات أصلية من أفضل الماركات العالمية في جميع أقسام التجميل والعناية.</p>
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-4">
+                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">أقسام المتجر</span>
             </div>
-            <a href="{{ route('shop') }}" class="shrink-0 inline-flex items-center gap-2 text-brand-500 font-bold text-sm hover:gap-3 transition-all">
-                جميع الأقسام ({{ $categories->count() }}) <i class="fa-solid fa-arrow-left text-xs"></i>
-            </a>
+            <h2 class="text-3xl md:text-5xl font-black mb-3">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
+            <p class="text-ink-dim max-w-2xl mx-auto text-sm md:text-base">اكتشفي منتجات أصلية من أفضل الماركات العالمية في جميع أقسام التجميل والعناية</p>
         </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            @foreach($topCategories as $cat)
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            @foreach($categories as $cat)
             <a href="{{ route('shop', ['category' => $cat->slug]) }}"
-               class="group flex flex-col items-center glass-panel rounded-2xl p-5 text-center transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg hover:border-brand-500/30">
-                <div class="w-20 h-20 rounded-2xl overflow-hidden mb-4 bg-surface-alt flex-shrink-0">
+               class="group flex flex-col items-center text-center glass-panel rounded-2xl p-4 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg hover:border-brand-500/30">
+                <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 bg-surface-alt flex-shrink-0">
                     @if($cat->sample_image)
                     <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
                     @else
                     <div class="w-full h-full flex items-center justify-center">
-                        <i class="fa-solid fa-tag text-2xl text-ink-dim/20"></i>
+                        <i class="fa-solid fa-tag text-xl text-ink-dim/20"></i>
                     </div>
                     @endif
                 </div>
-                <h3 class="font-black text-sm mb-1.5 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[11px] font-bold">
-                    {{ $cat->products_count }} منتج
+                <h3 class="font-black text-xs mb-1.5 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-bold">
+                    {{ $cat->products_count }}
                 </span>
             </a>
             @endforeach
@@ -288,15 +281,15 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                 <span class="text-sm text-ink-muted">منتج أصلي</span>
             </div>
             <div class="glass-panel rounded-2xl p-6">
-                <span class="text-3xl md:text-4xl font-black text-white block mb-2">15,000+</span>
+                <span class="text-3xl md:text-4xl font-black text-ink block mb-2">15,000+</span>
                 <span class="text-sm text-ink-muted">عميلة سعيدة</span>
             </div>
             <div class="glass-panel rounded-2xl p-6">
-                <span class="text-3xl md:text-4xl font-black text-white block mb-2">4.9</span>
+                <span class="text-3xl md:text-4xl font-black text-ink block mb-2">4.9</span>
                 <span class="text-sm text-ink-muted">تقييم العملاء</span>
             </div>
             <div class="glass-panel rounded-2xl p-6">
-                <span class="text-3xl md:text-4xl font-black text-white block mb-2">24H</span>
+                <span class="text-3xl md:text-4xl font-black text-ink block mb-2">24H</span>
                 <span class="text-sm text-ink-muted">توصيل سريع</span>
             </div>
         </div>
@@ -315,29 +308,29 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="glass-panel rounded-2xl p-7 text-right hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
+            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
+                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-certificate text-xl text-brand-500"></i>
                 </div>
                 <h3 class="font-black text-lg mb-3 text-ink">منتجات أصلية مضمونة</h3>
                 <p class="text-ink-dim text-sm leading-relaxed">جميع منتجاتنا أصلية 100% ومستوردة من مصادر موثوقة ومعتمدة دولياً. نضمن لكِ الجودة والأصالة في كل طلب.</p>
             </div>
-            <div class="glass-panel rounded-2xl p-7 text-right hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
+            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
+                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-truck-fast text-xl text-brand-500"></i>
                 </div>
                 <h3 class="font-black text-lg mb-3 text-ink">توصيل لكل فلسطين</h3>
                 <p class="text-ink-dim text-sm leading-relaxed">نوصل طلبك لباب بيتك في الضفة الغربية، القدس، والداخل المحتل. شحن سريع وتتبع مباشر لشحنتك حتى الاستلام.</p>
             </div>
-            <div class="glass-panel rounded-2xl p-7 text-right hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
+            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
+                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-tags text-xl text-brand-500"></i>
                 </div>
                 <h3 class="font-black text-lg mb-3 text-ink">أفضل الأسعار والعروض</h3>
                 <p class="text-ink-dim text-sm leading-relaxed">أسعار تنافسية مع عروض حصرية وخصومات يومية. الدفع عند الاستلام متاح لراحتك وأمانك التام.</p>
             </div>
-            <div class="glass-panel rounded-2xl p-7 text-right hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
+            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
+                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-headset text-xl text-brand-500"></i>
                 </div>
                 <h3 class="font-black text-lg mb-3 text-ink">دعم احترافي متواصل</h3>
@@ -359,7 +352,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                 <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">لماذا تختارينا</span>
             </div>
             <h2 class="text-3xl md:text-5xl font-black mb-4">لماذا <span class="gradient-text bg-[length:200%_auto]">JeniCare</span><span class="text-brand-500">.</span></h2>
-            <p class="text-ink-dim max-w-xl mx-auto text-lg font-light">متجر العناية بالبشرة الأول في فلسطين. نوفر لكِ تجربة تسوق آمنة وموثوقة مع منتجات أصلية وخدمة عملاء استثنائية.</p>
+            <p class="text-ink-dim max-w-2xl mx-auto text-lg font-light">متجر العناية بالبشرة الأول في فلسطين. نوفر لكِ تجربة تسوق آمنة وموثوقة مع منتجات أصلية وخدمة عملاء استثنائية.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             @php
@@ -370,7 +363,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                 ];
             @endphp
             @foreach($valueCards as $card)
-            <div class="value-card glass-panel rounded-[2rem] p-8 text-right group relative overflow-hidden transition-all duration-500">
+            <div class="value-card glass-panel rounded-[2rem] p-8 text-center group relative overflow-hidden transition-all duration-500">
                 {{-- Top accent line --}}
                 <div class="absolute top-0 right-8 left-8 h-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: var(--gradient-primary);"></div>
                 {{-- Background glow --}}
@@ -378,7 +371,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                 {{-- Number badge --}}
                 <div class="absolute top-6 left-6 text-6xl font-black opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-500 select-none" style="color: var(--brand-500);">{{ $card['num'] }}</div>
                 {{-- Icon --}}
-                <div class="relative z-10 w-16 h-16 rounded-2xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 group-hover:scale-110 transition-all duration-500 shadow-neon">
+                <div class="relative z-10 w-16 h-16 rounded-2xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 group-hover:scale-110 transition-all duration-500 shadow-neon mx-auto">
                     <i class="{{ $card['icon'] }} text-2xl" style="color: var(--brand-500);"></i>
                 </div>
                 {{-- Content --}}
@@ -402,12 +395,12 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
 <section id="products" class="py-20 relative">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(var(--brand-500-rgb,255,42,133),0.04),transparent_60%)] pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="mb-16 text-right">
+        <div class="mb-16 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-6">
                 <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">مختبر الجمال</span>
             </div>
             <h2 class="text-3xl md:text-5xl font-black mb-4">منتجات مختارة <span class="gradient-text bg-[length:200%_auto]">بعناية فائقة</span></h2>
-            <p class="text-ink-dim max-w-xl text-lg font-light">كل منتج في متجرنا تم انتقاؤه بعناية من أفضل الماركات العالمية ليكون جزءاً من روتين عنايتك الشخصي. منتجات أصلية، نتائج مضمونة.</p>
+            <p class="text-ink-dim max-w-2xl mx-auto text-lg font-light">كل منتج في متجرنا تم انتقاؤه بعناية من أفضل الماركات العالمية ليكون جزءاً من روتين عنايتك الشخصي. منتجات أصلية، نتائج مضمونة.</p>
         </div>
 
         @if($featuredProducts->isNotEmpty() || $newProducts->isNotEmpty())
@@ -487,10 +480,9 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
             {{-- Info/Value Card (col-span-5) --}}
             <div class="md:col-span-5 rounded-[2rem] glass-panel border border-white/5 p-10 flex flex-col justify-between relative overflow-hidden group cursor-default">
                 <div class="absolute -left-20 -top-20 w-64 h-64 bg-brand-500/8 rounded-full blur-3xl group-hover:bg-brand-500/12 transition-colors"></div>
-                {{-- Top accent bar --}}
                 <div class="absolute top-0 right-8 left-8 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: var(--gradient-primary);"></div>
-                <div class="relative z-10">
-                    <div class="w-14 h-14 rounded-2xl bg-accent-500/10 flex items-center justify-center mb-6 shadow-accent-neon">
+                <div class="relative z-10 text-center">
+                    <div class="w-14 h-14 rounded-2xl bg-accent-500/10 flex items-center justify-center mb-6 shadow-accent-neon mx-auto">
                         <i class="fa-solid fa-microchip text-2xl text-accent-500"></i>
                     </div>
                     <h3 class="text-2xl font-black mb-4" style="color: var(--ink);">روتين عناية<br>مصمم خصيصاً لكِ.</h3>
@@ -498,8 +490,8 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                         نختار لكِ أفضل المنتجات المناسبة لنوع بشرتك واحتياجاتك. تصفحي مجموعتنا المميزة من منتجات العناية بالبشرة والشعر، وتمتعي بتجربة تسوق فريدة مع شحن سريع ودفع آمن.
                     </p>
                 </div>
-                <div class="mt-8">
-                    <a href="{{ route('shop') }}" class="text-accent-500 font-bold flex items-center gap-2 hover:gap-4 transition-all group/link">
+                <div class="mt-8 text-center">
+                    <a href="{{ route('shop') }}" class="text-accent-500 font-bold flex items-center justify-center gap-2 hover:gap-4 transition-all group/link">
                         تصفحي المتجر <i class="fa-solid fa-arrow-left text-sm group-hover/link:-translate-x-1 transition-transform"></i>
                     </a>
                 </div>
