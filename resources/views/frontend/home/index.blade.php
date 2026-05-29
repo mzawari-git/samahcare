@@ -32,74 +32,67 @@
 @section('content')
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 1: HERO — Professional Slideshow Cycling Categories
+     SECTION 1: HERO — Slideshow with Cycling Text
      ═══════════════════════════════════════════════════════════════ --}}
 @php
-$heroPhrases = [
-    'beauty' => [
-        'لمسات ساحرة تبدأ بمنتجات استثنائية... اختاري الأفضل مع جنين.',
-        'جودة لا تُضاهى لجمال يدوم... مستحضرات صُممت لتبرز إشراقتكِ.',
-        'ألوان غنية وتركيبات آمنة، لتجربة جمال تفوق التوقعات.',
-        'سر الإطلالة المثالية يبدأ من هنا... دعي الجودة تتحدث عنكِ.',
-        'منتجات أصلية 100%... لأن بشرتك تستحق الأفضل دائماً.',
-        'اكتشفي أسرار الجمال مع أفخر الماركات العالمية الأصلية.',
-    ],
-    'devices' => [
-        'أحدث التقنيات العالمية بين يديكِ، لنتائج احترافية تبهر عملائكِ.',
-        'ارتقي بمستوى خدماتكِ مع أجهزة الجيل الجديد من جنين للتجميل.',
-        'دقة الأداء، وسرعة النتائج... التكنولوجيا الذكية في خدمة الجمال.',
-        'استثمري في نجاحكِ مع أجهزة صُممت لتدوم وتقدم الأفضل.',
-        'أجهزة احترافية متطورة... لأن التميز هو معيارنا الوحيد.',
-    ],
-    'salon' => [
-        'من التصميم إلى التنفيذ... نجهز صالونكِ ليكون وجهة الفخامة الأولى.',
-        'أثاث عصري ومعدات متكاملة، نبني لكِ مساحة تعكس رقي أعمالكِ.',
-        'راحة لعملائكِ وتميز لمشروعكِ، مع حلول جنين الشاملة لتجهيز الصالونات.',
-        'لا تساومي على أناقة مكانكِ... دعينا نصنع لكِ صالون أحلامكِ.',
-        'صالونكِ المتكامل... من الفكرة إلى الواقع مع خبراء جنين للتجميل.',
-    ],
-    'general' => [
-        'جنين للتجميل: خيار المحترفين الأول.',
-        'كل ما يخص عالم الجمال والأناقة... تحت سقف واحد.',
-        'شريككِ الموثوق لرحلة نجاح وتألق مستمرة.',
-        'جودة نثق بها، وخدمة تلبي تطلعاتكم.',
-        'منتجات أصلية، أجهزة احترافية، تجهيز متكامل... في مكان واحد.',
-    ],
+$allPhrases = [
+    'لمسات ساحرة تبدأ بمنتجات استثنائية... اختاري الأفضل مع جنين.',
+    'جودة لا تُضاهى لجمال يدوم... مستحضرات صُممت لتبرز إشراقتكِ.',
+    'ألوان غنية وتركيبات آمنة، لتجربة جمال تفوق التوقعات.',
+    'سر الإطلالة المثالية يبدأ من هنا... دعي الجودة تتحدث عنكِ.',
+    'منتجات أصلية 100%... لأن بشرتك تستحق الأفضل دائماً.',
+    'أحدث التقنيات العالمية بين يديكِ، لنتائج احترافية تبهر عملائكِ.',
+    'ارتقي بمستوى خدماتكِ مع أجهزة الجيل الجديد من جنين للتجميل.',
+    'دقة الأداء، وسرعة النتائج... التكنولوجيا الذكية في خدمة الجمال.',
+    'استثمري في نجاحكِ مع أجهزة صُممت لتدوم وتقدم الأفضل.',
+    'من التصميم إلى التنفيذ... نجهز صالونكِ ليكون وجهة الفخامة الأولى.',
+    'أثاث عصري ومعدات متكاملة، نبني لكِ مساحة تعكس رقي أعمالكِ.',
+    'راحة لعملائكِ وتميز لمشروعكِ، مع حلول جنين الشاملة لتجهيز الصالونات.',
+    'لا تساومي على أناقة مكانكِ... دعينا نصنع لكِ صالون أحلامكِ.',
+    'جنين للتجميل: خيار المحترفين الأول.',
+    'كل ما يخص عالم الجمال والأناقة... تحت سقف واحد.',
+    'شريككِ الموثوق لرحلة نجاح وتألق مستمرة.',
+    'جودة نثق بها، وخدمة تلبي تطلعاتكم.',
+    'اكتشفي أسرار الجمال مع أفخر الماركات العالمية الأصلية.',
+    'صالونكِ المتكامل... من الفكرة إلى الواقع مع خبراء جنين للتجميل.',
+    'منتجات أصلية، أجهزة احترافية، تجهيز متكامل... في مكان واحد.',
 ];
+shuffle($allPhrases);
+$phraseCount = count($allPhrases);
 
-// Pick 3-5 random categories that have products
-$slideshowCategories = $categories->filter(fn($c) => $c->products_count > 0)->shuffle()->take(5);
-if ($slideshowCategories->isEmpty() && $featuredProducts->isNotEmpty()) {
-    $slideshowCategories = collect([null]);
-}
+$slideshowCats = $categories->filter(fn($c) => $c->products_count > 0)->shuffle()->take(5);
 @endphp
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
-             class="w-full h-full object-cover opacity-20 mix-blend-luminosity"
+             class="w-full h-full object-cover opacity-15 mix-blend-luminosity"
              alt="" aria-hidden="true" loading="eager" fetchpriority="high">
-        <div class="absolute inset-0 bg-gradient-to-b from-surface/60 via-surface/85 to-surface"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-surface/60 via-surface/88 to-surface"></div>
     </div>
 
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-28 pb-16">
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-24 pb-16">
+        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
-            {{-- Right: Text Content --}}
-            <div class="w-full lg:w-1/2 text-right">
+            {{-- Right: Static Title + Cycling Text --}}
+            <div class="w-full lg:w-[45%] text-right">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-6">
                     <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse shadow-neon"></span>
                     <span class="text-xs tracking-widest text-brand-500 uppercase font-bold">جنين للتجميل</span>
                 </div>
 
-                <h1 class="text-4xl md:text-5xl lg:text-7xl font-black mb-6 leading-tight tracking-tight">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight">
                     <span class="text-ink">منتجات أصلية</span><br>
                     <span class="gradient-text bg-[length:200%_auto]">نتائج مبهرة.</span>
                 </h1>
 
-                <p id="heroPhrase" class="text-lg md:text-xl text-ink-dim mb-10 max-w-lg font-light leading-relaxed transition-all duration-500">
-                    {{ $heroPhrases['general'][array_rand($heroPhrases['general'])] }}
-                </p>
+                <div class="relative h-20 md:h-16 mb-8 overflow-hidden">
+                    @foreach($allPhrases as $i => $phrase)
+                    <p class="hero-phrase text-lg md:text-xl text-ink-dim max-w-lg font-light leading-relaxed absolute inset-0 transition-all duration-700 {{ $i === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4' }}" data-phrase="{{ $i }}">
+                        {{ $phrase }}
+                    </p>
+                    @endforeach
+                </div>
 
                 <div class="flex items-center gap-6 flex-wrap">
                     <a href="{{ route('shop') }}" class="group relative px-8 py-4 rounded-full overflow-hidden font-black tracking-wide inline-flex items-center gap-2 shadow-neon hover:shadow-neon-strong transition-all" style="background:var(--gradient-primary);color:#fff;">
@@ -109,53 +102,53 @@ if ($slideshowCategories->isEmpty() && $featuredProducts->isNotEmpty()) {
                         جميع المنتجات
                     </a>
                 </div>
+
+                {{-- Phrase counter dots --}}
+                <div class="flex gap-1.5 mt-8 justify-end">
+                    @for($i = 0; $i < min($phraseCount, 6); $i++)
+                    <span class="phrase-dot block w-1.5 h-1.5 rounded-full transition-all duration-300 {{ $i === 0 ? 'bg-brand-500 w-5' : 'bg-ink-dim/20' }}"></span>
+                    @endfor
+                    <span class="text-[10px] text-ink-dim/40 ml-2">{{ $phraseCount }}+</span>
+                </div>
             </div>
 
             {{-- Left: Product Slideshow --}}
-            <div class="w-full lg:w-1/2 relative flex justify-center mt-8 lg:mt-0">
-                <div class="relative w-full max-w-md">
-                    @foreach($slideshowCategories as $index => $cat)
+            <div class="w-full lg:w-[55%] relative flex justify-center">
+                <div class="relative w-full max-w-lg">
+                    @foreach($slideshowCats as $index => $cat)
                     @php
-                    $catProducts = $cat ? \App\Models\Product::where('category_id', $cat->id)->where('status', 'active')->inRandomOrder()->take(3)->get() : $featuredProducts->take(3);
-                    $primaryProduct = $catProducts->first();
-                    if (!$primaryProduct) continue;
-                    $catType = $cat ? (str_contains($cat->name_ar, 'جهاز') || str_contains($cat->name_ar, 'ليزر') ? 'devices' : (str_contains($cat->name_ar, 'صالون') || str_contains($cat->name_ar, 'تجهيز') ? 'salon' : 'beauty')) : 'general';
-                    $phrase = $heroPhrases[$catType][array_rand($heroPhrases[$catType])];
+                    $catProducts = \App\Models\Product::where('category_id', $cat->id)->where('status', 'active')->inRandomOrder()->take(2)->get();
+                    $main = $catProducts->first();
+                    if (!$main) { $main = $featuredProducts->first(); $catProducts = $featuredProducts->take(2); }
+                    if (!$main) continue;
                     @endphp
-                    <div class="hero-slide glass-panel rounded-3xl overflow-hidden p-4 border-2 border-brand-500/10 {{ $index === 0 ? '' : 'hidden' }}" data-slide="{{ $index }}">
-                        <a href="{{ route('product.show', $primaryProduct->slug) }}" class="block">
-                            <div class="relative rounded-2xl overflow-hidden h-[350px] md:h-[420px] bg-surface-alt">
-                                @if($primaryProduct->main_image_url)
-                                <img src="{{ $primaryProduct->main_image_url }}" alt="{{ $primaryProduct->name_ar }}"
-                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
-                                @else
-                                <div class="w-full h-full flex items-center justify-center">
-                                    <i class="fa-solid fa-flask text-6xl text-ink-dim/10"></i>
-                                </div>
-                                @endif
-                                <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-surface/90 to-transparent">
-                                    <span class="inline-block px-3 py-1 rounded-full bg-brand-500 text-white text-xs font-bold mb-2">{{ $cat ? ($cat->display_name ?? $cat->name_ar) : 'منتجات مميزة' }}</span>
-                                    <h3 class="text-xl font-black text-white mb-1">{{ $primaryProduct->name_ar }}</h3>
-                                    <p class="text-white/70 text-sm mb-2">{{ $phrase }}</p>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-brand-400 font-black text-lg">{{ number_format($primaryProduct->final_b2c_price ?? $primaryProduct->b2c_price, 0) }} ₪</span>
-                                        <span class="text-white/60 text-xs flex items-center gap-1">اضغط للتفاصيل <i class="fa-solid fa-arrow-left"></i></span>
-                                    </div>
+                    <div class="hero-slide glass-panel rounded-3xl overflow-hidden p-3 {{ $index === 0 ? '' : 'hidden' }}" data-slide="{{ $index }}">
+                        <a href="{{ route('product.show', $main->slug) }}" class="block relative rounded-2xl overflow-hidden h-[340px] md:h-[400px] bg-surface-alt group">
+                            @if($main->main_image_url)
+                            <img src="{{ $main->main_image_url }}" alt="{{ $main->name_ar }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                            @else
+                            <div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-flask text-5xl text-ink-dim/15"></i></div>
+                            @endif
+                            <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-surface/95 via-surface/70 to-transparent">
+                                <span class="inline-block px-2.5 py-1 rounded-full bg-brand-500 text-white text-[11px] font-bold mb-2">{{ $cat->display_name ?? $cat->name_ar }}</span>
+                                <h3 class="text-lg font-black text-white mb-1">{{ $main->name_ar }}</h3>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-brand-400 font-black">{{ number_format($main->final_b2c_price ?? $main->b2c_price, 0) }} ₪</span>
+                                    <span class="text-white/50 text-xs flex items-center gap-1">تفاصيل <i class="fa-solid fa-arrow-left"></i></span>
                                 </div>
                             </div>
                         </a>
                         @if($catProducts->count() > 1)
-                        <div class="flex gap-3 mt-3">
-                            @foreach($catProducts as $subProduct)
-                            <a href="{{ route('product.show', $subProduct->slug) }}" class="flex-1 glass-panel rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
-                                <div class="relative h-20 bg-surface-alt">
-                                    @if($subProduct->main_image_url)
-                                    <img src="{{ $subProduct->main_image_url }}" alt="{{ $subProduct->name_ar }}" class="w-full h-full object-cover" loading="lazy">
-                                    @endif
+                        <div class="grid grid-cols-2 gap-2 mt-2">
+                            @foreach($catProducts as $sub)
+                            <a href="{{ route('product.show', $sub->slug) }}" class="glass-panel rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
+                                <div class="h-16 bg-surface-alt">
+                                    @if($sub->main_image_url)<img src="{{ $sub->main_image_url }}" alt="" class="w-full h-full object-cover" loading="lazy">@endif
                                 </div>
                                 <div class="p-2 text-center">
-                                    <p class="text-xs font-bold text-ink truncate">{{ $subProduct->name_ar }}</p>
-                                    <span class="text-brand-500 font-bold text-xs">{{ number_format($subProduct->final_b2c_price ?? $subProduct->b2c_price, 0) }} ₪</span>
+                                    <p class="text-[11px] font-bold text-ink truncate">{{ $sub->name_ar }}</p>
+                                    <span class="text-brand-500 font-bold text-[11px]">{{ number_format($sub->final_b2c_price ?? $sub->b2c_price, 0) }} ₪</span>
                                 </div>
                             </a>
                             @endforeach
@@ -163,57 +156,60 @@ if ($slideshowCategories->isEmpty() && $featuredProducts->isNotEmpty()) {
                         @endif
                     </div>
                     @endforeach
-
-                    @if($slideshowCategories->isEmpty())
-                    <div class="hero-slide glass-panel rounded-3xl overflow-hidden p-4 border-2 border-brand-500/10 text-center py-16">
-                        <i class="fa-solid fa-store text-5xl text-ink-dim/20 mb-4 block"></i>
-                        <p class="text-ink-dim text-lg">تصفحي منتجاتنا المميزة</p>
-                        <a href="{{ route('shop') }}" class="inline-block mt-4 px-6 py-2.5 rounded-full font-bold" style="background:var(--gradient-primary);color:#fff;">تسوقي الآن</a>
-                    </div>
-                    @endif
                 </div>
-
-                @if($slideshowCategories->count() > 1)
-                {{-- Slide Navigation Dots --}}
-                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-                    @foreach($slideshowCategories as $index => $cat)
-                    <button onclick="showHeroSlide({{ $index }})" class="hero-dot w-2.5 h-2.5 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-brand-500 w-6' : 'bg-ink-dim/30 hover:bg-ink-dim/60' }}" aria-label="شريحة {{ $index + 1 }}"></button>
-                    @endforeach
-                </div>
-                @endif
             </div>
         </div>
     </div>
 
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
         <span class="text-[10px] uppercase tracking-[0.3em] text-ink-dim">مرر</span>
-        <div class="w-px h-12 bg-gradient-to-b from-ink-dim/30 to-transparent"></div>
+        <div class="w-px h-10 bg-gradient-to-b from-ink-dim/30 to-transparent"></div>
     </div>
 </section>
 
-@if($slideshowCategories->count() > 1)
 <script>
-let currentHeroSlide = 0;
-const totalHeroSlides = {{ $slideshowCategories->count() }};
-let heroInterval;
+(function() {
+    var phrases = document.querySelectorAll('.hero-phrase');
+    var dots = document.querySelectorAll('.phrase-dot');
+    var slides = document.querySelectorAll('.hero-slide');
+    var totalP = phrases.length;
+    var totalS = slides.length;
+    var currentP = 0;
+    var currentS = 0;
+    var pInterval, sInterval;
 
-function showHeroSlide(index) {
-    document.querySelectorAll('.hero-slide').forEach(s => s.classList.add('hidden'));
-    const slide = document.querySelector('.hero-slide[data-slide="'+index+'"]');
-    if (slide) slide.classList.remove('hidden');
-    document.querySelectorAll('.hero-dot').forEach((d, i) => {
-        d.className = i === index ? 'hero-dot w-6 h-2.5 rounded-full bg-brand-500 transition-all duration-300' : 'hero-dot w-2.5 h-2.5 rounded-full bg-ink-dim/30 hover:bg-ink-dim/60 transition-all duration-300';
+    function showPhrase(idx) {
+        phrases.forEach(function(p, i) {
+            p.classList.toggle('opacity-100', i === idx);
+            p.classList.toggle('translate-y-0', i === idx);
+            p.classList.toggle('opacity-0', i !== idx);
+            p.classList.toggle('translate-y-4', i !== idx);
+        });
+        dots.forEach(function(d, i) {
+            d.className = i === idx ? 'phrase-dot block w-5 h-1.5 rounded-full bg-brand-500 transition-all duration-300' : 'phrase-dot block w-1.5 h-1.5 rounded-full bg-ink-dim/20 transition-all duration-300';
+        });
+        currentP = idx;
+    }
+
+    function showSlide(idx) {
+        slides.forEach(function(s) { s.classList.add('hidden'); });
+        var s = document.querySelector('.hero-slide[data-slide="' + idx + '"]');
+        if (s) s.classList.remove('hidden');
+        currentS = idx;
+    }
+
+    function nextPhrase() { showPhrase((currentP + 1) % totalP); }
+    function nextSlide() { showSlide((currentS + 1) % totalS); }
+
+    pInterval = setInterval(nextPhrase, 4000);
+    if (totalS > 1) sInterval = setInterval(nextSlide, 6000);
+
+    document.querySelectorAll('.hero-slide').forEach(function(s) {
+        s.addEventListener('mouseenter', function() { clearInterval(sInterval); });
+        s.addEventListener('mouseleave', function() { if (totalS > 1) sInterval = setInterval(nextSlide, 6000); });
     });
-    currentHeroSlide = index;
-}
-
-function nextHeroSlide() {
-    showHeroSlide((currentHeroSlide + 1) % totalHeroSlides);
-}
-
-heroInterval = setInterval(nextHeroSlide, 5000);
+})();
 </script>
-@endif
 
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION 2: Categories — Compact Professional Grid
