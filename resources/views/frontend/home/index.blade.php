@@ -139,6 +139,24 @@ $heroHeadlines = [
     ['line1' => 'نبني لكِ قصة نجاح', 'line2' => 'من الصفر إلى القمة.'],
     ['line1' => 'منتجات اخترناها', 'line2' => 'بكل حب ودقة.'],
     ['line1' => 'نعيد تعريف الجمال', 'line2' => 'في فلسطين.'],
+    // ═════ NEW HIGH-IMPACT HEADLINES ═════
+    ['line1' => 'ماركات عالمية أصلية', 'line2' => 'بأسعار تنافسية.'],
+    ['line1' => 'توصيل خلال 24 ساعة', 'line2' => 'لكل مدن فلسطين.'],
+    ['line1' => 'دعم فني على مدار اليوم', 'line2' => 'نحنُ هنا لمساعدتكِ.'],
+    ['line1' => 'أكثر من 800 منتج', 'line2' => 'في متجركِ المفضل.'],
+    ['line1' => 'ثقة 15,000 عميلة', 'line2' => 'لا تخطئي الاختيار.'],
+    ['line1' => 'منتجات مختارة بعناية', 'line2' => 'لأنكِ تستحقين.'],
+    ['line1' => 'أجهزة صالونات احترافية', 'line2' => 'للنجاح والتميز.'],
+    ['line1' => 'تجميل احترافي', 'line2' => 'يبدأ من اختياركِ.'],
+    ['line1' => 'لمسة جنين', 'line2' => 'تفرق معكِ دائماً.'],
+    ['line1' => 'جودة لا تُضاهى', 'line2' => 'وأصالة تدوم.'],
+    ['line1' => 'أنقي المنتجات', 'line2' => 'من مصادر موثوقة.'],
+    ['line1' => 'تسوقي بذكاء', 'line2' => 'وتألقي بثقة.'],
+    ['line1' => 'كل ما تحتاجينه', 'line2' => 'للعناية والجمال.'],
+    ['line1' => 'صالونكِ يستحق الأفضل', 'line2' => 'ونحنُ نقدمه لكِ.'],
+    ['line1' => 'تجربة تسوق فريدة', 'line2' => 'مع جنين للتجميل.'],
+    ['line1' => 'ثقة وجودة', 'line2' => 'في كل طلب.'],
+    ['line1' => 'جمالكِ.. مسؤوليتنا', 'line2' => 'ونحنُ نحب ذلك.'],
 ];
 
 // Product slides with matching titles
@@ -207,62 +225,72 @@ if (!empty($slideProductIds)) {
                 </div>
 
                 {{-- ═══════════════════════════════════════════
-                     UNIFIED HERO CARD — Headline + Phrase rotate together
+                     PREMIUM HERO CARD — Animated gradient + floating elements
                      ═══════════════════════════════════════════ --}}
-                <div id="heroCard" class="relative mb-6">
-                    <div class="relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-10" style="background:linear-gradient(145deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.02) 50%,rgba(var(--brand-500-rgb,255,42,133),0.04) 100%);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.08),0 0 80px rgba(var(--brand-500-rgb,255,42,133),0.08);">
+                <div id="heroCard" class="relative mb-6 select-none">
+                    <div class="relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-10" style="background:linear-gradient(145deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.015) 40%,rgba(var(--brand-500-rgb,255,42,133),0.05) 100%);border:1.5px solid rgba(255,255,255,0.12);backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.1),0 0 100px rgba(var(--brand-500-rgb,255,42,133),0.06);">
 
-                        {{-- Ambient glows --}}
-                        <div class="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-25 pointer-events-none" style="background:radial-gradient(circle,var(--brand-500),transparent 70%);filter:blur(50px);"></div>
-                        <div class="absolute -bottom-24 -left-24 w-48 h-48 rounded-full opacity-15 pointer-events-none" style="background:radial-gradient(circle,#06b6d4,transparent 70%);filter:blur(50px);"></div>
+                        {{-- Ambient glow orbs --}}
+                        <div class="absolute -top-28 -right-28 w-56 h-56 rounded-full opacity-20 pointer-events-none" style="background:radial-gradient(circle,var(--brand-500),transparent 70%);filter:blur(60px);animation:glowPulse 5s ease-in-out infinite;"></div>
+                        <div class="absolute -bottom-28 -left-28 w-56 h-56 rounded-full opacity-12 pointer-events-none" style="background:radial-gradient(circle,#06b6d4,transparent 70%);filter:blur(60px);animation:glowPulse 6s ease-in-out infinite 1s;"></div>
 
                         {{-- Animated border shimmer --}}
-                        <div class="absolute inset-0 rounded-[2rem] sm:rounded-[2.5rem] pointer-events-none" style="background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.03) 50%,transparent 60%);background-size:200% 200%;animation:borderShimmer 4s ease-in-out infinite;"></div>
+                        <div class="absolute inset-0 rounded-[2rem] sm:rounded-[2.5rem] pointer-events-none" style="background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.04) 50%,transparent 60%);background-size:200% 200%;animation:borderShimmer 5s ease-in-out infinite;"></div>
 
-                        {{-- Top badge --}}
+                        {{-- Floating decorative elements --}}
+                        <div class="absolute top-4 right-6 text-white/10 pointer-events-none animate-bounce" style="animation-duration:3s;"><i class="ph-fill ph-sparkle text-xl"></i></div>
+                        <div class="absolute bottom-8 left-6 text-white/10 pointer-events-none animate-bounce" style="animation-duration:4s;animation-delay:1s;"><i class="ph-fill ph-star text-lg"></i></div>
+                        <div class="absolute top-1/2 right-3 text-white/5 pointer-events-none animate-pulse"><i class="ph-fill ph-diamond text-xs"></i></div>
+
+                        {{-- Premium badge --}}
                         <div class="flex justify-center mb-5 relative z-10">
-                            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-black tracking-widest uppercase" style="background:rgba(var(--brand-500-rgb,255,42,133),0.15);color:var(--brand-500);border:1px solid rgba(var(--brand-500-rgb,255,42,133),0.25);box-shadow:0 0 20px rgba(var(--brand-500-rgb,255,42,133),0.15);">
+                            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black tracking-[0.15em] uppercase" style="background:rgba(var(--brand-500-rgb,255,42,133),0.12);color:var(--brand-500);border:1px solid rgba(var(--brand-500-rgb,255,42,133),0.2);box-shadow:0 0 30px rgba(var(--brand-500-rgb,255,42,133),0.1),inset 0 1px 0 rgba(255,255,255,0.1);">
                                 <span class="relative flex h-2 w-2">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-60"></span>
                                     <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
                                 </span>
                                 عروض حصرية
                             </span>
                         </div>
 
-                        {{-- Rotating Headline (Line 1 + Line 2) --}}
-                        <div class="relative overflow-hidden mb-4" style="height:95px;">
+                        {{-- Rotating Headline with scale animation --}}
+                        <div class="relative overflow-hidden mb-3" style="height:100px;">
                             @foreach($heroHeadlines as $i => $headline)
-                            <div class="hero-headline absolute w-full text-center" style="top:0;left:0;opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '20px' }});transition:opacity 0.6s cubic-bezier(0.4,0,0.2,1),transform 0.6s cubic-bezier(0.4,0,0.2,1);pointer-events:{{ $i === 0 ? 'auto' : 'none' }};" data-headline="{{ $i }}">
-                                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-black leading-[1.1] tracking-tight">
-                                    <span class="block" style="color:#ffffff;text-shadow:0 2px 16px rgba(255,255,255,0.15);">{{ $headline['line1'] }}</span>
-                                    <span class="block mt-1" style="color:rgba(255,255,255,0.92);text-shadow:0 0 30px rgba(255,255,255,0.2),0 4px 10px rgba(0,0,0,0.3);">{{ $headline['line2'] }}</span>
+                            <div class="hero-headline absolute w-full text-center px-2" style="top:0;left:0;opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '20px' }}) scale({{ $i === 0 ? '1' : '0.95' }});transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1);pointer-events:{{ $i === 0 ? 'auto' : 'none' }};" data-headline="{{ $i }}">
+                                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-black leading-[1.12] tracking-tight">
+                                    <span class="block hero-line-1" style="background:linear-gradient(135deg,#fff 30%,#f0abfc 70%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:shineText 4s linear infinite;">{{ $headline['line1'] }}</span>
+                                    <span class="block mt-1.5" style="color:rgba(255,255,255,0.88);text-shadow:0 0 25px rgba(255,255,255,0.15),0 3px 8px rgba(0,0,0,0.3);">{{ $headline['line2'] }}</span>
                                 </h1>
                             </div>
                             @endforeach
                         </div>
 
-                        {{-- Divider --}}
+                        {{-- Elegant divider --}}
                         <div class="flex items-center gap-3 justify-center mb-4 relative z-10">
-                            <div class="h-px flex-1 max-w-[60px]" style="background:linear-gradient(to left,transparent,rgba(255,255,255,0.2));"></div>
-                            <i class="ph-fill ph-sparkle text-brand-500/60 text-sm"></i>
-                            <div class="h-px flex-1 max-w-[60px]" style="background:linear-gradient(to right,transparent,rgba(255,255,255,0.2));"></div>
+                            <div class="h-px flex-1 max-w-[50px]" style="background:linear-gradient(to left,transparent,rgba(255,255,255,0.25));"></div>
+                            <div class="w-7 h-7 rounded-full flex items-center justify-center" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">
+                                <i class="ph-fill ph-sparkle text-brand-500/70 text-xs"></i>
+                            </div>
+                            <div class="h-px flex-1 max-w-[50px]" style="background:linear-gradient(to right,transparent,rgba(255,255,255,0.25));"></div>
                         </div>
 
                         {{-- Rotating Marketing Phrase --}}
-                        <div class="relative overflow-hidden" style="height:52px;">
+                        <div class="relative overflow-hidden" style="height:50px;">
                             @foreach($allPhrases as $i => $phrase)
-                            <p class="hero-phrase absolute w-full text-center text-sm sm:text-base md:text-lg font-bold leading-relaxed"
-                               style="top:0;left:0;color:rgba(255,255,255,0.65);opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '12px' }});transition:opacity 0.6s ease,transform 0.6s ease;pointer-events:{{ $i === 0 ? 'auto' : 'none' }};"
+                            <p class="hero-phrase absolute w-full text-center text-sm sm:text-base md:text-lg font-semibold leading-relaxed px-4"
+                               style="top:0;left:0;color:rgba(255,255,255,0.6);opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '10px' }});transition:opacity 0.6s ease,transform 0.6s ease;pointer-events:{{ $i === 0 ? 'auto' : 'none' }};"
                                data-phrase="{{ $i }}">{{ $phrase }}</p>
                             @endforeach
                         </div>
 
-                        {{-- Progress dots --}}
-                        <div class="flex gap-2 justify-center mt-5 relative z-10">
-                            @foreach($heroHeadlines as $i => $h)
-                            <span class="hero-dot block h-1.5 rounded-full transition-all duration-500 {{ $i === 0 ? 'bg-white/80 w-6' : 'bg-white/20 w-1.5' }}"></span>
-                            @endforeach
+                        {{-- Progress dots with count --}}
+                        <div class="flex items-center justify-center gap-2 mt-5 relative z-10">
+                            <span class="text-[10px] font-bold text-white/30" id="heroCounter">1 / {{ count($heroHeadlines) }}</span>
+                            <div class="flex gap-1.5">
+                                @foreach($heroHeadlines as $i => $h)
+                                <span class="hero-dot block h-1 rounded-full transition-all duration-500 {{ $i === 0 ? 'bg-gradient-to-r from-brand-400 to-brand-600 w-5' : 'bg-white/15 w-1' }}"></span>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -356,22 +384,28 @@ if (!empty($slideProductIds)) {
     var currentIdx = 0, interval;
 
     function showSlide(idx) {
-        // Headlines
+        // Headlines with scale
         headlines.forEach(function(h, i) {
-            h.style.opacity = i === idx ? '1' : '0';
-            h.style.transform = i === idx ? 'translateY(0)' : 'translateY(20px)';
-            h.style.pointerEvents = i === idx ? 'auto' : 'none';
+            var active = i === idx;
+            h.style.opacity = active ? '1' : '0';
+            h.style.transform = active ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)';
+            h.style.pointerEvents = active ? 'auto' : 'none';
         });
         // Phrases (cycle through independently mapped to headline index)
         var phraseIdx = idx % totalP;
         phrases.forEach(function(p, i) {
             p.style.opacity = i === phraseIdx ? '1' : '0';
-            p.style.transform = i === phraseIdx ? 'translateY(0)' : 'translateY(12px)';
+            p.style.transform = i === phraseIdx ? 'translateY(0)' : 'translateY(10px)';
         });
-        // Dots
+        // Dots with gradient
         heroDots.forEach(function(d, i) {
-            d.className = i === idx ? 'hero-dot block h-1.5 rounded-full bg-white/80 w-6 transition-all duration-500' : 'hero-dot block h-1.5 rounded-full bg-white/20 w-1.5 transition-all duration-500';
+            d.className = i === idx
+                ? 'hero-dot block h-1 rounded-full bg-gradient-to-r from-brand-400 to-brand-600 w-5 transition-all duration-500'
+                : 'hero-dot block h-1 rounded-full bg-white/15 w-1 transition-all duration-500';
         });
+        // Counter
+        var counter = document.getElementById('heroCounter');
+        if (counter) counter.textContent = (idx + 1) + ' / ' + totalH;
         currentIdx = idx;
     }
 
@@ -410,6 +444,14 @@ if (!empty($slideProductIds)) {
     @keyframes borderShimmer {
         0% { background-position: 200% 200%; }
         100% { background-position: -200% -200%; }
+    }
+    @keyframes glowPulse {
+        0%, 100% { opacity: 0.15; transform: scale(1); }
+        50% { opacity: 0.25; transform: scale(1.1); }
+    }
+    @keyframes shineText {
+        0% { background-position: 200% center; }
+        100% { background-position: -200% center; }
     }
     .value-card:hover { transform: translateY(-6px); border-color: rgba(255,42,133,0.15); box-shadow: 0 12px 40px rgba(0,0,0,0.3), var(--neon-glow); }
     @media (max-width: 767px) {
