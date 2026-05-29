@@ -53,7 +53,7 @@ class ShopController extends Controller
             $query->orderBy('created_at', 'desc');
         }
 
-        $products = $query->paginate(12)->appends($request->query());
+        $products = $query->get();
         $categories = Category::active()
             ->withCount(['products' => function($q) {
                 $q->active()->showInB2C();

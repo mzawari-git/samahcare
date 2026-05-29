@@ -21,7 +21,7 @@
             <div class="flex flex-wrap gap-3">
                 <div class="flex items-center gap-2 glass-panel rounded-full px-4 py-2 border-white/5">
                     <i class="ph-fill ph-package text-brand-500"></i>
-                    <span class="text-sm font-bold text-white">{{ method_exists($products, 'total') ? $products->total() : $products->count() }}</span>
+                    <span class="text-sm font-bold text-white">{{ $products->count() }}</span>
                     <span class="text-xs text-white-dim">منتج</span>
                 </div>
                 <div class="flex items-center gap-2 glass-panel rounded-full px-4 py-2 border-white/5">
@@ -47,7 +47,7 @@
                     <li>
                         <a href="{{ route('shop') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-all duration-200 {{ !request('category') ? 'bg-brand-500 text-white font-bold shadow-neon' : 'text-white-dim hover:bg-white/5 hover:text-white' }}">
                             <span>الكل</span>
-                            <span class="text-[11px] {{ !request('category') ? 'bg-white/20' : 'bg-white/5' }} px-2 py-0.5 rounded-full">{{ method_exists($products, 'total') ? $products->total() : $products->count() }}</span>
+                            <span class="text-[11px] {{ !request('category') ? 'bg-white/20' : 'bg-white/5' }} px-2 py-0.5 rounded-full">{{ $products->count() }}</span>
                         </a>
                     </li>
                     @foreach($categories as $category)
@@ -86,7 +86,7 @@
             <div class="flex justify-between items-center flex-wrap gap-3 mb-6 glass-panel rounded-2xl px-5 py-3 border-white/5 sticky top-[80px] z-20">
                 <p class="text-sm text-white-dim flex items-center gap-2">
                     <i class="ph-fill ph-package text-brand-500"></i>
-                    <strong class="text-white">{{ method_exists($products, 'total') ? $products->total() : $products->count() }}</strong> منتج
+                    <strong class="text-white">{{ $products->count() }}</strong> منتج
                     @if(request('category') && isset($selectedCategory))
                     <span>في <strong class="text-brand-500">{{ $selectedCategory->name_ar }}</strong></span>
                     @endif
@@ -213,12 +213,6 @@
                 @endforeach
             </div>
 
-            {{-- Pagination --}}
-            @if(method_exists($products, 'links'))
-            <div class="flex justify-center mt-10">
-                {{ $products->links('pagination::bootstrap-5') }}
-            </div>
-            @endif
             @endif
         </div>
     </div>
