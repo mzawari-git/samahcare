@@ -294,13 +294,13 @@ if (!empty($slideProductIds)) {
 })();
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col-reverse md:flex-col">
 
 {{-- ═══════════════════════════════════════════════════════════════
       SECTION 2: Categories — All Categories Centered
      ═══════════════════════════════════════════════════════════════ --}}
 @if($categories->isNotEmpty())
-<section class="py-16 bg-surface order-2 md:order-1">
+<section class="py-16 bg-surface">
 
     {{-- Mobile: section label --}}
     <div class="md:hidden text-center mb-6">
@@ -345,7 +345,7 @@ if (!empty($slideProductIds)) {
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION 3: Trust Bar — Social Proof & Quick Stats
      ═══════════════════════════════════════════════════════════════ --}}
-<section class="py-12 border-b border-ink/10 order-3 md:order-2">
+<section class="py-12 border-b border-ink/10">
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div class="glass-panel rounded-2xl p-6">
@@ -371,7 +371,7 @@ if (!empty($slideProductIds)) {
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION 3: Brand USP — Optimized for Facebook & Google Ads
      ═══════════════════════════════════════════════════════════════ --}}
-<section class="py-16 relative overflow-hidden order-4 md:order-3">
+<section class="py-16 relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(var(--brand-500-rgb,255,42,133),0.04),transparent_60%)] pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="text-center mb-14">
@@ -415,7 +415,7 @@ if (!empty($slideProductIds)) {
 {{-- ═══════════════════════════════════════════════════════════════
       SECTION 4: Why شركة جنين للتجميل? — Premium Value Cards
       ═══════════════════════════════════════════════════════════════ --}}
-<section class="py-24 relative overflow-hidden order-5 md:order-4">
+<section class="py-24 relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(var(--brand-500-rgb,255,42,133),0.03),transparent_70%)] pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="mb-16 text-center">
@@ -464,7 +464,7 @@ if (!empty($slideProductIds)) {
 {{-- ═══════════════════════════════════════════════════════════════
       SECTION 3: Product Lab — Asymmetric Grid
       ═══════════════════════════════════════════════════════════════ --}}
-<section id="products" class="py-20 relative order-1 md:order-5">
+<section id="products" class="py-20 relative">
 
     {{-- Mobile: visual separator to make reordering obvious --}}
     <div class="md:hidden -mt-20 mb-8 text-center">
