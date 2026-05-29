@@ -50,3 +50,6 @@
 # OS
 .DS_Store
 Thumbs.db
+
+blog*.txt
+~$*
