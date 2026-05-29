@@ -37,7 +37,7 @@
     {{-- Google Fonts: Tajawal (preconnect for perf) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link id="googleFontsLink" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
@@ -157,7 +157,6 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     {{-- Core App JS --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelScript() !!} @endif
@@ -329,13 +328,6 @@
         @endif
     </div>
 
-    {{-- Floating WhatsApp Button --}}
-    @if(!empty($siteSettings['whatsapp_number']))
-    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $siteSettings['whatsapp_number']) }}" class="floating-whatsapp-v3" target="_blank" title="تواصل عبر واتساب" aria-label="تواصل عبر واتساب">
-        <i class="ph-fill ph-whatsapp-logo"></i>
-    </a>
-    @endif
-
     {{-- Scroll to Top Button --}}
     <button class="scroll-to-top-v3" id="scrollToTopV3" title="العودة للأعلى" aria-label="العودة للأعلى" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <i class="ph ph-caret-up"></i>
@@ -364,5 +356,6 @@
     <style>
     .skip-link { position:absolute; top:-40px; left:0; background:var(--ink); color:var(--surface); padding:8px; z-index:100; } .skip-link:focus { top:0; }
     </style>
+@include('frontend.layouts.partials.theme-switcher')
 </body>
 </html>
