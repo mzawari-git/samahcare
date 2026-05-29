@@ -301,6 +301,14 @@ if (!empty($slideProductIds)) {
      ═══════════════════════════════════════════════════════════════ --}}
 @if($categories->isNotEmpty())
 <section class="py-16 bg-surface order-2 md:order-1">
+
+    {{-- Mobile: section label --}}
+    <div class="md:hidden text-center mb-6">
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full font-black text-sm border-2" style="border-color:var(--ink-muted);color:var(--ink);">
+            <i class="fa-solid fa-layer-group text-xs"></i> تصفحي الأقسام <i class="fa-solid fa-layer-group text-xs"></i>
+        </div>
+    </div>
+
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-12">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-4">
@@ -457,6 +465,14 @@ if (!empty($slideProductIds)) {
       SECTION 3: Product Lab — Asymmetric Grid
       ═══════════════════════════════════════════════════════════════ --}}
 <section id="products" class="py-20 relative order-1 md:order-5">
+
+    {{-- Mobile: visual separator to make reordering obvious --}}
+    <div class="md:hidden -mt-20 mb-8 text-center">
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full font-black text-sm shadow-lg" style="background:var(--gradient-primary);color:#fff;">
+            <i class="fa-solid fa-star text-xs"></i> منتجاتنا المميزة <i class="fa-solid fa-star text-xs"></i>
+        </div>
+    </div>
+
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(var(--brand-500-rgb,255,42,133),0.04),transparent_60%)] pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="mb-16 text-center">
