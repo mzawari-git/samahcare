@@ -28,11 +28,6 @@
                     <i class="ph-fill ph-squares-four text-accent-500"></i>
                     <span class="text-sm font-bold text-white">{{ $categories->count() }}</span>
                     <span class="text-xs text-white-dim">قسم</span>
-                </div>
-                <div class="flex items-center gap-2 glass-panel rounded-full px-4 py-2 border-white/5">
-                    <i class="ph-fill ph-truck text-green-400"></i>
-                    <span class="text-xs text-white-dim">شحن مجاني فوق {{ $siteSettings['free_shipping_min'] ?? '200' }} ₪</span>
-                </div>
             </div>
         </div>
     </div>
@@ -91,7 +86,7 @@
             <div class="flex justify-between items-center flex-wrap gap-3 mb-6 glass-panel rounded-2xl px-5 py-3 border-white/5 sticky top-[80px] z-20">
                 <p class="text-sm text-white-dim flex items-center gap-2">
                     <i class="ph-fill ph-package text-brand-500"></i>
-                    <strong class="text-white">{{ $products->total() }}</strong> منتج
+                    <strong class="text-white">{{ $products->count() }}</strong> منتج
                     @if(request('category') && isset($selectedCategory))
                     <span>في <strong class="text-brand-500">{{ $selectedCategory->name_ar }}</strong></span>
                     @endif

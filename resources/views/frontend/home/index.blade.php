@@ -108,7 +108,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                     <div class="hero-title absolute w-full text-right" style="top:0;right:0;opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '30px' }});transition:opacity 0.8s ease,transform 0.8s ease;" data-title="{{ $i }}">
                         <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.85] tracking-tight">
                             <span class="block text-ink">{{ $slide['title_line1'] }}</span>
-                            <span class="block mt-2" style="background:linear-gradient(135deg,{{ $slide['color'] }},{{ $slide['color'] }}cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;">{{ $slide['title_line2'] }}</span>
+                            <span class="block mt-3" style="color:#ffffff;text-shadow:0 0 40px rgba(255,255,255,0.4),0 0 80px rgba(255,255,255,0.2),0 4px 8px rgba(0,0,0,0.3);">{{ $slide['title_line2'] }}</span>
                         </h1>
                     </div>
                     @endforeach
