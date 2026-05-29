@@ -163,6 +163,19 @@ class Product extends Model
         return $this->main_image_url;
     }
 
+    public function optimizedImageUrl(int $width = 600, ?int $height = null, int $quality = 85, bool $webp = true): ?string
+    {
+        $image = $this->main_image_webp ?: $this->main_image;
+        if (!$image) return null;
+        if ($this->isAbsoluteUrl($image)) return $image;
+
+        $params = ['w' => $width, 'q' => $quality];
+        if ($height) $params['h'] = $height;
+        if ($webp) $params['webp'] = 1;
+
+        return route('image.optimized', ['path' => 'products/' . $image]) . '?' . http_build_query($params);
+    }
+
     public function getAvailableQuantityAttribute(): int
     {
         return max(0, $this->stock_quantity - $this->reserved_quantity);

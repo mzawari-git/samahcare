@@ -128,7 +128,7 @@
                 <div class="product-grid-item group glass-panel rounded-2xl border-white/5 overflow-hidden hover:border-brand-500/20 transition-all duration-300">
                     <a href="{{ route('product.show', $product->slug) }}" class="block relative aspect-square overflow-hidden">
                         @if($product->main_image_url)
-                        <img src="{{ $product->main_image_url }}" alt="{{ $product->name_ar }}" loading="lazy" class="w-full h-full object-cover filter brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" onerror="this.parentElement.innerHTML='<div class=&quot;w-full h-full flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-4xl text-white/10&quot;></i></div>'">
+                        <img src="{{ $product->optimizedImageUrl(600, 600) }}" alt="{{ $product->name_ar }}" width="600" height="600" loading="lazy" class="w-full h-full object-cover filter brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" onerror="this.parentElement.innerHTML='<div class=&quot;w-full h-full flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-4xl text-white/10&quot;></i></div>'">
                         @else
                         <div class="w-full h-full flex items-center justify-center bg-surface-alt"><i class="ph ph-image text-4xl text-white/10"></i></div>
                         @endif
@@ -176,7 +176,7 @@
                 <div class="product-list-item glass-panel rounded-2xl border-white/5 p-4 flex gap-4 items-center hover:border-brand-500/20 transition-all duration-300">
                     <a href="{{ route('product.show', $product->slug) }}" class="flex-shrink-0">
                         @if($product->main_image_url)
-                        <img src="{{ $product->main_image_url }}" alt="{{ $product->name_ar }}" loading="lazy" class="w-24 h-24 rounded-xl object-cover" onerror="this.parentElement.innerHTML='<div class=&quot;w-24 h-24 rounded-xl bg-white/5 flex items-center justify-center&quot;><i class=&quot;ph ph-image text-2xl text-white/10&quot;></i></div>'">
+                        <img src="{{ $product->optimizedImageUrl(200, 200) }}" alt="{{ $product->name_ar }}" width="200" height="200" loading="lazy" class="w-24 h-24 rounded-xl object-cover" onerror="this.parentElement.innerHTML='<div class=&quot;w-24 h-24 rounded-xl bg-white/5 flex items-center justify-center&quot;><i class=&quot;ph ph-image text-2xl text-white/10&quot;></i></div>'">
                         @else
                         <div class="w-24 h-24 rounded-xl bg-white/5 flex items-center justify-center"><i class="ph ph-image text-2xl text-white/10"></i></div>
                         @endif

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 
@@ -13,21 +13,31 @@ class OptimizedImageController extends Controller
     public function show(Request $request, $path)
     {
         try {
-            $imagePath = 'public/' . $path;
-            
-            if (!Storage::exists($imagePath)) {
+            $fullPath = $this->resolvePath($path);
+            if (!$fullPath || !File::exists($fullPath)) {
                 abort(404);
             }
 
-            $image = Storage::get($imagePath);
-            $img = Image::make($image);
-
-            // Get requested dimensions
             $width = $request->get('w');
             $height = $request->get('h');
-            $quality = $request->get('q', 80);
+            $quality = min(100, max(10, (int) $request->get('q', 80)));
+            $webp = $request->get('webp');
 
-            // Resize if dimensions provided
+            $cacheKey = 'img_' . md5($path . $width . $height . $quality . ($webp ? 'wp' : ''));
+            $cacheDir = storage_path('app/public/cache/optimized');
+            if (!File::isDirectory($cacheDir)) {
+                File::makeDirectory($cacheDir, 0755, true);
+            }
+
+            $ext = $webp ? 'webp' : strtolower(pathinfo($path, PATHINFO_EXTENSION));
+            $cachePath = $cacheDir . '/' . $cacheKey . '.' . $ext;
+
+            if (File::exists($cachePath)) {
+                return $this->serveFile($cachePath, $ext);
+            }
+
+            $img = Image::make($fullPath);
+
             if ($width || $height) {
                 $img->resize($width, $height, function ($constraint) {
                     $constraint->aspectRatio();
@@ -35,25 +45,15 @@ class OptimizedImageController extends Controller
                 });
             }
 
-            // Convert to WebP if supported
-            if ($request->get('webp') && $img->mime() !== 'image/webp') {
+            if ($webp) {
                 $img->encode('webp', $quality);
             } else {
-                $img->encode($img->extension(), $quality);
+                $img->encode($img->extension() ?: 'jpg', $quality);
             }
 
-            // Cache the optimized image
-            $cacheKey = 'optimized_' . md5($path . $width . $height . $quality . ($request->get('webp') ? 'webp' : ''));
-            $cachePath = 'public/cache/' . $cacheKey . '.' . $img->extension();
-            
-            if (!Storage::exists($cachePath)) {
-                Storage::put($cachePath, $img->getEncoded());
-            }
+            $img->save($cachePath, $quality);
 
-            return Response::make($img->getEncoded())
-                ->header('Content-Type', $img->mime())
-                ->header('Cache-Control', 'public, max-age=31536000, immutable')
-                ->header('ETag', md5($img->getEncoded()));
+            return $this->serveFile($cachePath, $ext);
 
         } catch (\Exception $e) {
             abort(404);
@@ -63,29 +63,64 @@ class OptimizedImageController extends Controller
     public function thumbnail(Request $request, $path)
     {
         try {
-            $imagePath = 'public/' . $path;
-            
-            if (!Storage::exists($imagePath)) {
+            $fullPath = $this->resolvePath($path);
+            if (!$fullPath || !File::exists($fullPath)) {
                 abort(404);
             }
 
-            $image = Storage::get($imagePath);
-            $img = Image::make($image);
+            $cacheKey = 'thumb_' . md5($path);
+            $cacheDir = storage_path('app/public/cache/optimized');
+            if (!File::isDirectory($cacheDir)) {
+                File::makeDirectory($cacheDir, 0755, true);
+            }
 
-            // Create thumbnail (max 300x300)
+            $cachePath = $cacheDir . '/' . $cacheKey . '.webp';
+
+            if (File::exists($cachePath)) {
+                return $this->serveFile($cachePath, 'webp');
+            }
+
+            $img = Image::make($fullPath);
             $img->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
-
             $img->encode('webp', 75);
+            $img->save($cachePath, 75);
 
-            return Response::make($img->getEncoded())
-                ->header('Content-Type', 'image/webp')
-                ->header('Cache-Control', 'public, max-age=31536000, immutable');
+            return $this->serveFile($cachePath, 'webp');
 
         } catch (\Exception $e) {
             abort(404);
         }
+    }
+
+    private function resolvePath(string $path): ?string
+    {
+        $storagePath = storage_path('app/public/' . $path);
+        if (File::exists($storagePath)) {
+            return $storagePath;
+        }
+        $publicPath = public_path('storage/' . $path);
+        if (File::exists($publicPath)) {
+            return $publicPath;
+        }
+        return null;
+    }
+
+    private function serveFile(string $filePath, string $ext): \Illuminate\Http\Response
+    {
+        $mime = match ($ext) {
+            'webp' => 'image/webp',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            default => 'image/jpeg',
+        };
+
+        return Response::make(File::get($filePath))
+            ->header('Content-Type', $mime)
+            ->header('Cache-Control', 'public, max-age=31536000, immutable')
+            ->header('Content-Length', File::size($filePath));
     }
 }

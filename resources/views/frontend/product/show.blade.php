@@ -36,7 +36,7 @@
         <div>
             <div class="rounded-3xl overflow-hidden relative border border-white/5 glass-panel group">
                 @if($product->main_image)
-                <img src="{{ $product->main_image_url }}" alt="{{ $product->name_ar }}" class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-90" id="mainProductImage" onerror="this.outerHTML='<div class=&quot;w-full aspect-square flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-6xl text-white/10&quot;></i></div>'">
+                <img src="{{ $product->optimizedImageUrl(800, 800) }}" alt="{{ $product->name_ar }}" width="800" height="800" class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-90" id="mainProductImage" onerror="this.outerHTML='<div class=&quot;w-full aspect-square flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-6xl text-white/10&quot;></i></div>'">
                 @else
                 <div class="w-full aspect-square flex items-center justify-center bg-surface-alt"><i class="ph ph-image text-6xl text-white/10"></i></div>
                 @endif
@@ -52,12 +52,12 @@
             </div>
             @if($product->gallery_images && count($product->gallery_images) > 0)
             <div class="flex gap-3 mt-4 overflow-x-auto pb-2 hide-scroll">
-                <button onclick="swapImage(this, '{{ $product->main_image_url }}')" class="gallery-thumb w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-brand-500 shadow-neon">
-                    <img src="{{ $product->main_image_url }}" class="w-full h-full object-cover">
+                <button onclick="swapImage(this, '{{ $product->optimizedImageUrl(800, 800) }}')" class="gallery-thumb w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-brand-500 shadow-neon">
+                    <img src="{{ $product->optimizedImageUrl(100, 100) }}" width="100" height="100" class="w-full h-full object-cover">
                 </button>
                 @foreach($product->gallery_images as $image)
-                <button onclick="swapImage(this, '{{ url('files/' . $image) }}')" class="gallery-thumb w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-500/50 transition-all">
-                    <img src="{{ url('files/' . $image) }}" class="w-full h-full object-cover">
+                <button onclick="swapImage(this, '{{ route('image.optimized', ['path' => $image]) }}?w=800&h=800&webp=1&q=85')" class="gallery-thumb w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-500/50 transition-all">
+                    <img src="{{ route('image.optimized', ['path' => $image]) }}?w=100&h=100&webp=1&q=80" width="100" height="100" class="w-full h-full object-cover">
                 </button>
                 @endforeach
             </div>
@@ -179,7 +179,7 @@
             <div class="group glass-panel rounded-2xl border-white/5 overflow-hidden hover:border-brand-500/20 transition-all duration-300">
                 <a href="{{ route('product.show', $related->slug) }}" class="block aspect-square overflow-hidden">
                     @if($related->main_image)
-                    <img src="{{ $related->main_image_url }}" alt="{{ $related->name_ar }}" loading="lazy" class="w-full h-full object-cover filter brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" onerror="this.parentElement.innerHTML='<div class=&quot;w-full h-full flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-3xl text-white/10&quot;></i></div>'">
+                    <img src="{{ $related->optimizedImageUrl(400, 400) }}" alt="{{ $related->name_ar }}" width="400" height="400" loading="lazy" class="w-full h-full object-cover filter brightness-75 group-hover:brightness-100 group-hover:scale-105 transition-all duration-500" onerror="this.parentElement.innerHTML='<div class=&quot;w-full h-full flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-3xl text-white/10&quot;></i></div>'">
                     @else
                     <div class="w-full h-full flex items-center justify-center bg-surface-alt"><i class="ph ph-image text-3xl text-white/10"></i></div>
                     @endif

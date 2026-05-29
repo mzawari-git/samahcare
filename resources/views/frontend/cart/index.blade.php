@@ -52,7 +52,7 @@
                     <div class="cart-item-row flex items-center gap-4 px-5 py-4 border-b border-white/5 hover:bg-white/[0.02] transition-colors" data-item-id="{{ $item->id }}">
                         <a href="{{ route('product.show', $item->product->slug) }}" class="flex-shrink-0">
                             @if($item->product->main_image_url)
-                            <img src="{{ $item->product->main_image_url }}" alt="{{ $item->product->name_ar }}" class="w-20 h-20 rounded-xl object-cover">
+                            <img src="{{ $item->product->optimizedImageUrl(160, 160) }}" alt="{{ $item->product->name_ar }}" width="160" height="160" class="w-20 h-20 rounded-xl object-cover">
                             @else
                             <div class="w-20 h-20 rounded-xl bg-white/5 flex items-center justify-center"><i class="ph ph-image text-2xl text-white/10"></i></div>
                             @endif
@@ -152,7 +152,7 @@
                 <a href="{{ route('product.show', $rp->slug) }}" class="glass-panel rounded-xl overflow-hidden group hover:-translate-y-1 transition-all duration-300">
                     <div class="h-36 bg-surface-alt overflow-hidden">
                         @if($rp->main_image_url)
-                        <img src="{{ $rp->main_image_url }}" alt="{{ $rp->name_ar }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                        <img src="{{ $rp->optimizedImageUrl(300, 300) }}" alt="{{ $rp->name_ar }}" width="300" height="300" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                         @else
                         <div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-box text-3xl text-ink-dim/15"></i></div>
                         @endif

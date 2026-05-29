@@ -38,7 +38,7 @@
                     <div style="background:var(--glass-bg);border-radius:16px;border:1px solid var(--glass-border);overflow:hidden;transition:all .3s;" onmouseover="this.style.boxShadow='0 8px 32px rgba(0,0,0,.1)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
                         <a href="{{ route('product.show', $product->slug) }}" style="display:block;aspect-ratio:1/1;overflow:hidden;background:var(--surface-alt);">
                             @if($product->main_image)
-                            <img src="{{ $product->main_image_url }}" alt="{{ $product->name_ar }}" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                            <img src="{{ $product->optimizedImageUrl(500, 500) }}" alt="{{ $product->name_ar }}" width="500" height="500" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
                             @else
                             <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface-alt);">
                                 <i class="fas fa-bottle" style="font-size:3rem;color:var(--gray-300);"></i>

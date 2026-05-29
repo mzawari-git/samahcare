@@ -90,7 +90,7 @@ Route::post('/api/track/fingerprint', [\App\Http\Controllers\Api\FingerprintCont
 Route::post('/api/track/behavior', [\App\Http\Controllers\Api\BehavioralController::class, 'store'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
 // Optimized image endpoints
-Route::get('/images/{path}', [\App\Http\Controllers\Frontend\OptimizedImageController::class, 'show'])->where('path', '.*');
+Route::get('/images/{path}', [\App\Http\Controllers\Frontend\OptimizedImageController::class, 'show'])->where('path', '.*')->name('image.optimized');
 Route::get('/thumbnails/{path}', [\App\Http\Controllers\Frontend\OptimizedImageController::class, 'thumbnail'])->where('path', '.*');
 
 // Serve storage files directly (avoid "storage" in URL - some hosts block it)

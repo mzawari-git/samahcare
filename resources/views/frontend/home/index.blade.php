@@ -147,8 +147,8 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                     <div class="hero-slide glass-panel rounded-3xl overflow-hidden p-3 {{ $index === 0 ? '' : 'hidden' }}" data-slide="{{ $index }}">
                         <a href="{{ route('product.show', $main->slug) }}" class="block relative rounded-2xl overflow-hidden bg-surface-alt group" style="height:380px;">
                             @if($main->main_image_url)
-                            <img src="{{ $main->main_image_url }}" alt="{{ $main->name_ar }}"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                            <img src="{{ $main->optimizedImageUrl(800) }}" alt="{{ $main->name_ar }}" width="800" height="380"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="{{ $index === 0 ? 'eager' : 'lazy' }}"{{ $index === 0 ? ' fetchpriority="high"' : '' }}>
                             @else
                             <div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-flask text-5xl text-ink-dim/15"></i></div>
                             @endif
@@ -164,7 +164,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                             @foreach($subProducts as $sub)
                             <a href="{{ route('product.show', $sub->slug) }}" class="glass-panel rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
                                 <div class="h-16 bg-surface-alt">
-                                    @if($sub->main_image_url)<img src="{{ $sub->main_image_url }}" alt="" class="w-full h-full object-cover" loading="lazy">@endif
+                                    @if($sub->main_image_url)<img src="{{ $sub->optimizedImageUrl(200, 200) }}" alt="" width="200" height="200" class="w-full h-full object-cover" loading="lazy">@endif
                                 </div>
                                 <div class="p-2 text-center">
                                     <p class="text-[11px] font-bold text-ink truncate">{{ $sub->name_ar }}</p>
@@ -413,7 +413,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                  onclick="window.location='{{ route('product.show', $bigProduct->slug) }}'">
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10"></div>
                 @if($bigProduct->main_image_url)
-                <img src="{{ $bigProduct->main_image_url }}" alt="{{ $bigProduct->name_ar }}"
+                <img src="{{ $bigProduct->optimizedImageUrl(800, 450) }}" alt="{{ $bigProduct->name_ar }}" width="800" height="450"
                      class="absolute inset-0 w-full h-full object-cover filter grayscale mix-blend-luminosity group-hover:scale-105 transition-transform duration-700"
                      loading="lazy">
                 @else
@@ -450,7 +450,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10"></div>
                 <div class="absolute inset-0 bg-accent-500/5 mix-blend-overlay z-10 group-hover:bg-accent-500/10 transition-colors"></div>
                 @if($secondProduct->main_image_url)
-                <img src="{{ $secondProduct->main_image_url }}" alt="{{ $secondProduct->name_ar }}"
+                <img src="{{ $secondProduct->optimizedImageUrl(600, 450) }}" alt="{{ $secondProduct->name_ar }}" width="600" height="450"
                      class="absolute inset-0 w-full h-full object-cover filter contrast-125 group-hover:scale-105 transition-transform duration-700"
                      loading="lazy">
                 @else
@@ -504,7 +504,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                  onclick="window.location='{{ route('product.show', $thirdProduct->slug) }}'">
                 <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-10"></div>
                 @if($thirdProduct->main_image_url)
-                <img src="{{ $thirdProduct->main_image_url }}" alt="{{ $thirdProduct->name_ar }}"
+                <img src="{{ $thirdProduct->optimizedImageUrl(600, 300) }}" alt="{{ $thirdProduct->name_ar }}" width="600" height="300"
                      class="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000"
                      loading="lazy">
                 @else
@@ -584,7 +584,7 @@ if (empty($slidesData) && $featuredProducts->isNotEmpty()) {
                class="flex-shrink-0 w-[260px] glass-panel rounded-2xl overflow-hidden group border border-white/5 block transition-all duration-500 hover:-translate-y-2 hover:border-brand-500/30" style="scroll-snap-align: start;">
                 <div class="relative h-[260px] overflow-hidden">
                     @if($product->main_image_url)
-                    <img src="{{ $product->main_image_url }}" alt="{{ $product->name_ar }}"
+                    <img src="{{ $product->optimizedImageUrl(400, 400) }}" alt="{{ $product->name_ar }}" width="400" height="400"
                          class="w-full h-full object-cover filter brightness-75 group-hover:brightness-100 group-hover:scale-110 transition-all duration-700"
                          loading="lazy">
                     @else
