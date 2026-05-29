@@ -106,6 +106,36 @@
     </div>
     @endif
 
+    {{-- GUIDES SECTION --}}
+    @if($guidePosts->isNotEmpty())
+    <div style="padding:3rem 1rem;background:#ffffff;">
+        <div style="max-width:1100px;margin:0 auto;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+                <div style="display:flex;align-items:center;gap:.75rem;">
+                    <span style="display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:.75rem;background:#dcfce7;">
+                        <i class="ph ph-book-open" style="color:#16a34a;"></i>
+                    </span>
+                    <div>
+                        <h2 style="font-size:1.35rem;font-weight:900;color:#0f172a;">أدلة الاستخدام</h2>
+                        <p style="color:#64748b;font-size:.75rem;">أدلة شاملة ومقارنات بين الأجهزة والمنتجات</p>
+                    </div>
+                </div>
+                <a href="{{ route('blog.category', 'guides') }}" style="color:#16a34a;font-size:.8rem;font-weight:700;text-decoration:none;">عرض الكل &larr;</a>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.25rem;">
+                @foreach($guidePosts as $post)
+                <a href="{{ route('blog.show', $post->slug) }}" style="text-decoration:none;display:block;background:#fff;border:1px solid #e2e8f0;border-radius:1rem;padding:1.25rem;transition:all .2s;">
+                    <span style="display:inline-block;font-size:.65rem;font-weight:700;color:#16a34a;background:#dcfce7;padding:.2rem .65rem;border-radius:9999px;margin-bottom:.75rem;">{{ $post->category_label }}</span>
+                    <h3 style="font-size:1rem;font-weight:900;color:#0f172a;margin-bottom:.5rem;line-height:1.5;">{{ $post->title_ar }}</h3>
+                    <p style="color:#64748b;font-size:.75rem;line-height:1.6;">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 80) }}</p>
+                    <div style="margin-top:.75rem;font-size:.7rem;color:#94a3b8;">{{ $post->created_at->format('Y-m-d') }}</div>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    @endif
+
     {{-- LATEST POSTS --}}
     @if($latestPosts->isNotEmpty())
     <div style="padding:3rem 1rem 5rem;background:#f8fafc;">

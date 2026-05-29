@@ -10,11 +10,14 @@ class EventSourcingService
 {
     public function recordEvent(string $uuid, string $eventType, array $context = []): IdentityEvent
     {
+        $url = $context['url'] ?? request()?->fullUrl();
+        $referer = $context['referer'] ?? request()?->header('referer');
+
         $event = IdentityEvent::create([
             'uuid' => $uuid,
             'event_type' => $eventType,
-            'url' => $context['url'] ?? request()?->fullUrl(),
-            'referer' => $context['referer'] ?? request()?->header('referer'),
+            'url' => mb_strcut($url, 0, 255),
+            'referer' => mb_strcut($referer ?? '', 0, 255),
             'utm_source' => $context['utm_source'] ?? request()?->query('utm_source'),
             'utm_medium' => $context['utm_medium'] ?? request()?->query('utm_medium'),
             'utm_campaign' => $context['utm_campaign'] ?? request()?->query('utm_campaign'),

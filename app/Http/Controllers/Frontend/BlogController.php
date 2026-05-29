@@ -13,9 +13,10 @@ class BlogController extends Controller
         $latestPosts = BlogPost::published()->ordered()->limit(12)->get();
         $articlePosts = BlogPost::published()->category('articles')->ordered()->limit(4)->get();
         $tipPosts = BlogPost::published()->category('tips')->ordered()->limit(4)->get();
+        $guidePosts = BlogPost::published()->category('guides')->ordered()->limit(4)->get();
 
         return view('frontend.blog.index', compact(
-            'featuredPosts', 'latestPosts', 'articlePosts', 'tipPosts'
+            'featuredPosts', 'latestPosts', 'articlePosts', 'tipPosts', 'guidePosts'
         ));
     }
 
