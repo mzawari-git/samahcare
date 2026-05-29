@@ -200,50 +200,43 @@ $fallbackBtn = match($phraseCat) {
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 2: Categories Grid — Directly After Hero
+     SECTION 2: Categories — Compact Professional Grid
      ═══════════════════════════════════════════════════════════════ --}}
 @if($categories->isNotEmpty())
-<section class="py-20">
+@php $topCategories = $categories->take(6); @endphp
+<section class="py-16">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-14">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-6">
-                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">تصفحي الأقسام</span>
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div class="text-right md:text-right w-full md:w-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-4">
+                    <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">أقسام المتجر</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black mb-2">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
+                <p class="text-ink-dim text-sm md:text-base max-w-lg">اكتشفي منتجات أصلية من أفضل الماركات العالمية في جميع أقسام التجميل والعناية.</p>
             </div>
-            <h2 class="text-3xl md:text-5xl font-black mb-4">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
-            <p class="text-ink-dim max-w-3xl mx-auto text-lg font-light">اكتشفي مجموعتنا الكاملة من منتجات التجميل والعناية بالبشرة والشعر. جميع المنتجات أصلية ومضمونة من أفضل الماركات العالمية.</p>
+            <a href="{{ route('shop') }}" class="shrink-0 inline-flex items-center gap-2 text-brand-500 font-bold text-sm hover:gap-3 transition-all">
+                جميع الأقسام ({{ $categories->count() }}) <i class="fa-solid fa-arrow-left text-xs"></i>
+            </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($categories as $cat)
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            @foreach($topCategories as $cat)
             <a href="{{ route('shop', ['category' => $cat->slug]) }}"
-               class="group block glass-panel rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg">
-                <div class="relative h-52 overflow-hidden">
+               class="group flex flex-col items-center glass-panel rounded-2xl p-5 text-center transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg hover:border-brand-500/30">
+                <div class="w-20 h-20 rounded-2xl overflow-hidden mb-4 bg-surface-alt flex-shrink-0">
                     @if($cat->sample_image)
                     <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                         loading="lazy">
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
                     @else
-                    <div class="w-full h-full flex items-center justify-center bg-surface-alt">
-                        <i class="fa-solid fa-tag text-5xl text-ink-dim/20"></i>
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="fa-solid fa-tag text-2xl text-ink-dim/20"></i>
                     </div>
                     @endif
-                    <div class="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                        <span class="bg-brand-500 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                            <i class="fa-solid fa-arrow-left text-[10px]"></i> تصفح القسم
-                        </span>
-                    </div>
                 </div>
-                <div class="p-5">
-                    <h3 class="font-black text-lg mb-2 text-ink group-hover:text-brand-500 transition-colors duration-300">{{ $cat->display_name ?? $cat->name_ar }}</h3>
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-500 text-xs font-bold">
-                            <i class="fa-solid fa-box-open text-[10px]"></i> {{ $cat->products_count }} منتج
-                        </span>
-                        @if($cat->min_price)
-                        <span class="text-ink-muted text-sm">من {{ number_format($cat->min_price, 0) }} ₪</span>
-                        @endif
-                    </div>
-                </div>
+                <h3 class="font-black text-sm mb-1.5 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[11px] font-bold">
+                    {{ $cat->products_count }} منتج
+                </span>
             </a>
             @endforeach
         </div>
@@ -293,28 +286,28 @@ $fallbackBtn = match($phraseCat) {
                 <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-certificate text-xl text-brand-500"></i>
                 </div>
-                <h3 class="font-black text-lg mb-3 text-white">منتجات أصلية مضمونة</h3>
+                <h3 class="font-black text-lg mb-3 text-ink">منتجات أصلية مضمونة</h3>
                 <p class="text-ink-dim text-sm leading-relaxed">جميع منتجاتنا أصلية 100% ومستوردة من مصادر موثوقة ومعتمدة دولياً. نضمن لكِ الجودة والأصالة في كل طلب.</p>
             </div>
             <div class="glass-panel rounded-2xl p-7 text-right hover:-translate-y-2 transition-all duration-500 group">
                 <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-truck-fast text-xl text-brand-500"></i>
                 </div>
-                <h3 class="font-black text-lg mb-3 text-white">توصيل لكل فلسطين</h3>
+                <h3 class="font-black text-lg mb-3 text-ink">توصيل لكل فلسطين</h3>
                 <p class="text-ink-dim text-sm leading-relaxed">نوصل طلبك لباب بيتك في الضفة الغربية، القدس، والداخل المحتل. شحن سريع وتتبع مباشر لشحنتك حتى الاستلام.</p>
             </div>
             <div class="glass-panel rounded-2xl p-7 text-right hover:-translate-y-2 transition-all duration-500 group">
                 <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-tags text-xl text-brand-500"></i>
                 </div>
-                <h3 class="font-black text-lg mb-3 text-white">أفضل الأسعار والعروض</h3>
+                <h3 class="font-black text-lg mb-3 text-ink">أفضل الأسعار والعروض</h3>
                 <p class="text-ink-dim text-sm leading-relaxed">أسعار تنافسية مع عروض حصرية وخصومات يومية. الدفع عند الاستلام متاح لراحتك وأمانك التام.</p>
             </div>
             <div class="glass-panel rounded-2xl p-7 text-right hover:-translate-y-2 transition-all duration-500 group">
                 <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 group-hover:bg-brand-500/20 transition-colors">
                     <i class="fa-solid fa-headset text-xl text-brand-500"></i>
                 </div>
-                <h3 class="font-black text-lg mb-3 text-white">دعم احترافي متواصل</h3>
+                <h3 class="font-black text-lg mb-3 text-ink">دعم احترافي متواصل</h3>
                 <p class="text-ink-dim text-sm leading-relaxed">فريق خدمة عملاء محترف جاهز لمساعدتك يومياً من 9 صباحاً حتى 10 مساءً عبر الواتساب. استفسري وسنرد فوراً.</p>
             </div>
         </div>
@@ -402,7 +395,7 @@ $fallbackBtn = match($phraseCat) {
                 @endif
 
                 <div class="absolute top-6 right-6 z-20 flex gap-2">
-                    <span class="bg-black/50 backdrop-blur px-3 py-1 rounded-full text-xs border border-white/10 text-white/70">منتجات مميزة</span>
+                    <span class="bg-black/50 backdrop-blur px-3 py-1 rounded-full text-xs border border-white/10 text-ink/70">منتجات مميزة</span>
                     <span class="pill-brand backdrop-blur text-xs">الأكثر مبيعاً</span>
                 </div>
 
