@@ -115,21 +115,18 @@ html[data-theme-mode="light"] {
   .text-yellow-400 { color: #ca8a04 !important; }
 }
 
-/* Social sidebar visible on light backgrounds */
-html[data-theme-mode="light"] .floating-social-v3 a {
-    color: #6B7280 !important;
-    background: rgba(255,255,255,0.85);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+/* Social sidebar – preserve brand colors in light mode */
+html[data-theme-mode="light"] .floating-social-v3 a[data-platform] {
+    color: #fff !important;
 }
-html[data-theme-mode="light"] .floating-social-v3 a * { color: #6B7280 !important; }
-html[data-theme-mode="light"] .floating-social-v3 a:hover { color: #1F2937 !important; background: rgba(255,255,255,1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-html[data-theme-mode="light"] .floating-social-v3 a:hover * { color: #1F2937 !important; }
+html[data-theme-mode="light"] .floating-social-v3 a[data-platform] * {
+    color: #fff !important;
+}
+/* Fallback for social links without data-platform */
+html[data-theme-mode="light"] .floating-social-v3 a:not([data-platform]),
+html[data-theme-mode="light"] .floating-social-v3 a:not([data-platform]) * {
+    color: #6B7280 !important;
+}
 
 /* Theme switcher */
 html[data-theme-mode="light"] {

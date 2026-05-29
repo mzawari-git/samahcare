@@ -76,6 +76,14 @@
             width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--ink-dim); font-size: 1.1rem; transition: all .2s; text-decoration: none !important;
         }
         .floating-social-v3 a:hover { color: var(--ink); }
+        .floating-social-v3 a[data-platform="facebook"] { color: #1877F2; }
+        .floating-social-v3 a[data-platform="instagram"] { color: #E4405F; }
+        .floating-social-v3 a[data-platform="twitter"] { color: #0F1419; }
+        .floating-social-v3 a[data-platform="tiktok"] { color: #000000; }
+        .floating-social-v3 a[data-platform="linkedin"] { color: #0A66C2; }
+        .floating-social-v3 a[data-platform="youtube"] { color: #FF0000; }
+        .floating-social-v3 a[data-platform="whatsapp"] { color: #25D366; }
+        .floating-social-v3 a:hover { opacity: 0.8; transform: scale(1.15); }
         @media (max-width:768px) { .floating-social-v3 { left: 8px; bottom: 80px; top: auto; transform: none; } }
     </style>
     @stack('styles')
@@ -118,13 +126,13 @@
     </script>
 
     <div class="floating-social-v3">
-        @if(!empty($siteSettings['facebook_url']))<a href="{{ $siteSettings['facebook_url'] }}" target="_blank" aria-label="فيسبوك"><i class="ph ph-facebook-logo"></i></a>@endif
-        @if(!empty($siteSettings['instagram_url']))<a href="{{ $siteSettings['instagram_url'] }}" target="_blank" aria-label="إنستغرام"><i class="ph ph-instagram-logo"></i></a>@endif
-        @if(!empty($siteSettings['twitter_url']))<a href="{{ $siteSettings['twitter_url'] }}" target="_blank" aria-label="تويتر"><i class="ph ph-twitter-logo"></i></a>@endif
-        @if(!empty($siteSettings['tiktok_url']))<a href="{{ $siteSettings['tiktok_url'] }}" target="_blank" aria-label="تيك توك"><i class="ph ph-tiktok-logo"></i></a>@endif
-        @if(!empty($siteSettings['linkedin_url']))<a href="{{ $siteSettings['linkedin_url'] }}" target="_blank" aria-label="لينكد إن"><i class="ph ph-linkedin-logo"></i></a>@endif
-        @if(!empty($siteSettings['youtube_url']))<a href="{{ $siteSettings['youtube_url'] }}" target="_blank" aria-label="يوتيوب"><i class="ph ph-youtube-logo"></i></a>@endif
-        @if(!empty($siteSettings['whatsapp_number']))<a href="https://wa.me/{{ preg_replace('/[^0-9]/','',$siteSettings['whatsapp_number']) }}" target="_blank" aria-label="واتساب"><i class="ph ph-whatsapp-logo"></i></a>@endif
+        @if(!empty($siteSettings['facebook_url']))<a href="{{ $siteSettings['facebook_url'] }}" target="_blank" aria-label="فيسبوك" data-platform="facebook"><i class="ph ph-facebook-logo"></i></a>@endif
+        @if(!empty($siteSettings['instagram_url']))<a href="{{ $siteSettings['instagram_url'] }}" target="_blank" aria-label="إنستغرام" data-platform="instagram"><i class="ph ph-instagram-logo"></i></a>@endif
+        @if(!empty($siteSettings['twitter_url']))<a href="{{ $siteSettings['twitter_url'] }}" target="_blank" aria-label="تويتر" data-platform="twitter"><i class="ph ph-twitter-logo"></i></a>@endif
+        @if(!empty($siteSettings['tiktok_url']))<a href="{{ $siteSettings['tiktok_url'] }}" target="_blank" aria-label="تيك توك" data-platform="tiktok"><i class="ph ph-tiktok-logo"></i></a>@endif
+        @if(!empty($siteSettings['linkedin_url']))<a href="{{ $siteSettings['linkedin_url'] }}" target="_blank" aria-label="لينكد إن" data-platform="linkedin"><i class="ph ph-linkedin-logo"></i></a>@endif
+        @if(!empty($siteSettings['youtube_url']))<a href="{{ $siteSettings['youtube_url'] }}" target="_blank" aria-label="يوتيوب" data-platform="youtube"><i class="ph ph-youtube-logo"></i></a>@endif
+        @if(!empty($siteSettings['whatsapp_number']))<a href="https://wa.me/{{ preg_replace('/[^0-9]/','',$siteSettings['whatsapp_number']) }}" target="_blank" aria-label="واتساب" data-platform="whatsapp"><i class="ph ph-whatsapp-logo"></i></a>@endif
     </div>
 
     <style>.skip-link{position:absolute;top:-40px;left:0;background:var(--ink);color:var(--surface);padding:6px 12px;z-index:100;font-size:.75rem;font-weight:700;}.skip-link:focus{top:0;}</style>

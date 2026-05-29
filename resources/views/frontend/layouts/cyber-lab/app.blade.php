@@ -96,6 +96,13 @@
             text-decoration: none;
             border: 1px solid rgba(255,255,255,0.1);
         }
+        .floating-social-v3 a[data-platform="facebook"] { background: #1877F2; color: #fff; border-color: #1877F2; }
+        .floating-social-v3 a[data-platform="instagram"] { background: linear-gradient(135deg, #833AB4, #E4405F, #FCAF45); color: #fff; border-color: #E4405F; }
+        .floating-social-v3 a[data-platform="twitter"] { background: #0F1419; color: #fff; border-color: #0F1419; }
+        .floating-social-v3 a[data-platform="tiktok"] { background: #000000; color: #fff; border-color: #000000; }
+        .floating-social-v3 a[data-platform="linkedin"] { background: #0A66C2; color: #fff; border-color: #0A66C2; }
+        .floating-social-v3 a[data-platform="youtube"] { background: #FF0000; color: #fff; border-color: #FF0000; }
+        .floating-social-v3 a[data-platform="whatsapp"] { background: #25D366; color: #fff; border-color: #25D366; }
         .floating-social-v3 a:hover {
             transform: scale(1.15) translateX(5px);
             box-shadow: 0 6px 24px rgba(0,0,0,0.4);
@@ -306,25 +313,25 @@
     {{-- Floating Social Media Sidebar --}}
     <div class="floating-social-v3">
         @if(!empty($siteSettings['facebook_url']))
-            <a href="{{ $siteSettings['facebook_url'] }}" style="background:#1877F2;" target="_blank" title="فيسبوك" aria-label="فيسبوك"><i class="ph-fill ph-facebook-logo"></i></a>
+            <a href="{{ $siteSettings['facebook_url'] }}" data-platform="facebook" style="background:#1877F2;" target="_blank" title="فيسبوك" aria-label="فيسبوك"><i class="ph-fill ph-facebook-logo"></i></a>
         @endif
         @if(!empty($siteSettings['instagram_url']))
-            <a href="{{ $siteSettings['instagram_url'] }}" style="background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);" target="_blank" title="إنستغرام" aria-label="إنستغرام"><i class="ph-fill ph-instagram-logo"></i></a>
+            <a href="{{ $siteSettings['instagram_url'] }}" data-platform="instagram" style="background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);" target="_blank" title="إنستغرام" aria-label="إنستغرام"><i class="ph-fill ph-instagram-logo"></i></a>
         @endif
         @if(!empty($siteSettings['twitter_url']))
-            <a href="{{ $siteSettings['twitter_url'] }}" style="background:#1DA1F2;" target="_blank" title="تويتر" aria-label="تويتر"><i class="ph-fill ph-twitter-logo"></i></a>
+            <a href="{{ $siteSettings['twitter_url'] }}" data-platform="twitter" style="background:#1DA1F2;" target="_blank" title="تويتر" aria-label="تويتر"><i class="ph-fill ph-twitter-logo"></i></a>
         @endif
         @if(!empty($siteSettings['tiktok_url']))
-            <a href="{{ $siteSettings['tiktok_url'] }}" style="background:#000;" target="_blank" title="تيك توك" aria-label="تيك توك"><i class="ph-fill ph-tiktok-logo"></i></a>
+            <a href="{{ $siteSettings['tiktok_url'] }}" data-platform="tiktok" style="background:#000;" target="_blank" title="تيك توك" aria-label="تيك توك"><i class="ph-fill ph-tiktok-logo"></i></a>
         @endif
         @if(!empty($siteSettings['linkedin_url']))
-            <a href="{{ $siteSettings['linkedin_url'] }}" style="background:#0A66C2;" target="_blank" title="لينكد إن" aria-label="لينكد إن"><i class="ph-fill ph-linkedin-logo"></i></a>
+            <a href="{{ $siteSettings['linkedin_url'] }}" data-platform="linkedin" style="background:#0A66C2;" target="_blank" title="لينكد إن" aria-label="لينكد إن"><i class="ph-fill ph-linkedin-logo"></i></a>
         @endif
         @if(!empty($siteSettings['youtube_url']))
-            <a href="{{ $siteSettings['youtube_url'] }}" style="background:#FF0000;" target="_blank" title="يوتيوب" aria-label="يوتيوب"><i class="ph-fill ph-youtube-logo"></i></a>
+            <a href="{{ $siteSettings['youtube_url'] }}" data-platform="youtube" style="background:#FF0000;" target="_blank" title="يوتيوب" aria-label="يوتيوب"><i class="ph-fill ph-youtube-logo"></i></a>
         @endif
         @if(!empty($siteSettings['whatsapp_number']))
-            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $siteSettings['whatsapp_number']) }}" style="background:#25D366;" target="_blank" title="واتساب" aria-label="واتساب"><i class="ph-fill ph-whatsapp-logo"></i></a>
+            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $siteSettings['whatsapp_number']) }}" data-platform="whatsapp" style="background:#25D366;" target="_blank" title="واتساب" aria-label="واتساب"><i class="ph-fill ph-whatsapp-logo"></i></a>
         @endif
     </div>
 
