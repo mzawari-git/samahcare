@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\UserAddress;
 use App\Models\Wishlist;
+use App\Models\Affiliate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,9 @@ class AccountController extends Controller
             ->limit(5)
             ->get();
 
-        return view('frontend.account.index', compact('orders'));
+        $affiliate = Affiliate::where('user_id', Auth::id())->first();
+
+        return view('frontend.account.index', compact('orders', 'affiliate'));
     }
 
     public function orders()

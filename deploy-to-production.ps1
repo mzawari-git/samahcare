@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════
-# JeniCare Auto-Deploy Script (Local Windows → Production)
+# شركة جنين للتجميل Auto-Deploy Script (Local Windows → Production)
 # ═══════════════════════════════════════════════════════════════
 # 
 # This script pushes changes to GitHub then triggers a
@@ -18,7 +18,7 @@ $ErrorActionPreference = "Stop"
 $deployUrl = "https://www.jenincare.shop/deploy.php"
 $deploySecret = "jenincare-deploy-2026"
 
-Write-Host "═══ JeniCare Auto Deploy ═══" -ForegroundColor Cyan
+Write-Host "═══ شركة جنين للتجميل Auto Deploy ═══" -ForegroundColor Cyan
 
 # Step 1: Push to GitHub
 Write-Host "[1/3] Pushing to GitHub..." -ForegroundColor Yellow

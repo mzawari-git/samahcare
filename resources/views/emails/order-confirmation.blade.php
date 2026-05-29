@@ -27,7 +27,7 @@
     <div class="container">
         <div class="card">
             <div class="header">
-                <h1>شكراً لطلبك من JeniCare!</h1>
+                <h1>شكراً لطلبك من شركة جنين للتجميل!</h1>
                 <p>تم تأكيد طلبك بنجاح</p>
                 <div style="margin-top: 12px;">
                     <span class="status-badge">قيد الانتظار</span>
@@ -75,7 +75,7 @@
             @endif
 
             <div class="footer">
-                <p>JeniCare - <?php echo date('Y'); ?></p>
+                <p>شركة جنين للتجميل - <?php echo date('Y'); ?></p>
                 <p style="margin-top:4px;">{{ url('/') }}</p>
             </div>
         </div>

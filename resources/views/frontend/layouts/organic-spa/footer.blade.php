@@ -7,7 +7,7 @@
         <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: var(--gradient-primary);">
             <i class="fa-solid fa-leaf text-2xl text-white"></i>
         </div>
-        <h2 class="text-3xl md:text-4xl font-black mb-4" style="color: var(--brand-500);">انضمي إلى حديقة {{ $siteSettings['site_name'] ?? 'JeniCare' }}</h2>
+        <h2 class="text-3xl md:text-4xl font-black mb-4" style="color: var(--brand-500);">انضمي إلى حديقة {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}</h2>
         <p class="text-ink-dim mb-8 font-light max-w-lg mx-auto">احصلي على خصم 10% على طلبك الأول، وكوني أول من يعرف عن العروض الحصرية.</p>
         <form class="max-w-md mx-auto relative flex items-center" id="newsletterFormV3">
             @csrf
@@ -36,7 +36,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12">
             <div class="lg:col-span-5 text-right">
                 <div class="flex items-center gap-3 mb-6 justify-end">
-                    @if(!empty($siteSettings['site_logo_url']))<img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'JeniCare' }}" class="h-10 w-auto object-contain">@else<span class="text-3xl font-extrabold text-white">{{ $siteSettings['site_name'] ?? 'JeniCare' }}<span class="text-brand-500">.</span></span>@endif
+                    @if(!empty($siteSettings['site_logo_url']))<img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}" class="h-10 w-auto object-contain">@else<span class="text-3xl font-extrabold text-white">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}<span class="text-brand-500">.</span></span>@endif
                 </div>
                 <p class="text-ink-dim text-sm leading-relaxed mb-6 max-w-md ml-auto">{{ $siteSettings['site_description'] ?? 'وجهتك الفاخرة لمنتجات العناية الطبيعية.' }}</p>
                 <div class="flex gap-4 justify-end">
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="pt-8 border-t-2 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-dim" style="border-color:var(--glass-border);">
-            <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'JeniCare' }}. جميع الحقوق محفوظة.</p>
+            <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}. جميع الحقوق محفوظة.</p>
             <div class="flex gap-2 text-xs">
                 <span class="px-3 py-1 rounded-full" style="border:1px solid var(--glass-border);">الدفع عند الاستلام</span>
                 @if(($siteSettings['payment_jawwal_enabled'] ?? '0') == '1')<span class="px-3 py-1 rounded-full" style="color:var(--brand-500);border:1px solid var(--glass-border);">جوال باي</span>@endif

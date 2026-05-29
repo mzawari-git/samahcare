@@ -1,6 +1,6 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════
-# JeniCare Production Deploy (Run on jenincare.shop)
+# شركة جنين للتجميل Production Deploy (Run on jenincare.shop)
 # ═══════════════════════════════════════════════════════
 # 
 # SSH into your server and run:

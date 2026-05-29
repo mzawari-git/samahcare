@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'JeniCare - المنصة الرائدة لتقنيات العناية بالبشرة'))">
-    <meta name="keywords" content="@yield('meta_keywords', 'JeniCare, تجميل, عناية, بشرة')">
+    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'شركة جنين للتجميل - المنصة الرائدة لتقنيات العناية بالبشرة'))">
+    <meta name="keywords" content="@yield('meta_keywords', 'شركة جنين للتجميل, تجميل, عناية, بشرة')">
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'JeniCare'))">
+    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))">
     <meta property="og:description" content="@yield('meta_description', $siteSettings['site_description'] ?? '')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'JeniCare'))">
+    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))">
     <meta name="twitter:description" content="@yield('meta_description', '')">
     <meta name="twitter:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
-    <title>@yield('title', ($siteSettings['site_name'] ?? 'JeniCare'))</title>
+    <title>@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))</title>
 
     @if(!empty($siteSettings['site_favicon_url']))
         <link rel="icon" href="{{ $siteSettings['site_favicon_url'] }}">
@@ -39,7 +39,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}">
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}">
-    <script>(function(){var m=localStorage.getItem('jenicare_mode');if(!m){var c=document.cookie.match('jenicare_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
+    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
 
     @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
 
@@ -82,7 +82,7 @@
     <script>if('serviceWorker' in navigator&&window.location.hostname!=='localhost'){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister()})}).then(function(){navigator.serviceWorker.register('{{ asset('sw.js') }}').catch(function(){})})}</script>
     <script>window.basePath="{{ rtrim(url('/'), '/') }}";</script>
 </head>
-<body class="antialiased" style="background-color:var(--surface);color:var(--ink);">
+<body class="antialiased" style="margin:0;padding:0;background-color:var(--surface);color:var(--ink);">
     <a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
     @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelNoscript() !!} @endif
 

@@ -68,7 +68,9 @@
                         <input type="file" name="site_logo" class="form-control" accept="image/*">
                         <small class="text-muted">200x80 بكسل مقترح</small>
                         @if(!empty($settings['site_logo']))
-                        <div class="mt-2"><a href="{{ route('admin.settings.delete-logo') }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('حذف الشعار؟')"><i class="fas fa-trash"></i> حذف</a></div>
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="if(confirm('حذف الشعار؟')) document.getElementById('deleteLogoForm').submit();"><i class="fas fa-trash"></i> حذف</button>
+                        </div>
                         @endif
                     </div>
                 </div>
@@ -326,6 +328,7 @@
 </form>
 
 <form id="deleteProductsForm" action="{{ route('admin.settings.delete-products') }}" method="POST" style="display:none">@csrf @method('DELETE')</form>
+<form id="deleteLogoForm" action="{{ route('admin.settings.delete-logo') }}" method="POST" style="display:none">@csrf @method('DELETE')</form>
 
 <script>
 function switchTab(tabName) {

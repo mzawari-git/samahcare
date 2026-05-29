@@ -1,6 +1,6 @@
 ﻿@extends($layoutPath)
 
-@section('title', $product->meta_title ?: ($product->name_ar . ' - ' . ($siteSettings['site_name'] ?? 'JeniCare')))
+@section('title', $product->meta_title ?: ($product->name_ar . ' - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل')))
 @section('meta_description', $product->meta_description ?: ($product->short_description_ar ?? $product->description_ar ?? ''))
 
 @if($product->meta_keywords)

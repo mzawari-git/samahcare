@@ -33,7 +33,7 @@
 <body>
     <div class="header">
         <div class="header-left">
-            <h1>{{ $siteSettings['site_name'] ?? 'JeniCare' }}</h1>
+            <h1>{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}</h1>
             <div class="company">{{ $siteSettings['site_description'] ?? '' }}</div>
         </div>
         <div class="header-right">
@@ -96,6 +96,6 @@
         </div>
     </div>
 
-    <div class="footer">{{ $siteSettings['site_name'] ?? 'JeniCare' }} - شكراً لتعاملكم معنا</div>
+    <div class="footer">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }} - شكراً لتعاملكم معنا</div>
 </body>
 </html>

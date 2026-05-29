@@ -205,21 +205,21 @@ class AppServiceProvider extends ServiceProvider
                 default => 'cyber-lab',
             };
             // Architecture cookie overrides (user explicitly chose a layout)
-            if (isset($_COOKIE['jenicare_arch'])) {
-                $ca = $_COOKIE['jenicare_arch'];
+            if (isset($_COOKIE['شركة جنين للتجميل_arch'])) {
+                $ca = $_COOKIE['شركة جنين للتجميل_arch'];
                 if (in_array($ca, ['cyber-lab','organic-spa','editorial','luxury-boutique'])) {
                     $layoutArchitecture = $ca;
                 }
             }
             // ── Color (which CSS file) — independent of architecture ──
-            if (isset($_COOKIE['jenicare_color'])) {
-                $cc = $_COOKIE['jenicare_color'];
+            if (isset($_COOKIE['شركة جنين للتجميل_color'])) {
+                $cc = $_COOKIE['شركة جنين للتجميل_color'];
                 if (in_array($cc, ['rose','midnight','natural','forest','minimal','ocean','sunset','luxury'])) {
                     $activeTheme = $cc;
                 }
             }
             // If no color cookie but architecture cookie exists, set default color for that arch
-            if (!isset($_COOKIE['jenicare_color']) && isset($_COOKIE['jenicare_arch'])) {
+            if (!isset($_COOKIE['شركة جنين للتجميل_color']) && isset($_COOKIE['شركة جنين للتجميل_arch'])) {
                 $defaultColors = ['cyber-lab'=>'rose','organic-spa'=>'natural','editorial'=>'minimal','luxury-boutique'=>'sunset'];
                 $activeTheme = $defaultColors[$ca] ?? 'rose';
             }

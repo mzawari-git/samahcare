@@ -1,7 +1,7 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'تواصل معنا - ' . ($siteSettings['site_name'] ?? 'JeniCare'))
-@section('meta_description', 'تواصل مع فريق JeniCare. نحن هنا لمساعدتك على مدار الساعة.')
+@section('title', 'تواصل معنا - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
+@section('meta_description', 'تواصل مع فريق شركة جنين للتجميل نحن هنا لمساعدتك على مدار الساعة.')
 
 @section('content')
 <section class="pt-32 pb-8 bg-gradient-to-b border-b border-white/5">

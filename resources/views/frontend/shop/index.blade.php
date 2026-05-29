@@ -1,7 +1,7 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'المتجر - ' . ($siteSettings['site_name'] ?? 'JeniCare'))
-@section('meta_description', 'تسوق أفضل منتجات العناية بالشعر والبشرة من JeniCare. توصيل سريع لجميع أنحاء فلسطين.')
+@section('title', 'المتجر - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
+@section('meta_description', 'تسوق أفضل منتجات العناية بالشعر والبشرة من شركة جنين للتجميل توصيل سريع لجميع أنحاء فلسطين.')
 
 @section('content')
 {{-- Page Header --}}

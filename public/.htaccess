@@ -1,4 +1,4 @@
-# JeniCare Production .htaccess
+# شركة جنين للتجميل Production .htaccess
 # Safe for all hosting (no php_flag, no mod_php)
 
 <IfModule mod_rewrite.c>

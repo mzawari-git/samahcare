@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
             <div>
                 @if(!empty($siteSettings['site_logo_url']))
-                <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'JeniCare' }}" class="h-10 w-auto object-contain mb-5">
+                <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}" class="h-10 w-auto object-contain mb-5">
                 @endif
                 <h4 class="text-xs font-bold uppercase tracking-widest text-ink-dim mb-5">النشرة</h4>
                 <p class="text-ink-dim text-sm leading-relaxed mb-4">{{ $siteSettings['site_description'] ?? 'وجهتك الفاخرة لمنتجات العناية.' }}</p>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-ink-dim" style="border-top:1px solid rgba(255,255,255,0.06);">
-            <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'JeniCare' }}.</p>
+            <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}.</p>
             <div class="flex gap-4">
                 @if(!empty($siteSettings['facebook_url']))<a href="{{ $siteSettings['facebook_url'] }}" target="_blank" class="hover:text-white transition-colors">فيسبوك</a>@endif
                 @if(!empty($siteSettings['instagram_url']))<a href="{{ $siteSettings['instagram_url'] }}" target="_blank" class="hover:text-white transition-colors">إنستغرام</a>@endif

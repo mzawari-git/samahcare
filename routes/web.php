@@ -10,6 +10,8 @@ use App\Http\Controllers\Frontend\AccountController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\AffiliateController as FrontAffiliateController;
+use App\Http\Controllers\Frontend\BlogController as FrontBlogController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
@@ -50,6 +52,16 @@ Route::get('/terms', function () {
 Route::get('/privacy', function () {
     return view('frontend.pages.privacy');
 })->name('privacy');
+
+Route::get('/affiliate', [FrontAffiliateController::class, 'landing'])->name('affiliate.landing');
+Route::get('/affiliate/dashboard', [FrontAffiliateController::class, 'dashboard'])->name('affiliate.dashboard');
+Route::get('/affiliate/tools', [FrontAffiliateController::class, 'marketingTools'])->name('affiliate.tools');
+
+Route::get('/blog', [FrontBlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/category/{category}', [FrontBlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/{slug}', [FrontBlogController::class, 'show'])->name('blog.show');
+Route::post('/affiliate/register', [FrontAffiliateController::class, 'register'])->name('affiliate.register');
+Route::post('/affiliate/payout', [FrontAffiliateController::class, 'requestPayout'])->name('affiliate.payout.request');
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);

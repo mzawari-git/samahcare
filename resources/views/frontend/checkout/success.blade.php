@@ -1,6 +1,6 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'تم تأكيد الطلب - ' . ($siteSettings['site_name'] ?? 'JeniCare'))
+@section('title', 'تم تأكيد الطلب - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
 
 @section('content')
 <div style="min-height:60vh;display:flex;align-items:center;justify-content:center;padding:140px 16px 40px;">
@@ -9,7 +9,7 @@
             <i class="fas fa-check"></i>
         </div>
         <h1 style="font-size:1.8rem;font-weight:800;color:var(--ink);margin-bottom:8px;">تم تأكيد طلبك بنجاح!</h1>
-        <p style="color:var(--ink-muted);margin-bottom:24px;line-height:1.7;">شكراً لتسوقك من JeniCare. سيتم التواصل معك قريباً لتأكيد الطلب وترتيب التوصيل.</p>
+        <p style="color:var(--ink-muted);margin-bottom:24px;line-height:1.7;">شكراً لتسوقك من شركة جنين للتجميل سيتم التواصل معك قريباً لتأكيد الطلب وترتيب التوصيل.</p>
 
         <div class="glass-panel" style="border-radius:16px;border:1px solid var(--glass-border);padding:24px;margin-bottom:20px;text-align:right;">
             <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--glass-border);">

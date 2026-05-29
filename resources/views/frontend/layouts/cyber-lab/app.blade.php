@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'JeniCare - المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية'))">
-    <meta name="keywords" content="@yield('meta_keywords', 'JeniCare, تجميل, عناية, بشرة, منتجات تجميل, العناية بالبشرة, مكياج')">
+    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'شركة جنين للتجميل - المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية'))">
+    <meta name="keywords" content="@yield('meta_keywords', 'شركة جنين للتجميل, تجميل, عناية, بشرة, منتجات تجميل, العناية بالبشرة, مكياج')">
 
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'JeniCare') . ' | ' . ($siteSettings['site_description'] ?? ''))">
+    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل') . ' | ' . ($siteSettings['site_description'] ?? ''))">
     <meta property="og:description" content="@yield('meta_description', $siteSettings['site_description'] ?? 'المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'JeniCare') . ' | ' . ($siteSettings['site_description'] ?? ''))">
+    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل') . ' | ' . ($siteSettings['site_description'] ?? ''))">
     <meta name="twitter:description" content="@yield('meta_description', 'المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية')">
     <meta name="twitter:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
 
-    <title>@yield('title', ($siteSettings['site_name'] ?? 'JeniCare'))</title>
+    <title>@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))</title>
 
     {{-- Favicon --}}
     @if(!empty($siteSettings['site_favicon_url']))
@@ -58,15 +58,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="JeniCare">
-    <meta name="application-name" content="JeniCare">
+    <meta name="apple-mobile-web-app-title" content="شركة جنين للتجميل">
+    <meta name="application-name" content="شركة جنين للتجميل">
     <meta name="msapplication-TileColor" content="#050505">
     <meta name="msapplication-config" content="{{ asset('browserconfig.xml') }}">
 
     {{-- Active Theme CSS --}}
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}">
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}">
-    <script>(function(){var m=localStorage.getItem('jenicare_mode');if(!m){var c=document.cookie.match('jenicare_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
+    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
 
     @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
 

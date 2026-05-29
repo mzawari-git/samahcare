@@ -4,7 +4,7 @@ from typing import Optional
 import numpy as np
 from model import LTVModel
 
-app = FastAPI(title="JeniCare LTV Prediction Service", version="1.0.0")
+app = FastAPI(title="شركة جنين للتجميل LTV Prediction Service", version="1.0.0")
 model = LTVModel()
 
 

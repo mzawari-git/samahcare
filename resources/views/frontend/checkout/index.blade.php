@@ -1,6 +1,6 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'إتمام الشراء - ' . ($siteSettings['site_name'] ?? 'JeniCare'))
+@section('title', 'إتمام الشراء - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
 
 @section('content')
 <section class="pt-32 pb-8 relative border-b border-white/5">
@@ -315,7 +315,7 @@
                 {{-- WhatsApp alternative --}}
                 <div class="text-center p-4 glass-panel rounded-2xl border-white/5">
                     <p class="text-xs text-white-dim mb-2">تفضلين الطلب عبر واتساب؟</p>
-                    <a href="https://wa.me/{{ $settings['site_whatsapp'] ?? '970591234567' }}?text={{ urlencode('السلام عليكم، أريد تأكيد طلبي من JeniCare') }}" target="_blank" rel="noopener"
+                    <a href="https://wa.me/{{ $settings['site_whatsapp'] ?? '970591234567' }}?text={{ urlencode('السلام عليكم، أريد تأكيد طلبي من شركة جنين للتجميل') }}" target="_blank" rel="noopener"
                         class="inline-flex items-center gap-2 px-5 py-2 bg-green-600/15 border border-green-500/20 text-green-400 rounded-full font-bold text-xs hover:bg-green-500/20 hover:border-green-500/40 transition-all duration-300">
                         <i class="ph ph-whatsapp-logo text-sm"></i> اطلب عبر واتساب
                     </a>

@@ -1,6 +1,6 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'حسابي - ' . ($siteSettings['site_name'] ?? 'JeniCare'))
+@section('title', 'حسابي - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
 
 @section('content')
 <section class="pt-32 pb-8 bg-gradient-to-b border-b border-white/5 text-center">
@@ -17,6 +17,56 @@
         </div>
 
         <div class="col-lg-9">
+            {{-- Affiliate Card --}}
+            @php $affiliate = $affiliate ?? null; @endphp
+            <div style="background:var(--glass-bg);border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden;margin-bottom:1.25rem;">
+                <div style="padding:16px 24px;border-bottom:1px solid var(--glass-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
+                    <h2 style="font-size:1.15rem;margin:0;display:flex;align-items:center;gap:8px;">
+                        <i class="fas fa-hand-holding-usd" style="color:#ec4899;"></i> التسويق بالعمولة
+                    </h2>
+                    @if($affiliate)
+                    <a href="{{ route('affiliate.dashboard') }}" style="font-size:.75rem;font-weight:700;color:#ec4899;text-decoration:none;">لوحة التحكم الكاملة ←</a>
+                    @endif
+                </div>
+                <div style="padding:24px;">
+                    @if($affiliate)
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.75rem;margin-bottom:1.25rem;">
+                        <div style="background:rgba(236,72,153,0.08);border-radius:12px;padding:.85rem;text-align:center;">
+                            <div style="font-size:.7rem;color:var(--ink-dim);margin-bottom:.25rem;">الرصيد المتاح</div>
+                            <div style="font-size:1.25rem;font-weight:900;color:#ec4899;">{{ number_format($affiliate->wallet_balance, 0) }} ₪</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:.85rem;text-align:center;">
+                            <div style="font-size:.7rem;color:var(--ink-dim);margin-bottom:.25rem;">إجمالي الأرباح</div>
+                            <div style="font-size:1.25rem;font-weight:900;color:#d4af37;">{{ number_format($affiliate->total_earned, 0) }} ₪</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:.85rem;text-align:center;">
+                            <div style="font-size:.7rem;color:var(--ink-dim);margin-bottom:.25rem;">النقرات</div>
+                            <div style="font-size:1.25rem;font-weight:900;color:var(--ink);">{{ $affiliate->total_clicks }}</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:.85rem;text-align:center;">
+                            <div style="font-size:.7rem;color:var(--ink-dim);margin-bottom:.25rem;">التحويلات</div>
+                            <div style="font-size:1.25rem;font-weight:900;color:var(--ink);">{{ $affiliate->total_conversions }}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.04);border-radius:12px;padding:.6rem .85rem;">
+                        <input type="text" readonly value="{{ $affiliate->referral_link }}" id="accountRefLink" style="flex:1;background:transparent;border:none;color:var(--ink-dim);font-size:.8rem;outline:none;direction:ltr;text-align:left;">
+                        <button onclick="copyAccountRef()" style="padding:.4rem 1rem;border-radius:8px;font-size:.7rem;font-weight:700;color:#fff;background:#ec4899;border:none;cursor:pointer;white-space:nowrap;">نسخ الرابط</button>
+                    </div>
+                    @else
+                    <div style="text-align:center;padding:1.5rem 1rem;">
+                        <div style="font-size:2.5rem;margin-bottom:.75rem;">💎</div>
+                        <h3 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;">اربحِ 10% من كل طلبية عبر رابطك</h3>
+                        <p style="font-size:.8rem;color:var(--ink-dim);margin-bottom:1rem;">انضمي لبرنامج التسويق بالعمولة واحصلي على رابطك الخاص لمشاركته مع الجميع</p>
+                        <form action="{{ route('affiliate.register') }}" method="POST" style="display:inline-flex;gap:.5rem;">
+                            @csrf
+                            <input type="tel" name="phone" required style="background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);border-radius:8px;padding:.5rem .75rem;color:var(--ink);font-size:.8rem;outline:none;" placeholder="رقم الهاتف">
+                            <button type="submit" style="padding:.5rem 1.25rem;border-radius:8px;font-weight:700;font-size:.8rem;color:#fff;background:linear-gradient(135deg,#ec4899,#be185d);border:none;cursor:pointer;white-space:nowrap;">انضمي الآن</button>
+                        </form>
+                    </div>
+                    @endif
+                </div>
+            </div>
+
             <div style="background:var(--glass-bg);border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden;">
                 <div style="padding:20px 24px;border-bottom:1px solid var(--glass-border);">
                     <h2 style="font-size:1.15rem;margin:0;display:flex;align-items:center;gap:8px;">
@@ -77,3 +127,16 @@
     </div>
 </div>
 @endsection
+
+<script>
+function copyAccountRef() {
+    var input = document.getElementById('accountRefLink');
+    input.select(); input.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(input.value).then(function() {
+        var btn = event.target.closest('button');
+        var orig = btn.innerHTML;
+        btn.innerHTML = 'تم النسخ!';
+        setTimeout(function() { btn.innerHTML = orig; }, 2000);
+    });
+}
+</script>

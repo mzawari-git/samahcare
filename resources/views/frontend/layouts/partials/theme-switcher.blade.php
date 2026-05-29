@@ -94,13 +94,13 @@ function toggleDarkLight() {
     var isLight = html.getAttribute('data-theme-mode') === 'light';
     if (isLight) {
         html.removeAttribute('data-theme-mode');
-        localStorage.setItem('jenicare_mode', 'dark');
-        setCookie('jenicare_mode', 'dark', 365);
+        localStorage.setItem('شركة جنين للتجميل_mode', 'dark');
+        setCookie('شركة جنين للتجميل_mode', 'dark', 365);
         updateDarkLightIcon(false);
     } else {
         html.setAttribute('data-theme-mode', 'light');
-        localStorage.setItem('jenicare_mode', 'light');
-        setCookie('jenicare_mode', 'light', 365);
+        localStorage.setItem('شركة جنين للتجميل_mode', 'light');
+        setCookie('شركة جنين للتجميل_mode', 'light', 365);
         updateDarkLightIcon(true);
     }
 }
@@ -126,30 +126,30 @@ function toggleThemePalette() {
 function switchArchitecture(arch) {
     var colorMap = { 'cyber-lab': ['rose','midnight'], 'organic-spa': ['natural','forest'], 'editorial': ['minimal','ocean'], 'luxury-boutique': ['sunset','luxury'] };
     var defaults = { 'cyber-lab': 'rose', 'organic-spa': 'natural', 'editorial': 'minimal', 'luxury-boutique': 'sunset' };
-    var currentColor = localStorage.getItem('jenicare_color') || defaults[arch] || 'rose';
+    var currentColor = localStorage.getItem('شركة جنين للتجميل_color') || defaults[arch] || 'rose';
     var compatibleColors = colorMap[arch] || [];
     // If current color doesn't belong to new architecture, switch to default color for that architecture
     if (compatibleColors.indexOf(currentColor) === -1) {
         currentColor = defaults[arch] || 'rose';
     }
-    localStorage.setItem('jenicare_architecture', arch);
-    localStorage.setItem('jenicare_color', currentColor);
-    setCookie('jenicare_arch', arch, 365);
-    setCookie('jenicare_color', currentColor, 365);
+    localStorage.setItem('شركة جنين للتجميل_architecture', arch);
+    localStorage.setItem('شركة جنين للتجميل_color', currentColor);
+    setCookie('شركة جنين للتجميل_arch', arch, 365);
+    setCookie('شركة جنين للتجميل_color', currentColor, 365);
     location.reload();
 }
 
 function switchColor(color) {
     // Only change color, keep current architecture
-    localStorage.setItem('jenicare_color', color);
-    setCookie('jenicare_color', color, 365);
+    localStorage.setItem('شركة جنين للتجميل_color', color);
+    setCookie('شركة جنين للتجميل_color', color, 365);
     // Do NOT change architecture cookie
     location.reload();
 }
 
 function switchFont(font) {
-    localStorage.setItem('jenicare_font', font);
-    setCookie('jenicare_font', font, 365);
+    localStorage.setItem('شركة جنين للتجميل_font', font);
+    setCookie('شركة جنين للتجميل_font', font, 365);
     var link = document.getElementById('googleFontsLink');
     if(link) {
         link.href = 'https://fonts.googleapis.com/css2?family=' + font.replace('+','+') + ':wght@300;400;500;700;800;900&display=swap';
@@ -162,10 +162,10 @@ function switchFont(font) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var savedArch = localStorage.getItem('jenicare_architecture') || 'cyber-lab';
-    var savedColor = localStorage.getItem('jenicare_color') || 'rose';
-    var savedFont = localStorage.getItem('jenicare_font') || 'Tajawal';
-    var savedMode = localStorage.getItem('jenicare_mode') || getCookie('jenicare_mode') || 'dark';
+    var savedArch = localStorage.getItem('شركة جنين للتجميل_architecture') || 'cyber-lab';
+    var savedColor = localStorage.getItem('شركة جنين للتجميل_color') || 'rose';
+    var savedFont = localStorage.getItem('شركة جنين للتجميل_font') || 'Tajawal';
+    var savedMode = localStorage.getItem('شركة جنين للتجميل_mode') || getCookie('شركة جنين للتجميل_mode') || 'dark';
 
     // Apply dark/light mode
     if (savedMode === 'light') {

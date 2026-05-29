@@ -5,7 +5,7 @@
         <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center shadow-neon" style="background: var(--gradient-primary);">
             <i class="fa-solid fa-envelope-open text-2xl text-white"></i>
         </div>
-        <h2 class="text-3xl md:text-4xl font-black mb-4">انضمي إلى نادي <span class="text-brand-500">{{ $siteSettings['site_name'] ?? 'JeniCare' }}</span></h2>
+        <h2 class="text-3xl md:text-4xl font-black mb-4">انضمي إلى نادي <span class="text-brand-500">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}</span></h2>
         <p class="text-ink-muted mb-8 font-light max-w-lg mx-auto">احصلي على خصم 10% على طلبك الأول، وكوني أول من يعرف عن العروض الحصرية والمنتجات الجديدة.</p>
 
         <form class="max-w-md mx-auto relative flex items-center" id="newsletterFormV3">
@@ -88,9 +88,9 @@
             <div class="lg:col-span-5 text-right">
                 <div class="flex items-center gap-3 mb-6 justify-end">
                     @if(!empty($siteSettings['site_logo_url']))
-                        <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'JeniCare' }}" class="h-10 w-auto object-contain">
+                        <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}" class="h-10 w-auto object-contain">
                     @else
-                        <span class="text-3xl font-extrabold tracking-tight text-white">{{ $siteSettings['site_name'] ?? 'JeniCare' }}<span class="text-brand-500">.</span></span>
+                        <span class="text-3xl font-extrabold tracking-tight text-white">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}<span class="text-brand-500">.</span></span>
                     @endif
                 </div>
                 <p class="text-ink-dim text-sm leading-relaxed mb-8 font-light max-w-md ml-auto">
@@ -172,7 +172,7 @@
                 <div class="mt-10 pt-8 border-t border-white/5 flex flex-wrap gap-6 text-sm text-ink-dim font-light justify-end">
                     <span class="flex items-center gap-2"><i class="ph-fill ph-map-pin text-brand-500"></i> {{ $siteSettings['site_address'] ?? 'فلسطين، رام الله' }}</span>
                     <span class="flex items-center gap-2" dir="ltr"><i class="ph-fill ph-phone text-brand-500"></i> {{ $siteSettings['site_phone'] ?? '+972 56 903 0203' }}</span>
-                    <span class="flex items-center gap-2"><i class="ph-fill ph-envelope text-brand-500"></i> {{ $siteSettings['site_email'] ?? 'hello@jenicare.com' }}</span>
+                    <span class="flex items-center gap-2"><i class="ph-fill ph-envelope text-brand-500"></i> {{ $siteSettings['site_email'] ?? 'hello@شركة جنين للتجميلcom' }}</span>
                 </div>
             </div>
         </div>
@@ -180,7 +180,7 @@
         {{-- Copyright Bar --}}
         <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <p class="text-ink-dim text-sm font-light">
-                &copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}. جميع الحقوق محفوظة.
+                &copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'شركة شركة جنين للتجميل' }}. جميع الحقوق محفوظة.
             </p>
             <div class="flex gap-2 text-xs">
                 <span class="bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-ink-dim">الدفع عند الاستلام</span>

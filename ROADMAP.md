@@ -1,4 +1,4 @@
-# JeniCare Ad Tracking & Attribution Platform — Roadmap
+# شركة جنين للتجميل Ad Tracking & Attribution Platform — Roadmap
 
 > **Mission:** Build the most advanced, AI-powered, server-side ad tracking and attribution platform on the market — surpassing wetracked.io, ServerTrack, and HYROS in accuracy, compliance, and intelligence.
 
@@ -1003,7 +1003,7 @@ Week 7-8:  ── 1.10 Shopify Connector
 
 ## Competitive Comparison
 
-| Feature | wetracked.io | ServerTrack | HYROS | **JeniCare (Our System)** |
+| Feature | wetracked.io | ServerTrack | HYROS | **شركة جنين للتجميل (Our System)** |
 |---------|:-----------:|:-----------:|:-----:|:------------------------:|
 | **Platforms** | 7 | 3 | 5 | **10+** |
 | **AI Sanitization** | ❌ | ❌ | ❌ | **✅ Multi-LLM** |
@@ -1038,6 +1038,6 @@ Week 7-8:  ── 1.10 Shopify Connector
 
 > **Last Updated:** May 29, 2026
 >
-> **Owner:** JeniCare Engineering Team
+> **Owner:** شركة جنين للتجميل Engineering Team
 >
 > **Next Milestone:** Phase 8 — SaaS Multi-Tenancy Architecture

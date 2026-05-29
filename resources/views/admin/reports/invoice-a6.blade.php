@@ -25,7 +25,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>{{ $siteSettings['site_name'] ?? 'JeniCare' }}</h1>
+        <h1>{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}</h1>
         <div class="number">فاتورة {{ $order->order_number }}</div>
         <div style="font-size:6px;color:#737373;">{{ $order->created_at->format('Y-m-d H:i') }}</div>
     </div>
@@ -75,6 +75,6 @@
         <div class="summary-row total"><span>الإجمالي</span><span>{{ number_format($order->total_amount, 2) }} ₪</span></div>
     </div>
 
-    <div class="footer">{{ $siteSettings['site_name'] ?? 'JeniCare' }} - شكراً لتعاملكم معنا</div>
+    <div class="footer">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }} - شكراً لتعاملكم معنا</div>
 </body>
 </html>

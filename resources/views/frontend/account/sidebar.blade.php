@@ -27,6 +27,11 @@
                 <i class="fas fa-map-marker-alt" style="width:20px;text-align:center;"></i> عناويني
             </a>
         </li>
+        <li style="border-bottom:1px solid var(--glass-border);">
+            <a href="{{ route('affiliate.dashboard') }}" style="display:flex;align-items:center;gap:10px;padding:14px 20px;font-size:.9rem;font-weight:500;text-decoration:none;transition:all .2s;{{ request()->routeIs('affiliate.*') ? 'background:#ec4899;color:#fff;font-weight:600;' : 'color:#ec4899;' }}" onmouseover="this.style.background='#ec4899';this.style.color='#fff'" onmouseout="this.style.background='{{ request()->routeIs('affiliate.*') ? '#ec4899' : 'transparent' }}';this.style.color='{{ request()->routeIs('affiliate.*') ? '#fff' : '#ec4899' }}'">
+                <i class="fas fa-hand-holding-usd" style="width:20px;text-align:center;"></i> التسويق بالعمولة
+            </a>
+        </li>
         <li>
             <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();" style="display:flex;align-items:center;gap:10px;padding:14px 20px;color:var(--ink);font-size:.9rem;font-weight:500;text-decoration:none;transition:all .2s;" onmouseover="this.style.background='var(--brand-500)';this.style.color='#EF4444'" onmouseout="this.style.background='transparent';this.style.color='var(--ink)'">
                 <i class="fas fa-sign-out-alt" style="width:20px;text-align:center;color:#EF4444;"></i> تسجيل الخروج

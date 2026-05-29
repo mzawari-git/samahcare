@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\PredictiveController;
 use App\Http\Controllers\Admin\ReviewerIpController;
 use Modules\CustomAdmin\Http\Controllers\MetaAdsController;
 use Modules\CustomAdmin\Http\Controllers\MetaLeadHubController;
+use App\Http\Controllers\Admin\AffiliateController as AdminAffiliateController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
@@ -250,6 +252,29 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/reviewer-ips', [ReviewerIpController::class, 'store'])->name('admin.reviewer-ips.store');
     Route::delete('/reviewer-ips/{reviewer_ip}', [ReviewerIpController::class, 'destroy'])->name('admin.reviewer-ips.destroy');
     Route::post('/reviewer-ips/{reviewer_ip}/toggle', [ReviewerIpController::class, 'toggle'])->name('admin.reviewer-ips.toggle');
+
+    // Affiliate Management
+    Route::get('/affiliates', [AdminAffiliateController::class, 'index'])->name('admin.affiliates.index');
+    Route::get('/affiliates/commissions/list', [AdminAffiliateController::class, 'commissions'])->name('admin.affiliates.commissions');
+    Route::get('/affiliates/payouts/list', [AdminAffiliateController::class, 'payouts'])->name('admin.affiliates.payouts');
+    Route::get('/affiliates/{affiliate}', [AdminAffiliateController::class, 'show'])->name('admin.affiliates.show');
+    Route::patch('/affiliates/{affiliate}/status', [AdminAffiliateController::class, 'updateStatus'])->name('admin.affiliates.status');
+    Route::patch('/affiliates/{affiliate}/commission', [AdminAffiliateController::class, 'updateCommission'])->name('admin.affiliates.commission');
+    Route::patch('/affiliates/{affiliate}/tier', [AdminAffiliateController::class, 'updateTier'])->name('admin.affiliates.tier');
+    Route::patch('/affiliates/{affiliate}/notes', [AdminAffiliateController::class, 'notes'])->name('admin.affiliates.notes');
+    Route::patch('/affiliates/commissions/{commission}/approve', [AdminAffiliateController::class, 'approveCommission'])->name('admin.affiliates.commissions.approve');
+    Route::patch('/affiliates/commissions/{commission}/reject', [AdminAffiliateController::class, 'rejectCommission'])->name('admin.affiliates.commissions.reject');
+    Route::patch('/affiliates/payouts/{payout}/process', [AdminAffiliateController::class, 'processPayout'])->name('admin.affiliates.payouts.process');
+
+    // Blog Management
+    Route::get('/blog', [AdminBlogController::class, 'index'])->name('admin.blog.index');
+    Route::get('/blog/create', [AdminBlogController::class, 'create'])->name('admin.blog.create');
+    Route::post('/blog', [AdminBlogController::class, 'store'])->name('admin.blog.store');
+    Route::get('/blog/{blog}/edit', [AdminBlogController::class, 'edit'])->name('admin.blog.edit');
+    Route::put('/blog/{blog}', [AdminBlogController::class, 'update'])->name('admin.blog.update');
+    Route::delete('/blog/{blog}', [AdminBlogController::class, 'destroy'])->name('admin.blog.destroy');
+    Route::patch('/blog/{blog}/toggle', [AdminBlogController::class, 'toggle'])->name('admin.blog.toggle');
+    Route::patch('/blog/{id}/restore', [AdminBlogController::class, 'restore'])->name('admin.blog.restore');
 
     // Facebook Leads Hub
     Route::get('/leads-hub', [MetaLeadHubController::class, 'index'])->name('admin.leads-hub.index');

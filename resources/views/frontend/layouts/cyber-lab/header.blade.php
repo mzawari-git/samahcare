@@ -21,9 +21,9 @@
             {{-- Logo --}}
             <a href="{{ route('home') }}" class="flex items-center gap-2 text-xl font-black tracking-tight flex-shrink-0" style="color: var(--ink);">
                 @if(!empty($siteSettings['site_logo_url']))
-                    <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'JeniCare' }}" class="h-9 w-auto object-contain">
+                    <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}" class="h-9 w-auto object-contain">
                 @else
-                    {{ $siteSettings['site_name_ar'] ?? $siteSettings['site_name'] ?? 'JeniCare' }}<span class="text-brand-500">.</span>
+                    {{ $siteSettings['site_name_ar'] ?? $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}<span class="text-brand-500">.</span>
                 @endif
             </a>
 
@@ -32,6 +32,8 @@
                 <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">الرئيسية</a>
                 <a href="{{ route('shop') }}" class="nav-link {{ request()->routeIs('shop') ? 'active' : '' }}">المتجر</a>
                 <a href="{{ route('b2b') }}" class="nav-link {{ request()->routeIs('b2b') ? 'active' : '' }}">الأعمال</a>
+                <a href="{{ route('affiliate.landing') }}" class="nav-link {{ request()->routeIs('affiliate.*') ? 'active' : '' }}" style="color:#ec4899;">تسويق</a>
+                <a href="{{ route('blog.index') }}" class="nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}">مدونة</a>
                 <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">تواصل</a>
             </nav>
         </div>
@@ -77,26 +79,37 @@
 {{-- Mobile Menu --}}
 <div id="mobileMenuV3" class="fixed inset-0 z-[60] hidden">
     <div class="absolute inset-0" style="background:rgba(0,0,0,0.6);" onclick="toggleMobileMenuV3()"></div>
-    <div class="absolute top-0 right-0 w-72 h-full shadow-2xl transform translate-x-full transition-transform duration-300 p-6" id="mobileMenuPanelV3" style="background:var(--surface-alt);">
-        <div class="flex justify-between items-center mb-6">
-            <span class="text-lg font-black" style="color:var(--ink);">{{ $siteSettings['site_name'] ?? 'JeniCare' }}<span class="text-brand-500">.</span></span>
-            <button onclick="toggleMobileMenuV3()" class="icon-btn"><i class="ph ph-x text-xl"></i></button>
+    <div class="absolute top-0 right-0 w-80 h-full shadow-2xl transform translate-x-full transition-transform duration-300 p-0 flex flex-col" id="mobileMenuPanelV3" style="background:var(--surface);">
+        <div class="flex items-center justify-between px-5 py-4 border-b" style="border-color:rgba(255,255,255,0.06);">
+            <div class="flex items-center gap-2.5">
+                @if(!empty($siteSettings['site_logo_url']))
+                <img src="{{ $siteSettings['site_logo_url'] }}" alt="شركة جنين للتجميل" class="h-7 w-auto object-contain">
+                @else
+                <span class="text-base font-black" style="color:var(--ink);">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}</span>
+                @endif
+            </div>
+            <button onclick="toggleMobileMenuV3()" class="w-9 h-9 rounded-full flex items-center justify-center" style="background:var(--surface-alt);color:var(--ink-dim);border:none;cursor:pointer;"><i class="ph ph-x text-lg"></i></button>
         </div>
-        <a href="{{ route('shop') }}" class="btn-primary w-full justify-center mb-4"><i class="ph ph-storefront"></i> تسوق الآن</a>
-        <nav class="space-y-0 mb-4 border-t border-white/5 pt-3">
-            <a href="{{ route('home') }}" class="mobile-link {{ request()->routeIs('home') ? 'active' : '' }}"><i class="ph ph-house"></i> الرئيسية</a>
-            <a href="{{ route('shop') }}" class="mobile-link {{ request()->routeIs('shop') ? 'active' : '' }}"><i class="ph ph-storefront"></i> المتجر</a>
-            <a href="{{ route('b2b') }}" class="mobile-link"><i class="ph ph-buildings"></i> للأعمال</a>
-            <a href="{{ route('contact') }}" class="mobile-link"><i class="ph ph-envelope"></i> تواصل</a>
-        </nav>
-        <div class="border-t border-white/5 pt-3">
+        <div class="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+            <a href="{{ route('shop') }}" class="flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm mb-4" style="background:linear-gradient(135deg,#ec4899,#be185d);color:#fff;text-decoration:none;"><i class="ph ph-storefront"></i> تصفحي المتجر</a>
+            <a href="{{ route('home') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium" style="color:var(--ink);text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-house text-lg" style="color:var(--ink-dim);"></i></span> الرئيسية</a>
+            <a href="{{ route('shop') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium" style="color:var(--ink);text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-storefront text-lg" style="color:var(--ink-dim);"></i></span> المتجر</a>
+            <a href="{{ route('b2b') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium" style="color:var(--ink);text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-buildings text-lg" style="color:var(--ink-dim);"></i></span> الأعمال</a>
+            <a href="{{ route('affiliate.landing') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-bold" style="color:#ec4899;text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(236,72,153,0.1);"><i class="ph ph-share-network text-lg" style="color:#ec4899;"></i></span> التسويق بالعمولة</a>
+            <a href="{{ route('blog.index') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium" style="color:var(--ink);text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-article text-lg" style="color:var(--ink-dim);"></i></span> المدونة</a>
+            <a href="{{ route('contact') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium" style="color:var(--ink);text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-envelope text-lg" style="color:var(--ink-dim);"></i></span> تواصل معنا</a>
+        </div>
+        <div class="border-t px-4 py-3" style="border-color:rgba(255,255,255,0.06);">
             @auth
-            <a href="{{ route('account') }}" class="mobile-link"><i class="ph ph-user-circle"></i> حسابي</a>
-            <form method="POST" action="{{ route('logout') }}">@csrf<button class="mobile-link text-red-400 w-full text-right">خروج</button></form>
+            <a href="{{ route('account') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium" style="color:var(--ink);text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-user-circle text-lg" style="color:var(--ink-dim);"></i></span> حسابي</a>
+            <form method="POST" action="{{ route('logout') }}">@csrf<button class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium w-full" style="color:#ef4444;background:none;border:none;cursor:pointer;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.1);"><i class="ph ph-sign-out text-lg" style="color:#ef4444;"></i></span> تسجيل الخروج</button></form>
             @else
-            <a href="{{ route('login') }}" class="mobile-link"><i class="ph ph-sign-in"></i> تسجيل الدخول</a>
+            <a href="{{ route('login') }}" class="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium" style="color:var(--ink);text-decoration:none;"><span class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-sign-in text-lg" style="color:var(--ink-dim);"></i></span> تسجيل الدخول</a>
+            <a href="{{ route('register') }}" class="flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm mt-2" style="background:var(--surface-alt);color:var(--ink);text-decoration:none;"><i class="ph ph-user-plus"></i> إنشاء حساب جديد</a>
             @endauth
         </div>
+    </div>
+</div>
     </div>
 </div>
 

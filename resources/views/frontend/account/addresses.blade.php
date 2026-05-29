@@ -1,6 +1,6 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'عناويني - ' . ($siteSettings['site_name'] ?? 'JeniCare'))
+@section('title', 'عناويني - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
 
 @section('content')
 <section class="pt-32 pb-8 bg-gradient-to-b border-b border-white/5 text-center">

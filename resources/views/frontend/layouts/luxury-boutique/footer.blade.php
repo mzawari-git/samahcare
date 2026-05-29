@@ -2,7 +2,7 @@
 <footer class="pt-20 pb-12 relative" style="border-top:2px solid var(--glass-border);">
     <div class="max-w-4xl mx-auto px-4 text-center">
         <div class="mb-10">
-            <h4 class="text-2xl font-black mb-2 text-white">{{ $siteSettings['site_name'] ?? 'JeniCare' }}<span class="text-brand-500">.</span></h4>
+            <h4 class="text-2xl font-black mb-2 text-white">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}<span class="text-brand-500">.</span></h4>
             <div class="luxury-divider mb-4"></div>
             <p class="text-ink-dim text-sm max-w-md mx-auto">{{ $siteSettings['site_description'] ?? 'وجهتك الفاخرة لمنتجات العناية.' }}</p>
         </div>
@@ -33,7 +33,7 @@
             @if(!empty($siteSettings['whatsapp_number']))<a href="https://wa.me/{{ preg_replace('/[^0-9]/','',$siteSettings['whatsapp_number']) }}" target="_blank" class="w-10 h-10 rounded-full border-2 flex items-center justify-center text-ink-dim hover:text-white hover:border-brand-500 transition-all" style="border-color:var(--glass-border);" aria-label="واتساب"><i class="ph-fill ph-whatsapp-logo text-lg"></i></a>@endif
         </div>
 
-        <p class="text-ink-dim text-xs">&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'JeniCare' }}. جميع الحقوق محفوظة.</p>
+        <p class="text-ink-dim text-xs">&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}. جميع الحقوق محفوظة.</p>
     </div>
 </footer>
 

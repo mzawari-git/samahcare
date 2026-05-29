@@ -1,7 +1,7 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'للأعمال - ' . ($siteSettings['site_name'] ?? 'JeniCare'))
-@section('meta_description', 'JeniCare للأعمال - حلول متكاملة للصوالين والعيادات والمشتركين التجاريين. أسعار جملة، شحن مجاني، ودعم فني.')
+@section('title', 'للأعمال - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
+@section('meta_description', 'شركة جنين للتجميل للأعمال - حلول متكاملة للصوالين والعيادات والمشتركين التجاريين. أسعار جملة، شحن مجاني، ودعم فني.')
 
 @section('content')
 {{-- Hero --}}
@@ -15,7 +15,7 @@
                     <span class="text-xs tracking-widest text-white/80 uppercase font-bold">بروتوكول الأعمال</span>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black mb-4 text-white">
-                    {{ $siteSettings['site_name'] ?? 'JeniCare' }} <span class="text-accent-500">للأعمال</span>
+                    {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }} <span class="text-accent-500">للأعمال</span>
                 </h1>
                 <p class="text-white-dim text-lg leading-relaxed mb-8 max-w-lg">
                     حلول متكاملة للصوالين والعيادات والمشتركين التجاريين. أسعار جملة تنافسية، شحن مجاني للطلبات الكبيرة، ودعم فني مخصص.

@@ -483,6 +483,12 @@
                     <a href="{{ route('admin.hero-slides.index') }}" class="nav-item {{ request()->routeIs('admin.hero-slides.*') ? 'active' : '' }}">
                         <i class="fas fa-images"></i> <span>السلايدشو</span>
                     </a>
+                    <a href="{{ route('admin.blog.index') }}" class="nav-item {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}">
+                        <i class="fas fa-newspaper"></i> <span>المدونة والمقالات</span>
+                    </a>
+                    <a href="{{ route('admin.affiliates.index') }}" class="nav-item {{ request()->routeIs('admin.affiliates.*') ? 'active' : '' }}">
+                        <i class="fas fa-hand-holding-usd"></i> <span>التسويق بالعمولة</span>
+                    </a>
                     <a href="{{ route('admin.activity-logs.index') }}" class="nav-item {{ request()->routeIs('admin.activity-logs.*') ? 'active' : '' }}">
                         <i class="fas fa-history"></i> <span>سجل النشاطات</span>
                     </a>

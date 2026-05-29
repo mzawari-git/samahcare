@@ -13,7 +13,7 @@
             ctx.fillStyle = '#f60';
             ctx.fillRect(125, 1, 62, 20);
             ctx.fillStyle = '#069';
-            ctx.fillText('JeniCare', 2, 15);
+            ctx.fillText('شركة جنين للتجميل', 2, 15);
             ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
             ctx.fillText('FP', 4, 17);
             return canvas.toDataURL();
