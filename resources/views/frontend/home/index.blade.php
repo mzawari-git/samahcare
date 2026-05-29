@@ -205,34 +205,42 @@
 @if($categories->isNotEmpty())
 <section class="py-20">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="mb-16 text-right">
+        <div class="text-center mb-14">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-6">
                 <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">تصفحي الأقسام</span>
             </div>
             <h2 class="text-3xl md:text-5xl font-black mb-4">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
-            <p class="text-ink-dim max-w-xl text-lg font-light">اكتشفي مجموعتنا الكاملة من منتجات التجميل والعناية بالبشرة والشعر. جميع المنتجات أصلية ومضمونة من أفضل الماركات العالمية.</p>
+            <p class="text-ink-dim max-w-3xl mx-auto text-lg font-light">اكتشفي مجموعتنا الكاملة من منتجات التجميل والعناية بالبشرة والشعر. جميع المنتجات أصلية ومضمونة من أفضل الماركات العالمية.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($categories as $cat)
             <a href="{{ route('shop', ['category' => $cat->slug]) }}"
-               class="category-card glass-panel rounded-2xl overflow-hidden group relative h-[340px] block transition-all duration-700 hover:-translate-y-2 hover:border-brand-500/20">
-                <div class="absolute inset-0 bg-gradient-to-t from-surface/98 via-surface/30 to-transparent z-10"></div>
-                <div class="absolute top-0 right-8 left-8 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" style="background: var(--gradient-primary);"></div>
-                @if($cat->sample_image)
-                <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
-                     class="absolute inset-0 w-full h-full object-cover filter brightness-50 group-hover:brightness-75 group-hover:scale-110 transition-all duration-1000"
-                     loading="lazy">
-                @else
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <i class="fa-solid fa-tag text-8xl text-white/5"></i>
+               class="group block glass-panel rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg">
+                <div class="relative h-52 overflow-hidden">
+                    @if($cat->sample_image)
+                    <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                         loading="lazy">
+                    @else
+                    <div class="w-full h-full flex items-center justify-center bg-surface-alt">
+                        <i class="fa-solid fa-tag text-5xl text-ink-dim/20"></i>
+                    </div>
+                    @endif
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                        <span class="bg-brand-500 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-left text-[10px]"></i> تصفح القسم
+                        </span>
+                    </div>
                 </div>
-                @endif
-                <div class="absolute bottom-8 right-8 left-8 z-20 text-right">
-                    <h3 class="text-2xl font-black mb-2 text-white group-hover:text-brand-500 transition-colors duration-300">{{ $cat->display_name ?? $cat->name_ar }}</h3>
+                <div class="p-5">
+                    <h3 class="font-black text-lg mb-2 text-ink group-hover:text-brand-500 transition-colors duration-300">{{ $cat->display_name ?? $cat->name_ar }}</h3>
                     <div class="flex items-center justify-between">
-                        <span class="pill-brand text-xs">{{ $cat->products_count }} منتج</span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-500/10 text-brand-500 text-xs font-bold">
+                            <i class="fa-solid fa-box-open text-[10px]"></i> {{ $cat->products_count }} منتج
+                        </span>
                         @if($cat->min_price)
-                        <span class="text-ink-dim text-xs">من {{ number_format($cat->min_price, 0) }} ₪</span>
+                        <span class="text-ink-muted text-sm">من {{ number_format($cat->min_price, 0) }} ₪</span>
                         @endif
                     </div>
                 </div>

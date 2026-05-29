@@ -227,6 +227,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('layoutArchitecture', $layoutArchitecture);
             $view->with('layoutPath', 'frontend.layouts.' . $layoutArchitecture . '.app');
             $view->with('activeTheme', $activeTheme);
+            $view->with('isLightTheme', in_array($activeTheme, ['minimal']));
 
             $view->with('siteSettings', [
                 'site_name' => $s['site_name'] ?? $s['site_name_ar'] ?? config('app.name'),
