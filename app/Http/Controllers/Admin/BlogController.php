@@ -104,6 +104,22 @@ class BlogController extends Controller
         return back()->with('success', 'تم تحديث حالة النشر.');
     }
 
+    public function uploadInlineImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:5120',
+        ]);
+
+        $path = $request->file('image')->store('blog/inline', 'public');
+        $url = asset('storage/' . $path);
+
+        return response()->json([
+            'success' => true,
+            'url' => $url,
+            'html' => '<img src="' . $url . '" alt="" class="rounded-xl max-w-full mx-auto block" loading="lazy">',
+        ]);
+    }
+
     private function uniqueSlug(string $title, ?int $excludeId = null): string
     {
         $slug = Str::slug(preg_replace('/[^\x{0600}-\x{06FF}\w\s]/u', '', $title), '-');

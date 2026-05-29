@@ -275,6 +275,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/blog/{blog}', [AdminBlogController::class, 'destroy'])->name('admin.blog.destroy');
     Route::patch('/blog/{blog}/toggle', [AdminBlogController::class, 'toggle'])->name('admin.blog.toggle');
     Route::patch('/blog/{id}/restore', [AdminBlogController::class, 'restore'])->name('admin.blog.restore');
+    Route::post('/blog/upload-inline-image', [AdminBlogController::class, 'uploadInlineImage'])->name('admin.blog.upload-inline-image');
 
     // Facebook Leads Hub
     Route::get('/leads-hub', [MetaLeadHubController::class, 'index'])->name('admin.leads-hub.index');
