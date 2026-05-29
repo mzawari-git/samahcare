@@ -4,12 +4,6 @@
 @section('meta_description', 'تسوق أفضل منتجات العناية بالشعر والبشرة من شركة جنين للتجميل توصيل سريع لجميع أنحاء فلسطين.')
 
 @section('content')
-<style>
-    @media (max-width: 1023px) {
-        .shop-products-area { order: 1; }
-        .shop-sidebar { order: 2; }
-    }
-</style>
 {{-- Page Header --}}
 <section class="pt-32 pb-10 relative border-b border-white/5">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(var(--brand-500-rgb,255,42,133),0.06),transparent_60%)] pointer-events-none"></div>
@@ -40,11 +34,11 @@
 </section>
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-20">
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div class="flex flex-col-reverse lg:flex-row gap-8">
 
         {{-- Sidebar Filters --}}
         @if(isset($categories))
-        <aside class="shop-sidebar lg:w-64 flex-shrink-0">
+        <aside class="lg:w-64 flex-shrink-0">
             <div class="glass-panel rounded-2xl p-5 lg:sticky lg:top-32 border-white/5">
                 <h3 class="text-sm font-bold text-white mb-4 pb-3 border-b border-white/5 flex items-center gap-2">
                     <i class="ph ph-funnel text-brand-500"></i> الأقسام
@@ -87,7 +81,7 @@
         @endif
 
         {{-- Products Area --}}
-        <div class="shop-products-area flex-1 min-w-0">
+        <div class="flex-1 min-w-0">
             {{-- Toolbar --}}
             <div class="flex justify-between items-center flex-wrap gap-3 mb-6 glass-panel rounded-2xl px-5 py-3 border-white/5 sticky top-[80px] z-20">
                 <p class="text-sm text-white-dim flex items-center gap-2">
