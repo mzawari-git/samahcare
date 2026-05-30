@@ -53,7 +53,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}?v=3">
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}?v=3">
-    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
+    <script>(function(){localStorage.removeItem('شركة جنين للتجميل_mode');document.cookie='شركة جنين للتجميل_mode=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';document.documentElement.removeAttribute('data-theme-mode');})();</script>
 
     @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
 
@@ -134,6 +134,7 @@
     <script>if('serviceWorker' in navigator&&window.location.hostname!=='localhost'){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister()})}).then(function(){navigator.serviceWorker.register('{{ asset('sw.js') }}').catch(function(){})})}</script>
     </script>
     <script>window.basePath="{{ rtrim(url('/'), '/') }}";</script>
+    <style>html body{background-color:#09090b !important;color:#fafafa !important;}</style>
 </head>
 <body class="antialiased" style="background-color: var(--surface) !important; color: var(--ink);">
 
