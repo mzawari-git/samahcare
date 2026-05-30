@@ -14,9 +14,8 @@
     @include('admin.blog._form')
     <div class="mt-6 flex gap-3">
         <button type="submit" class="btn-primary"><i class="fas fa-save ml-1"></i> حفظ التعديلات</button>
-        <form action="{{ route('admin.blog.destroy', $post->id) }}" method="POST" onsubmit="return confirm('متأكد من الحذف؟')">@csrf @method('DELETE')
-            <button class="btn-ghost text-red-400"><i class="fas fa-trash ml-1"></i> حذف</button>
-        </form>
+        <a href="#" onclick="event.preventDefault(); if(confirm('متأكد من الحذف؟')) document.getElementById('delete-form').submit();" class="btn-ghost text-red-400"><i class="fas fa-trash ml-1"></i> حذف</a>
     </div>
 </form>
+<form id="delete-form" action="{{ route('admin.blog.destroy', $post->id) }}" method="POST" class="d-none">@csrf @method('DELETE')</form>
 @endsection

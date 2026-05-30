@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class BlogController extends Controller
 {
@@ -21,6 +22,26 @@ class BlogController extends Controller
     public function create()
     {
         return view('admin.blog.create');
+    }
+
+    private function getUploadedImage(Request $request): ?UploadedFile
+    {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if ($file && $file->isValid()) return $file;
+        }
+
+        if (!empty($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+            return new UploadedFile(
+                $_FILES['image']['tmp_name'],
+                $_FILES['image']['name'],
+                $_FILES['image']['type'],
+                $_FILES['image']['error'],
+                true
+            );
+        }
+
+        return null;
     }
 
     public function store(Request $request)
@@ -42,8 +63,9 @@ class BlogController extends Controller
         $data['is_published'] = $request->boolean('is_published');
         $data['is_featured'] = $request->boolean('is_featured');
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $this->saveImage($request->file('image'));
+        $image = $this->getUploadedImage($request);
+        if ($image) {
+            $data['image'] = $this->saveImage($image);
         }
 
         BlogPost::create($data);
@@ -81,9 +103,10 @@ class BlogController extends Controller
         $data['is_published'] = $request->boolean('is_published');
         $data['is_featured'] = $request->boolean('is_featured');
 
-        if ($request->hasFile('image')) {
+        $image = $this->getUploadedImage($request);
+        if ($image) {
             $this->deleteImage($blog->image);
-            $data['image'] = $this->saveImage($request->file('image'));
+            $data['image'] = $this->saveImage($image);
         }
 
         $blog->update($data);
