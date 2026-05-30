@@ -69,7 +69,7 @@
                     <li>
                         <a href="{{ route('shop', ['category' => $category->slug]) }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 {{ request('category') == $category->slug ? 'bg-brand-500 text-white font-bold shadow-neon' : 'text-white-dim hover:bg-white/5 hover:text-white' }}">
                             @if($category->image)
-                            <img src="{{ $category->image }}" alt="{{ $arName }}" class="w-8 h-8 rounded-lg object-contain flex-shrink-0 bg-white/10">
+                            <img src="{{ asset($category->image) }}" alt="{{ $arName }}" class="w-8 h-8 rounded-lg object-contain flex-shrink-0 bg-white/10">
                             @else
                             <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-white/10">
                                 <i class="ph ph-tag text-xs"></i>

@@ -360,7 +360,7 @@ if (!empty($slideProductIds)) {
                 {{-- Circular image --}}
                 <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden flex-shrink-0 mb-3" style="border:2px solid #f3e8f3;background:#fdf2f8;">
                     @if($cat->image)
-                    <img src="{{ $cat->image }}" alt="{{ $arName }}"
+                    <img src="{{ asset($cat->image) }}" alt="{{ $arName }}"
                          class="w-full h-full object-cover" loading="lazy">
                     @else
                     <div class="w-full h-full flex items-center justify-center" style="background:#fce7f3;">
