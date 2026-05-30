@@ -42,7 +42,7 @@ class BlogController extends Controller
         $data['is_featured'] = $request->boolean('is_featured');
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('blog', 'public');
+            $data['image'] = $request->file('image')->store('uploads/blog', 'public');
         }
 
         BlogPost::create($data);
@@ -82,7 +82,7 @@ class BlogController extends Controller
 
         if ($request->hasFile('image')) {
             if ($blog->image) Storage::disk('public')->delete($blog->image);
-            $data['image'] = $request->file('image')->store('blog', 'public');
+            $data['image'] = $request->file('image')->store('uploads/blog', 'public');
         }
 
         $blog->update($data);
@@ -122,7 +122,7 @@ class BlogController extends Controller
             'image' => 'required|image|max:5120',
         ]);
 
-        $path = $request->file('image')->store('blog/inline', 'public');
+        $path = $request->file('image')->store('uploads/blog/inline', 'public');
         $url = asset('storage/' . $path);
 
         return response()->json([

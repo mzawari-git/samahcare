@@ -70,21 +70,20 @@
         }
 
         .floating-social-v3 {
-            position: fixed; left: 20px; top: 50%; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 8px;
+            position: fixed; left: 20px; top: 50%; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 10px;
         }
         .floating-social-v3 a {
-            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--ink-dim); font-size: 1.1rem; transition: all .2s; text-decoration: none !important;
+            width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; transition: all .3s; box-shadow: 0 4px 12px rgba(0,0,0,.3); text-decoration: none !important; border: 1px solid rgba(255,255,255,.1);
         }
-        .floating-social-v3 a:hover { color: var(--ink); }
-        .floating-social-v3 a[data-platform="facebook"] { color: #1877F2; }
-        .floating-social-v3 a[data-platform="instagram"] { color: #E4405F; }
-        .floating-social-v3 a[data-platform="twitter"] { color: #0F1419; }
-        .floating-social-v3 a[data-platform="tiktok"] { color: #000000; }
-        .floating-social-v3 a[data-platform="linkedin"] { color: #0A66C2; }
-        .floating-social-v3 a[data-platform="youtube"] { color: #FF0000; }
-        .floating-social-v3 a[data-platform="whatsapp"] { color: #25D366; }
-        .floating-social-v3 a:hover { opacity: 0.8; transform: scale(1.15); }
-        @media (max-width:768px) { .floating-social-v3 { left: 8px; bottom: 80px; top: auto; transform: none; } }
+        .floating-social-v3 a[data-platform="facebook"] { background: #1877F2; border-color: #1877F2; }
+        .floating-social-v3 a[data-platform="instagram"] { background: linear-gradient(135deg, #833AB4, #E4405F, #FCAF45); border-color: #E4405F; }
+        .floating-social-v3 a[data-platform="twitter"] { background: #0F1419; border-color: #0F1419; }
+        .floating-social-v3 a[data-platform="tiktok"] { background: #000000; border-color: #000000; }
+        .floating-social-v3 a[data-platform="linkedin"] { background: #0A66C2; border-color: #0A66C2; }
+        .floating-social-v3 a[data-platform="youtube"] { background: #FF0000; border-color: #FF0000; }
+        .floating-social-v3 a[data-platform="whatsapp"] { background: #25D366; border-color: #25D366; }
+        .floating-social-v3 a:hover { transform: scale(1.15) translateX(5px); box-shadow: 0 6px 24px rgba(0,0,0,.4); }
+        @media (max-width:768px) { .floating-social-v3 { left: 10px; bottom: 100px; top: auto; transform: none; } .floating-social-v3 a { width: 38px; height: 38px; font-size: 1rem; } }
     </style>
     @stack('styles')
     <script>if('serviceWorker' in navigator&&window.location.hostname!=='localhost'){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister()})}).then(function(){navigator.serviceWorker.register('{{ asset('sw.js') }}').catch(function(){})})}</script>
@@ -126,13 +125,13 @@
     </script>
 
     <div class="floating-social-v3">
-        @if(!empty($siteSettings['facebook_url']))<a href="{{ $siteSettings['facebook_url'] }}" target="_blank" aria-label="فيسبوك" data-platform="facebook"><i class="ph ph-facebook-logo"></i></a>@endif
-        @if(!empty($siteSettings['instagram_url']))<a href="{{ $siteSettings['instagram_url'] }}" target="_blank" aria-label="إنستغرام" data-platform="instagram"><i class="ph ph-instagram-logo"></i></a>@endif
-        @if(!empty($siteSettings['twitter_url']))<a href="{{ $siteSettings['twitter_url'] }}" target="_blank" aria-label="تويتر" data-platform="twitter"><i class="ph ph-twitter-logo"></i></a>@endif
-        @if(!empty($siteSettings['tiktok_url']))<a href="{{ $siteSettings['tiktok_url'] }}" target="_blank" aria-label="تيك توك" data-platform="tiktok"><i class="ph ph-tiktok-logo"></i></a>@endif
-        @if(!empty($siteSettings['linkedin_url']))<a href="{{ $siteSettings['linkedin_url'] }}" target="_blank" aria-label="لينكد إن" data-platform="linkedin"><i class="ph ph-linkedin-logo"></i></a>@endif
-        @if(!empty($siteSettings['youtube_url']))<a href="{{ $siteSettings['youtube_url'] }}" target="_blank" aria-label="يوتيوب" data-platform="youtube"><i class="ph ph-youtube-logo"></i></a>@endif
-        @if(!empty($siteSettings['whatsapp_number']))<a href="https://wa.me/{{ preg_replace('/[^0-9]/','',$siteSettings['whatsapp_number']) }}" target="_blank" aria-label="واتساب" data-platform="whatsapp"><i class="ph ph-whatsapp-logo"></i></a>@endif
+        @if(!empty($siteSettings['facebook_url']))<a href="{{ $siteSettings['facebook_url'] }}" data-platform="facebook" style="background:#1877F2;" target="_blank" aria-label="فيسبوك"><i class="ph-fill ph-facebook-logo"></i></a>@endif
+        @if(!empty($siteSettings['instagram_url']))<a href="{{ $siteSettings['instagram_url'] }}" data-platform="instagram" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);" target="_blank" aria-label="إنستغرام"><i class="ph-fill ph-instagram-logo"></i></a>@endif
+        @if(!empty($siteSettings['twitter_url']))<a href="{{ $siteSettings['twitter_url'] }}" data-platform="twitter" style="background:#1DA1F2;" target="_blank" aria-label="تويتر"><i class="ph-fill ph-twitter-logo"></i></a>@endif
+        @if(!empty($siteSettings['tiktok_url']))<a href="{{ $siteSettings['tiktok_url'] }}" data-platform="tiktok" style="background:#000;" target="_blank" aria-label="تيك توك"><i class="ph-fill ph-tiktok-logo"></i></a>@endif
+        @if(!empty($siteSettings['linkedin_url']))<a href="{{ $siteSettings['linkedin_url'] }}" data-platform="linkedin" style="background:#0A66C2;" target="_blank" aria-label="لينكد إن"><i class="ph-fill ph-linkedin-logo"></i></a>@endif
+        @if(!empty($siteSettings['youtube_url']))<a href="{{ $siteSettings['youtube_url'] }}" data-platform="youtube" style="background:#FF0000;" target="_blank" aria-label="يوتيوب"><i class="ph-fill ph-youtube-logo"></i></a>@endif
+        @if(!empty($siteSettings['whatsapp_number']))<a href="https://wa.me/{{ preg_replace('/[^0-9]/','',$siteSettings['whatsapp_number']) }}" data-platform="whatsapp" style="background:#25D366;" target="_blank" aria-label="واتساب"><i class="ph-fill ph-whatsapp-logo"></i></a>@endif
     </div>
 
     <style>.skip-link{position:absolute;top:-40px;left:0;background:var(--ink);color:var(--surface);padding:6px 12px;z-index:100;font-size:.75rem;font-weight:700;}.skip-link:focus{top:0;}</style>

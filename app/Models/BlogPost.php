@@ -45,6 +45,7 @@ class BlogPost extends Model
     {
         if (!$this->image) return null;
         if (Str::startsWith($this->image, ['http://', 'https://'])) return $this->image;
+        if (Str::startsWith($this->image, 'uploads/')) return asset($this->image);
         return asset('storage/' . $this->image);
     }
 
