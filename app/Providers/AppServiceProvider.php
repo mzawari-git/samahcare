@@ -217,7 +217,8 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            $isLightTheme = ($_COOKIE['شركة جنين للتجميل_mode'] ?? '') === 'light';
+            $mode = $_COOKIE['شركة جنين للتجميل_mode'] ?? 'light';
+            $isLightTheme = $mode !== 'dark';
 
             $view->with('layoutArchitecture', $layoutArchitecture);
             $view->with('layoutPath', 'frontend.layouts.' . $layoutArchitecture . '.app');

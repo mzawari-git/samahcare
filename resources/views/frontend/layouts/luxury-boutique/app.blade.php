@@ -23,7 +23,7 @@
     <link rel="manifest" href="{{ asset('manifest.json') }}"><meta name="theme-color" content="var(--surface, #050505)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}">
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}">
-    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
+    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='dark'){document.documentElement.removeAttribute('data-theme-mode');}else{document.documentElement.setAttribute('data-theme-mode','light');}})();</script>
 
     @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
 
