@@ -40,7 +40,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}?v=2">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="manifest" href="{{ asset('manifest.json') }}"><meta name="theme-color" content="var(--surface, #050a08)">
@@ -51,8 +51,8 @@
     <meta name="application-name" content="شركة جنين للتجميل">
     <meta name="msapplication-TileColor" content="#050a08">
 
-    <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}?v=2">
+    <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}?v=2">
     <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
 
     @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
@@ -243,10 +243,29 @@
     <style>
     .skip-link { position:absolute; top:-40px; left:0; background:var(--ink); color:var(--surface); padding:8px 16px; z-index:100; border-radius:0 0 8px 0; transition:top .3s; font-weight:700; }
     .skip-link:focus { top:0; }
-    .header-spacer { height:80px; }
+    .header-spacer { height:56px; }
     .main-content-v3 { min-height:60vh; }
-    @media(min-width:1024px){.header-spacer{height:104px;}}
+    @media(min-width:768px){.header-spacer{height:64px;}}
+    @media(min-width:1024px){.header-spacer{height:80px;}}
     </style>
+    <script>
+    (function() {
+        function adjustSpacer() {
+            var header = document.getElementById('mainHeaderV3');
+            var spacer = document.querySelector('.header-spacer');
+            if (header && spacer) {
+                spacer.style.height = header.getBoundingClientRect().height + 'px';
+            }
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', adjustSpacer);
+        } else {
+            adjustSpacer();
+        }
+        window.addEventListener('resize', adjustSpacer);
+        window.addEventListener('load', adjustSpacer);
+    })();
+    </script>
 @include('frontend.layouts.partials.theme-switcher')
 </body>
 </html>

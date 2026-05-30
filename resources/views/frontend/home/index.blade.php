@@ -215,7 +215,7 @@ if (!empty($slideProductIds)) {
         <div class="absolute inset-0 bg-gradient-to-b from-[#1a0533] via-[#2d0a5c]/95 to-[#0f172a]/90"></div>
     </div>
 
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-16 md:pt-20 pb-20 md:pb-28">
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-4 md:pt-8 pb-20 md:pb-28">
         <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
 
             <div class="w-full lg:w-[45%] text-center">
