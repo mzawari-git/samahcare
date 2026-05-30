@@ -167,9 +167,16 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // SEO
     Route::get('/seo', [SeoController::class, 'index'])->name('admin.seo.index');
     Route::post('/seo/auto-generate-all', [SeoController::class, 'autoGenerateAll'])->name('admin.seo.auto-all');
+    Route::post('/seo/ai-generate-all', [SeoController::class, 'aiGenerateAll'])->name('admin.seo.ai-all');
     Route::get('/seo/{product}/edit', [SeoController::class, 'bulkEdit'])->name('admin.seo.edit');
     Route::post('/seo/{product}', [SeoController::class, 'bulkUpdate'])->name('admin.seo.update');
     Route::post('/seo/{product}/auto-generate', [SeoController::class, 'autoGenerate'])->name('admin.seo.auto');
+
+    // Barcodes
+    Route::get('/barcodes', [\App\Http\Controllers\Admin\BarcodeController::class, 'index'])->name('admin.barcodes.index');
+    Route::patch('/barcodes/{product}/update', [\App\Http\Controllers\Admin\BarcodeController::class, 'updateBarcode'])->name('admin.barcodes.update');
+    Route::get('/barcodes/generate-missing', [\App\Http\Controllers\Admin\BarcodeController::class, 'generateMissing'])->name('admin.barcodes.generate-missing');
+    Route::post('/barcodes/print', [\App\Http\Controllers\Admin\BarcodeController::class, 'print'])->name('admin.barcodes.print');
 
     // Analytics
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('admin.analytics.index');

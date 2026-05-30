@@ -85,6 +85,28 @@ class TriggerWordSeeder extends Seeder
         ['vaccine', 'meta_policy', 'high', 'block', null],
         ['lockdown', 'meta_policy', 'high', 'block', null],
         ['social distancing', 'meta_policy', 'medium', 'remove', null],
+
+        // Laser / Medical Device Filtering — لتجاوز فلاتر المنصات الإعلانية
+        ['ليزر', 'laser_devices', 'critical', 'replace', 'نبض ضوئي'],
+        ['laser', 'laser_devices', 'critical', 'replace', 'IPL'],
+        ['lazer', 'laser_devices', 'critical', 'replace', 'IPL'],
+        ['إزالة الشعر بالليزر', 'laser_devices', 'critical', 'replace', 'إزالة الشعر بالنبض الضوئي'],
+        ['laser hair removal', 'laser_devices', 'critical', 'replace', 'IPL hair removal'],
+        ['fractional', 'laser_devices', 'high', 'replace', 'micro-needling'],
+        ['co2 laser', 'laser_devices', 'critical', 'replace', 'advanced skin device'],
+        ['q-switched', 'laser_devices', 'high', 'replace', 'pigment device'],
+        ['nd:yag', 'laser_devices', 'high', 'replace', 'skin rejuvenation device'],
+        ['alma soprano', 'laser_devices', 'high', 'replace', 'advanced hair removal device'],
+
+        // Engagement Bait — عبارات حث إلزامية
+        ['شارك الآن', 'engagement_bait', 'high', 'replace', 'يمكنك المشاركة'],
+        ['اعمل تاج', 'engagement_bait', 'high', 'replace', 'شارك مع من يهمك'],
+        ['تعليق + لايك', 'engagement_bait', 'critical', 'replace', 'نرحب بتعليقاتك'],
+        ['comment now', 'engagement_bait', 'high', 'replace', 'feel free to comment'],
+        ['tag your friends', 'engagement_bait', 'high', 'replace', 'share with friends'],
+        ['like and share', 'engagement_bait', 'high', 'replace', 'discover more'],
+        ['share to win', 'engagement_bait', 'critical', 'replace', 'check our offers'],
+        ['comment to win', 'engagement_bait', 'critical', 'replace', 'explore our collection'],
     ];
 
     public function run(): void

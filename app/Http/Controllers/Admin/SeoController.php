@@ -109,6 +109,145 @@ class SeoController extends Controller
         return redirect()->route('admin.seo.index')->with('success', "تم إنشاء SEO تلقائياً لـ {$count} منتج");
     }
 
+    public function aiGenerateAll(Request $request)
+    {
+        $limit = $request->input('limit', 100);
+        $missingOnly = $request->boolean('missing_only', true);
+
+        $query = Product::with('category', 'brand');
+
+        if ($missingOnly) {
+            $query->where(function ($q) {
+                $q->whereNull('meta_title')
+                  ->orWhere('meta_title', '')
+                  ->orWhereNull('meta_description')
+                  ->orWhere('meta_description', '');
+            });
+        }
+
+        $products = $query->limit($limit)->get();
+        $count = 0;
+
+        foreach ($products as $product) {
+            $seo = $this->generateAiSeo($product);
+            $updateData = [];
+
+            if (empty($product->meta_title)) {
+                $updateData['meta_title'] = $seo['meta_title'];
+            }
+            if (empty($product->meta_description)) {
+                $updateData['meta_description'] = $seo['meta_description'];
+            }
+            if (empty($product->meta_keywords)) {
+                $updateData['meta_keywords'] = json_encode($seo['meta_keywords']);
+            }
+            if (empty($product->og_image) && $product->main_image_url) {
+                $updateData['og_image'] = $product->main_image_url;
+            }
+
+            if (!empty($updateData)) {
+                $product->update($updateData);
+                $count++;
+            }
+        }
+
+        return redirect()->route('admin.seo.index')->with('success', "تم إنشاء SEO ذكي لـ {$count} منتج من أصل {$products->count()}");
+    }
+
+    private function generateAiSeo(Product $product): array
+    {
+        $name = $product->name_ar;
+        $category = $product->category?->name_ar ?? 'منتجات التجميل';
+        $brand = $product->brand?->name ?? 'ماركة عالمية';
+        $cleanDesc = strip_tags($product->description_ar ?? '');
+
+        // AI-optimized title with emotional triggers and keywords
+        $title = $this->buildAiTitle($name, $category, $brand);
+
+        // AI-optimized description with value proposition and local SEO
+        $description = $this->buildAiDescription($name, $category, $brand, $cleanDesc);
+
+        // Smart keyword extraction with semantic grouping
+        $keywords = $this->buildAiKeywords($name, $category, $brand, $cleanDesc);
+
+        return [
+            'meta_title' => $title,
+            'meta_description' => $description,
+            'meta_keywords' => $keywords,
+        ];
+    }
+
+    private function buildAiTitle(string $name, string $category, string $brand): string
+    {
+        $templates = [
+            "{$name} من {$brand} — {$category} أصلي | جنين للتجميل",
+            "{$name}: {$category} احترافي بأفضل سعر | جنين للتجميل",
+            "اشتري {$name} — {$category} أصلي 100% | توصيل فلسطين",
+        ];
+        $title = $templates[array_rand($templates)];
+        return \Str::limit($title, 60);
+    }
+
+    private function buildAiDescription(string $name, string $category, string $brand, string $desc): string
+    {
+        $valueProps = [
+            "منتج أصلي 100% بضمان الجودة. شحن سريع لكل فلسطين ودفع عند الاستلام.",
+            "احصلي على أفضل سعر في فلسطين. توصيل مجاني للطلبات الكبيرة ودعم احترافي.",
+            "مستحضرات أصلية من مصادر موثوقة. اطلبي الآن واستلمي خلال 24-48 ساعة.",
+        ];
+        $valueProp = $valueProps[array_rand($valueProps)];
+
+        $base = "{$name} من {$brand} ضمن تشكيلة {$category} المتميزة في جنين للتجميل. ";
+        if (!empty($desc)) {
+            $base .= \Str::limit($desc, 80) . ' ';
+        }
+        $base .= $valueProp;
+
+        return \Str::limit($base, 160);
+    }
+
+    private function buildAiKeywords(string $name, string $category, string $brand, string $desc): array
+    {
+        $keywords = [];
+
+        // Product name decomposition
+        $nameWords = array_filter(explode(' ', $name), fn($w) => mb_strlen($w) > 2);
+        $keywords = array_merge($keywords, array_values($nameWords));
+
+        // Category synonyms
+        $catSynonyms = [
+            'شامبو' => ['شامبو', 'غسول شعر', 'عناية بالشعر'],
+            'بلسم' => ['بلسم', 'مرطب شعر', 'تنعيم'],
+            'كريم' => ['كريم', 'ترطيب', 'عناية بالبشرة'],
+            'مكياج' => ['مكياج', 'تجميل', 'أدوات تجميل'],
+            'عطر' => ['عطر', 'عطور', 'بخور'],
+            'جهاز' => ['أجهزة تجميل', 'تقنية متقدمة', 'عناية احترافية'],
+        ];
+
+        foreach ($catSynonyms as $key => $synonyms) {
+            if (str_contains($category, $key) || str_contains($name, $key)) {
+                $keywords = array_merge($keywords, $synonyms);
+            }
+        }
+
+        // Add core terms
+        $keywords[] = $category;
+        $keywords[] = $brand;
+        $keywords[] = 'جنين للتجميل';
+        $keywords[] = 'JeninCare';
+        $keywords[] = 'منتجات أصلية';
+        $keywords[] = 'شحن فلسطين';
+        $keywords[] = 'دفع عند الاستلام';
+
+        // Extract from description
+        if (!empty($desc)) {
+            $descWords = array_filter(explode(' ', $desc), fn($w) => mb_strlen($w) > 3 && mb_strlen($w) < 20);
+            $keywords = array_merge($keywords, array_slice(array_values($descWords), 0, 5));
+        }
+
+        return array_slice(array_unique($keywords), 0, 20);
+    }
+
     private function calculateSeoScore($product)
     {
         $score = 0;

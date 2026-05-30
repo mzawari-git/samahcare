@@ -21,10 +21,16 @@
         <h1 class="h4 mb-1"><i class="fas fa-search" style="color:var(--pink-600);margin-left:8px;"></i>SEO متقدم</h1>
         <p class="text-muted small mb-0">تحليل وتحسين محركات البحث لجميع المنتجات</p>
     </div>
-    <form action="{{ route('admin.seo.auto-all') }}" method="POST" onsubmit="return confirm('توليد SEO تلقائياً لجميع المنتجات الناقصة؟')">
-        @csrf
-        <button class="btn btn-outline-pink"><i class="fas fa-magic"></i> توليد SEO التلقائي للكل</button>
-    </form>
+    <div class="d-flex gap-2">
+        <form action="{{ route('admin.seo.auto-all') }}" method="POST" onsubmit="return confirm('توليد SEO تلقائياً لجميع المنتجات الناقصة؟')">
+            @csrf
+            <button class="btn btn-outline-pink"><i class="fas fa-magic"></i> توليد SEO التلقائي</button>
+        </form>
+        <form action="{{ route('admin.seo.ai-all') }}" method="POST" onsubmit="return confirm('توليد SEO ذكي (AI) للمنتجات الناقصة؟ سيتم معالجة 100 منتج في كل مرة.')">
+            @csrf
+            <button class="btn btn-pink"><i class="fas fa-robot"></i> توليد SEO ذكي AI</button>
+        </form>
+    </div>
 </div>
 
 {{-- Stats --}}

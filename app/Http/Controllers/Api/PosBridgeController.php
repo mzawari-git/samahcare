@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\PosSale;
 use App\Services\OfflineConversionService;
+use App\Services\InventorySyncService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -12,6 +13,7 @@ class PosBridgeController extends Controller
 {
     public function __construct(
         private OfflineConversionService $offlineConversion,
+        private InventorySyncService $inventorySync,
     ) {}
 
     public function store(Request $request)
@@ -29,6 +31,8 @@ class PosBridgeController extends Controller
             'items.*.name' => 'required_with:items|string',
             'items.*.price' => 'required_with:items|numeric',
             'items.*.quantity' => 'required_with:items|integer|min:1',
+            'items.*.barcode' => 'nullable|string',
+            'items.*.sku' => 'nullable|string',
             'payment_method' => 'nullable|string|max:50',
             'sale_at' => 'nullable|date',
         ]);
@@ -54,6 +58,23 @@ class PosBridgeController extends Controller
             'sale_at' => $data['sale_at'] ?? now(),
         ]);
 
+        // مزامنة المخزون لحظياً مع المتجر الإلكتروني
+        $syncResults = null;
+        if (config('erp.pos_bridge.auto_update_inventory', true) && !empty($data['items'])) {
+            try {
+                $syncResults = $this->inventorySync->syncFromPosSale($sale);
+                Log::info('POS inventory sync completed', [
+                    'pos_sale_id' => $sale->pos_sale_id,
+                    'results' => $syncResults,
+                ]);
+            } catch (\Exception $e) {
+                Log::error('POS inventory sync failed but sale was recorded', [
+                    'pos_sale_id' => $sale->pos_sale_id,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
         $uuid = $this->offlineConversion->matchCustomer($sale);
 
         if ($request->input('send_offline', true)) {
@@ -69,15 +90,22 @@ class PosBridgeController extends Controller
             'pos_sale_id' => $sale->pos_sale_id,
             'matched' => $uuid !== null,
             'total' => $sale->order_total,
+            'inventory_sync' => $syncResults,
         ]);
+
+        $responseData = [
+            'id' => $sale->id,
+            'pos_sale_id' => $sale->pos_sale_id,
+            'matched_to_online' => $uuid !== null,
+        ];
+
+        if ($syncResults) {
+            $responseData['inventory_sync'] = $syncResults;
+        }
 
         return response()->json([
             'success' => true,
-            'data' => [
-                'id' => $sale->id,
-                'pos_sale_id' => $sale->pos_sale_id,
-                'matched_to_online' => $uuid !== null,
-            ],
+            'data' => $responseData,
         ], 201);
     }
 

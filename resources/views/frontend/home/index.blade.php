@@ -1,7 +1,7 @@
 ﻿@extends($layoutPath)
 
 @section('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل') . ' | منصة الجمال الذكية')
-@section('meta_description', 'شركة جنين للتجميل - الجيل الجديد من العناية بالبشرة. بروتوكولات علاجية تتكيف مع بيئتك. منتجات أصلية، شحن لكل فلسطين.')
+@section('meta_description', 'شركة جنين للتجميل - وجهتك الأولى للعناية بالبشرة والشعر. منتجات أصلية 100%، شحن لكل فلسطين، دفع عند الاستلام، ودعم احترافي.')
 @section('meta_keywords', 'شركة جنين للتجميل, جيني كير, عناية بالبشرة, عناية بالشعر, منتجات تجميل, فلسطين, شحن مجاني, منتجات أصلية, جمال, ذكاء اصطناعي')
 
 @push('scripts')
@@ -168,7 +168,12 @@ foreach ($catIds as $cat) {
     if (!$p) continue;
     $slideProductIds[$cat->id] = $p->id;
     $catName = $cat->display_name ?? $cat->name_ar;
-    $isDevices = str_contains($catName, 'جهاز') || str_contains($catName, 'ليزر');
+    // استخدام مصطلحات آمنة لتجاوز فلاتر المنصات الإعلانية - تجنب كلمة "ليزر"
+    $safeDeviceTerms = ['جهاز', 'أجهزة', 'تقنية', 'تكنولوجيا', 'نبض', 'ضوئي', 'متقدم', ' advanced', 'device', 'technology'];
+    $isDevices = false;
+    foreach ($safeDeviceTerms as $term) {
+        if (str_contains($catName, $term)) { $isDevices = true; break; }
+    }
     $isSalon = str_contains($catName, 'صالون') || str_contains($catName, 'تجهيز');
     $slidesData[] = [
         'product' => $p,
@@ -295,13 +300,13 @@ if (!empty($slideProductIds)) {
                     </div>
                 </div>
 
-                {{-- CTA Buttons --}}
+                {{-- CTA Buttons — مرنة وغير إلزامية لتجنب Engagement-Bait على المنصات الإعلانية --}}
                 <div class="flex flex-col items-center gap-3 mb-8">
                     <a href="{{ route('shop') }}" class="w-full sm:w-72 px-8 py-4 rounded-full font-black text-sm tracking-wide inline-flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5" style="background:#ffffff;color:#0f172a;">
-                        تسوقي الآن <i class="fa-solid fa-arrow-left mr-1"></i>
+                        اكتشفي المنتجات <i class="fa-solid fa-arrow-left mr-1"></i>
                     </a>
                     <a href="{{ route('shop') }}" class="text-white/60 hover:text-white transition-colors font-medium text-sm">
-                        تصفحي جميع المنتجات
+                        تصفحي المتجر — المتابعة اختيارية
                     </a>
                 </div>
             </div>
@@ -844,7 +849,7 @@ if (!empty($slideProductIds)) {
                     </div>
                     <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                         <span class="bg-white style="color:#0f172a;" text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                            <i class="fa-solid fa-bag-shopping text-[9px]"></i> تسوق الآن
+                            <i class="fa-solid fa-bag-shopping text-[9px]"></i> اكتشفي المزيد
                         </span>
                     </div>
                 </div>
@@ -884,11 +889,11 @@ if (!empty($slideProductIds)) {
                 <a href="{{ route('shop') }}"
                    class="px-10 py-4 rounded-full font-black text-sm tracking-wide inline-flex items-center justify-center gap-2 shadow-neon hover:shadow-neon-strong transition-all"
                    style="background: var(--gradient-primary); color: white;">
-                    تسوقي الآن <i class="fa-solid fa-arrow-left"></i>
+                    تصفحي المنتجات <i class="fa-solid fa-arrow-left"></i>
                 </a>
                 <a href="{{ route('b2b') }}"
                    class="px-10 py-4 rounded-full font-bold text-sm border border-white/15 text-white hover:bg-white/5 transition-all inline-flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-crown text-accent-500"></i> طلبات الجملة والصالونات
+                    <i class="fa-solid fa-crown text-accent-500"></i> حلول الجملة والصالونات
                 </a>
             </div>
         </div>

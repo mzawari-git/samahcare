@@ -449,6 +449,9 @@
                     <a href="{{ route('admin.coupons.index') }}" class="nav-item {{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
                         <i class="fas fa-ticket-alt"></i> <span>كوبونات الخصم</span>
                     </a>
+                    <a href="{{ route('admin.barcodes.index') }}" class="nav-item {{ request()->routeIs('admin.barcodes.*') ? 'active' : '' }}">
+                        <i class="fas fa-barcode"></i> <span>الباركود والطباعة</span>
+                    </a>
                 </div>
             </nav>
 
