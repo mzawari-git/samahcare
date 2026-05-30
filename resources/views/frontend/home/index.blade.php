@@ -233,7 +233,7 @@ if (!empty($slideProductIds)) {
                      PREMIUM HERO CARD — Animated gradient + floating elements
                      ═══════════════════════════════════════════ --}}
                 <div id="heroCard" class="relative mb-6 select-none">
-                    <div class="relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-10" style="background:linear-gradient(145deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.02) 40%,rgba(var(--brand-500-rgb,255,42,133),0.08) 100%);border:1.5px solid rgba(255,255,255,0.15);backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.1),0 0 120px rgba(var(--brand-500-rgb,255,42,133),0.1);">
+                    <div class="relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-10" style="background:linear-gradient(145deg,rgba(60,20,60,0.55) 0%,rgba(40,15,45,0.45) 40%,rgba(var(--brand-500-rgb,255,42,133),0.18) 100%);border:1.5px solid rgba(236,72,153,0.25);backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.08),0 0 120px rgba(var(--brand-500-rgb,255,42,133),0.15);">
 
                         {{-- Ambient glow orbs --}}
                         <div class="absolute -top-28 -right-28 w-56 h-56 rounded-full opacity-20 pointer-events-none" style="background:radial-gradient(circle,var(--brand-500),transparent 70%);filter:blur(60px);animation:glowPulse 5s ease-in-out infinite;"></div>
