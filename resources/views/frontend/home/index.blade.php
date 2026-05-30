@@ -403,11 +403,12 @@ if (!empty($slideProductIds)) {
 </a>
 @endif
 
-{{-- Hide floating social sidebar & theme switcher on homepage --}}
+{{-- Hide theme switcher on mobile; keep floating social visible --}}
 @push('styles')
 <style>
     @media (max-width:1024px) {
-        .floating-social-v3, #themeSwitcher { display: none !important; }
+        #themeSwitcher { display: none !important; }
+        .floating-social-v3 { opacity: 0.7; }
     }
     @media (min-width:1025px) {
         .floating-social-v3 { opacity: 0.4; transition: opacity 0.3s; }
