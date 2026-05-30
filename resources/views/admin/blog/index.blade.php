@@ -65,15 +65,19 @@
 .flex-gap { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 
 .featured-star { color: #f59e0b; font-size: .75rem; }
+
+.tab-btn { padding: .4rem .85rem; border-radius: 8px; border: 1px solid var(--gray-200); background: #fff; color: var(--gray-600); font-size: .8rem; font-weight: 600; cursor: pointer; transition: all .15s; }
+.tab-btn:hover { border-color: var(--pink-300); color: var(--pink-600); }
+.tab-btn.active { background: var(--pink-600); color: #fff; border-color: var(--pink-600); }
 </style>
 @endpush
 
 @section('content')
 @php
     $total = $posts->total();
-    $published = $posts->filter(fn($p) => $p->is_published)->count();
+    $published = $posts->filter(fn($p) => $p->is_published && !$p->trashed())->count();
     $featured = $posts->filter(fn($p) => $p->is_featured)->count();
-    $hidden = $total - $published;
+    $hidden = $posts->filter(fn($p) => !$p->is_published && !$p->trashed())->count();
 @endphp
 
 {{-- Stats --}}
@@ -93,6 +97,11 @@
         <div class="stat-num">{{ $hidden }}</div>
         <div class="stat-lbl">مخفي</div>
     </div>
+    <div class="stat-box" style="cursor:pointer;" onclick="setTab('trash')">
+        <div class="stat-icon" style="color:#78716c;"><i class="fas fa-trash-alt"></i></div>
+        <div class="stat-num">{{ $trashedCount }}</div>
+        <div class="stat-lbl">سلة المحذوفات</div>
+    </div>
     <div class="stat-box">
         <div class="stat-icon" style="color:#f59e0b;"><i class="fas fa-star"></i></div>
         <div class="stat-num">{{ $featured }}</div>
@@ -106,9 +115,9 @@
     <div class="header-actions">
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="blogSearch" placeholder="بحث في المقالات..." oninput="filterBlogPosts(this.value)">
+            <input type="text" id="blogSearch" placeholder="بحث في المقالات..." oninput="filterPosts()">
         </div>
-        <select class="filter-select" id="blogFilter" onchange="filterBlogPosts(document.getElementById('blogSearch').value)">
+        <select class="filter-select" id="blogCategoryFilter" onchange="filterPosts()">
             <option value="">جميع الأقسام</option>
             <option value="articles">مقالات عن المنتجات</option>
             <option value="tips">نصائح للعناية</option>
@@ -118,6 +127,26 @@
         <a href="{{ route('admin.blog.create') }}" class="btn btn-pink btn-sm rounded-pill px-3" style="padding:.5rem 1rem;">
             <i class="fas fa-plus"></i> مقال جديد
         </a>
+    </div>
+</div>
+
+{{-- Tabs --}}
+<div style="display:flex;align-items:center;gap:4px;margin-bottom:1rem;flex-wrap:wrap;">
+    <button class="tab-btn active" data-tab="all" onclick="setTab('all')">الكل</button>
+    <button class="tab-btn" data-tab="published" onclick="setTab('published')">منشور</button>
+    <button class="tab-btn" data-tab="hidden" onclick="setTab('hidden')">مخفي</button>
+    <button class="tab-btn" data-tab="trash" onclick="setTab('trash')">
+        سلة المحذوفات @if($trashedCount > 0)<span class="badge bg-danger rounded-pill" style="font-size:.55rem;">{{ $trashedCount }}</span>@endif
+    </button>
+    <div style="margin-right:auto;">
+        @if($trashedCount > 0)
+        <form action="{{ route('admin.blog.empty-trash') }}" method="POST" class="d-inline" onsubmit="return confirm('سيتم حذف {{ $trashedCount }} مقال نهائياً. متأكد؟')">
+            @csrf @method('DELETE')
+            <button class="btn btn-sm" style="border:1px solid var(--gray-200);border-radius:8px;color:var(--gray-500);padding:.3rem .6rem;font-size:.75rem;">
+                <i class="fas fa-trash-alt"></i> إفراغ السلة
+            </button>
+        </form>
+        @endif
     </div>
 </div>
 
@@ -202,7 +231,7 @@
                 </td>
             </tr>
             @empty
-            <tr>
+            <tr class="empty-row">
                 <td colspan="5" class="text-center py-5">
                     <div style="font-size:2.5rem;color:var(--gray-200);margin-bottom:.5rem;"><i class="fas fa-newspaper"></i></div>
                     <div style="color:var(--gray-500);font-weight:600;">لا توجد مقالات بعد</div>
@@ -227,16 +256,34 @@
 
 @push('scripts')
 <script>
-function filterBlogPosts(query) {
-    const filter = document.getElementById('blogFilter').value;
+let currentTab = 'all';
+
+function filterPosts() {
+    const query = document.getElementById('blogSearch').value.toLowerCase();
+    const category = document.getElementById('blogCategoryFilter').value;
     const rows = document.querySelectorAll('#blogTableBody tr');
     rows.forEach(row => {
+        if (row.classList.contains('empty-row')) return;
         const text = row.textContent.toLowerCase();
         const cat = row.dataset.category || '';
-        const matchSearch = !query || text.includes(query.toLowerCase());
-        const matchFilter = !filter || cat === filter;
-        row.style.display = matchSearch && matchFilter ? '' : 'none';
+        const isTrashed = row.classList.contains('deleted');
+        const isPublished = !isTrashed && row.querySelector('.status-badge')?.innerHTML.includes('منشور');
+        const matchSearch = !query || text.includes(query);
+        const matchCategory = !category || cat === category;
+        let matchTab = true;
+        if (currentTab === 'published') matchTab = !!isPublished;
+        else if (currentTab === 'hidden') matchTab = !isTrashed && !isPublished;
+        else if (currentTab === 'trash') matchTab = isTrashed;
+        row.style.display = matchSearch && matchCategory && matchTab ? '' : 'none';
     });
+}
+
+function setTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tab);
+    });
+    filterPosts();
 }
 </script>
 @endpush

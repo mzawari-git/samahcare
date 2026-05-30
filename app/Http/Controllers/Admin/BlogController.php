@@ -13,7 +13,8 @@ class BlogController extends Controller
     public function index()
     {
         $posts = BlogPost::withTrashed()->latest()->paginate(20);
-        return view('admin.blog.index', compact('posts'));
+        $trashedCount = BlogPost::onlyTrashed()->count();
+        return view('admin.blog.index', compact('posts', 'trashedCount'));
     }
 
     public function create()
@@ -102,6 +103,12 @@ class BlogController extends Controller
     {
         $blog->update(['is_published' => !$blog->is_published]);
         return back()->with('success', 'تم تحديث حالة النشر.');
+    }
+
+    public function emptyTrash()
+    {
+        BlogPost::onlyTrashed()->forceDelete();
+        return back()->with('success', 'تم إفراغ سلة المحذوفات.');
     }
 
     public function uploadInlineImage(Request $request)
