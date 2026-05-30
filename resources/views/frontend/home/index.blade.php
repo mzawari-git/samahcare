@@ -339,38 +339,43 @@ if (!empty($slideProductIds)) {
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION: Categories — Image first, text below
+     SECTION: Categories — BringUs Style (Circular image, white card, pink border)
      ═══════════════════════════════════════════════════════════════ --}}
 @if($categories->isNotEmpty())
-<section class="categories-section py-12 bg-surface relative z-20">
+<section class="categories-section py-12 relative z-20" style="background:#fafafa;">
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-10">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-4">
-                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">أقسام المتجر</span>
-            </div>
-            <h2 class="text-2xl md:text-4xl font-black mb-2">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
-            <p class="text-ink-dim max-w-2xl mx-auto text-sm md:text-base">اكتشفي منتجات أصلية من أفضل الماركات العالمية في جميع أقسام التجميل والعناية</p>
+            <h2 class="text-2xl md:text-3xl font-black mb-2" style="color:#1a1a1a;">تسوقي حسب <span style="color:#ec4899;">القسم</span></h2>
+            <p class="max-w-2xl mx-auto text-sm md:text-base" style="color:#888;">اكتشفي منتجات أصلية من أفضل الماركات العالمية في جميع أقسام التجميل والعناية</p>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
             @foreach($categories as $cat)
+            @php
+                $arName = $cat->display_name ?? $cat->name_ar;
+                $enName = $cat->name_en ?? '';
+            @endphp
             <a href="{{ route('shop', ['category' => $cat->slug]) }}"
-               class="group flex flex-col items-center text-center glass-panel rounded-2xl p-4 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg hover:border-brand-500/30">
-                {{-- Image first --}}
-                <div class="w-24 h-24 rounded-2xl overflow-hidden bg-surface-alt flex-shrink-0 mb-3">
-                    @if($cat->sample_image)
-                    <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
-                         class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy">
+               class="group flex flex-col items-center text-center rounded-2xl p-3 md:p-4 transition-all duration-300 hover:shadow-md"
+               style="background:#fff;border:1.5px solid #E8D5E0;">
+                {{-- Circular image --}}
+                <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden flex-shrink-0 mb-3" style="border:2px solid #f3e8f3;background:#fdf2f8;">
+                    @if($cat->image)
+                    <img src="{{ $cat->image }}" alt="{{ $arName }}"
+                         class="w-full h-full object-cover" loading="lazy">
                     @else
-                    <div class="w-full h-full flex items-center justify-center">
-                        <i class="fa-solid fa-tag text-xl text-ink-dim/20"></i>
+                    <div class="w-full h-full flex items-center justify-center" style="background:#fce7f3;">
+                        <i class="fa-solid fa-tag text-lg" style="color:#ec4899;"></i>
                     </div>
                     @endif
                 </div>
-                {{-- Text below --}}
-                <h3 class="font-black text-sm mb-1 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-bold">
-                    {{ $cat->products_count }} منتج
-                </span>
+                {{-- Arabic name --}}
+                <h3 class="font-bold text-xs md:text-sm mb-0.5 leading-tight" style="color:#1a1a1a;">
+                    @if($emoji)<span class="ml-1">{{ $emoji }}</span>@endif{{ $arName }}
+                </h3>
+                {{-- English name --}}
+                @if($enName)
+                <span class="text-[10px] md:text-[11px]" style="color:#999;">{{ $enName }}</span>
+                @endif
             </a>
             @endforeach
         </div>
