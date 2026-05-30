@@ -3,8 +3,14 @@
 <header class="fixed top-0 w-full z-50 border-b-2" id="mainHeaderV3" style="background: var(--header-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-color: var(--glass-border); border-radius: 0 0 2rem 2rem; transition: background 0.3s, border-radius 0.3s;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 md:h-16 flex items-center justify-between">
         <div class="flex items-center gap-8 flex-1">
-            <a href="{{ route('home') }}" class="flex items-center gap-2 text-xl font-black tracking-tight flex-shrink-0" style="color: var(--ink);">
-                @if(!empty($siteSettings['site_logo_url']))<img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name']??'شركة جنين للتجميل' }}" class="h-7 md:h-9 w-auto object-contain">@else{{ $siteSettings['site_name_ar']??$siteSettings['site_name']??'شركة جنين للتجميل' }}<span class="text-brand-500">.</span>@endif
+            <a href="{{ route('home') }}" class="flex items-center gap-2 flex-shrink-0 group" style="color: var(--ink);">
+                @if(!empty($siteSettings['site_logo_url']))
+                <div class="relative flex items-center justify-center rounded-xl p-1.5 transition-all duration-300 group-hover:scale-105" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);box-shadow:0 2px 12px rgba(0,0,0,0.15);">
+                    <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name']??'شركة جنين للتجميل' }}" class="h-6 md:h-8 w-auto object-contain drop-shadow-md">
+                </div>
+                @else
+                <span class="text-lg md:text-xl font-black tracking-tight">{{ $siteSettings['site_name_ar']??$siteSettings['site_name']??'شركة جنين للتجميل' }}<span class="text-brand-500">.</span></span>
+                @endif
             </a>
             <nav class="hidden lg:flex items-center gap-6 text-sm font-bold">
                 <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home')?'active':'' }}">الرئيسية</a>
