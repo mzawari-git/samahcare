@@ -25,7 +25,7 @@
             <button onclick="toggleSearchV3()" class="icon-btn" aria-label="بحث"><i class="ph ph-magnifying-glass text-lg"></i></button>
             <a href="{{ route('cart') }}" class="icon-btn relative" aria-label="السلة"><i class="ph ph-shopping-bag text-lg"></i><span class="absolute -top-0.5 -right-0.5 bg-brand-500 text-white text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center" id="cart-count-v3">{{ $cartCount??0 }}</span></a>
             @auth<a href="{{ route('account') }}" class="hidden sm:flex items-center gap-1.5 text-sm font-medium nav-link"><i class="ph ph-user-circle"></i> حسابي</a>@else<a href="{{ route('login') }}" class="hidden sm:inline-flex btn-ghost text-sm">دخول</a>@endauth
-            <a href="{{ route('shop') }}" class="btn-primary text-sm hidden md:inline-flex"><i class="ph ph-storefront"></i> تسوق الآن</a>
+            <a href="{{ route('shop') }}" class="btn-primary text-sm inline-flex"><i class="ph ph-storefront"></i> <span class="hidden sm:inline">تسوق الآن</span></a>
             <button onclick="toggleMobileMenuV3()" class="lg:hidden icon-btn"><i class="ph ph-list text-xl" id="mobileMenuIconV3"></i></button>
         </div>
     </div>
