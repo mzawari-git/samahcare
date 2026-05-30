@@ -194,8 +194,13 @@ class AppServiceProvider extends ServiceProvider
             $settings = SettingsHelper::getAll();
             $s = array_merge($defaultSettings, $settings);
 
-            // ── Force rose theme for consistency across all environments ──
-            $activeTheme = 'rose';
+            // ── Read user theme preferences from cookies (persist across logout) ──
+            $knownThemes = ['rose','midnight','natural','forest','minimal','ocean','sunset','luxury'];
+            $activeTheme = $_COOKIE['شركة جنين للتجميل_color'] ?? $s['site_theme'] ?? 'rose';
+            if (!in_array($activeTheme, $knownThemes)) {
+                $activeTheme = 'rose';
+            }
+
             // Default: derive architecture from the active theme color
             $layoutArchitecture = match($activeTheme) {
                 'rose', 'midnight' => 'cyber-lab',
@@ -212,10 +217,12 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
+            $isLightTheme = ($_COOKIE['شركة جنين للتجميل_mode'] ?? '') === 'light';
+
             $view->with('layoutArchitecture', $layoutArchitecture);
             $view->with('layoutPath', 'frontend.layouts.' . $layoutArchitecture . '.app');
             $view->with('activeTheme', $activeTheme);
-            $view->with('isLightTheme', in_array($activeTheme, ['minimal']));
+            $view->with('isLightTheme', $isLightTheme);
 
             $view->with('siteSettings', [
                 'site_name' => $s['site_name'] ?? $s['site_name_ar'] ?? config('app.name'),

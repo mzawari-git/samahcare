@@ -55,9 +55,8 @@
     <meta http-equiv="Expires" content="0">
 
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}?v=4">
-    @if($isLightTheme)
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}?v=4">
-    @endif
+    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='light')document.documentElement.setAttribute('data-theme-mode','light');})();</script>
 
     @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
 

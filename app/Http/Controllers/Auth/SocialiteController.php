@@ -18,6 +18,16 @@ class SocialiteController extends Controller
         return rtrim($base, '/') . '/auth/' . $provider . '/callback';
     }
 
+    private function loginUser(User $user, Request $request): void
+    {
+        Auth::login($user);
+        $request->session()->regenerate();
+        $user->update([
+            'last_login_at' => now(),
+            'last_login_ip' => $request->ip(),
+        ]);
+    }
+
     public function redirect(Request $request, string $provider)
     {
         if (!in_array($provider, ['google', 'facebook'])) {
@@ -45,31 +55,47 @@ class SocialiteController extends Controller
             return redirect()->route('login')->with('error', 'فشل تسجيل الدخول عبر ' . $provider . '. يرجى المحاولة مرة أخرى.');
         }
 
+        // 1. Existing social account → login directly
         $existingAccount = SocialAccount::where('provider', $provider)
             ->where('provider_id', $socialUser->getId())
             ->first();
 
         if ($existingAccount) {
-            Auth::login($existingAccount->user);
+            $user = $existingAccount->user;
+            if (!$user->is_active) {
+                return redirect()->route('login')->with('error', 'تم تعطيل حسابك. يرجى التواصل مع الإدارة.');
+            }
+            $this->loginUser($user, $request);
             return redirect()->intended(route('home'));
         }
 
+        // 2. Existing user with same email → link social account & login
         $existingUser = User::where('email', $socialUser->getEmail())->first();
 
         if ($existingUser) {
+            if (!$existingUser->is_active) {
+                return redirect()->route('login')->with('error', 'تم تعطيل حسابك. يرجى التواصل مع الإدارة.');
+            }
+
             $existingUser->socialAccounts()->create([
                 'provider' => $provider,
                 'provider_id' => $socialUser->getId(),
                 'avatar' => $socialUser->getAvatar(),
             ]);
 
-            Auth::login($existingUser);
+            $this->loginUser($existingUser, $request);
             return redirect()->intended(route('home'));
+        }
+
+        // 3. New user → create account & login
+        $email = $socialUser->getEmail();
+        if (empty($email)) {
+            return redirect()->route('login')->with('error', 'لم نتمكن من الحصول على بريدك الإلكتروني. يرجى المحاولة بطريقة أخرى.');
         }
 
         $user = User::create([
             'name' => $socialUser->getName() ?? $socialUser->getNickname() ?? $provider . '_user',
-            'email' => $socialUser->getEmail() ?? 'user_' . Str::random(8) . '@' . $provider . '.com',
+            'email' => $email,
             'password' => bcrypt(Str::random(32)),
             'role' => 'customer',
             'tenant_id' => 1,
@@ -82,7 +108,7 @@ class SocialiteController extends Controller
             'avatar' => $socialUser->getAvatar(),
         ]);
 
-        Auth::login($user);
+        $this->loginUser($user, $request);
         return redirect()->intended(route('home'));
     }
 }

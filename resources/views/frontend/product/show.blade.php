@@ -36,7 +36,7 @@
         <div>
             <div class="rounded-3xl overflow-hidden relative border border-white/5 glass-panel group">
                 @if($product->main_image)
-                <img src="{{ $product->optimizedImageUrl(800, 800) }}" alt="{{ $product->name_ar }}" width="800" height="800" class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105 filter brightness-90" id="mainProductImage" onerror="this.outerHTML='<div class=&quot;w-full aspect-square flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-6xl text-white/10&quot;></i></div>'">
+                <img src="{{ $product->optimizedImageUrl(800, 800) }}" alt="{{ $product->name_ar }}" width="800" height="800" class="w-full aspect-square object-contain transition-transform duration-500 group-hover:scale-105 filter brightness-90" id="mainProductImage" onerror="this.outerHTML='<div class=&quot;w-full aspect-square flex items-center justify-center bg-surface-alt&quot;><i class=&quot;ph ph-image text-6xl text-white/10&quot;></i></div>'">
                 @else
                 <div class="w-full aspect-square flex items-center justify-center bg-surface-alt"><i class="ph ph-image text-6xl text-white/10"></i></div>
                 @endif
@@ -53,11 +53,11 @@
             @if($product->gallery_images && count($product->gallery_images) > 0)
             <div class="flex gap-3 mt-4 overflow-x-auto pb-2 hide-scroll">
                 <button onclick="swapImage(this, '{{ $product->optimizedImageUrl(800, 800) }}')" class="gallery-thumb w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-brand-500 shadow-neon">
-                    <img src="{{ $product->optimizedImageUrl(100, 100) }}" width="100" height="100" class="w-full h-full object-cover">
+                    <img src="{{ $product->optimizedImageUrl(100, 100) }}" width="100" height="100" class="w-full h-full object-contain">
                 </button>
                 @foreach($product->gallery_images as $image)
                 <button onclick="swapImage(this, '{{ route('image.optimized', ['path' => $image]) }}?w=800&h=800&webp=1&q=85')" class="gallery-thumb w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-transparent hover:border-brand-500/50 transition-all">
-                    <img src="{{ route('image.optimized', ['path' => $image]) }}?w=100&h=100&webp=1&q=80" width="100" height="100" class="w-full h-full object-cover">
+                    <img src="{{ route('image.optimized', ['path' => $image]) }}?w=100&h=100&webp=1&q=80" width="100" height="100" class="w-full h-full object-contain">
                 </button>
                 @endforeach
             </div>

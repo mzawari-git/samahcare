@@ -128,10 +128,13 @@
                     <span class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-user-circle text-base" style="color:var(--ink-dim);"></i></span>
                     <span>حسابي</span>
                 </a>
-                <a href="{{ route('logout') }}" class="mobile-link">
-                    <span class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-sign-out text-base" style="color:var(--ink-dim);"></i></span>
-                    <span>تسجيل خروج</span>
-                </a>
+                <form method="POST" action="{{ route('logout') }}" style="display:contents;">
+                    @csrf
+                    <button type="submit" class="mobile-link" style="width:100%;background:none;border:none;cursor:pointer;text-align:right;">
+                        <span class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-sign-out text-base" style="color:var(--ink-dim);"></i></span>
+                        <span>تسجيل خروج</span>
+                    </button>
+                </form>
                 @else
                 <a href="{{ route('login') }}" class="mobile-link">
                     <span class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--surface-alt);"><i class="ph ph-sign-in text-base" style="color:var(--ink-dim);"></i></span>

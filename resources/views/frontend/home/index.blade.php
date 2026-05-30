@@ -320,7 +320,7 @@ if (!empty($slideProductIds)) {
                         <a href="{{ route('product.show', $main->slug) }}" class="block relative rounded-2xl overflow-hidden bg-surface-alt group" style="height:280px;">
                             @if($main->main_image_url)
                             <img src="{{ $main->optimizedImageUrl(800) }}" alt="{{ $main->name_ar }}" width="800" height="380"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="{{ $index === 0 ? 'eager' : 'lazy' }}"{{ $index === 0 ? ' fetchpriority="high"' : '' }}>
+                                 class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700" loading="{{ $index === 0 ? 'eager' : 'lazy' }}"{{ $index === 0 ? ' fetchpriority="high"' : '' }}>
                             @else
                             <div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-flask text-5xl text-ink-dim/15"></i></div>
 @endif
@@ -336,7 +336,7 @@ if (!empty($slideProductIds)) {
                             @foreach($subProducts as $sub)
                             <a href="{{ route('product.show', $sub->slug) }}" class="glass-panel rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
                                 <div class="h-16 bg-surface-alt">
-                                    @if($sub->main_image_url)<img src="{{ $sub->optimizedImageUrl(200, 200) }}" alt="" width="200" height="200" class="w-full h-full object-cover" loading="lazy">@endif
+                                    @if($sub->main_image_url)<img src="{{ $sub->optimizedImageUrl(200, 200) }}" alt="" width="200" height="200" class="w-full h-full object-contain" loading="lazy">@endif
                                 </div>
                                 <div class="p-2 text-center">
                                     <p class="text-[11px] font-bold text-ink truncate">{{ $sub->name_ar }}</p>
@@ -836,7 +836,7 @@ if (!empty($slideProductIds)) {
                 <div class="relative h-[260px] overflow-hidden">
                     @if($product->main_image_url)
                     <img src="{{ $product->optimizedImageUrl(400, 400) }}" alt="{{ $product->name_ar }}" width="400" height="400"
-                         class="w-full h-full object-cover filter brightness-75 group-hover:brightness-100 group-hover:scale-110 transition-all duration-700"
+                         class="w-full h-full object-contain filter brightness-75 group-hover:brightness-100 group-hover:scale-110 transition-all duration-700"
                          loading="lazy">
                     @else
                     <div class="w-full h-full flex items-center justify-center bg-surface-alt">
