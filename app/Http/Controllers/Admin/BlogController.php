@@ -50,13 +50,16 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index')->with('success', 'تم إنشاء المقال بنجاح.');
     }
 
-    public function edit(BlogPost $blog)
+    public function edit($id)
     {
-        return view('admin.blog.edit', ['post' => $blog]);
+        $post = BlogPost::withTrashed()->findOrFail($id);
+        return view('admin.blog.edit', ['post' => $post]);
     }
 
-    public function update(Request $request, BlogPost $blog)
+    public function update(Request $request, $id)
     {
+        $blog = BlogPost::withTrashed()->findOrFail($id);
+
         $data = $request->validate([
             'title_ar' => 'required|string|max:255',
             'category' => 'required|in:articles,tips,news,guides',
@@ -87,8 +90,9 @@ class BlogController extends Controller
         return redirect()->route('admin.blog.index')->with('success', 'تم تحديث المقال بنجاح.');
     }
 
-    public function destroy(BlogPost $blog)
+    public function destroy($id)
     {
+        $blog = BlogPost::withTrashed()->findOrFail($id);
         $blog->delete();
         return back()->with('success', 'تم حذف المقال.');
     }
@@ -99,8 +103,9 @@ class BlogController extends Controller
         return back()->with('success', 'تم استعادة المقال.');
     }
 
-    public function toggle(BlogPost $blog)
+    public function toggle($id)
     {
+        $blog = BlogPost::withTrashed()->findOrFail($id);
         $blog->update(['is_published' => !$blog->is_published]);
         return back()->with('success', 'تم تحديث حالة النشر.');
     }
