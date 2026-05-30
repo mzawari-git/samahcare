@@ -215,7 +215,7 @@ if (!empty($slideProductIds)) {
         <div class="absolute inset-0 bg-gradient-to-b from-[#1a0533] via-[#2d0a5c]/95 to-[#0f172a]/90"></div>
     </div>
 
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-32 md:pt-28 pb-20 md:pb-28">
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 pt-20 md:pt-24 pb-20 md:pb-28">
         <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
 
             <div class="w-full lg:w-[45%] text-center">
@@ -223,7 +223,7 @@ if (!empty($slideProductIds)) {
                 {{-- Logo — clean, no border --}}
                 <div class="mb-5 flex justify-center">
                     @if(!empty($siteSettings['site_logo_url']))
-                    <img src="{{ $siteSettings['site_logo_url'] }}" alt="جنين للتجميل" class="h-8 sm:h-10 md:h-12 w-auto object-contain drop-shadow-lg">
+                    <img src="{{ $siteSettings['site_logo_url'] }}" alt="جنين للتجميل" class="h-14 sm:h-18 md:h-22 w-auto object-contain drop-shadow-lg">
                     @else
                     <span class="text-xl sm:text-2xl md:text-3xl tracking-wider text-white font-black" style="letter-spacing:0.12em;">جنين للتجميل</span>
                     @endif
