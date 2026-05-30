@@ -53,8 +53,11 @@
                 </h3>
                 <ul class="space-y-1">
                     <li>
-                        <a href="{{ route('shop') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-all duration-200 {{ !request('category') ? 'bg-brand-500 text-white font-bold shadow-neon' : 'text-white-dim hover:bg-white/5 hover:text-white' }}">
-                            <span>الكل</span>
+                        <a href="{{ route('shop') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 {{ !request('category') ? 'bg-brand-500 text-white font-bold shadow-neon' : 'text-white-dim hover:bg-white/5 hover:text-white' }}">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-white/10">
+                                <i class="ph ph-squares-four text-xs"></i>
+                            </div>
+                            <span class="flex-1">الكل</span>
                             <span class="text-[11px] {{ !request('category') ? 'bg-white/20' : 'bg-white/5' }} px-2 py-0.5 rounded-full">{{ $products->count() }}</span>
                         </a>
                     </li>
@@ -64,8 +67,15 @@
                         $arName = !empty($arName) ? $arName : $category->name_ar;
                     @endphp
                     <li>
-                        <a href="{{ route('shop', ['category' => $category->slug]) }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-all duration-200 {{ request('category') == $category->slug ? 'bg-brand-500 text-white font-bold shadow-neon' : 'text-white-dim hover:bg-white/5 hover:text-white' }}">
-                            <span>{{ $arName }}</span>
+                        <a href="{{ route('shop', ['category' => $category->slug]) }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 {{ request('category') == $category->slug ? 'bg-brand-500 text-white font-bold shadow-neon' : 'text-white-dim hover:bg-white/5 hover:text-white' }}">
+                            @if($category->sample_image)
+                            <img src="{{ $category->sample_image }}" alt="{{ $arName }}" class="w-8 h-8 rounded-lg object-contain flex-shrink-0 bg-white/10">
+                            @else
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-white/10">
+                                <i class="ph ph-tag text-xs"></i>
+                            </div>
+                            @endif
+                            <span class="flex-1">{{ $arName }}</span>
                             <span class="text-[11px] {{ request('category') == $category->slug ? 'bg-white/20' : 'bg-white/5' }} px-2 py-0.5 rounded-full">{{ $category->products_count ?? 0 }}</span>
                         </a>
                     </li>

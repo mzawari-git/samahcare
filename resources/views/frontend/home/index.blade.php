@@ -339,7 +339,7 @@ if (!empty($slideProductIds)) {
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION: Categories — All Categories (Name first, then Image)
+     SECTION: Categories — Image first, text below
      ═══════════════════════════════════════════════════════════════ --}}
 @if($categories->isNotEmpty())
 <section class="categories-section py-12 bg-surface relative z-20">
@@ -355,13 +355,8 @@ if (!empty($slideProductIds)) {
             @foreach($categories as $cat)
             <a href="{{ route('shop', ['category' => $cat->slug]) }}"
                class="group flex flex-col items-center text-center glass-panel rounded-2xl p-4 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg hover:border-brand-500/30">
-                {{-- Name first --}}
-                <h3 class="font-black text-sm mb-2 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-bold mb-3">
-                    {{ $cat->products_count }} منتج
-                </span>
-                {{-- Image second --}}
-                <div class="w-20 h-20 rounded-2xl overflow-hidden bg-surface-alt flex-shrink-0">
+                {{-- Image first --}}
+                <div class="w-24 h-24 rounded-2xl overflow-hidden bg-surface-alt flex-shrink-0 mb-3">
                     @if($cat->sample_image)
                     <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy">
@@ -371,6 +366,11 @@ if (!empty($slideProductIds)) {
                     </div>
                     @endif
                 </div>
+                {{-- Text below --}}
+                <h3 class="font-black text-sm mb-1 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-bold">
+                    {{ $cat->products_count }} منتج
+                </span>
             </a>
             @endforeach
         </div>
