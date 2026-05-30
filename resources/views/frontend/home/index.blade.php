@@ -207,46 +207,6 @@ if (!empty($slideProductIds)) {
 }
 @endphp
 
-{{-- ═══════════════════════════════════════════════════════════════
-     SECTION: Categories — All Categories (Name first, then Image)
-     ═══════════════════════════════════════════════════════════════ --}}
-@if($categories->isNotEmpty())
-<section class="categories-section py-12 bg-surface relative z-20">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-10">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-4">
-                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">أقسام المتجر</span>
-            </div>
-            <h2 class="text-2xl md:text-4xl font-black mb-2">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
-            <p class="text-ink-dim max-w-2xl mx-auto text-sm md:text-base">اكتشفي منتجات أصلية من أفضل الماركات العالمية في جميع أقسام التجميل والعناية</p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            @foreach($categories as $cat)
-            <a href="{{ route('shop', ['category' => $cat->slug]) }}"
-               class="group flex flex-col items-center text-center glass-panel rounded-2xl p-4 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg hover:border-brand-500/30">
-                {{-- Name first --}}
-                <h3 class="font-black text-sm mb-2 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-bold mb-3">
-                    {{ $cat->products_count }} منتج
-                </span>
-                {{-- Image second --}}
-                <div class="w-20 h-20 rounded-2xl overflow-hidden bg-surface-alt flex-shrink-0">
-                    @if($cat->sample_image)
-                    <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
-                         class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                    @else
-                    <div class="w-full h-full flex items-center justify-center">
-                        <i class="fa-solid fa-tag text-xl text-ink-dim/20"></i>
-                    </div>
-                    @endif
-                </div>
-            </a>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
@@ -370,22 +330,6 @@ if (!empty($slideProductIds)) {
                                 <span class="font-black text-2xl md:text-3xl" style="color:#ffffff;text-shadow:0 0 12px rgba(255,255,255,0.3),0 0 2px rgba(255,255,255,0.5);">{{ number_format($main->final_b2c_price ?? $main->b2c_price, 0) }} ₪</span>
                             </div>
                         </a>
-                        @php $subProducts = isset($cat) && isset($subProductsCache[$cat->id]) ? $subProductsCache[$cat->id] : collect(); @endphp
-                        @if($subProducts->isNotEmpty())
-                        <div class="grid grid-cols-2 gap-2 mt-2">
-                            @foreach($subProducts as $sub)
-                            <a href="{{ route('product.show', $sub->slug) }}" class="glass-panel rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
-                                <div class="h-16 bg-surface-alt">
-                                    @if($sub->main_image_url)<img src="{{ $sub->optimizedImageUrl(200, 200) }}" alt="" width="200" height="200" class="w-full h-full object-contain" loading="lazy">@endif
-                                </div>
-                                <div class="p-2 text-center">
-                                    <p class="text-[11px] font-bold text-ink truncate">{{ $sub->name_ar }}</p>
-                                    <span class="text-brand-500 font-bold text-xs">{{ number_format($sub->final_b2c_price ?? $sub->b2c_price, 0) }} ₪</span>
-                                </div>
-                            </a>
-                            @endforeach
-                        </div>
-                        @endif
                     </div>
                     @endforeach
                 </div>
@@ -393,6 +337,46 @@ if (!empty($slideProductIds)) {
         </div>
     </div>
 </section>
+
+{{-- ═══════════════════════════════════════════════════════════════
+     SECTION: Categories — All Categories (Name first, then Image)
+     ═══════════════════════════════════════════════════════════════ --}}
+@if($categories->isNotEmpty())
+<section class="categories-section py-12 bg-surface relative z-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-4">
+                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">أقسام المتجر</span>
+            </div>
+            <h2 class="text-2xl md:text-4xl font-black mb-2">تسوقي حسب <span class="gradient-text bg-[length:200%_auto]">القسم</span></h2>
+            <p class="text-ink-dim max-w-2xl mx-auto text-sm md:text-base">اكتشفي منتجات أصلية من أفضل الماركات العالمية في جميع أقسام التجميل والعناية</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            @foreach($categories as $cat)
+            <a href="{{ route('shop', ['category' => $cat->slug]) }}"
+               class="group flex flex-col items-center text-center glass-panel rounded-2xl p-4 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg hover:border-brand-500/30">
+                {{-- Name first --}}
+                <h3 class="font-black text-sm mb-2 text-ink group-hover:text-brand-500 transition-colors duration-300 leading-tight">{{ $cat->display_name ?? $cat->name_ar }}</h3>
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-bold mb-3">
+                    {{ $cat->products_count }} منتج
+                </span>
+                {{-- Image second --}}
+                <div class="w-20 h-20 rounded-2xl overflow-hidden bg-surface-alt flex-shrink-0">
+                    @if($cat->sample_image)
+                    <img src="{{ $cat->sample_image }}" alt="{{ $cat->display_name ?? $cat->name_ar }}"
+                         class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    @else
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="fa-solid fa-tag text-xl text-ink-dim/20"></i>
+                    </div>
+                    @endif
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 
 {{-- WhatsApp FAB --}}
 @if(!empty($siteSettings['whatsapp_number']))
