@@ -23,158 +23,83 @@
 @section('content')
 
 @php
-$allPhrases = [
-    'لمسات ساحرة تبدأ باختيار الخدمة المثالية... اختاري الأفضل مع سماح كير.',
-    'جودة لا تُضاهى لجمال يدوم... خدمات صُممت لتبرز إشراقتكِ.',
-    'أحدث تقنيات التجميل بين يديكِ، لنتائج احترافية تبهركِ.',
-    'ارتقي بمستوى خدماتكِ مع أحدث تقنيات التجميل من سماح كير.',
-    'سماح كير: خيار المحترفين الأول.',
-    'كل ما يخص عالم الجمال والأناقة... تحت سقف واحد.',
-    'شريككِ الموثوق لرحلة نجاح وتألق مستمرة.',
-    'جودة نثق بها، وخدمة تلبي تطلعاتكم.',
-    'صالونكِ المتكامل... من الفكرة إلى الواقع مع خبراء سماح كير.',
-    'إشراقة وردية تلفت الأنظار.. بلمسات احترافية من سماح كير.',
-    'دعي جمالك يتألق بنعومة ورقي لا مثيل لهما.',
-    'رفاهية الجمال في كل تفصيل، لتكوني الأجمل دائماً.',
-    'تكنولوجيا متطورة ترسم مستقبل جمالك باحترافية عالية.',
-    'لأن التميز هدفك.. وضعنا بين يديك أحدث خدمات التجميل العالمية.',
-    'استثمري في جمالك.. خدمات مصممة لرواد عالم التجميل.',
-    'سماح كير.. بصمتك الخاصة في عالم الأناقة والاحتراف.',
-    'نجمع لك أسرار الجمال في مكان واحد.',
-    'جودة تتحدث عن نفسها.. وتفاصيل دقيقة تصنع الفارق.',
-    'واجهتك الأولى لكل ما يبرز الجمال.',
-    'اكتشفي عالم الجمال بأفضل الخدمات الاحترافية.',
-    'بشرتكِ تستحق الأفضل.. خدمات عناية بنتائج مضمونة.',
-    'تألقي بثقة مع خدمات اختارها خبراء الجمال بعناية فائقة.',
-    'كل لمسة تنبض بالحياة... جمالكِ يبدأ من اختياراتكِ الذكية.',
-    'حولي روتين العناية اليومي إلى لحظات سحرية من الاسترخاء.',
-    'نحنُ لسنا مجرد صالون.. نحنُ وجهتكِ الشاملة لعالم الجمال.',
-    'كل خدمة تروي قصة.. قصة جودة وأصالة وتميز.',
-    'بشرة نضرة، شعر صحي، إطلالة ساحرة... كل هذا وأكثر مع سماح كير.',
-    'احجزي الآن، وابدئي رحلتكِ نحو جمال لا يقاوم.',
-    'سماح كير... حيث تلتقي الأحلام بالحقيقة في عالم التجميل.',
-    'تألقي دائماً، مع خدمات اخترناها لكِ بكل حب ودقة.',
-    'اختاري الذكاء، اختاري الجودة، اختاري سماح كير.',
-    'نعيد تعريف الجمال في فلسطين... جودة عالمية بأيدٍ محلية.',
-];
-
-// Hero two-line headlines
 $heroHeadlines = [
     ['line1' => 'خدمات احترافية', 'line2' => 'جمال لا يُقاوم.'],
     ['line1' => 'بشرتكِ تستحق الأفضل', 'line2' => 'اختاري من سماح كير.'],
     ['line1' => 'أحدث تقنيات التجميل', 'line2' => 'بين يديكِ الآن.'],
-    ['line1' => 'صالونكِ المثالي', 'line2' => 'فخامة متناهية.'],
     ['line1' => 'تقنيات متطورة', 'line2' => 'نتائج احترافية.'],
     ['line1' => 'جودة عالمية', 'line2' => 'خدمة محلية.'],
-    ['line1' => 'اكتشفي سر الإشراقة', 'line2' => 'مع خدمات سماح كير.'],
     ['line1' => 'احجزي موعدك', 'line2' => 'بسهولة تامة.'],
-    ['line1' => 'خبراء الجمال', 'line2' => 'يختارون لكِ.'],
-    ['line1' => 'روتين العناية', 'line2' => 'يتحول إلى سحر.'],
-    ['line1' => 'كل خدمة تروي', 'line2' => 'قصة تميز.'],
-    ['line1' => 'استثمري في جمالكِ', 'line2' => 'واجني الثناء.'],
-    ['line1' => 'سماح كير... وجهتكِ', 'line2' => 'لعالم الجمال.'],
-    ['line1' => 'إطلالة النجمات', 'line2' => 'في متناول يديكِ.'],
-    ['line1' => 'نبني لكِ قصة نجاح', 'line2' => 'من الصفر إلى القمة.'],
-    ['line1' => 'خدمات اخترناها', 'line2' => 'بكل حب ودقة.'],
-    ['line1' => 'نعيد تعريف الجمال', 'line2' => 'في فلسطين.'],
-    ['line1' => 'احجزي بثقة', 'line2' => 'واستمتعي بالنتائج.'],
-    ['line1' => 'لمسة احترافية', 'line2' => 'تُحدث فرقاً كبيراً.'],
-    ['line1' => 'جمالكِ.. مسؤوليتنا', 'line2' => 'ونحنُ نحب ذلك.'],
+];
+
+$heroPhrases = [
+    'لمسات ساحرة تبدأ باختيار الخدمة المثالية... اختاري الأفضل مع سماح كير.',
+    'أحدث تقنيات التجميل بين يديكِ، لنتائج احترافية تبهركِ.',
+    'كل ما يخص عالم الجمال والأناقة... تحت سقف واحد.',
+    'إشراقة وردية تلفت الأنظار.. بلمسات احترافية من سماح كير.',
+    'بشرة نضرة، شعر صحي، إطلالة ساحرة... كل هذا وأكثر مع سماح كير.',
+    'نحنُ لسنا مجرد صالون.. نحنُ وجهتكِ الشاملة لعالم الجمال.',
 ];
 @endphp
 
+{{-- ═══════════════════════════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════════════════════════ --}}
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    {{-- Animated background --}}
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0" style="background:var(--surface);"></div>
-        <div class="absolute inset-0 opacity-30" style="background:radial-gradient(ellipse at 20% 20%, var(--brand-500) 0%, transparent 60%),radial-gradient(ellipse at 80% 80%, var(--accent-500, #c026d3) 0%, transparent 60%),radial-gradient(ellipse at 50% 50%, rgba(192,38,211,0.15) 0%, transparent 70%);"></div>
-        <div class="absolute inset-0" style="background-image:radial-gradient(circle at 30% 20%, rgba(236,72,153,0.03) 0px, transparent 50px);"></div>
-        <div class="absolute inset-0 animate-hero-gradient" style="background:linear-gradient(135deg, transparent 0%, rgba(236,72,153,0.03) 25%, transparent 50%, rgba(192,38,211,0.02) 75%, transparent 100%);background-size:400% 400%;"></div>
+        <div class="absolute inset-0 opacity-20" style="background:radial-gradient(ellipse at 20% 20%, var(--brand-500) 0%, transparent 60%),radial-gradient(ellipse at 80% 80%, var(--accent-500, #c026d3) 0%, transparent 60%);"></div>
+        <div class="absolute inset-0" style="background-image:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0px, transparent 1px);background-size:32px 32px;"></div>
     </div>
 
-    {{-- Floating orbs --}}
-    <div class="absolute w-72 h-72 rounded-full pointer-events-none z-0" style="background:radial-gradient(circle, rgba(236,72,153,0.08), transparent 70%);top:-10%;right:-5%;filter:blur(60px);animation:heroOrbA 12s ease-in-out infinite;"></div>
-    <div class="absolute w-96 h-96 rounded-full pointer-events-none z-0" style="background:radial-gradient(circle, rgba(192,38,211,0.06), transparent 70%);bottom:-15%;left:-10%;filter:blur(80px);animation:heroOrbB 15s ease-in-out infinite;"></div>
+    <div class="absolute w-96 h-96 rounded-full pointer-events-none z-0" style="background:radial-gradient(circle, rgba(236,72,153,0.06), transparent 70%);top:-10%;right:-5%;filter:blur(80px);animation:heroOrbA 12s ease-in-out infinite;"></div>
+    <div class="absolute w-[30rem] h-[30rem] rounded-full pointer-events-none z-0" style="background:radial-gradient(circle, rgba(192,38,211,0.04), transparent 70%);bottom:-20%;left:-10%;filter:blur(100px);animation:heroOrbB 15s ease-in-out infinite;"></div>
 
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 py-12 md:py-20">
+    <div class="relative z-10 w-full max-w-6xl mx-auto px-4 py-12 md:py-20">
         <div class="flex flex-col items-center text-center">
 
-            {{-- Logo --}}
-            <div class="mb-6 md:mb-8 fade-in-hero" style="animation-delay:0.05s;">
+            <div class="mb-10 fade-in-hero" style="animation-delay:0.05s;">
                 @if(!empty($siteSettings['site_logo_url']))
-                <img src="{{ $siteSettings['site_logo_url'] }}" alt="سماح كير" class="h-10 sm:h-14 md:h-20 w-auto object-contain" style="filter:drop-shadow(0 4px 20px rgba(236,72,153,0.2));">
+                <img src="{{ $siteSettings['site_logo_url'] }}" alt="سماح كير" class="h-10 sm:h-12 md:h-16 w-auto object-contain">
                 @else
                 <span class="text-xl sm:text-2xl md:text-3xl font-black tracking-wide" style="color:var(--ink);">سماح كير<span style="color:var(--brand-500);">.</span></span>
                 @endif
             </div>
 
-            {{-- Premium Hero Card --}}
-            <div id="heroCard" class="w-full max-w-2xl mx-auto fade-in-hero" style="animation-delay:0.15s;">
-                <div class="relative overflow-hidden rounded-[2rem] p-8 md:p-10" style="background:linear-gradient(160deg, rgba(30,20,40,0.7) 0%, rgba(20,15,25,0.5) 60%, rgba(236,72,153,0.08) 100%);border:1px solid rgba(236,72,153,0.15);backdrop-filter:blur(32px);box-shadow:0 32px 96px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.06);">
-
-                    {{-- Subtle inner glow --}}
-                    <div class="absolute -top-32 -right-32 w-64 h-64 rounded-full pointer-events-none opacity-15" style="background:radial-gradient(circle,var(--brand-500),transparent 70%);filter:blur(70px);"></div>
-                    <div class="absolute -bottom-32 -left-32 w-64 h-64 rounded-full pointer-events-none opacity-10" style="background:radial-gradient(circle,var(--accent-500,#c026d3),transparent 70%);filter:blur(70px);"></div>
-
-                    {{-- Badge --}}
-                    <div class="flex justify-center mb-6 relative z-10">
-                        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black tracking-[0.15em] uppercase" style="background:rgba(236,72,153,0.1);color:var(--brand-500);border:1px solid rgba(236,72,153,0.15);">
-                            <span class="relative flex h-1.5 w-1.5">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background:var(--brand-500);"></span>
-                                <span class="relative inline-flex rounded-full h-1.5 w-1.5" style="background:var(--brand-500);"></span>
-                            </span>
-                            خدمات احترافية
-                        </span>
-                    </div>
-
-                    {{-- Rotating Headline --}}
-                    <div class="relative mb-4 z-10" style="min-height:110px;">
-                        @foreach($heroHeadlines as $i => $headline)
-                        <div class="hero-headline absolute w-full text-center px-2" data-index="{{ $i }}"
-                             style="opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '24px' }});pointer-events:{{ $i === 0 ? 'auto' : 'none' }};">
-                            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-black leading-[1.15] tracking-tight">
-                                <span class="block" style="background:linear-gradient(135deg,#fff 20%,#f9a8d4 50%,#fff 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">{{ $headline['line1'] }}</span>
-                                <span class="block mt-1" style="color:rgba(255,255,255,0.85);">{{ $headline['line2'] }}</span>
-                            </h1>
-                        </div>
-                        @endforeach
-                    </div>
-
-                    {{-- Decorative divider --}}
-                    <div class="flex items-center gap-3 justify-center mb-4 relative z-10">
-                        <div class="h-px flex-1 max-w-[60px]" style="background:linear-gradient(to left,transparent,rgba(236,72,153,0.2));"></div>
-                        <div style="color:var(--brand-500);font-size:0.7rem;"><i class="ph-fill ph-sparkle"></i></div>
-                        <div class="h-px flex-1 max-w-[60px]" style="background:linear-gradient(to right,transparent,rgba(236,72,153,0.2));"></div>
-                    </div>
-
-                    {{-- Rotating Phrase --}}
-                    <div class="relative z-10" style="min-height:52px;">
-                        @foreach($allPhrases as $i => $phrase)
-                        <p class="hero-phrase absolute w-full text-center px-2" data-index="{{ $i }}"
-                           style="color:rgba(255,255,255,0.55);font-size:0.92rem;font-weight:500;line-height:1.7;opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '12px' }});pointer-events:{{ $i === 0 ? 'auto' : 'none' }};">
-                            {{ $phrase }}
-                        </p>
-                        @endforeach
-                    </div>
-
-                    {{-- Progress --}}
-                    <div class="flex items-center justify-center gap-3 mt-6 relative z-10">
-                        <div class="flex gap-1.5">
-                            @foreach($heroHeadlines as $i => $h)
-                            <span class="hero-dot block rounded-full transition-all duration-700" style="height:4px;width:{{ $i === 0 ? '28px' : '4px' }};background:{{ $i === 0 ? 'var(--brand-500)' : 'rgba(255,255,255,0.12)' }};"></span>
-                            @endforeach
-                        </div>
-                        <span class="text-[10px] font-bold opacity-30" style="color:var(--ink);" id="heroCounter">01 / {{ str_pad(count($heroHeadlines), 2, '0', STR_PAD_LEFT) }}</span>
-                    </div>
+            <div class="relative mb-6" style="min-height:120px;">
+                @foreach($heroHeadlines as $i => $headline)
+                <div class="hero-headline absolute w-full text-center px-4" data-index="{{ $i }}"
+                     style="opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '24px' }});pointer-events:{{ $i === 0 ? 'auto' : 'none' }};">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black leading-[1.15] tracking-tight">
+                        <span class="block" style="background:linear-gradient(135deg,var(--ink) 30%,var(--brand-400) 70%,var(--ink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">{{ $headline['line1'] }}</span>
+                        <span class="block mt-1.5 text-ink-muted" style="font-weight:500;">{{ $headline['line2'] }}</span>
+                    </h1>
                 </div>
+                @endforeach
             </div>
 
-            {{-- CTA --}}
-            <div class="mt-8 flex flex-col items-center gap-3 fade-in-hero" style="animation-delay:0.35s;">
-                <a href="{{ route('booking') }}" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-black text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5" style="background:#fff;color:#0f172a;box-shadow:0 8px 32px rgba(0,0,0,0.3),0 0 40px rgba(236,72,153,0.15);">
+            <div class="relative mb-10" style="min-height:28px;">
+                @foreach($heroPhrases as $i => $phrase)
+                <p class="hero-phrase absolute w-full text-center px-4" data-index="{{ $i }}"
+                   style="color:var(--ink-dim);font-size:1rem;font-weight:400;line-height:1.7;opacity:{{ $i === 0 ? '1' : '0' }};transform:translateY({{ $i === 0 ? '0' : '12px' }});pointer-events:{{ $i === 0 ? 'auto' : 'none' }};">
+                    {{ $phrase }}
+                </p>
+                @endforeach
+            </div>
+
+            <div class="flex items-center justify-center gap-3 mb-10">
+                @foreach($heroHeadlines as $i => $h)
+                <span class="hero-dot block rounded-full transition-all duration-700" style="height:6px;width:{{ $i === 0 ? '32px' : '6px' }};background:{{ $i === 0 ? 'var(--brand-500)' : 'var(--ink-dim)' }};opacity:{{ $i === 0 ? '1' : '0.3' }};"></span>
+                @endforeach
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4 fade-in-hero" style="animation-delay:0.35s;">
+                <a href="{{ route('booking') }}" class="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full font-bold text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl" style="background:var(--gradient-primary);color:#fff;box-shadow:0 8px 32px rgba(0,0,0,0.25);">
                     احجزي موعدك الآن <i class="ph ph-arrow-left"></i>
                 </a>
-                <a href="{{ route('booking') }}" class="text-sm font-medium transition-colors" style="color:rgba(255,255,255,0.4);">استعرضي الخدمات — الحجز اختياري</a>
+                <a href="#servicesSection" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5 glass-panel" style="border-color:var(--glass-border);">
+                    استعرضي الخدمات <i class="ph ph-grid-four"></i>
+                </a>
             </div>
 
         </div>
@@ -188,9 +113,6 @@ $heroHeadlines = [
 @keyframes fadeInHero { to { opacity:1; transform:translateY(0); } }
 @keyframes heroOrbA { 0%,100% { transform:translate(0,0); } 50% { transform:translate(30px,-30px); } }
 @keyframes heroOrbB { 0%,100% { transform:translate(0,0); } 50% { transform:translate(-20px,40px); } }
-@keyframes animate-hero-gradient { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
-@keyframes borderShimmer { 0% { background-position:200% 200%; } 100% { background-position:-200% -200%; } }
-@keyframes glowPulse { 0%,100% { opacity:0.15; transform:scale(1); } 50% { opacity:0.25; transform:scale(1.1); } }
 
 @media (max-width:1024px) {
     #themeSwitcher { display:none!important; }
@@ -211,11 +133,10 @@ $heroHeadlines = [
     var phrases = document.querySelectorAll('.hero-phrase');
     var dots = document.querySelectorAll('.hero-dot');
     var total = headlines.length;
-    var totalP = phrases.length;
     var idx = 0, timer;
 
     function show(i) {
-        var pi = i % totalP;
+        var pi = i % phrases.length;
         headlines.forEach(function(h, j) {
             var a = j === i;
             h.style.opacity = a ? '1' : '0';
@@ -229,32 +150,26 @@ $heroHeadlines = [
         });
         dots.forEach(function(d, j) {
             var a = j === i;
-            d.style.width = a ? '28px' : '4px';
-            d.style.background = a ? 'var(--brand-500)' : 'rgba(255,255,255,0.12)';
+            d.style.width = a ? '32px' : '6px';
+            d.style.opacity = a ? '1' : '0.3';
+            d.style.background = a ? 'var(--brand-500)' : 'var(--ink-dim)';
         });
-        var c = document.getElementById('heroCounter');
-        if (c) c.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
         idx = i;
     }
 
     function next() { show((idx + 1) % total); }
-    timer = setInterval(next, 4500);
+    timer = setInterval(next, 5000);
 
-    var card = document.getElementById('heroCard');
+    var card = document.getElementById('hero');
     if (card) {
         card.addEventListener('mouseenter', function() { clearInterval(timer); });
-        card.addEventListener('mouseleave', function() { timer = setInterval(next, 4500); });
+        card.addEventListener('mouseleave', function() { timer = setInterval(next, 5000); });
     }
 })();
 </script>
 
-<style>
-    .value-card:hover { transform: translateY(-6px); border-color: rgba(255,42,133,0.15); box-shadow: 0 12px 40px rgba(0,0,0,0.3), var(--neon-glow); }
-    .service-card:hover { transform: translateY(-4px); }
-</style>
-
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION: Featured Services — Professional Cards
+     SECTION: Featured Services
      ═══════════════════════════════════════════════════════════════ --}}
 @if($featuredServices->isNotEmpty())
 @php
@@ -267,54 +182,58 @@ $serviceMeta = [
     6 => ['icon' => 'fa-solid fa-leaf', 'color' => '#60a5fa', 'gradient' => 'from-blue-500/20 to-blue-600/10'],
 ];
 @endphp
-<section class="py-24 relative overflow-hidden" id="servicesSection">
+<section id="servicesSection" class="py-24 md:py-32 relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(var(--brand-500-rgb,255,42,133),0.04),transparent_60%)] pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="mb-16 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-6">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
-                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">خدماتنا</span>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-black mb-4">خدمات مختارة <span class="gradient-text bg-[length:200%_auto]">بعناية فائقة</span></h2>
-            <p class="text-ink-dim max-w-2xl mx-auto text-lg font-light">كل خدمة في سماح كير تم تصميمها بعناية لتكون جزءاً من روتين جمالك الشخصي. خدمات احترافية، نتائج مضمونة.</p>
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase" style="background:color-mix(in srgb, var(--brand-500) 10%, transparent);color:var(--brand-500);border:1px solid color-mix(in srgb, var(--brand-500) 20%, transparent);">
+                <span class="w-1.5 h-1.5 rounded-full" style="background:var(--brand-500);"></span>
+                خدماتنا
+            </span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mt-6 mb-4" style="color:var(--ink);">خدمات مختارة <span class="gradient-text">بعناية فائقة</span></h2>
+            <p class="text-ink-dim max-w-2xl mx-auto text-lg font-light leading-relaxed">كل خدمة في سماح كير تم تصميمها بعناية لتكون جزءاً من روتين جمالك الشخصي. خدمات احترافية، نتائج مضمونة.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             @foreach($featuredServices as $service)
             @php $meta = $serviceMeta[$service->id] ?? ['icon' => 'fa-solid fa-spa', 'color' => 'var(--brand-500)']; @endphp
-            <div class="group relative rounded-[2rem] overflow-hidden glass-panel border border-white/5 transition-all duration-500 hover:shadow-xl hover:-translate-y-1" style="--service-color: {{ $meta['color'] }};">
-                {{-- Top accent bar --}}
-                <div class="h-1.5 w-full transition-opacity duration-300 opacity-0 group-hover:opacity-100" style="background: {{ $meta['color'] }};"></div>
+            <div class="group relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1" style="background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(16px);">
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(180deg, transparent 0%, color-mix(in srgb, {{ $meta['color'] }} 8%, transparent) 100%);"></div>
 
-                {{-- Service Icon Area --}}
-                <div class="p-8 pb-4 text-center">
-                    <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg" style="background: {{ $meta['color'] }}15; color: {{ $meta['color'] }}; font-size: 2rem;">
-                        <i class="{{ $meta['icon'] }}"></i>
-                    </div>
-
-                    <h3 class="text-xl font-black mb-2 text-ink">{{ $service->name }}</h3>
-                    <p class="text-ink-dim text-sm mb-4 leading-relaxed line-clamp-2">{{ $service->description }}</p>
-
-                    {{-- Price & Duration Row --}}
-                    <div class="flex items-center justify-center gap-4 mb-6">
-                        <div class="flex items-center gap-1.5 text-sm" style="color:{{ $meta['color'] }};">
-                            <i class="fa-regular fa-clock"></i>
-                            <span class="font-bold">{{ $service->duration }} دقيقة</span>
+                <div class="relative z-10 p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl transition-all duration-500 group-hover:scale-110" style="background:color-mix(in srgb, {{ $meta['color'] }} 15%, transparent);color:{{ $meta['color'] }};">
+                            <i class="{{ $meta['icon'] }}"></i>
                         </div>
-                        <div class="w-px h-5" style="background:var(--glass-border);"></div>
-                        <div>
-                            @if($service->is_on_sale)
-                            <span class="text-ink-dim text-sm line-through ml-1">{{ number_format($service->price, 0) }} ₪</span>
-                            <span class="font-black text-xl" style="color:{{ $meta['color'] }};">{{ number_format($service->final_price, 0) }} ₪</span>
-                            @else
-                            <span class="font-black text-xl" style="color:{{ $meta['color'] }};">{{ number_format($service->price, 0) }} ₪</span>
-                            @endif
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-black" style="color:var(--ink);">{{ $service->name }}</h3>
+                            <p class="text-ink-dim text-sm line-clamp-1">{{ $service->description }}</p>
                         </div>
                     </div>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-1.5 text-sm" style="color:{{ $meta['color'] }};">
+                                <i class="fa-regular fa-clock"></i>
+                                <span class="font-bold">{{ $service->duration }} دقيقة</span>
+                            </div>
+                            <div class="w-px h-4" style="background:var(--glass-border);"></div>
+                            <div>
+                                @if($service->is_on_sale)
+                                <span class="text-ink-dim text-sm line-through ml-1">{{ number_format($service->price, 0) }} ₪</span>
+                                <span class="font-black text-lg" style="color:{{ $meta['color'] }};">{{ number_format($service->final_price, 0) }} ₪</span>
+                                @else
+                                <span class="font-black text-lg" style="color:var(--ink);">{{ number_format($service->price, 0) }} ₪</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-5 border-0" style="height:1px;background:var(--glass-border);">
 
                     <a href="{{ route('booking') }}?service={{ $service->id }}"
-                       class="w-full py-3 rounded-full font-bold text-sm transition-all duration-300 inline-flex items-center justify-center gap-2"
-                       style="border:2px solid {{ $meta['color'] }}40; color: {{ $meta['color'] }}; background: transparent;">
+                       class="w-full py-3 rounded-xl font-bold text-sm transition-all duration-300 inline-flex items-center justify-center gap-2 group-hover:shadow-lg"
+                       style="border:1px solid color-mix(in srgb, {{ $meta['color'] }} 30%, transparent);color:{{ $meta['color'] }};background:transparent;">
                         احجزي الآن <i class="fa-solid fa-arrow-left text-xs"></i>
                     </a>
                 </div>
@@ -326,26 +245,39 @@ $serviceMeta = [
 @endif
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION: Trust Bar — Social Proof & Quick Stats
+     SECTION: Trust Bar
      ═══════════════════════════════════════════════════════════════ --}}
-<section class="py-12 border-b border-ink/10">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div class="glass-panel rounded-2xl p-6">
-                <span class="text-3xl md:text-4xl font-black gradient-text bg-[length:200%_auto] block mb-2">+{{ \App\Models\Service::count() }}</span>
-                <span class="text-sm text-ink-muted">خدمة احترافية</span>
+<section class="py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(var(--brand-500-rgb,255,42,133),0.03),transparent_70%)] pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="rounded-2xl p-6 md:p-8 text-center transition-all duration-300 hover:-translate-y-1" style="background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(12px);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:color-mix(in srgb, var(--brand-500) 12%, transparent);">
+                    <i class="fa-solid fa-spa text-xl" style="color:var(--brand-500);"></i>
+                </div>
+                <span class="text-3xl md:text-4xl font-black block mb-1 gradient-text">+{{ \App\Models\Service::count() }}</span>
+                <span class="text-sm" style="color:var(--ink-muted);">خدمة احترافية</span>
             </div>
-            <div class="glass-panel rounded-2xl p-6">
-                <span class="text-3xl md:text-4xl font-black text-ink block mb-2">5,000+</span>
-                <span class="text-sm text-ink-muted">عميلة سعيدة</span>
+            <div class="rounded-2xl p-6 md:p-8 text-center transition-all duration-300 hover:-translate-y-1" style="background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(12px);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:color-mix(in srgb, var(--brand-500) 12%, transparent);">
+                    <i class="fa-solid fa-heart text-xl" style="color:var(--brand-500);"></i>
+                </div>
+                <span class="text-3xl md:text-4xl font-black block mb-1" style="color:var(--ink);">5,000+</span>
+                <span class="text-sm" style="color:var(--ink-muted);">عميلة سعيدة</span>
             </div>
-            <div class="glass-panel rounded-2xl p-6">
-                <span class="text-3xl md:text-4xl font-black text-ink block mb-2">4.9</span>
-                <span class="text-sm text-ink-muted">تقييم العملاء</span>
+            <div class="rounded-2xl p-6 md:p-8 text-center transition-all duration-300 hover:-translate-y-1" style="background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(12px);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:color-mix(in srgb, var(--brand-500) 12%, transparent);">
+                    <i class="fa-solid fa-star text-xl" style="color:var(--brand-500);"></i>
+                </div>
+                <span class="text-3xl md:text-4xl font-black block mb-1" style="color:var(--ink);">4.9</span>
+                <span class="text-sm" style="color:var(--ink-muted);">تقييم العملاء</span>
             </div>
-            <div class="glass-panel rounded-2xl p-6">
-                <span class="text-3xl md:text-4xl font-black text-ink block mb-2">فوري</span>
-                <span class="text-sm text-ink-muted">تأكيد الحجز</span>
+            <div class="rounded-2xl p-6 md:p-8 text-center transition-all duration-300 hover:-translate-y-1" style="background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(12px);">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4" style="background:color-mix(in srgb, var(--brand-500) 12%, transparent);">
+                    <i class="fa-solid fa-bolt text-xl" style="color:var(--brand-500);"></i>
+                </div>
+                <span class="text-3xl md:text-4xl font-black block mb-1" style="color:var(--ink);">فوري</span>
+                <span class="text-sm" style="color:var(--ink-muted);">تأكيد الحجز</span>
             </div>
         </div>
     </div>
@@ -354,81 +286,34 @@ $serviceMeta = [
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION: Why Us
      ═══════════════════════════════════════════════════════════════ --}}
-<section class="py-16 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(var(--brand-500-rgb,255,42,133),0.04),transparent_60%)] pointer-events-none"></div>
+<section class="py-24 md:py-32 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(var(--brand-500-rgb,255,42,133),0.04),transparent_60%)] pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="text-center mb-14">
-            <h2 class="text-3xl md:text-5xl font-black mb-4">لماذا <span class="gradient-text bg-[length:200%_auto]">سماح كير</span></h2>
+        <div class="text-center mb-16">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase" style="background:color-mix(in srgb, var(--brand-500) 10%, transparent);color:var(--brand-500);border:1px solid color-mix(in srgb, var(--brand-500) 20%, transparent);">
+                <span class="w-1.5 h-1.5 rounded-full" style="background:var(--brand-500);"></span>
+                لماذا تختارينا
+            </span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mt-6 mb-4" style="color:var(--ink);">لماذا <span class="gradient-text">سماح كير</span></h2>
             <p class="text-ink-dim max-w-3xl mx-auto text-lg font-light leading-relaxed">نقدم لكِ أفضل خدمات التجميل والعناية بأسعار تنافسية، مع حجز سهل وأجواء راقية. اكتشفي تجربة جمال استثنائية.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
-                    <i class="fa-solid fa-certificate text-xl text-brand-500"></i>
-                </div>
-                <h3 class="font-black text-lg mb-3 text-ink">خدمات احترافية</h3>
-                <p class="text-ink-dim text-sm leading-relaxed">جميع خدماتنا تُقدم بأعلى معايير الجودة والاحترافية على يد خبراء معتمدين. نضمن لكِ نتائج مبهرة في كل زيارة.</p>
-            </div>
-            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
-                    <i class="fa-solid fa-calendar-check text-xl text-brand-500"></i>
-                </div>
-                <h3 class="font-black text-lg mb-3 text-ink">حجز سهل ومريح</h3>
-                <p class="text-ink-dim text-sm leading-relaxed">احجبي موعدكِ أونلاين بخطوات بسيطة. اختاري الخدمة والوقت المناسب واستمتعي بتجربة خالية من الانتظار.</p>
-            </div>
-            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
-                    <i class="fa-solid fa-hand-holding-heart text-xl text-brand-500"></i>
-                </div>
-                <h3 class="font-black text-lg mb-3 text-ink">أجواء فاخرة</h3>
-                <p class="text-ink-dim text-sm leading-relaxed">صالونات مجهزة بأحدث التقنيات وأجواء مريحة وراقية. تجربة عناية متكاملة تأخذكِ لعالم من الاسترخاء والجمال.</p>
-            </div>
-            <div class="glass-panel rounded-2xl p-7 text-center hover:-translate-y-2 transition-all duration-500 group">
-                <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center mb-5 mx-auto group-hover:bg-brand-500/20 transition-colors">
-                    <i class="fa-solid fa-headset text-xl text-brand-500"></i>
-                </div>
-                <h3 class="font-black text-lg mb-3 text-ink">دعم احترافي متواصل</h3>
-                <p class="text-ink-dim text-sm leading-relaxed">فريق خدمة عملاء محترف جاهز لمساعدتك يومياً من 9 صباحاً حتى 10 مساءً عبر الواتساب. استفسري وسنرد فوراً.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- ═══════════════════════════════════════════════════════════════
-     SECTION: Why سماح كير ? — Premium Value Cards
-     ═══════════════════════════════════════════════════════════════ --}}
-<section class="py-24 relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(var(--brand-500-rgb,255,42,133),0.03),transparent_70%)] pointer-events-none"></div>
-    <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="mb-16 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-6">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
-                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">لماذا تختارينا</span>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-black mb-4">لماذا <span class="gradient-text bg-[length:200%_auto]">سماح كير </span><span class="text-brand-500">.</span></h2>
-            <p class="text-ink-dim max-w-2xl mx-auto text-lg font-light">صالون التجميل الأول في فلسطين. نوفر لكِ تجربة حجز آمنة وموثوقة مع خدمات احترافية وخدمة عملاء استثنائية.</p>
-        </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             @php
-                $valueCards = [
-                    ['num' => '01', 'icon' => 'fa-solid fa-shield-check', 'title' => 'خدمات احترافية مضمونة', 'desc' => 'نضمن لكِ جودة كل خدمة من خبراء معتمدين. لا تقلقي بشأن النتائج - نتعامل فقط مع أمهر الاختصاصيين.'],
-                    ['num' => '02', 'icon' => 'fa-solid fa-calendar-check', 'title' => 'حجز سريع ومريح', 'desc' => 'احجبي موعدك أونلاين من أي مكان. اختاري الخدمة والوقت المناسب واستمتعي بتجربة خالية من المتاعب.'],
-                    ['num' => '03', 'icon' => 'fa-solid fa-headset', 'title' => 'دعم يومي احترافي', 'desc' => 'فريق متخصص جاهز لمساعدتك من 9 صباحاً حتى 10 مساءً عبر الواتساب. استشارات مجانية لاختيار الخدمة المناسبة.'],
+                $features = [
+                    ['icon' => 'fa-solid fa-certificate', 'title' => 'خدمات احترافية مضمونة', 'desc' => 'جميع خدماتنا تُقدم بأعلى معايير الجودة والاحترافية على يد خبراء معتمدين. نضمن لكِ نتائج مبهرة في كل زيارة.'],
+                    ['icon' => 'fa-solid fa-calendar-check', 'title' => 'حجز سريع ومريح', 'desc' => 'احجبي موعدكِ أونلاين بخطوات بسيطة. اختاري الخدمة والوقت المناسب واستمتعي بتجربة خالية من الانتظار.'],
+                    ['icon' => 'fa-solid fa-headset', 'title' => 'دعم احترافي متواصل', 'desc' => 'فريق خدمة عملاء محترف جاهز لمساعدتك يومياً من 9 صباحاً حتى 10 مساءً عبر الواتساب. استفسري وسنرد فوراً.'],
                 ];
             @endphp
-            @foreach($valueCards as $card)
-            <div class="value-card glass-panel rounded-[2rem] p-8 text-center group relative overflow-hidden transition-all duration-500">
-                <div class="absolute top-0 right-8 left-8 h-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: var(--gradient-primary);"></div>
-                <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700" style="background: radial-gradient(circle, var(--brand-500) 0%, transparent 70%); filter: blur(50px);"></div>
-                <div class="absolute top-6 left-6 text-6xl font-black opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-500 select-none" style="color: var(--brand-500);">{{ $card['num'] }}</div>
-                <div class="relative z-10 w-16 h-16 rounded-2xl bg-brand-500/10 flex items-center justify-center mb-6 group-hover:bg-brand-500/20 group-hover:scale-110 transition-all duration-500 shadow-neon mx-auto">
-                    <i class="{{ $card['icon'] }} text-2xl" style="color: var(--brand-500);"></i>
+            @foreach($features as $card)
+            <div class="group relative rounded-2xl overflow-hidden p-8 md:p-10 transition-all duration-500 hover:-translate-y-1" style="background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(16px);">
+                <div class="absolute top-0 inset-x-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:var(--gradient-primary);"></div>
+                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-2xl transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg" style="background:color-mix(in srgb, var(--brand-500) 12%, transparent);color:var(--brand-500);">
+                    <i class="{{ $card['icon'] }}"></i>
                 </div>
-                <div class="relative z-10">
-                    <h3 class="text-xl font-black mb-3" style="color: var(--ink);">{{ $card['title'] }}</h3>
-                    <p class="text-ink-dim text-sm leading-relaxed">{{ $card['desc'] }}</p>
-                </div>
+                <h3 class="text-xl font-black mb-3" style="color:var(--ink);">{{ $card['title'] }}</h3>
+                <p class="text-ink-dim text-sm leading-relaxed">{{ $card['desc'] }}</p>
             </div>
             @endforeach
         </div>
@@ -436,28 +321,28 @@ $serviceMeta = [
 </section>
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION: Tech Marquee Ticker
+     SECTION: Marquee
      ═══════════════════════════════════════════════════════════════ --}}
-<div class="py-10 border-y border-white/5 overflow-hidden flex whitespace-nowrap opacity-40 hover:opacity-70 transition-opacity">
-    <div class="animate-marquee-rtl flex items-center gap-16 font-mono text-xs tracking-[0.2em] uppercase text-white/50">
-        <span><i class="fa-solid fa-asterisk text-brand-500 text-[8px] mr-2"></i> خدمات احترافية</span>
-        <i class="fa-solid fa-circle text-[4px] text-brand-500"></i>
+<div class="py-8 overflow-hidden" style="border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);">
+    <div class="animate-marquee-rtl flex items-center gap-12 font-mono text-xs tracking-[0.15em] uppercase" style="color:var(--ink-muted);">
+        <span><i class="fa-solid fa-asterisk" style="color:var(--brand-500);font-size:6px;margin-left:6px;"></i> خدمات احترافية</span>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>حجز سهل ومريح</span>
-        <i class="fa-solid fa-circle text-[4px] text-accent-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>أفضل خدمات التجميل</span>
-        <i class="fa-solid fa-circle text-[4px] text-brand-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>الدفع عند الحضور</span>
-        <i class="fa-solid fa-circle text-[4px] text-accent-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>دعم احترافي يومي</span>
-        <i class="fa-solid fa-circle text-[4px] text-brand-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>عروض وخصومات حصرية</span>
-        <i class="fa-solid fa-circle text-[4px] text-accent-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>أجواء فاخرة</span>
-        <i class="fa-solid fa-circle text-[4px] text-brand-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>خدمات احترافية</span>
-        <i class="fa-solid fa-circle text-[4px] text-accent-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>حجز سهل ومريح</span>
-        <i class="fa-solid fa-circle text-[4px] text-brand-500"></i>
+        <span class="w-1 h-1 rounded-full" style="background:var(--ink-dim);"></span>
         <span>أفضل خدمات التجميل</span>
     </div>
 </div>
@@ -465,28 +350,32 @@ $serviceMeta = [
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION: CTA Banner
      ═══════════════════════════════════════════════════════════════ --}}
-<section class="py-24 relative overflow-hidden">
+<section class="py-24 md:py-32 relative overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(var(--brand-500-rgb,255,42,133),0.06),transparent_70%)]"></div>
-    <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
-        <div class="glass-panel rounded-[3rem] p-12 md:p-16 border border-white/5">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 mb-8">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
-                <span class="text-xs text-brand-500 font-bold tracking-widest uppercase">احجبي الآن</span>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-black mb-6">
+    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+        <div class="rounded-[2rem] p-12 md:p-16 relative overflow-hidden" style="background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(16px);">
+            <div class="absolute -top-32 -right-32 w-64 h-64 rounded-full pointer-events-none opacity-10" style="background:radial-gradient(circle,var(--brand-500),transparent 70%);filter:blur(70px);"></div>
+            <div class="absolute -bottom-32 -left-32 w-64 h-64 rounded-full pointer-events-none opacity-10" style="background:radial-gradient(circle,var(--accent-500),transparent 70%);filter:blur(70px);"></div>
+
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-8" style="background:color-mix(in srgb, var(--brand-500) 10%, transparent);color:var(--brand-500);border:1px solid color-mix(in srgb, var(--brand-500) 20%, transparent);">
+                <span class="w-1.5 h-1.5 rounded-full" style="background:var(--brand-500);"></span>
+                احجبي الآن
+            </span>
+
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-6" style="color:var(--ink);">
                 مستعدة لاكتشاف<br>
-                <span class="gradient-text bg-[length:200%_auto]">تجربة جمال فريدة؟</span>
+                <span class="gradient-text">تجربة جمال فريدة؟</span>
             </h2>
-            <p class="text-ink-dim text-lg mb-10 max-w-2xl mx-auto font-light">
+
+            <p class="text-ink-dim text-lg mb-10 max-w-xl mx-auto font-light leading-relaxed">
                 انضمي إلى آلاف العميلات السعيدات واحجبي موعدكِ الآن. خدمات احترافية، أجواء فاخرة، ودعم متواصل على مدار الأسبوع.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('booking') }}"
-                   class="px-10 py-4 rounded-full font-black text-sm tracking-wide inline-flex items-center justify-center gap-2 shadow-neon hover:shadow-neon-strong transition-all"
-                   style="background: var(--gradient-primary); color: white;">
-                    احجبي موعدك <i class="fa-solid fa-arrow-left"></i>
-                </a>
-            </div>
+
+            <a href="{{ route('booking') }}"
+               class="inline-flex items-center gap-2.5 px-10 py-4 rounded-full font-bold text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+               style="background:var(--gradient-primary);color:#fff;box-shadow:0 8px 32px rgba(0,0,0,0.25);">
+                احجبي موعدك <i class="fa-solid fa-arrow-left"></i>
+            </a>
         </div>
     </div>
 </section>
