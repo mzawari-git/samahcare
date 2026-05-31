@@ -1,4 +1,4 @@
-@extends('frontend.layouts.organic-spa.app')
+@extends($layoutPath)
 
 @section('title', 'سياسة الخصوصية - سماح كير')
 @section('meta_description', 'سياسة الخصوصية لمنصة سماح كير - نوضح كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام خدماتنا.')

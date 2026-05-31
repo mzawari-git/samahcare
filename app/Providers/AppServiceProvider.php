@@ -175,24 +175,25 @@ class AppServiceProvider extends ServiceProvider
             $s = array_merge($defaultSettings, $settings);
 
             // Read user theme preferences from cookies (persist across logout)
-            $knownThemes = ['rose','midnight','natural','forest','minimal','ocean','sunset','luxury'];
-            $activeTheme = $_COOKIE['سماح كير _color'] ?? $s['site_theme'] ?? 'rose';
+            $knownThemes = ['clean','rose','midnight','natural','forest','minimal','ocean','sunset','luxury'];
+            $activeTheme = $_COOKIE['سماح كير _color'] ?? $s['site_theme'] ?? 'clean';
             if (!in_array($activeTheme, $knownThemes)) {
-                $activeTheme = 'rose';
+                $activeTheme = 'clean';
             }
 
             // Default: derive architecture from the active theme color
             $layoutArchitecture = match($activeTheme) {
+                'clean' => 'clean-minimal',
                 'rose', 'midnight' => 'cyber-lab',
                 'natural', 'forest' => 'organic-spa',
                 'minimal', 'ocean' => 'editorial',
                 'sunset', 'luxury' => 'luxury-boutique',
-                default => 'cyber-lab',
+                default => 'clean-minimal',
             };
             // Architecture cookie overrides (user explicitly chose a layout)
             if (isset($_COOKIE['سماح كير _arch'])) {
                 $ca = $_COOKIE['سماح كير _arch'];
-                if (in_array($ca, ['cyber-lab','organic-spa','editorial','luxury-boutique'])) {
+                if (in_array($ca, ['clean-minimal','cyber-lab','organic-spa','editorial','luxury-boutique'])) {
                     $layoutArchitecture = $ca;
                 }
             }

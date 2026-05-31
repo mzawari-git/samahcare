@@ -1,233 +1,55 @@
 @extends($layoutPath)
 
-@section('title', 'تم تأكيد الحجز - ' . ($siteSettings['site_name'] ?? 'سماح كير '))
-
-@push('styles')
-<style>
-.bp-success-wrap {
-  max-width: 560px;
-  margin: 0 auto;
-  padding: 2rem 1rem 3rem;
-}
-
-.success-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-.success-icon-wrap {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.25rem;
-  background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.05));
-  border: 2px solid rgba(34,197,94,0.15);
-  animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.success-icon-wrap i {
-  font-size: 2.5rem;
-  color: #22c55e;
-}
-@keyframes successPop {
-  0% { transform: scale(0); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.success-header h1 {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #1a1a2e;
-  margin-bottom: 0.4rem;
-}
-.success-header h1 .gradient-text {
-  background: linear-gradient(135deg, #d946ef, #c026d3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.success-header p {
-  color: #6b7280;
-  font-size: 0.9rem;
-}
-
-.bp-card {
-  background: #fff;
-  border-radius: 24px;
-  padding: 1.5rem 1.75rem;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-  border: 1px solid rgba(217,70,239,0.07);
-}
-.detail-card {
-  margin-bottom: 1.5rem;
-  animation: fadeInUp 0.45s ease 0.1s both;
-}
-.detail-card .card-head {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  font-weight: 800;
-  padding-bottom: 0.65rem;
-  border-bottom: 1px solid #f1f3f5;
-  color: #1a1a2e;
-  margin-bottom: 0.5rem;
-}
-.detail-card .card-head i {
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: rgba(217,70,239,0.1);
-  color: #d946ef;
-  font-size: 0.7rem;
-}
-.detail-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.55rem 0;
-}
-.detail-line + .detail-line {
-  border-top: 1px solid #f1f3f5;
-}
-.detail-line .label { color: #868e96; font-size: 0.82rem; }
-.detail-line .value { font-weight: 700; color: #1a1a2e; }
-.detail-total {
-  border-top: 2px solid rgba(217,70,239,0.1);
-  margin-top: 0.25rem;
-  padding-top: 0.65rem;
-}
-.detail-total .value { color: #d946ef; font-size: 1.15rem; }
-
-.success-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  align-items: center;
-  animation: fadeInUp 0.45s ease 0.2s both;
-}
-.btn-primary-custom {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.85rem 2rem;
-  font-weight: 800;
-  font-size: 0.92rem;
-  border: none;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #d946ef, #c026d3);
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s;
-  min-width: 220px;
-}
-.btn-primary-custom::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 50%);
-  pointer-events: none;
-}
-.btn-primary-custom:hover {
-  filter: brightness(1.06);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(217,70,239,0.25);
-  color: #fff;
-}
-.btn-secondary-custom {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.85rem 2rem;
-  font-weight: 700;
-  font-size: 0.92rem;
-  border: 2px solid #e9ecef;
-  border-radius: 16px;
-  background: #fff;
-  color: #495057;
-  text-decoration: none;
-  transition: all 0.25s;
-  min-width: 220px;
-}
-.btn-secondary-custom:hover {
-  border-color: #d946ef;
-  color: #d946ef;
-  background: #fdf4ff;
-  transform: translateY(-2px);
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 576px) {
-  .bp-card { padding: 1.2rem; }
-  .success-header h1 { font-size: 1.3rem; }
-  .btn-primary-custom, .btn-secondary-custom { min-width: 0; width: 100%; }
-}
-</style>
-@endpush
+@section('title', 'تم تأكيد الحجز - ' . ($siteSettings['site_name'] ?? 'سماح كير'))
 
 @section('content')
-<div class="bp-success-wrap">
-
-    <div class="success-header fade-in-up">
-        <div class="success-icon-wrap">
-            <i class="fas fa-check-circle"></i>
+<div class="max-w-lg mx-auto px-4 py-20">
+    <div class="text-center mb-10">
+        <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style="background:#dcfce7;animation:successPop 0.5s cubic-bezier(0.34,1.56,0.64,1);">
+            <i class="fas fa-check-circle text-4xl" style="color:#22c55e;"></i>
         </div>
-        <h1>تم استلام <span class="gradient-text">حجزك</span> بنجاح!</h1>
-        <p>سنقوم بالتواصل معك لتأكيد الموعد خلال 24 ساعة</p>
+        <h1 class="text-2xl font-black mb-2" style="color:var(--ink);">تم استلام <span class="gradient-text">حجزك</span> بنجاح!</h1>
+        <p class="text-sm" style="color:var(--ink-muted);">سنقوم بالتواصل معك لتأكيد الموعد خلال 24 ساعة</p>
     </div>
 
-    <div class="bp-card detail-card">
-        <div class="card-head">
-            <i class="fas fa-receipt"></i>
-            تفاصيل الحجز
+    <div class="rounded-2xl p-6 mb-8" style="background:white;border:1px solid rgba(0,0,0,0.04);box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+        <div class="flex items-center gap-2 pb-4 mb-4" style="border-bottom:1px solid rgba(0,0,0,0.04);">
+            <i class="fas fa-receipt" style="color:var(--brand-500);"></i>
+            <span class="text-sm font-bold" style="color:var(--ink);">تفاصيل الحجز</span>
         </div>
-        <div class="detail-line">
-            <span class="label">رقم الحجز</span>
-            <span class="value">{{ $booking->booking_number }}</span>
+        @foreach([
+            ['رقم الحجز', $booking->booking_number],
+            ['الخدمة', $booking->service_name],
+            ['التاريخ', $booking->booking_date instanceof \Carbon\Carbon ? $booking->booking_date->format('Y-m-d') : $booking->booking_date],
+            ['الوقت', $booking->booking_time],
+            ['الاسم', $booking->customer_name],
+        ] as $line)
+        <div class="flex justify-between items-center py-3" style="{{ !$loop->last ? 'border-bottom:1px solid rgba(0,0,0,0.04);' : '' }}">
+            <span class="text-sm" style="color:var(--ink-muted);">{{ $line[0] }}</span>
+            <span class="text-sm font-bold" style="color:var(--ink);">{{ $line[1] }}</span>
         </div>
-        <div class="detail-line">
-            <span class="label">الخدمة</span>
-            <span class="value">{{ $booking->service_name }}</span>
-        </div>
-        <div class="detail-line">
-            <span class="label">التاريخ</span>
-            <span class="value">{{ $booking->booking_date instanceof \Carbon\Carbon ? $booking->booking_date->format('Y-m-d') : $booking->booking_date }}</span>
-        </div>
-        <div class="detail-line">
-            <span class="label">الوقت</span>
-            <span class="value">{{ $booking->booking_time }}</span>
-        </div>
-        <div class="detail-line">
-            <span class="label">الاسم</span>
-            <span class="value">{{ $booking->customer_name }}</span>
-        </div>
+        @endforeach
         @if($booking->total_amount > 0)
-        <div class="detail-line detail-total">
-            <span class="label fw-bold" style="color:#1a1a2e;">الإجمالي</span>
-            <span class="value">{{ number_format($booking->total_amount) }} ₪</span>
+        <div class="flex justify-between items-center pt-4 mt-2" style="border-top:2px solid var(--brand-50);">
+            <span class="text-sm font-bold" style="color:var(--ink);">الإجمالي</span>
+            <span class="text-lg font-black" style="color:var(--brand-500);">{{ number_format($booking->total_amount) }} ₪</span>
         </div>
         @endif
     </div>
 
-    <div class="success-actions">
-        <a href="{{ route('booking') }}" class="btn-primary-custom">
+    <div class="flex flex-col gap-3 items-center">
+        <a href="{{ route('booking') }}" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:opacity-90" style="background:var(--gradient-primary);min-width:220px;">
             <i class="fas fa-calendar-plus"></i> حجز جديد
         </a>
-        <a href="{{ route('home') }}" class="btn-secondary-custom">
+        <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all hover:-translate-y-0.5" style="background:white;color:var(--ink);border:1px solid rgba(0,0,0,0.06);min-width:220px;">
             <i class="fas fa-house"></i> العودة للرئيسية
         </a>
     </div>
-
 </div>
+
+<style>
+@keyframes successPop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+</style>
 @endsection
 
 @if($trackingData && $trackingData['pixel_enabled'])

@@ -1,4 +1,4 @@
-@extends('frontend.layouts.editorial.app')
+@extends($layoutPath)
 
 @section('title', 'أداة تصميم المقالات | مدونة سماح كير ')
 

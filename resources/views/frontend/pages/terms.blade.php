@@ -1,4 +1,4 @@
-@extends('frontend.layouts.organic-spa.app')
+@extends($layoutPath)
 
 @section('title', 'الشروط والأحكام - سماح كير')
 @section('meta_description', 'الشروط والأحكام المنظمة لاستخدام منصة سماح كير للخدمات الجمالية والحجز الإلكتروني في فلسطين.')

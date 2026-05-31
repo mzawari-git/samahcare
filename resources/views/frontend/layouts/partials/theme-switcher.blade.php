@@ -17,6 +17,7 @@
             <div class="grid grid-cols-2 gap-2">
                 @php
                 $architectures = [
+                    'clean-minimal' => ['name' => 'نظيف', 'icon' => 'ph ph-sparkle', 'color' => '#c4727f'],
                     'cyber-lab' => ['name' => 'سايبر', 'icon' => 'ph ph-cpu', 'color' => '#ff2a85'],
                     'organic-spa' => ['name' => 'طبيعة', 'icon' => 'ph ph-leaf', 'color' => '#00ff88'],
                     'editorial' => ['name' => 'تحريري', 'icon' => 'ph ph-text-aa', 'color' => '#ffffff'],
@@ -42,6 +43,7 @@
             <div class="flex gap-2 flex-wrap" id="colorPaletteContainer">
                 @php
                 $palettes = [
+                    'clean' => ['name' => 'نظيف', 'color' => '#c4727f', 'arch' => 'clean-minimal'],
                     'rose' => ['name' => 'روز', 'color' => '#ff2a85', 'arch' => 'cyber-lab'],
                     'midnight' => ['name' => 'ليلي', 'color' => '#7c3aed', 'arch' => 'cyber-lab'],
                     'natural' => ['name' => 'طبيعي', 'color' => '#00ff88', 'arch' => 'organic-spa'],
@@ -124,8 +126,8 @@ function toggleThemePalette() {
 }
 
 function switchArchitecture(arch) {
-    var colorMap = { 'cyber-lab': ['rose','midnight'], 'organic-spa': ['natural','forest'], 'editorial': ['minimal','ocean'], 'luxury-boutique': ['sunset','luxury'] };
-    var defaults = { 'cyber-lab': 'rose', 'organic-spa': 'natural', 'editorial': 'minimal', 'luxury-boutique': 'sunset' };
+    var colorMap = { 'clean-minimal': ['clean'], 'cyber-lab': ['rose','midnight'], 'organic-spa': ['natural','forest'], 'editorial': ['minimal','ocean'], 'luxury-boutique': ['sunset','luxury'] };
+    var defaults = { 'clean-minimal': 'clean', 'cyber-lab': 'rose', 'organic-spa': 'natural', 'editorial': 'minimal', 'luxury-boutique': 'sunset' };
     var currentColor = localStorage.getItem('سماح كير _color') || defaults[arch] || 'rose';
     var compatibleColors = colorMap[arch] || [];
     // If current color doesn't belong to new architecture, switch to default color for that architecture
@@ -162,8 +164,8 @@ function switchFont(font) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var savedArch = localStorage.getItem('سماح كير _architecture') || 'cyber-lab';
-    var savedColor = localStorage.getItem('سماح كير _color') || 'rose';
+    var savedArch = localStorage.getItem('سماح كير _architecture') || 'clean-minimal';
+    var savedColor = localStorage.getItem('سماح كير _color') || 'clean';
     var savedFont = localStorage.getItem('سماح كير _font') || 'Tajawal';
     // Default light mode — user can toggle to dark
     var savedMode = localStorage.getItem('سماح كير _mode') || 'light';

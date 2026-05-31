@@ -1,7 +1,7 @@
-@extends('frontend.layouts.editorial.app')
+@extends($layoutPath)
 
-@section('title', 'مدونة سماح كير  | مقالات ونصائح للعناية الشاملة')
-@section('meta_description', 'مدونة سماح كير  - مقالات ونصائح للعناية الشاملة، أحدث أخبار التجميل، وأدلة استخدام متكاملة.')
+@section('title', 'مدونة سماح كير | مقالات ونصائح للعناية الشاملة')
+@section('meta_description', 'مدونة سماح كير - مقالات ونصائح للعناية الشاملة، أحدث أخبار التجميل، وأدلة استخدام متكاملة.')
 
 @php
 function readingTime($content) {
@@ -11,257 +11,163 @@ function readingTime($content) {
 @endphp
 
 @section('content')
-<section style="background:var(--surface);min-height:100vh;">
-
-    {{-- HERO --}}
-    <div style="position:relative;overflow:hidden;padding:8rem 1rem 5rem;text-align:center;background:linear-gradient(135deg,var(--surface) 0%,color-mix(in srgb,var(--brand-500) 6%,var(--surface)) 50%,var(--surface) 100%);">
-        <div style="position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--brand-500) 12%,transparent) 0%,transparent 70%);pointer-events:none;"></div>
-        <div style="position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent-500,var(--brand-500)) 8%,transparent) 0%,transparent 70%);pointer-events:none;"></div>
-        <div style="max-width:720px;margin:0 auto;position:relative;z-index:1;">
-            <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1.25rem;border-radius:9999px;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);background:color-mix(in srgb,var(--brand-500) 6%,var(--surface));margin-bottom:1.75rem;">
-                <span style="font-size:.7rem;font-weight:800;color:var(--brand-500);letter-spacing:.1em;">مدونة سماح كير </span>
-            </div>
-            <h1 style="font-size:clamp(2rem,5vw,3.25rem);font-weight:900;color:var(--ink);line-height:1.15;margin-bottom:1rem;">جمالكِ يبدأ من <span style="color:var(--brand-500);">المعلومة الصحيحة</span></h1>
-            <p style="color:var(--ink-muted);font-size:1.05rem;line-height:1.8;max-width:580px;margin:0 auto 2rem;">اكتشفي أحدث المقالات والنصائح في عالم التجميل والعناية. كل ما تحتاجين معرفته عن الخدمات، وطرق العناية المثلى.</p>
-
-            {{-- Category filter pills --}}
-            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;">
-                <a href="{{ route('blog.index') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;background:var(--brand-500);color:#fff;border:none;transition:all .2s;">الكل</a>
-                <a href="{{ route('blog.category', 'articles') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);color:var(--ink);background:transparent;transition:all .2s;">مقالات عن الخدمات</a>
-                <a href="{{ route('blog.category', 'guides') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);color:var(--ink);background:transparent;transition:all .2s;">أدلة الاستخدام</a>
-                <a href="{{ route('blog.category', 'tips') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);color:var(--ink);background:transparent;transition:all .2s;">نصائح للعناية</a>
-            </div>
+<section class="py-20 lg:py-28" style="background:var(--surface-alt);">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4" style="color:var(--ink);">
+            مدونة <span class="gradient-text">سماح كير</span>
+        </h1>
+        <p class="text-base mb-8" style="color:var(--ink-muted);">اكتشفي أحدث المقالات والنصائح في عالم التجميل والعناية</p>
+        <div class="flex flex-wrap justify-center gap-2">
+            <a href="{{ route('blog.index') }}" class="px-4 py-2 rounded-full text-xs font-bold text-white" style="background:var(--brand-500);">الكل</a>
+            <a href="{{ route('blog.category', 'articles') }}" class="px-4 py-2 rounded-full text-xs font-bold transition-all hover:opacity-80" style="background:white;color:var(--ink);border:1px solid rgba(0,0,0,0.06);">مقالات</a>
+            <a href="{{ route('blog.category', 'guides') }}" class="px-4 py-2 rounded-full text-xs font-bold transition-all hover:opacity-80" style="background:white;color:var(--ink);border:1px solid rgba(0,0,0,0.06);">أدلة الاستخدام</a>
+            <a href="{{ route('blog.category', 'tips') }}" class="px-4 py-2 rounded-full text-xs font-bold transition-all hover:opacity-80" style="background:white;color:var(--ink);border:1px solid rgba(0,0,0,0.06);">نصائح</a>
         </div>
     </div>
-
-    {{-- FEATURED POSTS --}}
-    @if($featuredPosts->isNotEmpty())
-    <div style="padding:3rem 1rem;background:var(--surface);">
-        <div style="max-width:1100px;margin:0 auto;">
-            <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;">
-                <span style="font-size:.7rem;font-weight:800;color:var(--brand-500);letter-spacing:.1em;background:color-mix(in srgb,var(--brand-500) 8%,var(--surface));padding:.3rem .85rem;border-radius:9999px;">مقالات مميزة</span>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
-                @foreach($featuredPosts as $post)
-                <a href="{{ route('blog.show', $post->slug) }}" class="blog-card blog-card-featured" style="text-decoration:none;display:flex;flex-direction:column;border-radius:1.25rem;overflow:hidden;border:1px solid var(--glass-border);background:var(--surface-alt);transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;">
-                    <div style="position:relative;overflow:hidden;">
-                        @if($post->image_url)
-                        <img src="{{ $post->image_url }}" alt="{{ $post->title_ar }}" style="width:100%;height:220px;object-fit:cover;transition:transform .5s ease;display:block;" loading="lazy">
-                        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6));"></div>
-                        @else
-                        <div style="height:160px;background:linear-gradient(135deg,{{ $post->category_color }}15,{{ $post->category_color }}08);display:flex;align-items:center;justify-content:center;">
-                            <i class="ph ph-article" style="font-size:3rem;color:{{ $post->category_color }}30;"></i>
-                        </div>
-                        @endif
-                        <span style="position:absolute;top:1rem;right:1rem;z-index:2;font-size:.6rem;font-weight:800;color:#fff;background:var(--brand-500);padding:.25rem .75rem;border-radius:9999px;backdrop-filter:blur(4px);">مميز</span>
-                    </div>
-                    <div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;">
-                        <span style="display:inline-block;font-size:.6rem;font-weight:700;color:{{ $post->category_color }};background:{{ $post->category_color }}12;padding:.2rem .65rem;border-radius:9999px;margin-bottom:.75rem;align-self:flex-start;">{{ $post->category_label }}</span>
-                        <h3 style="font-size:1.05rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;line-height:1.5;">{{ $post->title_ar }}</h3>
-                        <p style="color:var(--ink-muted);font-size:.78rem;line-height:1.7;flex:1;">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 100) }}</p>
-                        <div style="margin-top:.75rem;display:flex;align-items:center;gap:.75rem;font-size:.65rem;color:var(--ink-dim);">
-                            <span>{{ $post->created_at->format('Y-m-d') }}</span>
-                            <span>&middot;</span>
-                            <span>{{ readingTime($post->content_ar) }} دقيقة قراءة</span>
-                        </div>
-                    </div>
-                </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    @endif
-
-    {{-- ARTICLES SECTION --}}
-    @if($articlePosts->isNotEmpty())
-    <div style="padding:3rem 1rem;background:var(--surface-alt);">
-        <div style="max-width:1100px;margin:0 auto;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
-                <div style="display:flex;align-items:center;gap:.75rem;">
-                    <span style="display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:.75rem;background:color-mix(in srgb,var(--brand-500) 12%,transparent);">
-                        <i class="ph ph-flask" style="color:var(--brand-500);"></i>
-                    </span>
-                    <div>
-                        <h2 style="font-size:1.3rem;font-weight:900;color:var(--ink);margin:0;">مقالات عن الخدمات</h2>
-                        <p style="color:var(--ink-muted);font-size:.75rem;margin:.25rem 0 0;">تعرفي على كل ما يخص خدمات التجميل والعناية</p>
-                    </div>
-                </div>
-                <a href="{{ route('blog.category', 'articles') }}" style="color:var(--brand-500);font-size:.78rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;transition:gap .2s;">عرض الكل <span style="font-size:.85rem;">&larr;</span></a>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;">
-                @foreach($articlePosts as $post)
-                <a href="{{ route('blog.show', $post->slug) }}" class="blog-card" style="text-decoration:none;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--glass-border);border-radius:1rem;padding:1.25rem;transition:all .3s cubic-bezier(.4,0,.2,1);">
-                    <span style="display:inline-block;font-size:.6rem;font-weight:700;color:{{ $post->category_color }};background:{{ $post->category_color }}12;padding:.2rem .65rem;border-radius:9999px;margin-bottom:.75rem;align-self:flex-start;">{{ $post->category_label }}</span>
-                    <h3 style="font-size:.95rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;line-height:1.5;">{{ $post->title_ar }}</h3>
-                    <p style="color:var(--ink-muted);font-size:.73rem;line-height:1.7;flex:1;">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 80) }}</p>
-                    <div style="margin-top:.75rem;display:flex;align-items:center;gap:.75rem;font-size:.6rem;color:var(--ink-dim);">
-                        <span>{{ $post->created_at->format('Y-m-d') }}</span>
-                        <span>&middot;</span>
-                        <span>{{ readingTime($post->content_ar) }} دقائق</span>
-                    </div>
-                </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    @endif
-
-    {{-- TIPS SECTION --}}
-    @if($tipPosts->isNotEmpty())
-    <div style="padding:3rem 1rem;background:var(--surface);">
-        <div style="max-width:1100px;margin:0 auto;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
-                <div style="display:flex;align-items:center;gap:.75rem;">
-                    <span style="display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:.75rem;background:color-mix(in srgb,var(--accent-500,#0891b2) 12%,transparent);">
-                        <i class="ph ph-sparkle" style="color:var(--accent-500,#0891b2);"></i>
-                    </span>
-                    <div>
-                        <h2 style="font-size:1.3rem;font-weight:900;color:var(--ink);margin:0;">نصائح للعناية الشاملة</h2>
-                        <p style="color:var(--ink-muted);font-size:.75rem;margin:.25rem 0 0;">دليلكِ المتكامل لروتين عناية صحيح وفعّال</p>
-                    </div>
-                </div>
-                <a href="{{ route('blog.category', 'tips') }}" style="color:var(--accent-500,#0891b2);font-size:.78rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;transition:gap .2s;">عرض الكل <span style="font-size:.85rem;">&larr;</span></a>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;">
-                @foreach($tipPosts as $post)
-                <a href="{{ route('blog.show', $post->slug) }}" class="blog-card" style="text-decoration:none;display:flex;flex-direction:column;background:var(--surface-alt);border:1px solid var(--glass-border);border-radius:1rem;padding:1.25rem;transition:all .3s cubic-bezier(.4,0,.2,1);">
-                    <span style="display:inline-block;font-size:.6rem;font-weight:700;color:{{ $post->category_color }};background:{{ $post->category_color }}12;padding:.2rem .65rem;border-radius:9999px;margin-bottom:.75rem;align-self:flex-start;">{{ $post->category_label }}</span>
-                    <h3 style="font-size:.95rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;line-height:1.5;">{{ $post->title_ar }}</h3>
-                    <p style="color:var(--ink-muted);font-size:.73rem;line-height:1.7;flex:1;">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 80) }}</p>
-                    <div style="margin-top:.75rem;display:flex;align-items:center;gap:.75rem;font-size:.6rem;color:var(--ink-dim);">
-                        <span>{{ $post->created_at->format('Y-m-d') }}</span>
-                        <span>&middot;</span>
-                        <span>{{ readingTime($post->content_ar) }} دقائق</span>
-                    </div>
-                </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    @endif
-
-    {{-- GUIDES SECTION --}}
-    @if($guidePosts->isNotEmpty())
-    <div style="padding:3rem 1rem;background:var(--surface-alt);">
-        <div style="max-width:1100px;margin:0 auto;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
-                <div style="display:flex;align-items:center;gap:.75rem;">
-                    <span style="display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:.75rem;background:color-mix(in srgb,var(--green-500,#16a34a) 12%,transparent);">
-                        <i class="ph ph-book-open" style="color:var(--green-500,#16a34a);"></i>
-                    </span>
-                    <div>
-                        <h2 style="font-size:1.3rem;font-weight:900;color:var(--ink);margin:0;">أدلة الاستخدام</h2>
-                        <p style="color:var(--ink-muted);font-size:.75rem;margin:.25rem 0 0;">أدلة شاملة ومقارنات بين الخدمات</p>
-                    </div>
-                </div>
-                <a href="{{ route('blog.category', 'guides') }}" style="color:var(--green-500,#16a34a);font-size:.78rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;transition:gap .2s;">عرض الكل <span style="font-size:.85rem;">&larr;</span></a>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;">
-                @foreach($guidePosts as $post)
-                <a href="{{ route('blog.show', $post->slug) }}" class="blog-card" style="text-decoration:none;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--glass-border);border-radius:1rem;padding:1.25rem;transition:all .3s cubic-bezier(.4,0,.2,1);">
-                    <span style="display:inline-block;font-size:.6rem;font-weight:700;color:{{ $post->category_color }};background:{{ $post->category_color }}12;padding:.2rem .65rem;border-radius:9999px;margin-bottom:.75rem;align-self:flex-start;">{{ $post->category_label }}</span>
-                    <h3 style="font-size:.95rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;line-height:1.5;">{{ $post->title_ar }}</h3>
-                    <p style="color:var(--ink-muted);font-size:.73rem;line-height:1.7;flex:1;">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 80) }}</p>
-                    <div style="margin-top:.75rem;display:flex;align-items:center;gap:.75rem;font-size:.6rem;color:var(--ink-dim);">
-                        <span>{{ $post->created_at->format('Y-m-d') }}</span>
-                        <span>&middot;</span>
-                        <span>{{ readingTime($post->content_ar) }} دقائق</span>
-                    </div>
-                </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    @endif
-
-    {{-- LATEST POSTS --}}
-    @if($latestPosts->isNotEmpty())
-    <div style="padding:3rem 1rem 4rem;background:var(--surface);">
-        <div style="max-width:1100px;margin:0 auto;">
-            <div style="text-align:center;margin-bottom:2.5rem;">
-                <h2 style="font-size:1.6rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;">أحدث المقالات</h2>
-                <p style="color:var(--ink-muted);font-size:.85rem;">كل ما هو جديد في عالم التجميل والعناية</p>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
-                @foreach($latestPosts as $post)
-                <a href="{{ route('blog.show', $post->slug) }}" class="blog-card blog-card-image" style="text-decoration:none;display:flex;flex-direction:column;border-radius:1.25rem;overflow:hidden;border:1px solid var(--glass-border);background:var(--surface-alt);transition:all .3s cubic-bezier(.4,0,.2,1);">
-                    @if($post->image_url)
-                    <div style="position:relative;overflow:hidden;">
-                        <img src="{{ $post->image_url }}" alt="{{ $post->title_ar }}" style="width:100%;height:200px;object-fit:cover;transition:transform .5s ease;display:block;" loading="lazy">
-                    </div>
-                    @else
-                    <div style="height:140px;background:linear-gradient(135deg,{{ $post->category_color }}10,{{ $post->category_color }}05);"></div>
-                    @endif
-                    <div style="padding:1.25rem;flex:1;display:flex;flex-direction:column;">
-                        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
-                            <span style="font-size:.55rem;font-weight:700;color:{{ $post->category_color }};background:{{ $post->category_color }}12;padding:.15rem .55rem;border-radius:9999px;letter-spacing:.02em;">{{ $post->category_label }}</span>
-                            <span style="font-size:.6rem;color:var(--ink-dim);">{{ $post->created_at->format('Y-m-d') }}</span>
-                        </div>
-                        <h3 style="font-size:.95rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;line-height:1.5;">{{ $post->title_ar }}</h3>
-                        <p style="color:var(--ink-muted);font-size:.75rem;line-height:1.7;flex:1;">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 90) }}</p>
-                        <div style="margin-top:.75rem;display:flex;align-items:center;gap:.5rem;font-size:.6rem;color:var(--ink-dim);">
-                            <span>{{ readingTime($post->content_ar) }} دقيقة قراءة</span>
-                        </div>
-                    </div>
-                </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    @endif
-
-    {{-- NEWSLETTER CTA --}}
-    <div style="padding:3.5rem 1rem;background:var(--surface-alt);">
-        <div style="max-width:600px;margin:0 auto;text-align:center;">
-            <span style="display:inline-flex;align-items:center;justify-content:center;width:3rem;height:3rem;border-radius:1rem;background:color-mix(in srgb,var(--brand-500) 12%,transparent);margin-bottom:1.25rem;">
-                <i class="ph ph-envelope-open" style="font-size:1.3rem;color:var(--brand-500);"></i>
-            </span>
-            <h2 style="font-size:1.3rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;">انضمي إلى نشرتنا البريدية</h2>
-            <p style="color:var(--ink-muted);font-size:.85rem;margin-bottom:1.5rem;">احصلي على أحدث المقالات والنصائح الحصرية مباشرة في بريدك الإلكتروني</p>
-            <form action="#" method="POST" style="display:flex;gap:.5rem;max-width:420px;margin:0 auto;">
-                @csrf
-                <input type="email" name="email" placeholder="بريدك الإلكتروني" required style="flex:1;padding:.65rem 1rem;border-radius:.75rem;border:1px solid var(--glass-border);background:var(--surface);color:var(--ink);font-size:.8rem;outline:none;transition:border-color .2s;">
-                <button type="submit" style="padding:.65rem 1.5rem;border-radius:.75rem;border:none;background:var(--brand-500);color:#fff;font-size:.8rem;font-weight:800;cursor:pointer;transition:all .2s;">اشتراك</button>
-            </form>
-        </div>
-    </div>
-
-    {{-- EMPTY STATE --}}
-    @if($latestPosts->isEmpty())
-    <div style="padding:5rem 1rem;text-align:center;">
-        <i class="ph ph-article" style="font-size:4rem;color:var(--ink-dim);opacity:.3;margin-bottom:1rem;"></i>
-        <h2 style="font-size:1.5rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;">المقالات قريباً</h2>
-        <p style="color:var(--ink-muted);">نعمل على تجهيز محتوى قيّم ومفيد لكِ. تابعينا!</p>
-    </div>
-    @endif
-
 </section>
 
-<style>
-.blog-card {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
-}
-.blog-card:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--brand-500) 30%, var(--glass-border)) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
-}
-.blog-card-featured:hover img {
-    transform: scale(1.06);
-}
-.blog-card-image:hover img {
-    transform: scale(1.06);
-}
-.blog-card-featured:hover {
-    border-color: color-mix(in srgb, var(--brand-500) 40%, var(--glass-border)) !important;
-}
-.category-pill:hover {
-    background: var(--brand-500) !important;
-    color: #fff !important;
-    border-color: var(--brand-500) !important;
-}
-.newsletter-input:focus {
-    border-color: var(--brand-500) !important;
-}
-</style>
+@if($featuredPosts->isNotEmpty())
+<div class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-xl font-black mb-8" style="color:var(--ink);">مقالات مميزة</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($featuredPosts as $post)
+            <a href="{{ route('blog.show', $post->slug) }}" class="group block rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg" style="background:white;border:1px solid rgba(0,0,0,0.04);text-decoration:none;">
+                @if($post->image_url)
+                <div class="relative overflow-hidden" style="height:200px;">
+                    <img src="{{ $post->image_url }}" alt="{{ $post->title_ar }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                </div>
+                @else
+                <div class="flex items-center justify-center" style="height:140px;background:var(--brand-50);">
+                    <i class="ph ph-article text-4xl" style="color:var(--brand-300);"></i>
+                </div>
+                @endif
+                <div class="p-6">
+                    <span class="inline-block text-[10px] font-bold px-2.5 py-1 rounded-full mb-3" style="color:{{ $post->category_color }};background:{{ $post->category_color }}12;">{{ $post->category_label }}</span>
+                    <h3 class="text-base font-bold mb-2" style="color:var(--ink);line-height:1.5;">{{ $post->title_ar }}</h3>
+                    <p class="text-sm mb-4 line-clamp-2" style="color:var(--ink-muted);">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 100) }}</p>
+                    <div class="flex items-center gap-3 text-xs" style="color:var(--ink-dim);">
+                        <span>{{ $post->created_at->format('Y-m-d') }}</span>
+                        <span>&middot;</span>
+                        <span>{{ readingTime($post->content_ar) }} دقيقة قراءة</span>
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if($articlePosts->isNotEmpty())
+<div class="py-16" style="background:var(--surface-alt);">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-xl font-black" style="color:var(--ink);">مقالات عن الخدمات</h2>
+            <a href="{{ route('blog.category', 'articles') }}" class="text-sm font-bold" style="color:var(--brand-500);">عرض الكل &larr;</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($articlePosts as $post)
+            <a href="{{ route('blog.show', $post->slug) }}" class="group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md" style="background:white;border:1px solid rgba(0,0,0,0.04);text-decoration:none;">
+                <span class="inline-block text-[10px] font-bold px-2.5 py-1 rounded-full mb-3" style="color:{{ $post->category_color }};background:{{ $post->category_color }}12;">{{ $post->category_label }}</span>
+                <h3 class="text-sm font-bold mb-2" style="color:var(--ink);line-height:1.5;">{{ $post->title_ar }}</h3>
+                <p class="text-xs mb-3 line-clamp-2" style="color:var(--ink-muted);">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 80) }}</p>
+                <div class="flex items-center gap-3 text-[10px]" style="color:var(--ink-dim);">
+                    <span>{{ $post->created_at->format('Y-m-d') }}</span>
+                    <span>{{ readingTime($post->content_ar) }} دقائق</span>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if($tipPosts->isNotEmpty())
+<div class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-xl font-black" style="color:var(--ink);">نصائح للعناية</h2>
+            <a href="{{ route('blog.category', 'tips') }}" class="text-sm font-bold" style="color:var(--brand-500);">عرض الكل &larr;</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($tipPosts as $post)
+            <a href="{{ route('blog.show', $post->slug) }}" class="group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md" style="background:white;border:1px solid rgba(0,0,0,0.04);text-decoration:none;">
+                <span class="inline-block text-[10px] font-bold px-2.5 py-1 rounded-full mb-3" style="color:{{ $post->category_color }};background:{{ $post->category_color }}12;">{{ $post->category_label }}</span>
+                <h3 class="text-sm font-bold mb-2" style="color:var(--ink);line-height:1.5;">{{ $post->title_ar }}</h3>
+                <p class="text-xs mb-3 line-clamp-2" style="color:var(--ink-muted);">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 80) }}</p>
+                <div class="flex items-center gap-3 text-[10px]" style="color:var(--ink-dim);">
+                    <span>{{ $post->created_at->format('Y-m-d') }}</span>
+                    <span>{{ readingTime($post->content_ar) }} دقائق</span>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if($guidePosts->isNotEmpty())
+<div class="py-16" style="background:var(--surface-alt);">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-xl font-black" style="color:var(--ink);">أدلة الاستخدام</h2>
+            <a href="{{ route('blog.category', 'guides') }}" class="text-sm font-bold" style="color:var(--brand-500);">عرض الكل &larr;</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($guidePosts as $post)
+            <a href="{{ route('blog.show', $post->slug) }}" class="group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md" style="background:white;border:1px solid rgba(0,0,0,0.04);text-decoration:none;">
+                <span class="inline-block text-[10px] font-bold px-2.5 py-1 rounded-full mb-3" style="color:{{ $post->category_color }};background:{{ $post->category_color }}12;">{{ $post->category_label }}</span>
+                <h3 class="text-sm font-bold mb-2" style="color:var(--ink);line-height:1.5;">{{ $post->title_ar }}</h3>
+                <p class="text-xs mb-3 line-clamp-2" style="color:var(--ink-muted);">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 80) }}</p>
+                <div class="flex items-center gap-3 text-[10px]" style="color:var(--ink-dim);">
+                    <span>{{ $post->created_at->format('Y-m-d') }}</span>
+                    <span>{{ readingTime($post->content_ar) }} دقائق</span>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if($latestPosts->isNotEmpty())
+<div class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-black mb-2" style="color:var(--ink);">أحدث المقالات</h2>
+            <p class="text-sm" style="color:var(--ink-muted);">كل ما هو جديد في عالم التجميل والعناية</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($latestPosts as $post)
+            <a href="{{ route('blog.show', $post->slug) }}" class="group block rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg" style="background:white;border:1px solid rgba(0,0,0,0.04);text-decoration:none;">
+                @if($post->image_url)
+                <div class="relative overflow-hidden" style="height:180px;">
+                    <img src="{{ $post->image_url }}" alt="{{ $post->title_ar }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                </div>
+                @else
+                <div style="height:120px;background:var(--surface-alt);"></div>
+                @endif
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="color:{{ $post->category_color }};background:{{ $post->category_color }}12;">{{ $post->category_label }}</span>
+                        <span class="text-[10px]" style="color:var(--ink-dim);">{{ $post->created_at->format('Y-m-d') }}</span>
+                    </div>
+                    <h3 class="text-sm font-bold mb-2" style="color:var(--ink);line-height:1.5;">{{ $post->title_ar }}</h3>
+                    <p class="text-xs line-clamp-2" style="color:var(--ink-muted);">{{ Str::limit(strip_tags($post->excerpt_ar ?? $post->content_ar), 90) }}</p>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if($latestPosts->isEmpty())
+<div class="py-20 text-center">
+    <i class="ph ph-article text-5xl mb-4" style="color:var(--ink-dim);opacity:0.3;"></i>
+    <h2 class="text-xl font-black mb-2" style="color:var(--ink);">المقالات قريباً</h2>
+    <p style="color:var(--ink-muted);">نعمل على تجهيز محتوى قيّم ومفيد لكِ</p>
+</div>
+@endif
 @endsection
