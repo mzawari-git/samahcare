@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\AdAlertController;
 use App\Http\Controllers\Admin\GoogleAdsController;
 use App\Http\Controllers\Admin\AiCreativeController;
 use App\Http\Controllers\Admin\AudienceController;
+use App\Http\Controllers\Admin\MetaToolsController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
@@ -312,4 +313,46 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::post('/lookalike', [AudienceController::class, 'createLookalike'])->name('admin.audiences.lookalike');
         Route::post('/overlap', [AudienceController::class, 'overlapAnalysis'])->name('admin.audiences.overlap');
     });
+
+    // ============================================================
+    // Meta Advanced Tools
+    // ============================================================
+
+    // WhatsApp
+    Route::get('/meta-tools/whatsapp', [MetaToolsController::class, 'whatsappDashboard'])->name('admin.meta-tools.whatsapp');
+    Route::post('/meta-tools/whatsapp/send', [MetaToolsController::class, 'whatsappSend'])->name('admin.meta-tools.whatsapp-send');
+    Route::post('/meta-tools/whatsapp/bulk', [MetaToolsController::class, 'whatsappBulkSend'])->name('admin.meta-tools.whatsapp-bulk');
+    Route::get('/meta-tools/whatsapp/test', [MetaToolsController::class, 'whatsappTest'])->name('admin.meta-tools.whatsapp-test');
+
+    // Conversations
+    Route::get('/meta-tools/conversations', [MetaToolsController::class, 'conversationsIndex'])->name('admin.meta-tools.conversations');
+    Route::get('/meta-tools/conversations/{id}/messages', [MetaToolsController::class, 'conversationsMessages'])->name('admin.meta-tools.conversation-messages');
+    Route::post('/meta-tools/conversations/reply', [MetaToolsController::class, 'conversationsReply'])->name('admin.meta-tools.conversation-reply');
+    Route::get('/meta-tools/conversations/unread', [MetaToolsController::class, 'conversationsUnread'])->name('admin.meta-tools.conversation-unread');
+
+    // Pixel Helper
+    Route::get('/meta-tools/pixel-helper', [MetaToolsController::class, 'pixelHelperIndex'])->name('admin.meta-tools.pixel-helper');
+    Route::get('/meta-tools/pixel-helper/verify', [MetaToolsController::class, 'pixelHelperVerify'])->name('admin.meta-tools.pixel-verify');
+    Route::get('/meta-tools/pixel-helper/health', [MetaToolsController::class, 'pixelHelperHealth'])->name('admin.meta-tools.pixel-health');
+
+    // A/B Testing
+    Route::get('/meta-tools/ab-tests', [MetaToolsController::class, 'abTestsIndex'])->name('admin.ab-tests.index');
+    Route::post('/meta-tools/ab-tests', [MetaToolsController::class, 'abTestsCreate'])->name('admin.ab-tests.create');
+    Route::get('/meta-tools/ab-tests/{id}/analyze', [MetaToolsController::class, 'abTestsAnalyze'])->name('admin.ab-tests.analyze');
+    Route::post('/meta-tools/ab-tests/{id}/winner', [MetaToolsController::class, 'abTestsDeclareWinner'])->name('admin.ab-tests.winner');
+
+    // Instagram
+    Route::get('/meta-tools/instagram', [MetaToolsController::class, 'instagramDashboard'])->name('admin.meta-tools.instagram');
+    Route::get('/meta-tools/instagram/insights', [MetaToolsController::class, 'instagramInsights'])->name('admin.meta-tools.instagram-insights');
+    Route::get('/meta-tools/instagram/top-posts', [MetaToolsController::class, 'instagramTopPosts'])->name('admin.meta-tools.instagram-top-posts');
+
+    // Audience Upload
+    Route::get('/meta-tools/audience-upload', [MetaToolsController::class, 'audienceUploadIndex'])->name('admin.meta-tools.audience-upload');
+    Route::post('/meta-tools/audience-upload/csv', [MetaToolsController::class, 'audienceUploadCsv'])->name('admin.meta-tools.audience-upload-csv');
+    Route::post('/meta-tools/audience-upload/phones', [MetaToolsController::class, 'audienceUploadPhones'])->name('admin.meta-tools.audience-upload-phones');
+    Route::post('/meta-tools/audience-upload/emails', [MetaToolsController::class, 'audienceUploadEmails'])->name('admin.meta-tools.audience-upload-emails');
+    Route::get('/meta-tools/audience-upload/template', [MetaToolsController::class, 'audienceTemplate'])->name('admin.meta-tools.audience-template');
+
+    // Enhanced Matching
+    Route::post('/meta-tools/enhanced-matching/test', [MetaToolsController::class, 'enhancedMatchingTest'])->name('admin.meta-tools.enhanced-matching');
 });

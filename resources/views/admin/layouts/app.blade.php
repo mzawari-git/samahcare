@@ -399,6 +399,67 @@ src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
                     <a href="{{ route('admin.meta-marketing.index') }}" class="nav-item {{ request()->routeIs('admin.meta-marketing.*') && !request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
                         <i class="fas fa-rocket"></i> <span>التسويق عبر ميتا</span>
                     </a>
+                    <a href="{{ route('admin.ads.dashboard') }}" class="nav-item {{ request()->routeIs('admin.ads.*') ? 'active' : '' }}">
+                        <i class="fab fa-facebook"></i> <span>إعلانات Meta</span>
+                    </a>
+                    <a href="{{ route('admin.google-ads.index') }}" class="nav-item {{ request()->routeIs('admin.google-ads.*') ? 'active' : '' }}">
+                        <i class="fab fa-google"></i> <span>إعلانات Google</span>
+                    </a>
+                    <a href="{{ route('admin.leads-hub.index') }}" class="nav-item {{ request()->routeIs('admin.leads-hub.*') ? 'active' : '' }}">
+                        <i class="fas fa-user-friends"></i> <span>العملاء المحتملون</span>
+                    </a>
+                    <a href="{{ route('admin.meta-tools.conversations') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.conversations*') ? 'active' : '' }}">
+                        <i class="fab fa-facebook-messenger"></i> <span>المحادثات</span>
+                    </a>
+                    <a href="{{ route('admin.meta-tools.whatsapp') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.whatsapp*') ? 'active' : '' }}">
+                        <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
+                    </a>
+                    <a href="{{ route('admin.meta-tools.instagram') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.instagram*') ? 'active' : '' }}">
+                        <i class="fab fa-instagram"></i> <span>Instagram</span>
+                    </a>
+                    <a href="{{ route('admin.ai-creative.index') }}" class="nav-item {{ request()->routeIs('admin.ai-creative.*') ? 'active' : '' }}">
+                        <i class="fas fa-magic"></i> <span>AI Creative</span>
+                    </a>
+                    <a href="{{ route('admin.audiences.index') }}" class="nav-item {{ request()->routeIs('admin.audiences.*') ? 'active' : '' }}">
+                        <i class="fas fa-bullseye"></i> <span>بناء الجماهير</span>
+                    </a>
+                    <a href="{{ route('admin.meta-tools.audience-upload') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.audience-upload*') ? 'active' : '' }}">
+                        <i class="fas fa-upload"></i> <span>رفع بيانات الجمهور</span>
+                    </a>
+                    <a href="{{ route('admin.ab-tests.index') }}" class="nav-item {{ request()->routeIs('admin.ab-tests.*') ? 'active' : '' }}">
+                        <i class="fas fa-flask"></i> <span>A/B Testing</span>
+                    </a>
+                    <a href="{{ route('admin.meta-tools.pixel-helper') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.pixel-helper*') ? 'active' : '' }}">
+                        <i class="fas fa-plug"></i> <span>Pixel Helper</span>
+                    </a>
+                    <a href="{{ route('admin.diagnostics.index') }}" class="nav-item {{ request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
+                        <i class="fas fa-stethoscope"></i> <span>تشخيص CAPI</span>
+                    </a>
+                    <a href="{{ route('admin.account-configuration.index') }}" class="nav-item {{ request()->routeIs('admin.account-configuration.*') ? 'active' : '' }}">
+                        <i class="fas fa-cogs"></i> <span>إعدادات الحساب</span>
+                    </a>
+                    <a href="{{ route('admin.ai-compliance.index') }}" class="nav-item {{ request()->routeIs('admin.ai-compliance.*') ? 'active' : '' }}">
+                        <i class="fas fa-shield-alt"></i> <span>الامتثال AI</span>
+                    </a>
+                    <a href="{{ route('admin.trigger-words.index') }}" class="nav-item {{ request()->routeIs('admin.trigger-words.*') ? 'active' : '' }}">
+                        <i class="fas fa-ban"></i> <span>الكلمات الممنوعة</span>
+                    </a>
+                    <a href="{{ route('admin.seo.index') }}" class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
+                        <i class="fas fa-search"></i> <span>SEO Management</span>
+                    </a>
+                    <a href="{{ route('admin.roas.index') }}" class="nav-item {{ request()->routeIs('admin.roas.*') ? 'active' : '' }}">
+                        <i class="fas fa-chart-bar"></i> <span>True ROAS</span>
+                    </a>
+                    <a href="{{ route('admin.ad-alerts.index') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.*') ? 'active' : '' }}">
+                        <i class="fas fa-bell"></i> <span>تنبيهات الإعلانات</span>
+                        @php $alertCount = \App\Models\AdAlert::unresolved()->unacknowledged()->count(); @endphp
+                        @if($alertCount > 0)
+                            <span class="badge bg-danger ms-auto">{{ $alertCount }}</span>
+                        @endif
+                    </a>
+                    <a href="{{ route('admin.ad-alerts.pause-log') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.pause-log') ? 'active' : '' }}">
+                        <i class="fas fa-pause-circle"></i> <span>سجل الإيقاف التلقائي</span>
+                    </a>
                     <a href="{{ route('admin.diagnostics.index') }}" class="nav-item {{ request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
                         <i class="fas fa-stethoscope"></i> <span>تشخيص CAPI</span>
                     </a>
