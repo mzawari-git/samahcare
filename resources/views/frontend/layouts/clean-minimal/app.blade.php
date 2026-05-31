@@ -40,9 +40,9 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}?v=5">
+    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}?v=6">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/themes/clean.css') }}?v=5">
+    <link rel="stylesheet" href="{{ asset('css/themes/clean.css') }}?v=6">
     <meta name="theme-color" content="#ffffff">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
@@ -69,7 +69,7 @@
     @include('frontend.layouts.clean-minimal.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="{{ asset('js/app.js') }}?v=5"></script>
+    <script src="{{ asset('js/app.js') }}?v=6"></script>
 
     @stack('scripts')
 

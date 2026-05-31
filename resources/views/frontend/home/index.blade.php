@@ -22,99 +22,118 @@
 
 @section('content')
 
-<section class="relative overflow-hidden min-h-[90vh] flex items-center" style="background:linear-gradient(135deg, var(--brand-50) 0%, var(--brand-100) 50%, var(--brand-50) 100%);">
+{{-- ═══════════════════════════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="relative overflow-hidden" style="background: var(--gradient-hero); min-height: 92vh;">
+    {{-- Decorative Elements --}}
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-30" style="background:radial-gradient(circle, var(--brand-200), transparent 70%);"></div>
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full opacity-20" style="background:radial-gradient(circle, var(--brand-300), transparent 70%);"></div>
+        <div class="absolute top-20 right-10 w-72 h-72 rounded-full opacity-40 animate-float-slow" style="background: radial-gradient(circle, var(--brand-200), transparent 70%);"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 rounded-full opacity-30 animate-float" style="background: radial-gradient(circle, var(--accent-200), transparent 70%);"></div>
+        <div class="absolute top-1/2 left-1/3 w-48 h-48 rounded-full opacity-20" style="background: radial-gradient(circle, var(--brand-300), transparent 70%);"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-16 lg:py-0">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center min-h-[92vh] py-20">
+            
+            {{-- Content --}}
             <div class="order-2 lg:order-1">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-8 animate-fade-up" style="background:var(--brand-100);color:var(--brand-600);">
-                    <span class="w-2 h-2 rounded-full animate-pulse" style="background:var(--brand-500);"></span>
-                    تخفيضات الصيف — خصم يصل إلى 40%
+                {{-- Badge --}}
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 animate-fade-up" style="background: rgba(255,255,255,0.8); backdrop-filter: blur(8px); border: 1px solid var(--brand-100); animation-delay: 0.1s;">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background: var(--brand-500);"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5" style="background: var(--brand-500);"></span>
+                    </span>
+                    <span class="text-sm font-semibold" style="color: var(--brand-700);">تخفيضات الصيف — خصم يصل إلى 40%</span>
                 </div>
 
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.05] tracking-tight mb-6 font-display animate-fade-up" style="color:var(--ink);animation-delay:0.1s;">
-                    جمالكِ،
-                    <br>
-                    <span class="gradient-text">إلى آفاق جديدة</span>
+                {{-- Heading --}}
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.05] tracking-tight mb-6 animate-fade-up" style="color: var(--ink); animation-delay: 0.2s;">
+                    اكتشفي
+                    <span class="block mt-2">
+                        <span class="gradient-text">جمالكِ الحقيقي</span>
+                    </span>
                 </h1>
 
-                <p class="text-lg lg:text-xl leading-relaxed mb-10 max-w-lg font-body animate-fade-up" style="color:var(--ink-muted);animation-delay:0.2s;">
-                    منتجات عناية بالبشرة والتجميل الفاخرة توصل إلى بابكِ. ماركات أصلية، نصائح خبراء، ونتائج مضمونة.
+                {{-- Description --}}
+                <p class="text-lg lg:text-xl leading-relaxed mb-10 max-w-lg animate-fade-up" style="color: var(--ink-muted); animation-delay: 0.3s;">
+                    خدمات عناية بالبشرة وتجميل فاخرة بأيدي خبيرات معتمدات. احجزي موعدكِ الآن واستمتعي بتجربة جمالية استثنائية.
                 </p>
 
-                <div class="flex flex-col sm:flex-row items-start gap-4 animate-fade-up" style="animation-delay:0.3s;">
-                    <a href="{{ route('booking') }}" class="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 font-body" style="background:var(--brand-500);box-shadow:0 4px 20px rgba(220,38,38,0.35);">
-                        تسوقي الآن
+                {{-- CTA Buttons --}}
+                <div class="flex flex-col sm:flex-row items-start gap-4 mb-12 animate-fade-up" style="animation-delay: 0.4s;">
+                    <a href="{{ route('booking') }}" class="btn btn-primary group">
+                        <span>احجزي موعدكِ الآن</span>
                         <i class="ph ph-arrow-left transition-transform group-hover:-translate-x-1"></i>
                     </a>
-                    <a href="#services" class="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1 font-body" style="background:white;color:var(--ink);border:2px solid var(--brand-100);box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-                        تصفحي الفئات
-                        <i class="ph ph-caret-down transition-transform group-hover:translate-y-0.5"></i>
+                    <a href="#services" class="btn btn-secondary group">
+                        <i class="ph ph-grid-four"></i>
+                        <span>تصفحي خدماتنا</span>
                     </a>
                 </div>
 
-                <div class="flex items-center gap-8 mt-12 pt-8 animate-fade-up" style="border-top:1px solid var(--brand-100);animation-delay:0.4s;">
-                    <div>
-                        <span class="text-3xl font-black block font-display" style="color:var(--ink);">+{{ \App\Models\Service::count() }}</span>
-                        <span class="text-xs font-body" style="color:var(--ink-dim);">خدمة احترافية</span>
+                {{-- Stats --}}
+                <div class="flex items-center gap-8 lg:gap-12 animate-fade-up" style="animation-delay: 0.5s;">
+                    <div class="text-center">
+                        <div class="text-3xl lg:text-4xl font-black" style="color: var(--ink);">+{{ \App\Models\Service::count() }}</div>
+                        <div class="text-xs lg:text-sm mt-1" style="color: var(--ink-dim);">خدمة متاحة</div>
                     </div>
-                    <div class="w-px h-12" style="background:var(--brand-100);"></div>
-                    <div>
-                        <span class="text-3xl font-black block font-display" style="color:var(--ink);">5,000+</span>
-                        <span class="text-xs font-body" style="color:var(--ink-dim);">عميلة سعيدة</span>
+                    <div class="w-px h-14" style="background: var(--brand-200);"></div>
+                    <div class="text-center">
+                        <div class="text-3xl lg:text-4xl font-black" style="color: var(--ink);">5K+</div>
+                        <div class="text-xs lg:text-sm mt-1" style="color: var(--ink-dim);">عميلة سعيدة</div>
                     </div>
-                    <div class="w-px h-12" style="background:var(--brand-100);"></div>
-                    <div>
-                        <span class="text-3xl font-black block font-display" style="color:var(--ink);">4.9</span>
-                        <div class="flex items-center gap-0.5">
-                            @for($i = 0; $i < 5; $i++)
-                            <i class="ph-fill ph-star text-[10px]" style="color:#fbbf24;"></i>
-                            @endfor
+                    <div class="w-px h-14" style="background: var(--brand-200);"></div>
+                    <div class="text-center">
+                        <div class="flex items-center gap-1 justify-center">
+                            <span class="text-3xl lg:text-4xl font-black" style="color: var(--ink);">4.9</span>
+                            <i class="ph-fill ph-star text-xl" style="color: var(--accent-500);"></i>
                         </div>
+                        <div class="text-xs lg:text-sm mt-1" style="color: var(--ink-dim);">تقييم العميلات</div>
                     </div>
                 </div>
             </div>
 
-            <div class="order-1 lg:order-2 relative animate-fade-up" style="animation-delay:0.2s;">
-                <div class="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl" style="background:linear-gradient(135deg, var(--brand-100), var(--brand-200));">
+            {{-- Visual --}}
+            <div class="order-1 lg:order-2 relative animate-fade-up" style="animation-delay: 0.3s;">
+                {{-- Main Image Card --}}
+                <div class="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-xl" style="background: linear-gradient(145deg, var(--brand-100), var(--brand-200));">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="text-center">
-                            <div class="w-28 h-28 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg" style="background:white;">
-                                <i class="ph ph-sparkle text-5xl" style="color:var(--brand-500);"></i>
+                            <div class="w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg" style="background: white;">
+                                <i class="ph ph-sparkle text-6xl" style="color: var(--brand-500);"></i>
                             </div>
-                            <p class="text-lg font-bold font-body" style="color:var(--brand-700);">سماح كير</p>
-                            <p class="text-xs mt-1" style="color:var(--brand-500);">Beauty & Care</p>
+                            <p class="text-2xl font-bold" style="color: var(--brand-700);">سماح كير</p>
+                            <p class="text-sm mt-2" style="color: var(--brand-500);">Beauty & Wellness</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="absolute -bottom-6 -right-6 lg:-right-12 p-5 rounded-2xl shadow-xl animate-float-slow" style="background:white;max-width:240px;border:1px solid var(--brand-50);">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:#dcfce7;">
-                            <i class="ph-fill ph-check-circle text-xl" style="color:#16a34a;"></i>
+                {{-- Floating Card 1 --}}
+                <div class="absolute -bottom-6 -right-4 lg:-right-8 p-5 rounded-2xl shadow-xl animate-float" style="background: white; max-width: 220px; border: 1px solid var(--brand-50);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: var(--success-bg);">
+                            <i class="ph-fill ph-check-circle text-xl" style="color: var(--success);"></i>
                         </div>
                         <div>
-                            <p class="text-sm font-bold font-body" style="color:var(--ink);">حجز مؤكد</p>
-                            <p class="text-[11px] font-body" style="color:var(--ink-dim);">قبل دقائق</p>
+                            <p class="text-sm font-bold" style="color: var(--ink);">حجز مؤكد</p>
+                            <p class="text-xs" style="color: var(--ink-dim);">قبل 3 دقائق</p>
                         </div>
                     </div>
-                    <p class="text-xs font-body" style="color:var(--ink-muted);">تم حجز خدمة العناية بالبشرة بنجاح</p>
+                    <p class="text-xs" style="color: var(--ink-muted);">تم حجز جلسة العناية بالبشرة</p>
                 </div>
 
-                <div class="absolute -top-4 -left-4 lg:-left-8 p-4 rounded-2xl shadow-xl animate-float-fast" style="background:white;max-width:180px;border:1px solid var(--brand-50);">
-                    <div class="flex items-center gap-2">
+                {{-- Floating Card 2 --}}
+                <div class="absolute -top-4 -left-4 lg:-left-8 p-4 rounded-2xl shadow-xl animate-float-slow" style="background: white; max-width: 180px; border: 1px solid var(--brand-50);">
+                    <div class="flex items-center gap-3">
                         <div class="flex -space-x-2 space-x-reverse">
-                            <div class="w-8 h-8 rounded-full border-2 border-white" style="background:var(--brand-100);"></div>
-                            <div class="w-8 h-8 rounded-full border-2 border-white" style="background:var(--brand-200);"></div>
-                            <div class="w-8 h-8 rounded-full border-2 border-white" style="background:var(--brand-300);"></div>
+                            <div class="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold" style="background: var(--brand-100); color: var(--brand-600);">س</div>
+                            <div class="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold" style="background: var(--accent-100); color: var(--accent-600);">ن</div>
+                            <div class="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold" style="background: var(--brand-200); color: var(--brand-700);">ل</div>
                         </div>
                         <div>
-                            <p class="text-xs font-bold" style="color:var(--ink);">+500</p>
-                            <p class="text-[10px]" style="color:var(--ink-dim);">هذا الأسبوع</p>
+                            <p class="text-sm font-bold" style="color: var(--ink);">+120</p>
+                            <p class="text-[10px]" style="color: var(--ink-dim);">هذا الشهر</p>
                         </div>
                     </div>
                 </div>
@@ -123,123 +142,135 @@
     </div>
 </section>
 
-<section class="py-8 lg:py-10" style="background:white;border-bottom:1px solid var(--brand-50);">
+{{-- ═══════════════════════════════════════════════════════════════
+     TRUST BAR
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="py-6 lg:py-8 border-b" style="background: var(--surface); border-color: var(--neutral-100);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             <div class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background:var(--brand-50);">
-                    <i class="ph ph-truck text-xl" style="color:var(--brand-500);"></i>
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background: var(--brand-50);">
+                    <i class="ph ph-truck text-lg" style="color: var(--brand-600);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">شحن مجاني</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">للطلبات فوق 150 شيكل</p>
+                    <p class="text-sm font-semibold" style="color: var(--ink);">توصيل مجاني</p>
+                    <p class="text-xs" style="color: var(--ink-dim);">للطلبات +150 شيكل</p>
                 </div>
             </div>
             <div class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background:var(--brand-50);">
-                    <i class="ph ph-arrow-counter-clockwise text-xl" style="color:var(--brand-500);"></i>
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background: var(--accent-50);">
+                    <i class="ph ph-shield-check text-lg" style="color: var(--accent-600);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">إرجاع سهل</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">خلال 30 يوم</p>
+                    <p class="text-sm font-semibold" style="color: var(--ink);">منتجات أصلية</p>
+                    <p class="text-xs" style="color: var(--ink-dim);">ضمان 100%</p>
                 </div>
             </div>
             <div class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background:var(--brand-50);">
-                    <i class="ph ph-lock-simple text-xl" style="color:var(--brand-500);"></i>
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background: var(--success-bg);">
+                    <i class="ph ph-arrow-counter-clockwise text-lg" style="color: var(--success);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">دفع آمن</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">تشفير SSL</p>
+                    <p class="text-sm font-semibold" style="color: var(--ink);">إرجاع سهل</p>
+                    <p class="text-xs" style="color: var(--ink-dim);">خلال 30 يوم</p>
                 </div>
             </div>
             <div class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background:var(--brand-50);">
-                    <i class="ph ph-certificate text-xl" style="color:var(--brand-500);"></i>
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110" style="background: var(--info-bg);">
+                    <i class="ph ph-headset text-lg" style="color: var(--info);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">أصلي 100%</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">مضمون</p>
+                    <p class="text-sm font-semibold" style="color: var(--ink);">دعم متواصل</p>
+                    <p class="text-xs" style="color: var(--ink-dim);">يومياً 9ص - 10م</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+{{-- ═══════════════════════════════════════════════════════════════
+     FEATURED SERVICES
+     ═══════════════════════════════════════════════════════════════ --}}
 @if($featuredServices->isNotEmpty())
 @php
-$serviceIcons = [
-    1 => ['icon' => 'ph ph-hand-heart', 'bg' => '#fce7f3', 'label' => 'عناية'],
-    2 => ['icon' => 'ph ph-sparkle', 'bg' => '#ede9fe', 'label' => 'تجميل'],
-    3 => ['icon' => 'ph ph-drop', 'bg' => '#d1fae5', 'label' => 'ترطيب'],
-    4 => ['icon' => 'ph ph-flower-lotus', 'bg' => '#fef3c7', 'label' => 'استرخاء'],
-    5 => ['icon' => 'ph ph-fire', 'bg' => '#fee2e2', 'label' => 'الأكثر طلباً'],
-    6 => ['icon' => 'ph ph-leaf', 'bg' => '#dbeafe', 'label' => 'طبيعي'],
+$serviceMeta = [
+    1 => ['icon' => 'ph ph-hand-heart', 'bg' => 'var(--brand-50)', 'color' => 'var(--brand-500)', 'tag' => 'الأكثر طلباً'],
+    2 => ['icon' => 'ph ph-sparkle', 'bg' => 'var(--accent-50)', 'color' => 'var(--accent-500)', 'tag' => 'جديد'],
+    3 => ['icon' => 'ph ph-drop', 'bg' => 'var(--success-bg)', 'color' => 'var(--success)', 'tag' => 'مميز'],
+    4 => ['icon' => 'ph ph-flower-lotus', 'bg' => 'var(--warning-bg)', 'color' => 'var(--warning)', 'tag' => ''],
+    5 => ['icon' => 'ph ph-fire', 'bg' => 'var(--error-bg)', 'color' => 'var(--error)', 'tag' => 'عرض خاص'],
+    6 => ['icon' => 'ph ph-leaf', 'bg' => 'var(--info-bg)', 'color' => 'var(--info)', 'tag' => ''],
 ];
 @endphp
-<section id="services" class="py-24 lg:py-32">
+<section id="services" class="section-lg" style="background: var(--surface);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {{-- Section Header --}}
         <div class="text-center mb-16">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-4 font-body" style="background:var(--brand-50);color:var(--brand-600);">
+            <span class="badge badge-brand mb-4">
                 <i class="ph ph-star-four"></i>
-                منتجات مميزة
+                خدمات مميزة
             </span>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 font-display" style="color:var(--ink);">
-                خدمات مختارة <span class="gradient-text">بعناية</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4" style="color: var(--ink);">
+                خدماتنا <span class="gradient-text">المختارة</span>
             </h2>
-            <p class="text-base lg:text-lg max-w-2xl mx-auto font-body" style="color:var(--ink-muted);">
-                كل خدمة مصممة بعناية لتكون جزءاً من روتين جمالكِ الشخصي
+            <p class="text-lg max-w-2xl mx-auto" style="color: var(--ink-muted);">
+                كل خدمة مصممة بعناية فائقة لتمنحكِ تجربة جمالية لا تُنسى
             </p>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        {{-- Services Grid --}}
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             @foreach($featuredServices as $service)
-            @php $meta = $serviceIcons[$service->id] ?? ['icon' => 'ph ph-spa', 'bg' => 'var(--brand-50)', 'label' => '']; @endphp
-            <div class="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl" style="background:white;border:1px solid var(--brand-50);">
-                <div class="relative aspect-square overflow-hidden" style="background:{{ $meta['bg'] }};">
+            @php $meta = $serviceMeta[$service->id] ?? ['icon' => 'ph ph-spa', 'bg' => 'var(--brand-50)', 'color' => 'var(--brand-500)', 'tag' => '']; @endphp
+            <div class="card group cursor-pointer">
+                {{-- Image Area --}}
+                <div class="relative aspect-square overflow-hidden" style="background: {{ $meta['bg'] }};">
                     <div class="absolute inset-0 flex items-center justify-center">
-                        <i class="{{ $meta['icon'] }} text-5xl sm:text-6xl transition-transform duration-500 group-hover:scale-125 group-hover:rotate-12" style="color:var(--brand-500);"></i>
+                        <i class="{{ $meta['icon'] }} text-5xl lg:text-6xl transition-all duration-500 group-hover:scale-110" style="color: {{ $meta['color'] }};"></i>
                     </div>
 
+                    {{-- Tag --}}
                     @if($service->is_on_sale)
-                    <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold text-white shadow-md" style="background:var(--brand-500);">
+                    <div class="absolute top-3 left-3 badge" style="background: var(--brand-500); color: white;">
                         تخفيض
                     </div>
-                    @elseif($service->id <= 3)
-                    <div class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold text-white shadow-md" style="background:#10b981;">
-                        جديد
+                    @elseif(!empty($meta['tag']))
+                    <div class="absolute top-3 left-3 badge" style="background: {{ $meta['color'] }}; color: white;">
+                        {{ $meta['tag'] }}
                     </div>
                     @endif
 
-                    @if(!empty($meta['label']))
-                    <div class="absolute bottom-3 right-3 px-2 py-1 rounded-lg text-[9px] font-bold" style="background:rgba(255,255,255,0.9);color:var(--ink-muted);">
-                        {{ $meta['label'] }}
-                    </div>
-                    @endif
-
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
-                        <a href="{{ route('booking') }}?service={{ $service->id }}" class="px-6 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-300 translate-y-4 group-hover:translate-y-0" style="background:var(--brand-500);">
-                            أضيفي للسلة
+                    {{-- Hover Overlay --}}
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300" style="background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);">
+                        <a href="{{ route('booking') }}?service={{ $service->id }}" class="btn btn-primary py-2.5 px-5 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            احجزي الآن
                         </a>
                     </div>
                 </div>
 
-                <div class="p-4 sm:p-5">
+                {{-- Content --}}
+                <div class="p-4 lg:p-5">
+                    {{-- Rating --}}
                     <div class="flex items-center gap-1 mb-2">
                         @for($i = 1; $i <= 5; $i++)
-                        <i class="ph-fill ph-star text-xs" style="color:{{ $i <= 4 ? '#fbbf24' : '#e5e7eb' }};"></i>
+                        <i class="ph-fill ph-star text-xs" style="color: {{ $i <= 4 ? 'var(--accent-500)' : 'var(--neutral-200)' }};"></i>
                         @endfor
-                        <span class="text-[10px] ml-1 font-body" style="color:var(--ink-dim);">(24)</span>
+                        <span class="text-xs mr-1" style="color: var(--ink-dim);">(24)</span>
                     </div>
 
-                    <h3 class="text-sm sm:text-base font-bold mb-2 line-clamp-1 font-body" style="color:var(--ink);">{{ $service->name }}</h3>
+                    {{-- Name --}}
+                    <h3 class="text-sm lg:text-base font-bold mb-2 line-clamp-1" style="color: var(--ink);">
+                        {{ $service->name }}
+                    </h3>
 
+                    {{-- Price --}}
                     <div class="flex items-center gap-2">
                         @if($service->is_on_sale)
-                        <span class="text-sm font-bold font-body" style="color:var(--brand-500);">{{ number_format($service->final_price, 0) }} ₪</span>
-                        <span class="text-xs line-through font-body" style="color:var(--ink-dim);">{{ number_format($service->price, 0) }} ₪</span>
+                        <span class="text-base font-bold" style="color: var(--brand-600);">{{ number_format($service->final_price, 0) }} ₪</span>
+                        <span class="text-sm line-through" style="color: var(--ink-dim);">{{ number_format($service->price, 0) }} ₪</span>
                         @else
-                        <span class="text-sm font-bold font-body" style="color:var(--ink);">{{ number_format($service->price, 0) }} ₪</span>
+                        <span class="text-base font-bold" style="color: var(--ink);">{{ number_format($service->price, 0) }} ₪</span>
                         @endif
                     </div>
                 </div>
@@ -247,9 +278,10 @@ $serviceIcons = [
             @endforeach
         </div>
 
+        {{-- View All --}}
         <div class="text-center mt-12">
-            <a href="{{ route('booking') }}" class="inline-flex items-center gap-2 px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1 font-body" style="background:var(--brand-50);color:var(--brand-600);border:1px solid var(--brand-100);">
-                عرض جميع الخدمات
+            <a href="{{ route('booking') }}" class="btn btn-secondary">
+                <span>عرض جميع الخدمات</span>
                 <i class="ph ph-arrow-left"></i>
             </a>
         </div>
@@ -257,85 +289,140 @@ $serviceIcons = [
 </section>
 @endif
 
-<section class="py-24 lg:py-32 relative overflow-hidden" style="background:var(--surface-alt);">
-    <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 left-1/4 w-64 h-64 rounded-full opacity-20" style="background:radial-gradient(circle, var(--brand-200), transparent 70%);"></div>
-        <div class="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-10" style="background:radial-gradient(circle, var(--brand-300), transparent 70%);"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+{{-- ═══════════════════════════════════════════════════════════════
+     WHY CHOOSE US
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="section-lg" style="background: var(--surface-alt);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {{-- Section Header --}}
         <div class="text-center mb-16">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-4 font-body" style="background:var(--brand-50);color:var(--brand-600);">
+            <span class="badge badge-brand mb-4">
                 <i class="ph ph-heart"></i>
-                لماذا نحن
+                لماذا سماح كير
             </span>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 font-display" style="color:var(--ink);">
-                لماذا <span class="gradient-text">سماح كير</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4" style="color: var(--ink);">
+                تجربة <span class="gradient-text">استثنائية</span>
             </h2>
-            <p class="text-base lg:text-lg max-w-2xl mx-auto font-body" style="color:var(--ink-muted);">
-                نقدم لكِ تجربة جمالية استثنائية تجمع بين الاحترافية والاهتمام الشخصي
+            <p class="text-lg max-w-2xl mx-auto" style="color: var(--ink-muted);">
+                نجمع بين الاحترافية والاهتمام الشخصي لنقدم لكِ أفضل تجربة جمالية
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {{-- Features Grid --}}
+        <div class="grid md:grid-cols-3 gap-8">
             @php
                 $features = [
-                    ['icon' => 'ph ph-certificate', 'title' => 'خدمات احترافية مضمونة', 'desc' => 'جميع خدماتنا تُقدم بأعلى معايير الجودة على يد خبيرات معتمدات. نضمن لكِ نتائج مبهرة في كل زيارة.', 'color' => '#8b5cf6'],
-                    ['icon' => 'ph ph-calendar-check', 'title' => 'حجز سريع ومريح', 'desc' => 'احجزي موعدكِ أونلاين بخطوات بسيطة. اختاري الخدمة والوقت المناسب واستمتعي بتجربة خالية من الانتظار.', 'color' => '#06b6d4'],
-                    ['icon' => 'ph ph-headset', 'title' => 'دعم متواصل', 'desc' => 'فريق خدمة عملاء جاهز لمساعدتك يومياً من 9 صباحاً حتى 10 مساءً عبر الواتساب. استفسري وسنرد فوراً.', 'color' => '#10b981'],
+                    [
+                        'icon' => 'ph ph-certificate',
+                        'title' => 'خبيرات معتمدات',
+                        'desc' => 'فريقنا من الخبيرات المعتمدات يضمن لكِ أعلى معايير الجودة والاحترافية في كل جلسة.',
+                        'bg' => 'var(--brand-50)',
+                        'color' => 'var(--brand-500)',
+                    ],
+                    [
+                        'icon' => 'ph ph-calendar-check',
+                        'title' => 'حجز سهل وسريع',
+                        'desc' => 'احجزي موعدكِ أونلاين في ثوانٍ. اختاري الخدمة والوقت المناسب واستمتعي بتجربة سلسة.',
+                        'bg' => 'var(--accent-50)',
+                        'color' => 'var(--accent-500)',
+                    ],
+                    [
+                        'icon' => 'ph ph-shield-star',
+                        'title' => 'منتجات أصلية',
+                        'desc' => 'نستخدم فقط المنتجات الأصلية من أشهر الماركات العالمية لضمان أفضل النتائج لبشرتكِ.',
+                        'bg' => 'var(--success-bg)',
+                        'color' => 'var(--success)',
+                    ],
                 ];
             @endphp
-            @foreach($features as $i => $card)
-            <div class="group text-center p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" style="background:white;border:1px solid var(--brand-50);">
-                <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" style="background:var(--brand-50);">
-                    <i class="{{ $card['icon'] }} text-4xl" style="color:var(--brand-500);"></i>
+
+            @foreach($features as $feature)
+            <div class="card p-8 text-center group">
+                <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6" style="background: {{ $feature['bg'] }};">
+                    <i class="{{ $feature['icon'] }} text-4xl" style="color: {{ $feature['color'] }};"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3 font-display" style="color:var(--ink);">{{ $card['title'] }}</h3>
-                <p class="text-sm leading-relaxed font-body" style="color:var(--ink-muted);">{{ $card['desc'] }}</p>
+                <h3 class="text-xl font-bold mb-3" style="color: var(--ink);">{{ $feature['title'] }}</h3>
+                <p class="text-base leading-relaxed" style="color: var(--ink-muted);">{{ $feature['desc'] }}</p>
             </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<section class="py-24 lg:py-32">
+{{-- ═══════════════════════════════════════════════════════════════
+     TESTIMONIALS
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="section-lg" style="background: var(--surface);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {{-- Section Header --}}
         <div class="text-center mb-16">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-4 font-body" style="background:var(--brand-50);color:var(--brand-600);">
+            <span class="badge badge-brand mb-4">
                 <i class="ph ph-chat-circle-text"></i>
                 آراء العميلات
             </span>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 font-display" style="color:var(--ink);">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4" style="color: var(--ink);">
                 ماذا تقول <span class="gradient-text">عميلاتنا</span>
             </h2>
-            <p class="text-base lg:text-lg max-w-2xl mx-auto font-body" style="color:var(--ink-muted);">
+            <p class="text-lg max-w-2xl mx-auto" style="color: var(--ink-muted);">
                 تجارب حقيقية من عميلات سعيدات اخترن سماح كير
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {{-- Testimonials Grid --}}
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
             @php
                 $testimonials = [
-                    ['name' => 'سارة أحمد', 'role' => 'عميلة منتظمة', 'text' => 'تجربة رائعة! الخدمة احترافية والنتائج فاقت توقعاتي. أنصح الجميع بتجربة خدمات العناية بالبشرة.', 'rating' => 5],
-                    ['name' => 'نور محمد', 'role' => 'عميلة جديدة', 'text' => 'أول مرة أحجز أونلاين وكانت التجربة سهلة جداً. الفريق محترف والاهتمام بالتفاصيل واضح.', 'rating' => 5],
-                    ['name' => 'ليلى خالد', 'role' => 'عميلة VIP', 'text' => 'من أفضل المراكز التي تعاملت معها. الجودة عالية والأسعار معقولة. شكراً سماح كير!', 'rating' => 5],
+                    [
+                        'name' => 'سارة أحمد',
+                        'role' => 'عميلة منتظمة',
+                        'text' => 'تجربة رائعة! الخدمة احترافية والنتائج فاقت توقعاتي بمراحل. أنصح كل فتاة بتجربة خدمات العناية بالبشرة هنا.',
+                        'rating' => 5,
+                        'initial' => 'س',
+                        'bg' => 'var(--brand-100)',
+                    ],
+                    [
+                        'name' => 'نور محمد',
+                        'role' => 'عميلة جديدة',
+                        'text' => 'أول مرة أحجز أونلاين وكانت التجربة سهلة جداً ومريحة. الفريق محترف والاهتمام بأدق التفاصيل واضح من أول لحظة.',
+                        'rating' => 5,
+                        'initial' => 'ن',
+                        'bg' => 'var(--accent-100)',
+                    ],
+                    [
+                        'name' => 'ليلى خالد',
+                        'role' => 'عميلة VIP',
+                        'text' => 'من أفضل المراكز التي تعاملت معها على الإطلاق. الجودة عالية جداً والأسعار معقولة. شكراً سماح كير على التميز!',
+                        'rating' => 5,
+                        'initial' => 'ل',
+                        'bg' => 'var(--success-bg)',
+                    ],
                 ];
             @endphp
+
             @foreach($testimonials as $testimonial)
-            <div class="group p-6 lg:p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" style="background:white;border:1px solid var(--brand-50);">
+            <div class="card p-6 lg:p-8">
+                {{-- Stars --}}
                 <div class="flex items-center gap-1 mb-4">
                     @for($i = 1; $i <= 5; $i++)
-                    <i class="ph-fill ph-star text-lg" style="color:{{ $i <= $testimonial['rating'] ? '#fbbf24' : '#e5e7eb' }};"></i>
+                    <i class="ph-fill ph-star text-lg" style="color: {{ $i <= $testimonial['rating'] ? 'var(--accent-500)' : 'var(--neutral-200)' }};"></i>
                     @endfor
                 </div>
-                <p class="text-sm leading-relaxed mb-6 font-body" style="color:var(--ink-muted);">"{{ $testimonial['text'] }}"</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:var(--brand-50);">
-                        <span class="text-lg font-bold" style="color:var(--brand-500);">{{ mb_substr($testimonial['name'], 0, 1) }}</span>
+
+                {{-- Quote --}}
+                <p class="text-base leading-relaxed mb-6" style="color: var(--ink-muted);">
+                    "{{ $testimonial['text'] }}"
+                </p>
+
+                {{-- Author --}}
+                <div class="flex items-center gap-3 pt-4" style="border-top: var(--border-subtle);">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background: {{ $testimonial['bg'] }};">
+                        <span class="text-lg font-bold" style="color: var(--brand-600);">{{ $testimonial['initial'] }}</span>
                     </div>
                     <div>
-                        <p class="text-sm font-bold font-body" style="color:var(--ink);">{{ $testimonial['name'] }}</p>
-                        <p class="text-xs font-body" style="color:var(--ink-dim);">{{ $testimonial['role'] }}</p>
+                        <p class="text-sm font-bold" style="color: var(--ink);">{{ $testimonial['name'] }}</p>
+                        <p class="text-xs" style="color: var(--ink-dim);">{{ $testimonial['role'] }}</p>
                     </div>
                 </div>
             </div>
@@ -344,84 +431,104 @@ $serviceIcons = [
     </div>
 </section>
 
-<section class="py-24 lg:py-32" style="background:var(--surface-alt);">
+{{-- ═══════════════════════════════════════════════════════════════
+     CATEGORIES PREVIEW
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="section-lg" style="background: var(--surface-alt);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {{-- Section Header --}}
         <div class="text-center mb-16">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-4 font-body" style="background:var(--brand-50);color:var(--brand-600);">
-                <i class="ph ph-images"></i>
-                معرض الأعمال
+            <span class="badge badge-brand mb-4">
+                <i class="ph ph-grid-four"></i>
+                تصفحي حسب الفئة
             </span>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 font-display" style="color:var(--ink);">
-                قبل و<span class="gradient-text">بعد</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4" style="color: var(--ink);">
+                فئات <span class="gradient-text">خدماتنا</span>
             </h2>
-            <p class="text-base lg:text-lg max-w-2xl mx-auto font-body" style="color:var(--ink-muted);">
-                شاهدي التحولات المذهلة التي حققتها عميلاتنا
-            </p>
         </div>
 
+        {{-- Categories Grid --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
             @php
-                $galleryItems = [
-                    ['icon' => 'ph ph-sparkle', 'label' => 'العناية بالبشرة'],
-                    ['icon' => 'ph ph-eye', 'label' => 'المكياج'],
-                    ['icon' => 'ph ph-scissors', 'label' => 'الشعر'],
-                    ['icon' => 'ph ph-hand-heart', 'label' => 'الأظافر'],
+                $categories = [
+                    ['icon' => 'ph ph-sparkle', 'name' => 'العناية بالبشرة', 'count' => '12 خدمة', 'bg' => 'var(--brand-50)', 'color' => 'var(--brand-500)'],
+                    ['icon' => 'ph ph-eye', 'name' => 'المكياج', 'count' => '8 خدمات', 'bg' => 'var(--accent-50)', 'color' => 'var(--accent-500)'],
+                    ['icon' => 'ph ph-scissors', 'name' => 'العناية بالشعر', 'count' => '10 خدمات', 'bg' => 'var(--success-bg)', 'color' => 'var(--success)'],
+                    ['icon' => 'ph ph-hand-heart', 'name' => 'العناية بالأظافر', 'count' => '6 خدمات', 'bg' => 'var(--info-bg)', 'color' => 'var(--info)'],
                 ];
             @endphp
-            @foreach($galleryItems as $item)
-            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" style="background:linear-gradient(135deg, var(--brand-100), var(--brand-200));">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <i class="{{ $item['icon'] }} text-5xl lg:text-6xl transition-transform duration-500 group-hover:scale-125" style="color:var(--brand-500);"></i>
+
+            @foreach($categories as $cat)
+            <a href="{{ route('booking') }}" class="card p-6 lg:p-8 text-center group cursor-pointer">
+                <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110" style="background: {{ $cat['bg'] }};">
+                    <i class="{{ $cat['icon'] }} text-3xl lg:text-4xl" style="color: {{ $cat['color'] }};"></i>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6">
-                    <span class="text-sm font-bold text-white">{{ $item['label'] }}</span>
-                </div>
-            </div>
+                <h3 class="text-base lg:text-lg font-bold mb-1" style="color: var(--ink);">{{ $cat['name'] }}</h3>
+                <p class="text-sm" style="color: var(--ink-dim);">{{ $cat['count'] }}</p>
+            </a>
             @endforeach
         </div>
     </div>
 </section>
 
-<section class="py-24 lg:py-32">
+{{-- ═══════════════════════════════════════════════════════════════
+     BLOG PREVIEW
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="section-lg" style="background: var(--surface);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-4 font-body" style="background:var(--brand-50);color:var(--brand-600);">
-                <i class="ph ph-article"></i>
-                المدونة
-            </span>
-            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 font-display" style="color:var(--ink);">
-                نصائح <span class="gradient-text">الجمال</span>
-            </h2>
-            <p class="text-base lg:text-lg max-w-2xl mx-auto font-body" style="color:var(--ink-muted);">
-                اكتشفي أحدث النصائح والاتجاهات في عالم الجمال والعناية
-            </p>
+        
+        {{-- Section Header --}}
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+            <div>
+                <span class="badge badge-brand mb-4">
+                    <i class="ph ph-article"></i>
+                    المدونة
+                </span>
+                <h2 class="text-3xl md:text-4xl font-black" style="color: var(--ink);">
+                    نصائح <span class="gradient-text">الجمال</span>
+                </h2>
+            </div>
+            <a href="{{ route('blog.index') }}" class="btn btn-secondary mt-4 md:mt-0">
+                <span>جميع المقالات</span>
+                <i class="ph ph-arrow-left"></i>
+            </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {{-- Blog Grid --}}
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
             @php
                 $blogPosts = [
-                    ['title' => '10 نصائح للعناية بالبشرة في الصيف', 'excerpt' => 'تعرفي على أفضل الطرق للحفاظ على بشرتكِ مشرقة وصحية خلال فصل الصيف.', 'icon' => 'ph ph-sun', 'category' => 'عناية بالبشرة'],
-                    ['title' => 'أحدث صيحات المكياج لعام 2024', 'excerpt' => 'اكتشفي أبرز اتجاهات المكياج التي تسيطر على عالم الجمال هذا العام.', 'icon' => 'ph ph-palette', 'category' => 'مكياج'],
-                    ['title' => 'روتين العناية بالشعر المجعد', 'excerpt' => 'دليلكِ الشامل للعناية بالشعر المجعد والحصول على تموجات مثالية.', 'icon' => 'ph ph-wind', 'category' => 'عناية بالشعر'],
+                    ['title' => '10 نصائح ذهبية للعناية بالبشرة في الصيف', 'excerpt' => 'تعرفي على أفضل الطرق للحفاظ على بشرتكِ مشرقة وصحية خلال فصل الصيف الحار.', 'icon' => 'ph ph-sun', 'category' => 'عناية بالبشرة', 'bg' => 'var(--warning-bg)', 'color' => 'var(--warning)'],
+                    ['title' => 'أحدث صيحات المكياج الطبيعي لعام 2024', 'excerpt' => 'اكتشفي أبرز اتجاهات المكياج التي تبرز جمالكِ الطبيعي بإطلالة ناعمة وأنيقة.', 'icon' => 'ph ph-palette', 'category' => 'مكياج', 'bg' => 'var(--brand-50)', 'color' => 'var(--brand-500)'],
+                    ['title' => 'دليلكِ الشامل للعناية بالشعر المجعد', 'excerpt' => 'نصائح وحيل احترافية للتعامل مع الشعر المجعد والحصول على تموجات مثالية.', 'icon' => 'ph ph-wind', 'category' => 'عناية بالشعر', 'bg' => 'var(--success-bg)', 'color' => 'var(--success)'],
                 ];
             @endphp
+
             @foreach($blogPosts as $post)
-            <article class="group rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" style="background:white;border:1px solid var(--brand-50);">
-                <div class="aspect-[16/10] relative overflow-hidden" style="background:linear-gradient(135deg, var(--brand-50), var(--brand-100));">
+            <article class="card group cursor-pointer">
+                {{-- Image Area --}}
+                <div class="aspect-[16/10] relative overflow-hidden" style="background: {{ $post['bg'] }};">
                     <div class="absolute inset-0 flex items-center justify-center">
-                        <i class="{{ $post['icon'] }} text-5xl transition-transform duration-500 group-hover:scale-110" style="color:var(--brand-500);"></i>
+                        <i class="{{ $post['icon'] }} text-5xl transition-transform duration-500 group-hover:scale-110" style="color: {{ $post['color'] }};"></i>
                     </div>
-                    <div class="absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-bold" style="background:white;color:var(--brand-500);">
+                    <div class="absolute top-3 right-3 badge" style="background: white; color: var(--ink);">
                         {{ $post['category'] }}
                     </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-bold mb-2 line-clamp-2 font-body" style="color:var(--ink);">{{ $post['title'] }}</h3>
-                    <p class="text-sm leading-relaxed mb-4 line-clamp-2 font-body" style="color:var(--ink-muted);">{{ $post['excerpt'] }}</p>
-                    <a href="#" class="inline-flex items-center gap-1 text-sm font-bold transition-colors" style="color:var(--brand-500);">
+
+                {{-- Content --}}
+                <div class="p-5 lg:p-6">
+                    <h3 class="text-lg font-bold mb-2 line-clamp-2 group-hover:text-[var(--brand-600)] transition-colors" style="color: var(--ink);">
+                        {{ $post['title'] }}
+                    </h3>
+                    <p class="text-sm leading-relaxed mb-4 line-clamp-2" style="color: var(--ink-muted);">
+                        {{ $post['excerpt'] }}
+                    </p>
+                    <span class="inline-flex items-center gap-1 text-sm font-semibold group-hover:gap-2 transition-all" style="color: var(--brand-600);">
                         اقرأ المزيد
                         <i class="ph ph-arrow-left text-xs"></i>
-                    </a>
+                    </span>
                 </div>
             </article>
             @endforeach
@@ -429,47 +536,54 @@ $serviceIcons = [
     </div>
 </section>
 
-<section class="py-24 lg:py-32 relative overflow-hidden" style="background:linear-gradient(135deg, var(--brand-500), var(--brand-600));">
-    <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-20" style="background:white;"></div>
-        <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full opacity-10" style="background:white;"></div>
+{{-- ═══════════════════════════════════════════════════════════════
+     NEWSLETTER
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="section-lg relative overflow-hidden" style="background: var(--gradient-primary);">
+    {{-- Decorative --}}
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-20" style="background: white;"></div>
+        <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full opacity-10" style="background: white;"></div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8" style="background:rgba(255,255,255,0.2);">
+    <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-8" style="background: rgba(255,255,255,0.15);">
             <i class="ph ph-envelope-simple text-4xl text-white"></i>
         </div>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 font-display text-white">
+        <h2 class="text-3xl md:text-4xl font-black mb-4 text-white">
             اشتركي في نشرتنا
         </h2>
-        <p class="text-lg mb-10 max-w-xl mx-auto text-white/80 font-body">
-            احصلي على أحدث العروض والنصائح الجمالية مباشرة في بريدكِ الإلكتروني
+        <p class="text-lg mb-8 text-white/80">
+            احصلي على أحدث العروض والنصائح الجمالية مباشرة في بريدكِ
         </p>
         <form class="flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto">
-            <input type="email" placeholder="بريدكِ الإلكتروني" class="flex-1 w-full px-6 py-4 rounded-full text-sm font-body" style="background:white;color:var(--ink);border:none;outline:none;">
-            <button type="submit" class="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1 font-body" style="background:var(--ink);color:white;">
+            <input type="email" placeholder="بريدكِ الإلكتروني" class="flex-1 w-full px-6 py-4 rounded-full text-base" style="background: white; color: var(--ink); border: none;">
+            <button type="submit" class="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-base transition-all hover:scale-105" style="background: var(--ink); color: white;">
                 اشتركي الآن
             </button>
         </form>
-        <p class="text-xs mt-4 text-white/60 font-body">لن نشارك بريدكِ الإلكتروني مع أي طرف ثالث</p>
+        <p class="text-sm mt-4 text-white/60">لن نشارك بريدكِ مع أي طرف ثالث</p>
     </div>
 </section>
 
-<section class="py-24 lg:py-32">
+{{-- ═══════════════════════════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════════════════════════ --}}
+<section class="section-lg" style="background: var(--surface);">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8" style="background:var(--brand-50);">
-            <i class="ph ph-calendar-check text-5xl" style="color:var(--brand-500);"></i>
+        <div class="w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8" style="background: var(--brand-50);">
+            <i class="ph ph-calendar-check text-5xl" style="color: var(--brand-500);"></i>
         </div>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-6 font-display" style="color:var(--ink);">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-6" style="color: var(--ink);">
             مستعدة لتجربة
-            <span class="gradient-text">جمال استثنائية؟</span>
+            <span class="gradient-text">جمال استثنائي؟</span>
         </h2>
-        <p class="text-lg mb-10 max-w-xl mx-auto font-body" style="color:var(--ink-muted);">
+        <p class="text-lg mb-10 max-w-xl mx-auto" style="color: var(--ink-muted);">
             انضمي إلى آلاف العميلات السعيدات واحجزي موعدكِ الآن
         </p>
-        <a href="{{ route('booking') }}" class="group inline-flex items-center gap-2.5 px-10 py-5 rounded-full font-bold text-base text-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 font-body" style="background:var(--brand-500);box-shadow:0 8px 32px rgba(220,38,38,0.4);">
-            احجزي موعدك الآن
-            <i class="ph ph-arrow-left transition-transform group-hover:-translate-x-1"></i>
+        <a href="{{ route('booking') }}" class="btn btn-primary text-lg px-10 py-5">
+            <span>احجزي موعدكِ الآن</span>
+            <i class="ph ph-arrow-left"></i>
         </a>
     </div>
 </section>
