@@ -403,16 +403,28 @@ src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
                         <i class="fas fa-stethoscope"></i> <span>تشخيص CAPI</span>
                     </a>
                     <a href="{{ route('admin.ads.dashboard') }}" class="nav-item {{ request()->routeIs('admin.ads.*') ? 'active' : '' }}">
-                        <i class="fas fa-ad"></i> <span>إدارة الإعلانات</span>
+                        <i class="fab fa-facebook"></i> <span>إعلانات Meta</span>
+                    </a>
+                    <a href="{{ route('admin.google-ads.index') }}" class="nav-item {{ request()->routeIs('admin.google-ads.*') ? 'active' : '' }}">
+                        <i class="fab fa-google"></i> <span>إعلانات Google</span>
                     </a>
                     <a href="{{ route('admin.leads-hub.index') }}" class="nav-item {{ request()->routeIs('admin.leads-hub.*') ? 'active' : '' }}">
-                        <i class="fas fa-users"></i> <span>عملاء فيسبوك</span>
+                        <i class="fas fa-user-friends"></i> <span>العملاء المحتملون</span>
+                    </a>
+                    <a href="{{ route('admin.ai-creative.index') }}" class="nav-item {{ request()->routeIs('admin.ai-creative.*') ? 'active' : '' }}">
+                        <i class="fas fa-magic"></i> <span>AI Creative</span>
+                    </a>
+                    <a href="{{ route('admin.audiences.index') }}" class="nav-item {{ request()->routeIs('admin.audiences.*') ? 'active' : '' }}">
+                        <i class="fas fa-bullseye"></i> <span>بناء الجماهير</span>
                     </a>
                     <a href="{{ route('admin.account-configuration.index') }}" class="nav-item {{ request()->routeIs('admin.account-configuration.*') ? 'active' : '' }}">
                         <i class="fas fa-cogs"></i> <span>إعدادات الحساب</span>
                     </a>
                     <a href="{{ route('admin.ai-compliance.index') }}" class="nav-item {{ request()->routeIs('admin.ai-compliance.*') ? 'active' : '' }}">
                         <i class="fas fa-shield-alt"></i> <span>الامتثال AI</span>
+                    </a>
+                    <a href="{{ route('admin.trigger-words.index') }}" class="nav-item {{ request()->routeIs('admin.trigger-words.*') ? 'active' : '' }}">
+                        <i class="fas fa-ban"></i> <span>الكلمات الممنوعة</span>
                     </a>
                     <a href="{{ route('admin.predictive.index') }}" class="nav-item {{ request()->routeIs('admin.predictive.*') ? 'active' : '' }}">
                         <i class="fas fa-brain"></i> <span>التوقع AI</span>
@@ -432,6 +444,9 @@ src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
                         @if($alertCount > 0)
                             <span class="badge bg-danger ms-auto">{{ $alertCount }}</span>
                         @endif
+                    </a>
+                    <a href="{{ route('admin.ad-alerts.pause-log') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.pause-log') ? 'active' : '' }}">
+                        <i class="fas fa-pause-circle"></i> <span>سجل الإيقاف التلقائي</span>
                     </a>
                 </div>
             </nav>
