@@ -10,6 +10,9 @@ module.exports = {
       fontFamily: {
         sans: ['Tajawal', 'sans-serif'],
         mono: ['Tajawal', 'monospace'],
+        display: ['"Playfair Display"', 'serif'],
+        body: ['Inter', 'sans-serif'],
+        arabic: ['"Noto Sans Arabic"', 'Tajawal', 'sans-serif'],
       },
       colors: {
         brand: {
@@ -36,6 +39,13 @@ module.exports = {
           800: 'var(--accent-800, #f2a2cc)',
           900: 'var(--accent-900, #f9cde3)',
         },
+        rose: {
+          primary: '#D4537E',
+          dark: '#993556',
+          light: '#FBEAF0',
+        },
+        cream: '#FAF6F2',
+        charcoal: '#2C2C2A',
         surface: 'var(--surface, #050505)',
         'surface-alt': 'var(--surface-alt, #0a0a0a)',
         ink: 'var(--ink, #ffffff)',

@@ -7,7 +7,7 @@
     background-color: var(--surface, #050505);
     color: var(--ink, #ffffff);
     overflow-x: hidden;
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Inter', 'Tajawal', sans-serif;
     -webkit-tap-highlight-color: transparent;
   }
   html {

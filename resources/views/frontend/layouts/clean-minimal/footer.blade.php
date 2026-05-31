@@ -1,4 +1,4 @@
-<footer style="background:var(--surface-alt);border-top:1px solid rgba(0,0,0,0.04);">
+<footer style="background:var(--surface-alt);border-top:1px solid rgba(212,83,126,0.06);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
@@ -7,23 +7,23 @@
                     @if(!empty($siteSettings['site_logo_url']))
                         <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'سماح كير' }}" class="h-9 w-auto object-contain">
                     @else
-                        <span class="text-xl font-black" style="color:var(--ink);">سماح كير<span style="color:var(--brand-500);">.</span></span>
+                        <span class="text-xl font-black font-display" style="color:var(--ink);">Samah<span style="color:var(--brand-500);">care</span></span>
                     @endif
                 </div>
-                <p class="text-sm leading-relaxed mb-6 max-w-sm" style="color:var(--ink-muted);">
+                <p class="text-sm leading-relaxed mb-6 max-w-sm font-body" style="color:var(--ink-muted);">
                     {{ $siteSettings['site_description'] ?? 'وجهتك الأولى لحجز خدمات العناية بالبشرة والشعر والتجميل. احجزي موعدك الآن بسهولة.' }}
                 </p>
                 <div class="flex gap-2.5">
-                    @if(!empty($siteSettings['facebook_url']))<a href="{{ $siteSettings['facebook_url'] }}" target="_blank" class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80" style="background:var(--brand-50);color:var(--brand-600);"><i class="ph-fill ph-facebook-logo text-lg"></i></a>@endif
-                    @if(!empty($siteSettings['instagram_url']))<a href="{{ $siteSettings['instagram_url'] }}" target="_blank" class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80" style="background:var(--brand-50);color:var(--brand-600);"><i class="ph-fill ph-instagram-logo text-lg"></i></a>@endif
+                    @if(!empty($siteSettings['facebook_url']))<a href="{{ $siteSettings['facebook_url'] }}" target="_blank" class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80" style="background:var(--brand-50);color:var(--brand-500);"><i class="ph-fill ph-facebook-logo text-lg"></i></a>@endif
+                    @if(!empty($siteSettings['instagram_url']))<a href="{{ $siteSettings['instagram_url'] }}" target="_blank" class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80" style="background:var(--brand-50);color:var(--brand-500);"><i class="ph-fill ph-instagram-logo text-lg"></i></a>@endif
                     @if(!empty($siteSettings['whatsapp_number']))<a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $siteSettings['whatsapp_number']) }}" target="_blank" class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80" style="background:#dcfce7;color:#16a34a;"><i class="ph-fill ph-whatsapp-logo text-lg"></i></a>@endif
-                    @if(!empty($siteSettings['tiktok_url']))<a href="{{ $siteSettings['tiktok_url'] }}" target="_blank" class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80" style="background:var(--brand-50);color:var(--brand-600);"><i class="ph-fill ph-tiktok-logo text-lg"></i></a>@endif
+                    @if(!empty($siteSettings['tiktok_url']))<a href="{{ $siteSettings['tiktok_url'] }}" target="_blank" class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:opacity-80" style="background:var(--brand-50);color:var(--brand-500);"><i class="ph-fill ph-tiktok-logo text-lg"></i></a>@endif
                 </div>
             </div>
 
             <div class="lg:col-span-2">
-                <h5 class="font-bold text-sm mb-5" style="color:var(--ink);">روابط سريعة</h5>
-                <ul class="space-y-3 text-sm" style="color:var(--ink-muted);">
+                <h5 class="font-bold text-sm mb-5 font-body" style="color:var(--ink);">روابط سريعة</h5>
+                <ul class="space-y-3 text-sm font-body" style="color:var(--ink-muted);">
                     <li><a href="{{ route('home') }}" class="hover:text-[var(--brand-500)] transition-colors">الرئيسية</a></li>
                     <li><a href="{{ route('booking') }}" class="hover:text-[var(--brand-500)] transition-colors">احجزي موعد</a></li>
                     <li><a href="{{ route('blog.index') }}" class="hover:text-[var(--brand-500)] transition-colors">المدونة</a></li>
@@ -32,8 +32,8 @@
             </div>
 
             <div class="lg:col-span-2">
-                <h5 class="font-bold text-sm mb-5" style="color:var(--ink);">الدعم</h5>
-                <ul class="space-y-3 text-sm" style="color:var(--ink-muted);">
+                <h5 class="font-bold text-sm mb-5 font-body" style="color:var(--ink);">الدعم</h5>
+                <ul class="space-y-3 text-sm font-body" style="color:var(--ink-muted);">
                     <li><a href="{{ route('faq') }}" class="hover:text-[var(--brand-500)] transition-colors">الأسئلة الشائعة</a></li>
                     <li><a href="{{ route('terms') }}" class="hover:text-[var(--brand-500)] transition-colors">الشروط والأحكام</a></li>
                     <li><a href="{{ route('privacy') }}" class="hover:text-[var(--brand-500)] transition-colors">سياسة الخصوصية</a></li>
@@ -41,8 +41,8 @@
             </div>
 
             <div class="lg:col-span-4">
-                <h5 class="font-bold text-sm mb-5" style="color:var(--ink);">تواصلي معنا</h5>
-                <ul class="space-y-4 text-sm" style="color:var(--ink-muted);">
+                <h5 class="font-bold text-sm mb-5 font-body" style="color:var(--ink);">تواصلي معنا</h5>
+                <ul class="space-y-4 text-sm font-body" style="color:var(--ink-muted);">
                     <li class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-50);">
                             <i class="ph-fill ph-map-pin text-sm" style="color:var(--brand-500);"></i>
@@ -71,10 +71,10 @@
             </div>
         </div>
 
-        <div class="py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs" style="color:var(--ink-dim);border-top:1px solid rgba(0,0,0,0.04);">
+        <div class="py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body" style="color:var(--ink-dim);border-top:1px solid rgba(212,83,126,0.06);">
             <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'سماح كير' }}. جميع الحقوق محفوظة.</p>
             <div class="flex gap-2">
-                <span class="px-3 py-1 rounded-full" style="background:var(--brand-50);color:var(--brand-600);">الدفع عند الحضور</span>
+                <span class="px-3 py-1 rounded-full" style="background:var(--brand-50);color:var(--brand-500);">الدفع عند الحضور</span>
                 @if(($siteSettings['payment_jawwal_enabled'] ?? '0') == '1')
                 <span class="px-3 py-1 rounded-full" style="background:#dcfce7;color:#16a34a;">جوال باي</span>
                 @endif
