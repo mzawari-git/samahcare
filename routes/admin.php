@@ -26,6 +26,9 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\RoasController;
 use App\Http\Controllers\Admin\CapiDiagnosticsController;
 use App\Http\Controllers\Admin\AdAlertController;
+use App\Http\Controllers\Admin\GoogleAdsController;
+use App\Http\Controllers\Admin\AiCreativeController;
+use App\Http\Controllers\Admin\AudienceController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
@@ -88,6 +91,21 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // Bulk
     Route::post('/ads/insights/refresh', [MetaAdsController::class, 'refreshInsights'])->name('admin.ads.refresh-insights');
     Route::post('/ads/sync', [MetaAdsController::class, 'syncCampaigns'])->name('admin.ads.sync');
+
+    // Google Ads Management
+    Route::get('/google-ads', [GoogleAdsController::class, 'index'])->name('admin.google-ads.index');
+    Route::post('/google-ads', [GoogleAdsController::class, 'store'])->name('admin.google-ads.store');
+    Route::put('/google-ads/{campaignId}', [GoogleAdsController::class, 'update'])->name('admin.google-ads.update');
+    Route::post('/google-ads/{campaignId}/toggle', [GoogleAdsController::class, 'toggle'])->name('admin.google-ads.toggle');
+    Route::delete('/google-ads/{campaignId}', [GoogleAdsController::class, 'destroy'])->name('admin.google-ads.destroy');
+    Route::get('/google-ads/{campaignId}/insights', [GoogleAdsController::class, 'insights'])->name('admin.google-ads.insights');
+    Route::get('/google-ads/{campaignId}/ad-groups', [GoogleAdsController::class, 'adGroups'])->name('admin.google-ads.ad-groups');
+    Route::post('/google-ads/{campaignId}/ad-groups', [GoogleAdsController::class, 'createAdGroup'])->name('admin.google-ads.create-ad-group');
+    Route::get('/google-ads/ad-groups/{adGroupId}/keywords', [GoogleAdsController::class, 'keywords'])->name('admin.google-ads.keywords');
+    Route::post('/google-ads/ad-groups/{adGroupId}/keywords', [GoogleAdsController::class, 'addKeyword'])->name('admin.google-ads.add-keyword');
+    Route::post('/google-ads/ad-groups/{adGroupId}/responsive-ad', [GoogleAdsController::class, 'createResponsiveAd'])->name('admin.google-ads.create-responsive-ad');
+    Route::get('/google-ads/test-connection', [GoogleAdsController::class, 'testConnection'])->name('admin.google-ads.test-connection');
+    Route::get('/google-ads/metrics', [GoogleAdsController::class, 'getMetrics'])->name('admin.google-ads.metrics');
 
     // OAuth Connect for all social platforms
     Route::get('/oauth/{platform}/redirect', [\App\Http\Controllers\Admin\SocialAuthController::class, 'redirect'])
@@ -247,6 +265,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/leads-hub/export', [MetaLeadHubController::class, 'exportExcel'])->name('admin.leads-hub.export');
     Route::get('/leads-hub/export-selected', [MetaLeadHubController::class, 'exportSelected'])->name('admin.leads-hub.export-selected');
     Route::get('/leads-hub/{lead}', [MetaLeadHubController::class, 'show'])->name('admin.leads-hub.show');
+    Route::post('/leads-hub/{lead}/score', [MetaLeadHubController::class, 'updateScore'])->name('admin.leads-hub.score');
+    Route::post('/leads-hub/{lead}/stage', [MetaLeadHubController::class, 'updateStage'])->name('admin.leads-hub.stage');
+    Route::post('/leads-hub/{lead}/tag', [MetaLeadHubController::class, 'addTag'])->name('admin.leads-hub.tag');
+    Route::delete('/leads-hub/{lead}/tag', [MetaLeadHubController::class, 'removeTag'])->name('admin.leads-hub.remove-tag');
 
     // Reviews
     Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
@@ -267,4 +289,26 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/ad-alerts/{alert}', [AdAlertController::class, 'destroy'])->name('admin.ad-alerts.destroy');
     Route::get('/ad-alerts/health-summary', [AdAlertController::class, 'healthSummary'])->name('admin.ad-alerts.health-summary');
     Route::get('/ad-alerts/active-count', [AdAlertController::class, 'activeAlertsCount'])->name('admin.ad-alerts.active-count');
+
+    // AI Creative Copilot
+    Route::prefix('ai-creative')->group(function () {
+        Route::get('/', [AiCreativeController::class, 'index'])->name('admin.ai-creative.index');
+        Route::get('/generate', [AiCreativeController::class, 'generateForm'])->name('admin.ai-creative.generate-form');
+        Route::post('/generate', [AiCreativeController::class, 'generate'])->name('admin.ai-creative.generate');
+        Route::post('/store', [AiCreativeController::class, 'store'])->name('admin.ai-creative.store');
+        Route::delete('/{id}', [AiCreativeController::class, 'destroy'])->name('admin.ai-creative.destroy');
+    });
+
+    // Audience Builder
+    Route::prefix('audiences')->group(function () {
+        Route::get('/', [AudienceController::class, 'index'])->name('admin.audiences.index');
+        Route::get('/create', [AudienceController::class, 'create'])->name('admin.audiences.create');
+        Route::post('/', [AudienceController::class, 'store'])->name('admin.audiences.store');
+        Route::get('/{audience}', [AudienceController::class, 'show'])->name('admin.audiences.show');
+        Route::post('/{audience}/sync', [AudienceController::class, 'sync'])->name('admin.audiences.sync');
+        Route::post('/{audience}/push', [AudienceController::class, 'pushToPlatform'])->name('admin.audiences.push');
+        Route::delete('/{audience}', [AudienceController::class, 'destroy'])->name('admin.audiences.destroy');
+        Route::post('/lookalike', [AudienceController::class, 'createLookalike'])->name('admin.audiences.lookalike');
+        Route::post('/overlap', [AudienceController::class, 'overlapAnalysis'])->name('admin.audiences.overlap');
+    });
 });

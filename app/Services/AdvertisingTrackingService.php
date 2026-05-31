@@ -26,6 +26,10 @@ class AdvertisingTrackingService
     private ?string $ttPixelId;
     private ?string $ttAccessToken;
 
+    private bool $googleCapiEnabled;
+    private ?string $googleConversionId;
+    private ?string $googleConversionLabel;
+
     private bool $obfuscationEnabled;
     private bool $urlSanitizationEnabled;
 
@@ -94,6 +98,10 @@ class AdvertisingTrackingService
         $this->ttCapiEnabled = MarketingSetting::get('tiktok_capi_enabled', false);
         $this->ttPixelId = MarketingSetting::get('tiktok_pixel_id');
         $this->ttAccessToken = MarketingSetting::get('tiktok_access_token');
+
+        $this->googleCapiEnabled = MarketingSetting::get('google_ads_capi_enabled', false);
+        $this->googleConversionId = MarketingSetting::get('google_conversion_id');
+        $this->googleConversionLabel = MarketingSetting::get('google_conversion_label');
 
         $this->obfuscationEnabled = MarketingSetting::get('event_obfuscation_enabled', false);
         $this->urlSanitizationEnabled = MarketingSetting::get('url_sanitization_enabled', false);
@@ -264,6 +272,10 @@ JS;
             $results['tiktok'] = $this->sendTikTokEventsAPI($eventName, $eventData, $commonContext);
         }
 
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI($eventName, $eventData, $userData, $commonContext);
+        }
+
         return $results + ['event_id' => $eventId];
     }
 
@@ -294,6 +306,10 @@ JS;
 
         if ($this->ttCapiEnabled && $this->ttAccessToken) {
             $results['tiktok'] = $this->sendTikTokEventsAPI('ViewContent', $eventData, $ctx);
+        }
+
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('ViewContent', $eventData, $userData, $ctx);
         }
 
         return $results + ['event_id' => $eventId];
@@ -328,6 +344,10 @@ JS;
             $results['tiktok'] = $this->sendTikTokEventsAPI('AddToCart', $eventData, $ctx);
         }
 
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('AddToCart', $eventData, $userData, $ctx);
+        }
+
         return $results + ['event_id' => $eventId];
     }
 
@@ -358,6 +378,10 @@ JS;
 
         if ($this->ttCapiEnabled && $this->ttAccessToken) {
             $results['tiktok'] = $this->sendTikTokEventsAPI('InitiateCheckout', $eventData, $ctx);
+        }
+
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('InitiateCheckout', $eventData, $userData, $ctx);
         }
 
         return $results + ['event_id' => $eventId];
@@ -397,6 +421,10 @@ JS;
             $results['tiktok'] = $this->sendTikTokEventsAPI('Purchase', $ttData, $ctx);
         }
 
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('Purchase', $eventData, $userData, $ctx);
+        }
+
         return $results + ['event_id' => $eventId];
     }
 
@@ -425,6 +453,10 @@ JS;
             $results['facebook'] = $this->sendFacebookCAPI('Lead', $eventData, $userData, $ctx);
         }
 
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('Lead', $eventData, $userData, $ctx);
+        }
+
         return $results + ['event_id' => $eventId];
     }
 
@@ -446,6 +478,10 @@ JS;
 
         if ($this->fbCapiEnabled && $this->fbAccessToken) {
             $results['facebook'] = $this->sendFacebookCAPI('Subscribe', $eventData, $userData, $ctx);
+        }
+
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('Subscribe', $eventData, $userData, $ctx);
         }
 
         return $results + ['event_id' => $eventId];
@@ -471,6 +507,10 @@ JS;
             $results['facebook'] = $this->sendFacebookCAPI('Search', $eventData, null, $ctx);
         }
 
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('Search', $eventData, null, $ctx);
+        }
+
         return $results + ['event_id' => $eventId];
     }
 
@@ -494,6 +534,10 @@ JS;
             $results['facebook'] = $this->sendFacebookCAPI('Contact', $eventData, $userData, $ctx);
         }
 
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI('Contact', $eventData, $userData, $ctx);
+        }
+
         return $results + ['event_id' => $eventId];
     }
 
@@ -514,6 +558,10 @@ JS;
 
         if ($this->fbCapiEnabled && $this->fbAccessToken) {
             $results['facebook'] = $this->sendFacebookCAPI($customEventName, $eventData, $userData, $ctx);
+        }
+
+        if ($this->googleCapiEnabled && $this->googleConversionId) {
+            $results['google'] = $this->sendGoogleCAPI($customEventName, $eventData, $userData, $ctx);
         }
 
         return $results + ['event_id' => $eventId];
@@ -677,6 +725,101 @@ JS;
                 'error' => $e->getMessage(),
             ];
         }
+    }
+
+    private function sendGoogleCAPI(string $eventName, array $eventData, ?array $userData = null, array $context = []): array
+    {
+        try {
+            $mappedEvent = $this->mapGoogleEventName($eventName);
+            $eventId = $context['event_id'] ?? $this->generateEventId($eventName);
+
+            $conversionData = [
+                'conversion_action' => $this->googleConversionId . '/' . $this->googleConversionLabel,
+                'conversion_date_time' => now()->format('Y-m-d H:i:s'),
+                'conversion_value' => $eventData['value'] ?? 0,
+                'currency_code' => $eventData['currency'] ?? self::CURRENCY,
+                'order_id' => $eventData['order_id'] ?? null,
+            ];
+
+            $userIdentifiers = [];
+            if ($userData) {
+                if (!empty($userData['email'])) {
+                    $userIdentifiers[] = [
+                        'hashed_email' => hash('sha256', strtolower(trim($userData['email']))),
+                    ];
+                }
+                if (!empty($userData['phone'])) {
+                    $phone = preg_replace('/[^0-9]/', '', $userData['phone']);
+                    $userIdentifiers[] = [
+                        'hashed_phone_number' => hash('sha256', $phone),
+                    ];
+                }
+                if (!empty($userData['name'])) {
+                    $parts = explode(' ', trim($userData['name']), 2);
+                    $userIdentifiers[] = [
+                        'hashed_first_name' => hash('sha256', strtolower($parts[0])),
+                    ];
+                    if (!empty($parts[1])) {
+                        $userIdentifiers[] = [
+                            'hashed_last_name' => hash('sha256', strtolower($parts[1])),
+                        ];
+                    }
+                }
+            }
+
+            if (!empty($userIdentifiers)) {
+                $conversionData['user_identifiers'] = $userIdentifiers;
+            }
+
+            $gclid = $this->getGclidFromUrl();
+            if ($gclid) {
+                $conversionData['gclid'] = $gclid;
+            }
+
+            $conversionData['custom_variables'] = [
+                ['key' => 'event_id', 'value' => $eventId],
+                ['key' => 'event_source_url', 'value' => $context['event_source_url'] ?? request()->fullUrl()],
+            ];
+
+            $job = \App\Jobs\SendGoogleConversion::dispatch($conversionData)->onQueue('capi-events');
+
+            $this->logCapiEvent('google', $eventName, $eventId, true, 202, ['queued' => true]);
+
+            return [
+                'success' => true,
+                'event_id' => $eventId,
+                'queued' => true,
+            ];
+        } catch (\Exception $e) {
+            Log::error('Google CAPI exception', [
+                'event' => $eventName,
+                'error' => $e->getMessage(),
+            ]);
+
+            return [
+                'success' => false,
+                'event_id' => $context['event_id'] ?? null,
+                'error' => $e->getMessage(),
+            ];
+        }
+    }
+
+    private function mapGoogleEventName(string $eventName): string
+    {
+        $map = [
+            'Purchase' => 'purchase',
+            'AddToCart' => 'add_to_cart',
+            'ViewContent' => 'view_item',
+            'InitiateCheckout' => 'begin_checkout',
+            'Lead' => 'generate_lead',
+            'Subscribe' => 'sign_up',
+            'Search' => 'search',
+            'Contact' => 'contact',
+            'AddPaymentInfo' => 'add_payment_info',
+            'AddToWishlist' => 'add_to_wishlist',
+        ];
+
+        return $map[$eventName] ?? strtolower($eventName);
     }
 
     private function logCapiEvent(string $platform, string $eventName, string $eventId, bool $success, int $statusCode, ?array $response): void
@@ -927,6 +1070,7 @@ JS;
     public function isTestMode(): bool { return $this->testMode; }
     public function getFbPixelId(): ?string { return $this->fbPixelId; }
     public function getTtPixelId(): ?string { return $this->ttPixelId; }
+    public function isGoogleCapiEnabled(): bool { return $this->googleCapiEnabled && $this->googleConversionId; }
 
     public function testFacebook(): array
     {
@@ -971,6 +1115,34 @@ JS;
         } catch (\Exception $e) {
             Log::error('TikTok test failed', ['error' => $e->getMessage()]);
             return false;
+        }
+    }
+
+    public function testGoogle(): array
+    {
+        if (!$this->googleCapiEnabled) {
+            return ['success' => false, 'message' => 'Google CAPI غير مفعل، قم بتفعيل Google Conversions API أولاً'];
+        }
+        if (!$this->googleConversionId) {
+            return ['success' => false, 'message' => 'Conversion ID فارغ، يرجى إدخال معرف التحويل'];
+        }
+        if (!$this->googleConversionLabel) {
+            return ['success' => false, 'message' => 'Conversion Label فارغ، يرجى إدخال تسمية التحويل'];
+        }
+        try {
+            $result = $this->sendGoogleCAPI('Test', ['value' => 0, 'currency' => self::CURRENCY], null, [
+                'event_id' => $this->generateEventId('Test'),
+                'event_time' => time(),
+                'event_source_url' => request()->fullUrl(),
+                'action_source' => 'website',
+            ]);
+            if ($result['success'] ?? false) {
+                return ['success' => true, 'message' => 'تم الاتصال بـ Google Ads بنجاح'];
+            }
+            return ['success' => false, 'message' => 'فشل الاتصال: ' . ($result['error'] ?? 'خطأ غير معروف')];
+        } catch (\Exception $e) {
+            Log::error('Google test failed', ['error' => $e->getMessage()]);
+            return ['success' => false, 'message' => 'خطأ في الاتصال: ' . $e->getMessage()];
         }
     }
 }
