@@ -2,7 +2,7 @@ name: Deploy to Production
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   deploy:
@@ -17,8 +17,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/u920699383/domains/samahcare.shop/public
-            git pull origin master
+            cd /home/u920699383/domains/samahcare.shop/public_html
+            git pull origin main
             php artisan migrate --force
             php artisan config:clear
             php artisan cache:clear
