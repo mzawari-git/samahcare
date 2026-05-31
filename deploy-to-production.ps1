@@ -29,12 +29,12 @@ if ($status) {
     if (-not $commitMsg) { $commitMsg = "Deploy: $(Get-Date -Format 'yyyy-MM-dd HH:mm')" }
     git commit -m $commitMsg
 }
-git push origin master
+git push origin main
 Write-Host "  Pushed to GitHub." -ForegroundColor Green
 
 # Step 2: Trigger webhook deploy on production
 Write-Host "[2/3] Triggering deploy on www.samahcare.com..." -ForegroundColor Yellow
-$payload = @{ ref = "refs/heads/master" } | ConvertTo-Json
+$payload = @{ ref = "refs/heads/main" } | ConvertTo-Json
 $signature = "sha256=" + (Get-HMAC -Text $payload -Key $deploySecret -Algorithm SHA256)
 
 try {
@@ -52,7 +52,7 @@ Write-Host "[3/3] Done!" -ForegroundColor Green
 Write-Host ""
 Write-Host "If webhook failed, deploy manually on your server:" -ForegroundColor Yellow
 Write-Host "  1. SSH to samahcare.shop" -ForegroundColor White
-Write-Host "  2. cd public_html && git pull origin master" -ForegroundColor White
+Write-Host "  2. cd public_html && git pull origin main" -ForegroundColor White
 Write-Host "  3. php artisan migrate --force && php artisan optimize:clear" -ForegroundColor White
 
 function Get-HMAC {

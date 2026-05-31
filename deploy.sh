@@ -18,7 +18,7 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] Deploy started"
 git fetch origin 2>&1
 
 LOCAL=$(git rev-parse HEAD)
-REMOTE=$(git rev-parse origin/master)
+REMOTE=$(git rev-parse origin/main)
 
 if [ "$LOCAL" = "$REMOTE" ]; then
     echo "Already up to date ($LOCAL)"
@@ -26,7 +26,7 @@ if [ "$LOCAL" = "$REMOTE" ]; then
 fi
 
 echo "Updating from $LOCAL to $REMOTE"
-git reset --hard origin/master 2>&1
+git reset --hard origin/main 2>&1
 
 /usr/local/bin/php composer.phar install --no-interaction --prefer-dist --no-dev --optimize-autoloader 2>&1
 

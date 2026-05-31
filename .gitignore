@@ -1,6 +1,8 @@
 # Environment files (contain passwords)
 .env
 .env.*
+# Keep .env.example tracked as a template reference
+!.env.example
 
 # Dependencies
 /vendor

@@ -38,7 +38,7 @@ $exitCode = 0;
 chdir(dirname(__DIR__));
 
 exec('git fetch origin 2>&1', $output, $exitCode);
-exec('git reset --hard origin/master 2>&1', $output, $exitCode);
+exec('git reset --hard origin/main 2>&1', $output, $exitCode);
 exec('composer install --no-interaction --prefer-dist --no-dev 2>&1', $output, $exitCode);
 exec('php artisan migrate --force 2>&1', $output, $exitCode);
 exec('php artisan config:clear 2>&1', $output, $exitCode);
