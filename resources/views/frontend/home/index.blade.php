@@ -22,47 +22,47 @@
 
 @section('content')
 
-<section class="relative overflow-hidden" style="background:linear-gradient(135deg, #FBEAF0 0%, #f8dce6 50%, #fbe9ec 100%);">
+<section class="relative overflow-hidden" style="background:linear-gradient(135deg, #FEE2E2 0%, #FECACA 50%, #FEE2E2 100%);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[85vh] py-20 lg:py-0">
             <div class="order-2 lg:order-1">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-8" style="background:rgba(212,83,126,0.12);color:var(--brand-500);">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-8" style="background:rgba(220,38,38,0.12);color:var(--brand-500);">
                     <span class="w-1.5 h-1.5 rounded-full" style="background:var(--brand-500);"></span>
-                    Summer sale — up to 40% off
+                    تخفيضات الصيف — خصم يصل إلى 40%
                 </div>
 
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight mb-6 font-display" style="color:var(--ink);">
-                    Your beauty,
+                    جمالكِ،
                     <br>
-                    <span class="gradient-text">elevated</span>
+                    <span class="gradient-text">إلى آفاق جديدة</span>
                 </h1>
 
                 <p class="text-lg leading-relaxed mb-10 max-w-lg font-body" style="color:var(--ink-muted);">
-                    Premium skincare & beauty products delivered to your door. Authentic brands, expert advice.
+                    منتجات عناية بالبشرة والتجميل الفاخرة توصل إلى بابكِ. ماركات أصلية، نصائح خبراء.
                 </p>
 
                 <div class="flex flex-col sm:flex-row items-start gap-4">
-                    <a href="{{ route('booking') }}" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 font-body" style="background:var(--brand-500);box-shadow:0 4px 16px rgba(212,83,126,0.3);">
-                        Shop now
+                    <a href="{{ route('booking') }}" class="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 font-body" style="background:var(--brand-500);box-shadow:0 4px 16px rgba(220,38,38,0.3);">
+                        تسوقي الآن
                         <i class="ph ph-arrow-left"></i>
                     </a>
-                    <a href="#services" class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 font-body" style="background:white;color:var(--ink);border:1px solid rgba(212,83,126,0.15);">
-                        Browse categories
+                    <a href="#services" class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 font-body" style="background:white;color:var(--ink);border:1px solid rgba(220,38,38,0.15);">
+                        تصفحي الفئات
                         <i class="ph ph-caret-down"></i>
                     </a>
                 </div>
 
-                <div class="flex items-center gap-8 mt-12 pt-8" style="border-top:1px solid rgba(212,83,126,0.1);">
+                <div class="flex items-center gap-8 mt-12 pt-8" style="border-top:1px solid rgba(220,38,38,0.1);">
                     <div>
                         <span class="text-2xl font-black block font-display" style="color:var(--ink);">+{{ \App\Models\Service::count() }}</span>
                         <span class="text-xs font-body" style="color:var(--ink-dim);">خدمة احترافية</span>
                     </div>
-                    <div class="w-px h-10" style="background:rgba(212,83,126,0.1);"></div>
+                    <div class="w-px h-10" style="background:rgba(220,38,38,0.1);"></div>
                     <div>
                         <span class="text-2xl font-black block font-display" style="color:var(--ink);">5,000+</span>
                         <span class="text-xs font-body" style="color:var(--ink-dim);">عميلة سعيدة</span>
                     </div>
-                    <div class="w-px h-10" style="background:rgba(212,83,126,0.1);"></div>
+                    <div class="w-px h-10" style="background:rgba(220,38,38,0.1);"></div>
                     <div>
                         <span class="text-2xl font-black block font-display" style="color:var(--ink);">4.9</span>
                         <span class="text-xs font-body" style="color:var(--ink-dim);">تقييم العملاء</span>
@@ -74,7 +74,7 @@
                 <div class="relative aspect-[4/5] rounded-3xl overflow-hidden" style="background:linear-gradient(135deg, var(--brand-100), var(--brand-50));">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="text-center">
-                            <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4" style="background:white;box-shadow:0 8px 32px rgba(212,83,126,0.15);">
+                            <div class="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4" style="background:white;box-shadow:0 8px 32px rgba(220,38,38,0.15);">
                                 <i class="ph ph-sparkle text-4xl" style="color:var(--brand-500);"></i>
                             </div>
                             <p class="text-sm font-semibold font-body" style="color:var(--brand-700);">سماح كير</p>
@@ -99,7 +99,7 @@
     </div>
 </section>
 
-<div class="py-6 lg:py-8" style="background:white;border-bottom:1px solid rgba(212,83,126,0.06);">
+<div class="py-6 lg:py-8" style="background:white;border-bottom:1px solid rgba(220,38,38,0.06);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             <div class="flex items-center gap-3">
@@ -107,8 +107,8 @@
                     <i class="ph ph-truck text-xl" style="color:var(--brand-500);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">Free shipping</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">Over ₪150</p>
+                    <p class="text-sm font-bold font-body" style="color:var(--ink);">شحن مجاني</p>
+                    <p class="text-xs font-body" style="color:var(--ink-dim);">للطلبات فوق 150 شيكل</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -116,8 +116,8 @@
                     <i class="ph ph-arrow-counter-clockwise text-xl" style="color:var(--brand-500);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">Easy returns</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">30-day policy</p>
+                    <p class="text-sm font-bold font-body" style="color:var(--ink);">إرجاع سهل</p>
+                    <p class="text-xs font-body" style="color:var(--ink-dim);">خلال 30 يوم</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -125,8 +125,8 @@
                     <i class="ph ph-lock-simple text-xl" style="color:var(--brand-500);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">Secure checkout</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">SSL encrypted</p>
+                    <p class="text-sm font-bold font-body" style="color:var(--ink);">دفع آمن</p>
+                    <p class="text-xs font-body" style="color:var(--ink-dim);">تشفير SSL</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
@@ -134,8 +134,8 @@
                     <i class="ph ph-certificate text-xl" style="color:var(--brand-500);"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold font-body" style="color:var(--ink);">100% authentic</p>
-                    <p class="text-xs font-body" style="color:var(--ink-dim);">Guaranteed</p>
+                    <p class="text-sm font-bold font-body" style="color:var(--ink);">أصلي 100%</p>
+                    <p class="text-xs font-body" style="color:var(--ink-dim);">مضمون</p>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@ $serviceIcons = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wide mb-4 font-body" style="background:var(--brand-50);color:var(--brand-500);">
-                Featured products
+                منتجات مميزة
             </span>
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 font-display" style="color:var(--ink);">
                 خدمات مختارة <span class="gradient-text">بعناية</span>
@@ -170,7 +170,7 @@ $serviceIcons = [
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             @foreach($featuredServices as $service)
             @php $meta = $serviceIcons[$service->id] ?? ['icon' => 'ph ph-spa', 'bg' => 'var(--brand-50)']; @endphp
-            <div class="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style="background:white;border:1px solid rgba(212,83,126,0.06);">
+            <div class="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style="background:white;border:1px solid rgba(220,38,38,0.06);">
                 <div class="relative aspect-square overflow-hidden" style="background:{{ $meta['bg'] }};">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <i class="{{ $meta['icon'] }} text-5xl sm:text-6xl transition-transform duration-300 group-hover:scale-110" style="color:var(--brand-500);"></i>
@@ -178,17 +178,17 @@ $serviceIcons = [
 
                     @if($service->is_on_sale)
                     <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold text-white" style="background:var(--brand-500);">
-                        Sale
+                        تخفيض
                     </div>
                     @elseif($service->id <= 3)
                     <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold text-white" style="background:#10b981;">
-                        New
+                        جديد
                     </div>
                     @endif
 
                     <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <a href="{{ route('booking') }}?service={{ $service->id }}" class="px-6 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-200 hover:scale-105" style="background:var(--brand-500);">
-                            Add to cart
+                            أضيفي للسلة
                         </a>
                     </div>
                 </div>
@@ -260,7 +260,7 @@ $serviceIcons = [
         <p class="text-lg mb-10 max-w-xl mx-auto font-body" style="color:var(--ink-muted);">
             انضمي إلى آلاف العميلات السعيدات واحجزي موعدكِ الآن
         </p>
-        <a href="{{ route('booking') }}" class="inline-flex items-center gap-2.5 px-10 py-4 rounded-full font-bold text-sm text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 font-body" style="background:var(--brand-500);box-shadow:0 4px 16px rgba(212,83,126,0.3);">
+        <a href="{{ route('booking') }}" class="inline-flex items-center gap-2.5 px-10 py-4 rounded-full font-bold text-sm text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 font-body" style="background:var(--brand-500);box-shadow:0 4px 16px rgba(220,38,38,0.3);">
             احجزي موعدك الآن
             <i class="ph ph-arrow-left"></i>
         </a>

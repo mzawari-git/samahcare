@@ -40,9 +40,9 @@ module.exports = {
           900: 'var(--accent-900, #f9cde3)',
         },
         rose: {
-          primary: '#D4537E',
-          dark: '#993556',
-          light: '#FBEAF0',
+          primary: '#DC2626',
+          dark: '#991B1B',
+          light: '#FEE2E2',
         },
         cream: '#FAF6F2',
         charcoal: '#2C2C2A',

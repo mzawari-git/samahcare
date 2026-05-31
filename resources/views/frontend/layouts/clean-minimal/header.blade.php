@@ -1,26 +1,26 @@
 @php if(!isset($headerServices)){$headerServices=\App\Models\Service::active()->ordered()->get();} @endphp
 
 <div class="w-full text-center py-2 px-4 text-xs font-semibold tracking-wide" style="background:var(--gradient-primary);color:#fff;">
-    <span>Summer sale — up to 40% off</span>
+    <span>تخفيضات الصيف — خصم يصل إلى 40%</span>
 </div>
 
-<header class="sticky top-0 w-full z-50 transition-all duration-300" id="mainHeader" style="background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,83,126,0.06);">
+<header class="sticky top-0 w-full z-50 transition-all duration-300" id="mainHeader" style="background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(220,38,38,0.06);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 md:h-20">
             <a href="{{ route('home') }}" class="flex items-center gap-2.5 flex-shrink-0">
                 @if(!empty($siteSettings['site_logo_url']))
                     <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name']??'سماح كير' }}" class="h-9 md:h-11 w-auto object-contain">
                 @else
-                    <span class="text-xl md:text-2xl font-black tracking-tight font-display" style="color:var(--ink);">Samah<span style="color:var(--brand-500);">care</span></span>
+                    <span class="text-xl md:text-2xl font-black tracking-tight font-display" style="color:var(--ink);">سماح <span style="color:var(--brand-500);">كير</span></span>
                 @endif
             </a>
 
             <nav class="hidden lg:flex items-center gap-8 text-sm font-medium font-body">
                 <a href="{{ route('home') }}" class="nav-link-clean {{ request()->routeIs('home')?'active':'' }}">الرئيسية</a>
-                <a href="{{ route('booking') }}" class="nav-link-clean {{ request()->routeIs('booking')?'active':'' }}">Shop</a>
-                <a href="{{ route('blog.index') }}" class="nav-link-clean {{ request()->routeIs('blog.*')?'active':'' }}">Categories</a>
-                <a href="{{ route('contact') }}" class="nav-link-clean {{ request()->routeIs('contact')?'active':'' }}">Blog</a>
-                <a href="{{ route('faq') }}" class="nav-link-clean {{ request()->routeIs('faq')?'active':'' }}">About</a>
+                <a href="{{ route('booking') }}" class="nav-link-clean {{ request()->routeIs('booking')?'active':'' }}">المتجر</a>
+                <a href="{{ route('blog.index') }}" class="nav-link-clean {{ request()->routeIs('blog.*')?'active':'' }}">الفئات</a>
+                <a href="{{ route('contact') }}" class="nav-link-clean {{ request()->routeIs('contact')?'active':'' }}">المدونة</a>
+                <a href="{{ route('faq') }}" class="nav-link-clean {{ request()->routeIs('faq')?'active':'' }}">من نحن</a>
             </nav>
 
             <div class="flex items-center gap-3">
@@ -37,13 +37,13 @@
                 @else
                     <a href="{{ route('login') }}" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium transition-colors font-body" style="color:var(--ink-muted);">
                         <i class="ph ph-sign-in text-lg"></i>
-                        Sign in
+                        تسجيل الدخول
                     </a>
                 @endauth
 
                 <a href="{{ route('booking') }}" class="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:-translate-y-px font-body" style="background:var(--brand-500);">
                     <i class="ph ph-calendar-plus text-base"></i>
-                    Book now
+                    احجزي الآن
                 </a>
 
                 <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-colors" style="color:var(--ink);">
@@ -62,7 +62,7 @@
                 @if(!empty($siteSettings['site_logo_url']))
                     <img src="{{ $siteSettings['site_logo_url'] }}" alt="سماح كير" class="h-8 w-auto object-contain">
                 @else
-                    <span class="text-lg font-black font-display" style="color:var(--ink);">Samah<span style="color:var(--brand-500);">care</span></span>
+                    <span class="text-lg font-black font-display" style="color:var(--ink);">سماح <span style="color:var(--brand-500);">كير</span></span>
                 @endif
                 <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full flex items-center justify-center bg-gray-50 text-gray-400 hover:bg-gray-100 transition-colors">
                     <i class="ph ph-x text-lg"></i>
@@ -73,7 +73,7 @@
         <div class="px-4 pt-4">
             <a href="{{ route('booking') }}" class="flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm text-white font-body" style="background:var(--brand-500);">
                 <i class="ph ph-calendar-plus text-lg"></i>
-                <span>Book now</span>
+                <span>احجزي الآن</span>
             </a>
         </div>
 
@@ -84,19 +84,19 @@
             </a>
             <a href="{{ route('booking') }}" class="mobile-link-clean {{ request()->routeIs('booking')?'active':'' }}">
                 <i class="ph ph-shopping-bag text-lg"></i>
-                <span>Shop</span>
+                <span>المتجر</span>
             </a>
             <a href="{{ route('blog.index') }}" class="mobile-link-clean {{ request()->routeIs('blog.*')?'active':'' }}">
                 <i class="ph ph-article text-lg"></i>
-                <span>Categories</span>
+                <span>الفئات</span>
             </a>
             <a href="{{ route('contact') }}" class="mobile-link-clean {{ request()->routeIs('contact')?'active':'' }}">
                 <i class="ph ph-envelope text-lg"></i>
-                <span>Blog</span>
+                <span>المدونة</span>
             </a>
             <a href="{{ route('faq') }}" class="mobile-link-clean {{ request()->routeIs('faq')?'active':'' }}">
                 <i class="ph ph-question text-lg"></i>
-                <span>About</span>
+                <span>من نحن</span>
             </a>
 
             <div class="border-t border-gray-100 mt-4 pt-4">
@@ -111,7 +111,7 @@
                 @else
                 <a href="{{ route('login') }}" class="mobile-link-clean">
                     <i class="ph ph-sign-in text-lg"></i>
-                    <span>Sign in</span>
+                    <span>تسجيل الدخول</span>
                 </a>
                 <a href="{{ route('register') }}" class="mobile-link-clean">
                     <i class="ph ph-user-plus text-lg"></i>
@@ -149,5 +149,5 @@
 <script>
 function toggleMobileMenu(){var m=document.getElementById('mobileMenu'),p=document.getElementById('mobilePanel'),i=document.getElementById('mobileMenuIcon');m.classList.contains('hidden')?(m.classList.remove('hidden'),setTimeout(function(){p.style.transform='translateX(0)'},10),i.className='ph ph-x text-xl'):(p.style.transform='translateX(100%)',setTimeout(function(){m.classList.add('hidden')},300),i.className='ph ph-list text-xl');}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var m=document.getElementById('mobileMenu');if(m&&!m.classList.contains('hidden'))toggleMobileMenu();}});
-window.addEventListener('scroll',function(){var h=document.getElementById('mainHeader');if(!h)return;h.style.boxShadow=window.scrollY>20?'0 1px 8px rgba(212,83,126,0.06)':'none';});
+window.addEventListener('scroll',function(){var h=document.getElementById('mainHeader');if(!h)return;h.style.boxShadow=window.scrollY>20?'0 1px 8px rgba(220,38,38,0.06)':'none';});
 </script>

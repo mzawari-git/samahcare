@@ -1,26 +1,26 @@
 /* ═══ CLEAN — Elegant Minimal Beauty ═══ */
 :root {
-  --brand-50: #FBEAF0; --brand-100: #f8dce6; --brand-200: #f0b8cc;
-  --brand-300: #e68aab; --brand-400: #dc6b92; --brand-500: #D4537E;
-  --brand-600: #b8456b; --brand-700: #993556; --brand-800: #7a2a45; --brand-900: #5c1f34;
+  --brand-50: #FEF2F2; --brand-100: #FEE2E2; --brand-200: #FECACA;
+  --brand-300: #FCA5A5; --brand-400: #F87171; --brand-500: #DC2626;
+  --brand-600: #B91C1C; --brand-700: #991B1B; --brand-800: #7F1D1D; --brand-900: #450A0A;
   --accent-50: #FAF6F2; --accent-100: #f5ede5; --accent-200: #ead9c9;
   --accent-300: #d9bda5; --accent-400: #c49a7c; --accent-500: #a87a5c;
   --accent-600: #8d6348; --accent-700: #724e39; --accent-800: #5a3d2d; --accent-900: #FAF6F2;
-  --surface: #ffffff; --surface-alt: #FBEAF0;
+  --surface: #ffffff; --surface-alt: #FEF2F2;
   --ink: #2C2C2A; --ink-muted: #6b7280; --ink-dim: #9ca3af;
   --header-bg: rgba(255, 255, 255, 0.95);
   --glass-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(212, 83, 126, 0.08);
-  --glass-shadow: 0 1px 3px rgba(212,83,126,0.04), 0 4px 20px rgba(212,83,126,0.03);
+  --glass-border: rgba(220, 38, 38, 0.08);
+  --glass-shadow: 0 1px 3px rgba(220,38,38,0.04), 0 4px 20px rgba(220,38,38,0.03);
   --neon-glow: 0 0 0 transparent;
   --neon-glow-strong: 0 0 0 transparent;
   --neon-text-shadow: none;
   --accent-glow: 0 0 0 transparent;
   --accent-glow-strong: 0 0 0 transparent;
-  --gradient-primary: linear-gradient(135deg, #D4537E, #993556);
-  --gradient-hero: linear-gradient(135deg, #D4537E 0%, #993556 50%, #dc6b92 100%);
+  --gradient-primary: linear-gradient(135deg, #DC2626, #991B1B);
+  --gradient-hero: linear-gradient(135deg, #DC2626 0%, #991B1B 50%, #F87171 100%);
   --card-radius: 1rem;
-  --card-border: 1px solid rgba(212, 83, 126, 0.08);
+  --card-border: 1px solid rgba(220, 38, 38, 0.08);
   --bg-pattern: none;
   --glass-blur: blur(12px);
   --glass-opacity: 0.9;

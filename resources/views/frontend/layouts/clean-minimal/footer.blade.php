@@ -1,4 +1,4 @@
-<footer style="background:var(--surface-alt);border-top:1px solid rgba(212,83,126,0.06);">
+<footer style="background:var(--surface-alt);border-top:1px solid rgba(220,38,38,0.06);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
@@ -7,7 +7,7 @@
                     @if(!empty($siteSettings['site_logo_url']))
                         <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'سماح كير' }}" class="h-9 w-auto object-contain">
                     @else
-                        <span class="text-xl font-black font-display" style="color:var(--ink);">Samah<span style="color:var(--brand-500);">care</span></span>
+                        <span class="text-xl font-black font-display" style="color:var(--ink);">سماح <span style="color:var(--brand-500);">كير</span></span>
                     @endif
                 </div>
                 <p class="text-sm leading-relaxed mb-6 max-w-sm font-body" style="color:var(--ink-muted);">
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body" style="color:var(--ink-dim);border-top:1px solid rgba(212,83,126,0.06);">
+        <div class="py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-body" style="color:var(--ink-dim);border-top:1px solid rgba(220,38,38,0.06);">
             <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'سماح كير' }}. جميع الحقوق محفوظة.</p>
             <div class="flex gap-2">
                 <span class="px-3 py-1 rounded-full" style="background:var(--brand-50);color:var(--brand-500);">الدفع عند الحضور</span>
