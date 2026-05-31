@@ -1,80 +1,75 @@
 {{-- ═══ Universal Theme Switcher: Architecture + Color + Font + Dark/Light ═══ --}}
-<div id="themeSwitcher" class="fixed bottom-20 left-5 z-[9999] flex flex-col gap-3">
-    <button onclick="toggleThemePalette()" id="themeToggleBtn" class="w-11 h-11 rounded-full flex items-center justify-center text-white/60 hover:text-white hover:scale-110 transition-all cursor-pointer shadow-lg border border-white/10" style="background:rgba(20,20,20,0.6); backdrop-filter:blur(8px);" title="تخصيص المظهر" aria-label="تخصيص المظهر">
-        <i class="ph ph-paint-brush text-lg"></i>
+<div id="themeSwitcher" class="fixed bottom-6 left-6 z-[9999] flex flex-col gap-3">
+    <button onclick="toggleThemePalette()" id="themeToggleBtn" class="w-12 h-12 rounded-full flex items-center justify-center text-white hover:text-white hover:scale-110 transition-all cursor-pointer shadow-xl border border-white/20" style="background:var(--brand-500);" title="تخصيص المظهر" aria-label="تخصيص المظهر">
+        <i class="ph ph-paint-brush text-xl"></i>
     </button>
 
-    {{-- Dark/Light Toggle --}}
-    <button onclick="toggleDarkLight()" id="darkLightBtn" class="w-11 h-11 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-lg border border-white/10" style="background:rgba(20,20,20,0.6); backdrop-filter:blur(8px);" title="داكن / فاتح" aria-label="داكن / فاتح">
-        <i id="darkLightIcon" class="ph ph-sun text-lg text-white/60"></i>
+    <button onclick="toggleDarkLight()" id="darkLightBtn" class="w-12 h-12 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-xl border border-white/20" style="background:var(--ink);" title="داكن / فاتح" aria-label="داكن / فاتح">
+        <i id="darkLightIcon" class="ph ph-sun text-xl text-white"></i>
     </button>
 
-    <div id="themePalette" class="hidden flex-col gap-4 p-4 rounded-2xl mb-2 min-w-[280px]" style="background:rgba(12,12,12,0.92); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.08); box-shadow:0 8px 40px rgba(0,0,0,0.6);">
+    <div id="themePalette" class="hidden flex-col gap-5 p-5 rounded-2xl mb-2 min-w-[300px]" style="background:white; border:1px solid rgba(0,0,0,0.08); box-shadow:0 20px 60px rgba(0,0,0,0.15);">
 
-        {{-- Architecture Picker --}}
         <div>
-            <h6 class="text-[10px] font-bold uppercase tracking-widest text-ink-dim mb-3">نمط التصميم</h6>
+            <h6 class="text-[11px] font-bold uppercase tracking-widest mb-3" style="color:var(--ink-dim);">نمط التصميم</h6>
             <div class="grid grid-cols-2 gap-2">
                 @php
                 $architectures = [
-                    'clean-minimal' => ['name' => 'نظيف', 'icon' => 'ph ph-sparkle', 'color' => '#c4727f'],
-                    'cyber-lab' => ['name' => 'سايبر', 'icon' => 'ph ph-cpu', 'color' => '#ff2a85'],
-                    'organic-spa' => ['name' => 'طبيعة', 'icon' => 'ph ph-leaf', 'color' => '#00ff88'],
-                    'editorial' => ['name' => 'تحريري', 'icon' => 'ph ph-text-aa', 'color' => '#ffffff'],
-                    'luxury-boutique' => ['name' => 'فخامة', 'icon' => 'ph ph-crown', 'color' => '#d4af37'],
+                    'clean-minimal' => ['name' => 'نظيف', 'icon' => 'ph ph-sparkle', 'color' => '#DC2626'],
+                    'cyber-lab' => ['name' => 'سايبر', 'icon' => 'ph ph-cpu', 'color' => '#ec4899'],
+                    'organic-spa' => ['name' => 'طبيعة', 'icon' => 'ph ph-leaf', 'color' => '#10b981'],
+                    'editorial' => ['name' => 'تحريري', 'icon' => 'ph ph-text-aa', 'color' => '#6b7280'],
+                    'luxury-boutique' => ['name' => 'فخامة', 'icon' => 'ph ph-crown', 'color' => '#eab308'],
                 ];
-                $currentArch = $layoutArchitecture ?? 'cyber-lab';
+                $currentArch = $layoutArchitecture ?? 'clean-minimal';
                 @endphp
                 @foreach($architectures as $key => $arch)
-                <button onclick="switchArchitecture('{{ $key }}')" data-arch="{{ $key }}" class="arch-btn text-right p-2.5 rounded-xl border transition-all text-xs {{ $currentArch === $key ? 'border-white/40 bg-white/10' : 'border-white/5 bg-white/5 hover:border-white/20' }}">
+                <button onclick="switchArchitecture('{{ $key }}')" data-arch="{{ $key }}" class="arch-btn text-right p-3 rounded-xl border-2 transition-all text-xs {{ $currentArch === $key ? 'border-current' : 'border-transparent hover:border-gray-200' }}" style="{{ $currentArch === $key ? 'background:var(--brand-50);color:var(--brand-500);' : 'background:#f9fafb;color:var(--ink-muted);' }}">
                     <div class="flex items-center gap-2 mb-1">
-                        <i class="{{ $arch['icon'] }} text-sm" style="color:{{ $arch['color'] }};"></i>
-                        <span class="font-bold text-white">{{ $arch['name'] }}</span>
+                        <i class="{{ $arch['icon'] }} text-base" style="color:{{ $arch['color'] }};"></i>
+                        <span class="font-bold">{{ $arch['name'] }}</span>
                     </div>
-                    <span class="text-[10px] text-ink-dim">نمط {{ $arch['name'] }}</span>
                 </button>
                 @endforeach
             </div>
         </div>
 
-        {{-- Color Palette Picker --}}
         <div>
-            <h6 class="text-[10px] font-bold uppercase tracking-widest text-ink-dim mb-3">لوحة الألوان</h6>
+            <h6 class="text-[11px] font-bold uppercase tracking-widest mb-3" style="color:var(--ink-dim);">لوحة الألوان</h6>
             <div class="flex gap-2 flex-wrap" id="colorPaletteContainer">
                 @php
                 $palettes = [
-                    'clean' => ['name' => 'نظيف', 'color' => '#c4727f', 'arch' => 'clean-minimal'],
-                    'rose' => ['name' => 'روز', 'color' => '#ff2a85', 'arch' => 'cyber-lab'],
+                    'clean' => ['name' => 'نظيف', 'color' => '#DC2626', 'arch' => 'clean-minimal'],
+                    'rose' => ['name' => 'روز', 'color' => '#ec4899', 'arch' => 'cyber-lab'],
                     'midnight' => ['name' => 'ليلي', 'color' => '#7c3aed', 'arch' => 'cyber-lab'],
-                    'natural' => ['name' => 'طبيعي', 'color' => '#00ff88', 'arch' => 'organic-spa'],
-                    'forest' => ['name' => 'غابة', 'color' => '#00c853', 'arch' => 'organic-spa'],
-                    'minimal' => ['name' => 'مينيمال', 'color' => '#ffffff', 'arch' => 'editorial'],
-                    'ocean' => ['name' => 'محيط', 'color' => '#00b4d8', 'arch' => 'editorial'],
-                    'sunset' => ['name' => 'غروب', 'color' => '#ff6b35', 'arch' => 'luxury-boutique'],
-                    'luxury' => ['name' => 'فخامة', 'color' => '#d4af37', 'arch' => 'luxury-boutique'],
+                    'natural' => ['name' => 'طبيعي', 'color' => '#10b981', 'arch' => 'organic-spa'],
+                    'forest' => ['name' => 'غابة', 'color' => '#059669', 'arch' => 'organic-spa'],
+                    'minimal' => ['name' => 'مينيمال', 'color' => '#6b7280', 'arch' => 'editorial'],
+                    'ocean' => ['name' => 'محيط', 'color' => '#0ea5e9', 'arch' => 'editorial'],
+                    'sunset' => ['name' => 'غروب', 'color' => '#f97316', 'arch' => 'luxury-boutique'],
+                    'luxury' => ['name' => 'فخامة', 'color' => '#eab308', 'arch' => 'luxury-boutique'],
                 ];
-                $currentColor = $siteSettings['site_theme'] ?? 'rose';
+                $currentColor = $siteSettings['site_theme'] ?? 'clean';
                 @endphp
                 @foreach($palettes as $key => $p)
-                <button onclick="switchColor('{{ $key }}')" data-color="{{ $key }}" data-arch="{{ $p['arch'] }}" class="color-btn w-8 h-8 rounded-full border-2 transition-all {{ $currentColor === $key ? 'border-white scale-125' : 'border-transparent opacity-60 hover:opacity-100' }}" style="background:{{ $p['color'] }};" title="{{ $p['name'] }}" aria-label="لون {{ $p['name'] }}"></button>
+                <button onclick="switchColor('{{ $key }}')" data-color="{{ $key }}" data-arch="{{ $p['arch'] }}" class="color-btn w-9 h-9 rounded-full border-3 transition-all {{ $currentColor === $key ? 'border-gray-800 scale-110' : 'border-transparent opacity-70 hover:opacity-100 hover:scale-105' }}" style="background:{{ $p['color'] }};" title="{{ $p['name'] }}" aria-label="لون {{ $p['name'] }}"></button>
                 @endforeach
             </div>
         </div>
 
-        {{-- Font Picker --}}
         <div>
-            <h6 class="text-[10px] font-bold uppercase tracking-widest text-ink-dim mb-3">الخط</h6>
+            <h6 class="text-[11px] font-bold uppercase tracking-widest mb-3" style="color:var(--ink-dim);">الخط</h6>
             <div class="flex gap-2 flex-wrap">
                 @php
                 $fonts = [
-                    'Tajawal' => 'تجال',
+                    'Tajawal' => 'تجوال',
                     'Cairo' => 'قاهرة',
                     'El+Messiri' => 'المسيري',
                     'Changa' => 'تشانغا',
                 ];
                 @endphp
                 @foreach($fonts as $fontKey => $fontName)
-                <button onclick="switchFont('{{ $fontKey }}')" data-font="{{ $fontKey }}" class="font-btn px-3 py-1.5 rounded-lg border border-white/10 text-xs text-white/60 hover:text-white hover:border-white/30 transition-all" style="font-family:'{{ str_replace('+',' ',$fontKey) }}',sans-serif;">{{ $fontName }}</button>
+                <button onclick="switchFont('{{ $fontKey }}')" data-font="{{ $fontKey }}" class="font-btn px-3 py-2 rounded-lg border-2 text-xs transition-all" style="font-family:'{{ str_replace('+',' ',$fontKey) }}',sans-serif;background:#f9fafb;color:var(--ink-muted);border-color:transparent;">{{ $fontName }}</button>
                 @endforeach
             </div>
         </div>
@@ -84,7 +79,9 @@
 <style>
 #themePalette { animation: fadeUpTheme 0.25s ease; }
 @keyframes fadeUpTheme { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-#themeToggleBtn:hover { box-shadow: 0 0 16px rgba(255,255,255,0.15); }
+#themeToggleBtn:hover { box-shadow: 0 8px 24px rgba(220,38,38,0.3); }
+.color-btn { border-width: 3px; }
+.arch-btn.border-current { border-color: var(--brand-500); }
 </style>
 
 <script>
@@ -96,13 +93,13 @@ function toggleDarkLight() {
     var isLight = html.getAttribute('data-theme-mode') === 'light';
     if (isLight) {
         html.removeAttribute('data-theme-mode');
-        localStorage.setItem('سماح كير _mode', 'dark');
-        setCookie('سماح كير _mode', 'dark', 365);
+        localStorage.setItem('samahcare_mode', 'dark');
+        setCookie('samahcare_mode', 'dark', 365);
         updateDarkLightIcon(false);
     } else {
         html.setAttribute('data-theme-mode', 'light');
-        localStorage.setItem('سماح كير _mode', 'light');
-        setCookie('سماح كير _mode', 'light', 365);
+        localStorage.setItem('samahcare_mode', 'light');
+        setCookie('samahcare_mode', 'light', 365);
         updateDarkLightIcon(true);
     }
 }
@@ -110,13 +107,11 @@ function toggleDarkLight() {
 function updateDarkLightIcon(isLight) {
     var icon = document.getElementById('darkLightIcon');
     if (icon) {
-        icon.className = isLight ? 'ph ph-moon text-lg' : 'ph ph-sun text-lg';
-        icon.style.color = isLight ? '#1c1917' : '';
+        icon.className = isLight ? 'ph ph-moon text-xl' : 'ph ph-sun text-xl';
     }
     var btn = document.getElementById('darkLightBtn');
     if (btn) {
-        btn.style.background = isLight ? 'rgba(255,255,255,0.85)' : 'rgba(20,20,20,0.6)';
-        btn.style.borderColor = isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)';
+        btn.style.background = isLight ? '#1a1a1a' : 'var(--ink)';
     }
 }
 
@@ -128,57 +123,77 @@ function toggleThemePalette() {
 function switchArchitecture(arch) {
     var colorMap = { 'clean-minimal': ['clean'], 'cyber-lab': ['rose','midnight'], 'organic-spa': ['natural','forest'], 'editorial': ['minimal','ocean'], 'luxury-boutique': ['sunset','luxury'] };
     var defaults = { 'clean-minimal': 'clean', 'cyber-lab': 'rose', 'organic-spa': 'natural', 'editorial': 'minimal', 'luxury-boutique': 'sunset' };
-    var currentColor = localStorage.getItem('سماح كير _color') || defaults[arch] || 'rose';
+    var currentColor = localStorage.getItem('samahcare_color') || defaults[arch] || 'clean';
     var compatibleColors = colorMap[arch] || [];
-    // If current color doesn't belong to new architecture, switch to default color for that architecture
     if (compatibleColors.indexOf(currentColor) === -1) {
-        currentColor = defaults[arch] || 'rose';
+        currentColor = defaults[arch] || 'clean';
     }
-    localStorage.setItem('سماح كير _architecture', arch);
-    localStorage.setItem('سماح كير _color', currentColor);
-    setCookie('سماح كير _arch', arch, 365);
-    setCookie('سماح كير _color', currentColor, 365);
+    localStorage.setItem('samahcare_architecture', arch);
+    localStorage.setItem('samahcare_color', currentColor);
+    setCookie('samahcare_arch', arch, 365);
+    setCookie('samahcare_color', currentColor, 365);
     location.reload();
 }
 
 function switchColor(color) {
-    // Only change color, keep current architecture
-    localStorage.setItem('سماح كير _color', color);
-    setCookie('سماح كير _color', color, 365);
-    // Do NOT change architecture cookie
+    localStorage.setItem('samahcare_color', color);
+    setCookie('samahcare_color', color, 365);
     location.reload();
 }
 
 function switchFont(font) {
-    localStorage.setItem('سماح كير _font', font);
-    setCookie('سماح كير _font', font, 365);
+    localStorage.setItem('samahcare_font', font);
+    setCookie('samahcare_font', font, 365);
     var link = document.getElementById('googleFontsLink');
     if(link) {
         link.href = 'https://fonts.googleapis.com/css2?family=' + font.replace('+','+') + ':wght@300;400;500;700;800;900&display=swap';
         document.body.style.fontFamily = "'" + font.replace('+',' ') + "', sans-serif";
     }
     var btns = document.querySelectorAll('.font-btn');
-    btns.forEach(function(b) { b.classList.remove('text-white','border-white/30'); b.classList.add('text-white/60','border-white/10'); });
+    btns.forEach(function(b) { 
+        b.style.background = '#f9fafb'; 
+        b.style.color = 'var(--ink-muted)'; 
+        b.style.borderColor = 'transparent'; 
+    });
     var fb = document.querySelector('.font-btn[data-font="' + font + '"]');
-    if(fb) fb.classList.add('text-white','border-white/30');
+    if(fb) { 
+        fb.style.background = 'var(--brand-50)'; 
+        fb.style.color = 'var(--brand-500)'; 
+        fb.style.borderColor = 'var(--brand-500)'; 
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var savedArch = localStorage.getItem('سماح كير _architecture') || 'clean-minimal';
-    var savedColor = localStorage.getItem('سماح كير _color') || 'clean';
-    var savedFont = localStorage.getItem('سماح كير _font') || 'Tajawal';
-    // Default light mode — user can toggle to dark
-    var savedMode = localStorage.getItem('سماح كير _mode') || 'light';
+    var savedArch = localStorage.getItem('samahcare_architecture') || 'clean-minimal';
+    var savedColor = localStorage.getItem('samahcare_color') || 'clean';
+    var savedFont = localStorage.getItem('samahcare_font') || 'Tajawal';
+    var savedMode = localStorage.getItem('samahcare_mode') || 'light';
 
     var archBtns = document.querySelectorAll('.arch-btn');
-    archBtns.forEach(function(b) { b.classList.remove('border-white/40','bg-white/10'); b.classList.add('border-white/5','bg-white/5'); });
+    archBtns.forEach(function(b) { 
+        b.style.background = '#f9fafb'; 
+        b.style.color = 'var(--ink-muted)'; 
+        b.classList.remove('border-current');
+        b.classList.add('border-transparent');
+    });
     var ab = document.querySelector('.arch-btn[data-arch="' + savedArch + '"]');
-    if(ab) { ab.classList.add('border-white/40','bg-white/10'); ab.classList.remove('border-white/5','bg-white/5'); }
+    if(ab) { 
+        ab.style.background = 'var(--brand-50)'; 
+        ab.style.color = 'var(--brand-500)'; 
+        ab.classList.add('border-current');
+        ab.classList.remove('border-transparent');
+    }
 
     var colorBtns = document.querySelectorAll('.color-btn');
-    colorBtns.forEach(function(b) { b.classList.remove('border-white','scale-125'); b.classList.add('border-transparent','opacity-60'); });
+    colorBtns.forEach(function(b) { 
+        b.classList.remove('border-gray-800','scale-110'); 
+        b.classList.add('border-transparent','opacity-70'); 
+    });
     var cb = document.querySelector('.color-btn[data-color="' + savedColor + '"]');
-    if(cb) { cb.classList.add('border-white','scale-125'); cb.classList.remove('border-transparent','opacity-60'); }
+    if(cb) { 
+        cb.classList.add('border-gray-800','scale-110'); 
+        cb.classList.remove('border-transparent','opacity-70'); 
+    }
 
     if(savedFont && savedFont !== 'Tajawal') {
         var link = document.getElementById('googleFontsLink');
@@ -187,7 +202,15 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.fontFamily = "'" + savedFont.replace('+',' ') + "', sans-serif";
         }
         var fb = document.querySelector('.font-btn[data-font="' + savedFont + '"]');
-        if(fb) fb.classList.add('text-white','border-white/30');
+        if(fb) { 
+            fb.style.background = 'var(--brand-50)'; 
+            fb.style.color = 'var(--brand-500)'; 
+            fb.style.borderColor = 'var(--brand-500)'; 
+        }
+    }
+
+    if(savedMode === 'light') {
+        updateDarkLightIcon(true);
     }
 });
 
