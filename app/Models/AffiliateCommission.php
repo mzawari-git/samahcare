@@ -28,7 +28,7 @@ class AffiliateCommission extends Model
 
     public function order()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(\App\Models\Booking::class, 'order_id');
     }
 
     public function customer()

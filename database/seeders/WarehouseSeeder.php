@@ -3,16 +3,19 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Core\Models\Warehouse;
-use Modules\Commerce\Models\Product;
-use Modules\Commerce\Models\WarehouseStock;
 
 class WarehouseSeeder extends Seeder
 {
     public function run(): void
     {
+        $warehouseClass = 'Modules\Core\Models\Warehouse';
+        if (!class_exists($warehouseClass)) {
+            $this->command->warn('Core module not found. Skipping WarehouseSeeder.');
+            return;
+        }
+
         // Create main warehouse in Ramallah
-        $mainWarehouse = Warehouse::create([
+        $mainWarehouse = $warehouseClass::create([
             'code' => 'WH-RAM-MAIN',
             'name' => 'المستودع الرئيسي - رام الله',
             'name_en' => 'Main Warehouse - Ramallah',
@@ -44,7 +47,7 @@ class WarehouseSeeder extends Seeder
         ]);
 
         // Create branch warehouse in Gaza
-        $gazaWarehouse = Warehouse::create([
+        $gazaWarehouse = $warehouseClass::create([
             'code' => 'WH-GAZ-001',
             'name' => 'فرع غزة',
             'name_en' => 'Gaza Branch',
@@ -76,7 +79,7 @@ class WarehouseSeeder extends Seeder
         ]);
 
         // Create pickup point in Nablus
-        $nablusWarehouse = Warehouse::create([
+        $nablusWarehouse = $warehouseClass::create([
             'code' => 'WH-NAB-PICKUP',
             'name' => 'نقطة استلام نابلس',
             'name_en' => 'Nablus Pickup Point',
@@ -108,7 +111,7 @@ class WarehouseSeeder extends Seeder
         ]);
 
         // Create virtual warehouse for online orders
-        $virtualWarehouse = Warehouse::create([
+        $virtualWarehouse = $warehouseClass::create([
             'code' => 'WH-VIRT-ONLINE',
             'name' => 'المستودع الافتراضي',
             'name_en' => 'Virtual Warehouse',
@@ -137,51 +140,10 @@ class WarehouseSeeder extends Seeder
             ]
         ]);
 
-        // Initialize stock for some products in main warehouse
-        $products = Product::take(20)->get();
-        
-        foreach ($products as $product) {
-            WarehouseStock::create([
-                'warehouse_id' => $mainWarehouse->id,
-                'product_id' => $product->id,
-                'quantity' => rand(50, 500),
-                'reserved_quantity' => 0,
-                'low_stock_threshold' => 10,
-                'cost_price' => $product->base_price * 0.7,
-                'location' => 'A-' . str_pad($product->id, 3, '0', STR_PAD_LEFT),
-                'metadata' => [
-                    'batch_number' => 'BATCH-' . date('Y-m-d') . '-' . $product->id,
-                    'expiry_date' => now()->addYears(2)->toDateString(),
-                    'received_date' => now()->toDateString()
-                ],
-                'last_updated_at' => now()
-            ]);
-
-            // Add some stock to Gaza warehouse
-            if (rand(0, 1)) {
-                WarehouseStock::create([
-                    'warehouse_id' => $gazaWarehouse->id,
-                    'product_id' => $product->id,
-                    'quantity' => rand(20, 200),
-                    'reserved_quantity' => 0,
-                    'low_stock_threshold' => 5,
-                    'cost_price' => $product->base_price * 0.7,
-                    'location' => 'B-' . str_pad($product->id, 3, '0', STR_PAD_LEFT),
-                    'metadata' => [
-                        'batch_number' => 'BATCH-' . date('Y-m-d') . '-' . $product->id,
-                        'expiry_date' => now()->addYears(2)->toDateString(),
-                        'received_date' => now()->toDateString()
-                    ],
-                    'last_updated_at' => now()
-                ]);
-            }
-        }
-
         $this->command->info('Warehouses created successfully!');
         $this->command->info('Main Warehouse: ' . $mainWarehouse->name);
         $this->command->info('Gaza Warehouse: ' . $gazaWarehouse->name);
         $this->command->info('Nablus Pickup: ' . $nablusWarehouse->name);
         $this->command->info('Virtual Warehouse: ' . $virtualWarehouse->name);
-        $this->command->info('Stock initialized for ' . $products->count() . ' products');
     }
 }

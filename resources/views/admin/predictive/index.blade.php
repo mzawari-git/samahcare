@@ -4,9 +4,11 @@ $settings = app(\App\Models\Setting::class);
 @extends('admin.layouts.app')
 @section('title', 'التوقع والتحليلات')
 @section('content')
-<div class="container-fluid py-4" dir="rtl">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">🔮 لوحة التوقع والتحليلات</h1>
+        <div>
+            <h1 class="h4 mb-1"><i class="fas fa-brain" style="color:var(--pink-600);margin-left:8px;"></i> التوقع والتحليلات</h1>
+            <p class="text-muted small mb-0">تحليلات تنبؤية LTV وتقسيم العملاء</p>
+        </div>
         <div class="d-flex gap-2">
             <select id="daysFilter" class="form-select" style="width:auto;">
                 <option value="7">7 أيام</option>
@@ -111,7 +113,6 @@ $settings = app(\App\Models\Setting::class);
             </table>
         </div>
     </div>
-</div>
 @endsection
 
 @push('scripts')

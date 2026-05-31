@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
-use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,27 +66,5 @@ class NotificationController extends Controller
         $notification->delete();
 
         return response()->json(['success' => true]);
-    }
-
-    public static function notifyNewOrder(Order $order)
-    {
-        Notification::create([
-            'type' => 'order',
-            'title' => 'طلب جديد',
-            'body' => "طلب جديد #{$order->order_number} بقيمة " . number_format($order->total_amount, 2) . " ₪",
-            'data' => ['order_id' => $order->id, 'url' => route('admin.orders.show', $order)],
-            'user_id' => null,
-        ]);
-    }
-
-    public static function notifyLowStock($product)
-    {
-        Notification::create([
-            'type' => 'inventory',
-            'title' => 'تنبيه المخزون',
-            'body' => "المنتج {$product->name_ar} وصل للحد الأدنى ({$product->stock_quantity} وحدة)",
-            'data' => ['product_id' => $product->id, 'url' => route('admin.products.edit', $product)],
-            'user_id' => null,
-        ]);
     }
 }

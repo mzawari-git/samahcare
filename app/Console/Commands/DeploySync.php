@@ -41,8 +41,8 @@ class DeploySync extends Command
         $this->info('Step 2/6: Forcing consistent database settings...');
         $forcedSettings = [
             'site_theme' => 'rose',
-            'site_name' => 'شركة جنين للتجميل',
-            'site_name_ar' => 'شركة جنين للتجميل',
+            'site_name' => 'سماح كير ',
+            'site_name_ar' => 'سماح كير ',
         ];
         foreach ($forcedSettings as $key => $value) {
             DB::table('settings')

@@ -1,4 +1,4 @@
-// شركة جنين للتجميل Service Worker — Lightweight
+// سماح كير  Service Worker — Lightweight
 const STATIC_CACHE = 'jenincare-static-v3';
 const DYNAMIC_CACHE = 'jenincare-dynamic-v3';
 
@@ -48,7 +48,7 @@ self.addEventListener('push', (event) => {
     if (!event.data) return;
     const data = event.data.json();
     event.waitUntil(
-        self.registration.showNotification(data.title || 'شركة جنين للتجميل', {
+        self.registration.showNotification(data.title || 'سماح كير ', {
             body: data.body || '',
             icon: '/favicon.ico',
             vibrate: [100, 50, 100],

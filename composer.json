@@ -1,7 +1,7 @@
 {
-    "name": "jenincare/jenin-care",
+    "name": "Samahcare/Samah-Care",
     "type": "project",
-    "description": "Jenin Care - Professional E-commerce Platform",
+    "description": "Samah Care  - Professional Care",
     "keywords": ["ecommerce", "laravel", "b2b", "b2c"],
     "license": "MIT",
     "require": {

@@ -1,9 +1,11 @@
 @extends('admin.layouts.app')
 @section('title', 'IP المراجعين')
 @section('content')
-<div class="container-fluid py-4" dir="rtl">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">🛡️ IP المراجعين</h1>
+        <div>
+            <h1 class="h4 mb-1"><i class="fas fa-user-secret" style="color:var(--pink-600);margin-left:8px;"></i> IP المراجعين</h1>
+            <p class="text-muted small mb-0">إدارة عناوين IP الخاصة بمراجعي المنصات الإعلانية</p>
+        </div>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIpModal">
             <i class="fas fa-plus"></i> إضافة IP
         </button>

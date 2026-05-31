@@ -60,102 +60,15 @@
     };
 
     window.addToCart = function(productId, quantity, btnEl) {
-        quantity = quantity || 1;
-        var qtyInput = document.getElementById('qty');
-        if (qtyInput) quantity = parseInt(qtyInput.value) || 1;
-
-        var btn = btnEl || document.querySelector('[onclick*="addToCart(' + productId + ')"]');
-        var originalHtml = '';
-        if (btn) {
-            originalHtml = btn.innerHTML;
-            btn.disabled = true;
-            btn.style.opacity = '0.7';
-            btn.style.cursor = 'not-allowed';
-            btn.innerHTML = '<span class="loading-spinner" style="width:16px;height:16px;border-width:2px;"></span> جاري الإضافة...';
-        }
-
-        fetch(basePath + '/cart/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: JSON.stringify({ product_id: productId, quantity: quantity })
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            if (btn) {
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                btn.style.cursor = 'pointer';
-                btn.innerHTML = originalHtml;
-            }
-            if (data.success) {
-                updateCartBadge(data.cart_count);
-                showNotification('success', 'تمت الإضافة إلى السلة بنجاح');
-            } else if (data.error) {
-                showNotification('error', data.error);
-            }
-        })
-        .catch(function() {
-            if (btn) {
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                btn.style.cursor = 'pointer';
-                btn.innerHTML = originalHtml;
-            }
-            showNotification('error', 'حدث خطأ، يرجى المحاولة مرة أخرى');
-        });
+        window.location.href = basePath + '/booking';
     };
 
-    function updateCartBadge(count) {
-        var badge = document.getElementById('cart-count-v3') || document.getElementById('cart-count');
-        if (badge) {
-            badge.textContent = count;
-            badge.style.transform = 'scale(1.3)';
-            setTimeout(function() { badge.style.transform = 'scale(1)'; }, 200);
-        }
-    }
+    window.updateCartBadge = function(count) {};
 
-    window.updateCartBadge = updateCartBadge;
-
-    function fetchCartCount() {
-        fetch(basePath + '/cart/count', {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
-            }
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            if (data.cart_count !== undefined) {
-                updateCartBadge(data.cart_count);
-            }
-        })
-        .catch(function() {});
-    }
-
-    fetchCartCount();
+    window.fetchCartCount = function() {};
 
     window.addToWishlist = function(productId) {
-        fetch(basePath + '/wishlist/toggle', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: JSON.stringify({ product_id: productId })
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            if (data.success) {
-                showNotification('success', 'تمت الإضافة إلى قائمة الأمنيات');
-            } else if (data.error) {
-                showNotification('error', data.error);
-            }
-        });
+        showNotification('info', 'يمكنك حجز الخدمات من صفحة الحجز');
     };
 
     window.updateQuantity = function(delta) {

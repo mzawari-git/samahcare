@@ -1,4 +1,4 @@
-# شركة جنين للتجميل Production .htaccess
+# سماح كير  Production .htaccess
 # Safe for all hosting (no php_flag, no mod_php)
 
 <IfModule mod_rewrite.c>

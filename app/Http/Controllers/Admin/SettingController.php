@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\Setting;
 use App\Helpers\SettingsHelper;
 use Illuminate\Http\Request;
@@ -36,8 +35,6 @@ class SettingController extends Controller
         'currency' => 'ILS',
         'currency_symbol' => '₪',
         'tax_rate' => '0',
-        'shipping_cost' => '0',
-        'free_shipping_min' => '0',
 
         // Social Media
         'facebook_url' => '',
@@ -69,9 +66,6 @@ class SettingController extends Controller
         // Features
         'maintenance_mode' => '0',
         'registration_enabled' => '1',
-        'b2b_enabled' => '1',
-        'reviews_enabled' => '1',
-        'wishlist_enabled' => '1',
 
         // Payment Methods
         'payment_cod_enabled' => '1',
@@ -141,11 +135,4 @@ class SettingController extends Controller
             ->with('success', 'تم حذف الشعار بنجاح');
     }
 
-    public function deleteAllProducts()
-    {
-        $count = Product::count();
-        Product::query()->delete();
-        return redirect()->route('admin.products.index')
-            ->with('success', "تم حذف جميع المنتجات ($count منتج) بنجاح");
-    }
 }

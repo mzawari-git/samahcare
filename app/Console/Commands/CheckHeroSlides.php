@@ -18,7 +18,7 @@ class CheckHeroSlides extends Command
         $this->info('=== Hero Slides Check ===');
         $this->newLine();
 
-        $slides = HeroSlide::with('product')->get();
+        $slides = HeroSlide::with('service')->get();
         $this->info("Found {$slides->count()} hero slides");
         $this->newLine();
 

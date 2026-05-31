@@ -26,7 +26,36 @@ class AdvertisingTrackingService
     private ?string $ttPixelId;
     private ?string $ttAccessToken;
 
+    private bool $obfuscationEnabled;
+    private bool $urlSanitizationEnabled;
+
     private ?DeduplicationService $dedup;
+
+    private const OBFUSCATION_MAP = [
+        'Purchase' => 'event_01',
+        'Lead' => 'event_02',
+        'Subscribe' => 'event_03',
+        'AddToCart' => 'event_04',
+        'InitiateCheckout' => 'event_05',
+        'ViewContent' => 'event_06',
+        'Search' => 'event_07',
+        'Contact' => 'event_08',
+        'CompleteRegistration' => 'event_09',
+        'AddPaymentInfo' => 'event_10',
+        'AddToWishlist' => 'event_11',
+    ];
+
+    private const MEDICAL_TERMS = [
+        'علاج', 'بوتوكس', 'فيلر', 'ليزر', 'تقشير', 'ميزوثيرابي',
+        'بلازما', 'Protein', 'Plasma', 'Botox', 'Filler', 'Laser',
+        'Mesotherapy', 'Peeling', 'Hydra', 'Microneedling', 'PRP',
+        'Carboxy', 'Cryo', 'Radiofrequency', 'RF', 'HIFU',
+        'thread', 'خيط', 'شد', 'تنحيف', 'تجميل', 'حقن',
+        'procedure', 'treatment', 'clinic', 'therapist',
+        'dermal', 'injection', 'aesthetic', 'cosmetic',
+        'dermatologist', 'surgeon', 'surgery', 'liposuction',
+        'خلطة', 'وصفة', 'ماسك', 'كريم', 'دهان', 'مرهم',
+    ];
 
     private const FB_API_VERSION = 'v22.0';
 
@@ -40,6 +69,8 @@ class AdvertisingTrackingService
         'em', 'ph', 'fn', 'ln', 'db', 'ct', 'st', 'zp',
         'country', 'gender', 'birthday', 'external_id',
     ];
+
+    private const CURRENCY = 'ILS';
 
     public function __construct(?DeduplicationService $dedup = null)
     {
@@ -63,6 +94,9 @@ class AdvertisingTrackingService
         $this->ttCapiEnabled = MarketingSetting::get('tiktok_capi_enabled', false);
         $this->ttPixelId = MarketingSetting::get('tiktok_pixel_id');
         $this->ttAccessToken = MarketingSetting::get('tiktok_access_token');
+
+        $this->obfuscationEnabled = MarketingSetting::get('event_obfuscation_enabled', false);
+        $this->urlSanitizationEnabled = MarketingSetting::get('url_sanitization_enabled', false);
     }
 
     public function isOptedOut(): bool
@@ -103,7 +137,7 @@ class AdvertisingTrackingService
                 $scripts[] = app(\App\Services\LinkedInService::class)->getInsightTag();
             }
         } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::debug('Error loading platform scripts', ['error' => $e->getMessage()]);
+            Log::debug('Error loading platform scripts', ['error' => $e->getMessage()]);
         }
 
         return implode("\n", $scripts);
@@ -168,9 +202,31 @@ JS;
         return request()->input('ttclid');
     }
 
+    private function obfuscateEventName(string $eventName): string
+    {
+        if (!$this->obfuscationEnabled) {
+            return $eventName;
+        }
+
+        return self::OBFUSCATION_MAP[$eventName] ?? $eventName;
+    }
+
+    private function sanitizeUrl(string $url): string
+    {
+        if (!$this->urlSanitizationEnabled) {
+            return $url;
+        }
+
+        $pattern = '/' . implode('|', array_map('preg_quote', self::MEDICAL_TERMS)) . '/ui';
+
+        return preg_replace($pattern, '[redacted]', $url);
+    }
+
     private function getEventSourceUrl(): string
     {
-        return request()->fullUrl();
+        $url = request()->fullUrl();
+
+        return $this->sanitizeUrl($url);
     }
 
     private function shouldDispatchEvent(string $eventName): bool
@@ -307,16 +363,16 @@ JS;
         return $results + ['event_id' => $eventId];
     }
 
-    public function trackPurchase($order, ?array $userData = null, ?array $options = []): array
+    public function trackPurchase($booking, ?array $userData = null, ?array $options = []): array
     {
         if (!$this->shouldDispatchEvent('Purchase')) {
             return ['success' => false, 'reason' => $this->isOptedOut() ? 'gdpr_optout' : 'tracking_disabled'];
         }
 
         $this->loadSettings();
-        $orderId = $order->order_number ?? $order->id ?? null;
-        $eventData = $this->buildPurchaseData($order, $options);
-        $eventId = $this->generateEventId('Purchase', (string) $orderId);
+        $bookingId = $booking->booking_number ?? $booking->id ?? null;
+        $eventData = $this->buildPurchaseData($booking, $options);
+        $eventId = $this->generateEventId('Purchase', (string) $bookingId);
         $results = [];
 
         $dedupCheck = $this->dedup ? $this->dedup->checkAndMark('Purchase', $eventId) : true;
@@ -334,26 +390,10 @@ JS;
         if ($this->fbCapiEnabled && $this->fbAccessToken && $this->fbPixelId) {
             $fbResult = $this->sendFacebookCAPI('Purchase', $eventData, $userData, $ctx);
             $results['facebook'] = $fbResult;
-
-            if ($order instanceof \Illuminate\Database\Eloquent\Model) {
-                try {
-                    $order->update([
-                        'meta_capi_sent' => $fbResult['success'] ?? false,
-                        'meta_capi_sent_at' => now(),
-                        'meta_capi_event_id' => $eventId,
-                        'meta_capi_response' => json_encode($fbResult),
-                    ]);
-                } catch (\Exception $e) {
-                    Log::warning('Failed to update order with CAPI status', [
-                        'order_id' => $orderId,
-                        'error' => $e->getMessage(),
-                    ]);
-                }
-            }
         }
 
         if ($this->ttCapiEnabled && $this->ttAccessToken && $this->ttPixelId) {
-            $ttData = $this->buildTikTokPurchaseData($order);
+            $ttData = $this->buildTikTokPurchaseData($booking);
             $results['tiktok'] = $this->sendTikTokEventsAPI('Purchase', $ttData, $ctx);
         }
 
@@ -482,11 +522,12 @@ JS;
     private function sendFacebookCAPI(string $eventName, array $eventData, ?array $userData = null, array $context = []): array
     {
         try {
-            $eventId = $context['event_id'] ?? $this->generateEventId($eventName);
+            $obfuscatedName = $this->obfuscateEventName($eventName);
+            $eventId = $context['event_id'] ?? $this->generateEventId($obfuscatedName);
 
             $payload = [
                 'data' => [[
-                    'event_name' => $eventName,
+                    'event_name' => $obfuscatedName,
                     'event_time' => $context['event_time'] ?? time(),
                     'event_id' => $eventId,
                     'event_source_url' => $context['event_source_url'] ?? $this->getEventSourceUrl(),
@@ -575,11 +616,12 @@ JS;
     private function sendTikTokEventsAPI(string $eventName, array $eventData, array $context = []): array
     {
         try {
-            $eventId = $context['event_id'] ?? $this->generateEventId($eventName);
+            $obfuscatedName = $this->obfuscateEventName($eventName);
+            $eventId = $context['event_id'] ?? $this->generateEventId($obfuscatedName);
 
             $payload = [
                 'pixel_code' => $this->ttPixelId,
-                'event' => $eventName,
+                'event' => $obfuscatedName,
                 'event_id' => $eventId,
                 'timestamp' => now()->toIso8601String(),
                 'context' => [
@@ -764,7 +806,7 @@ JS;
                 'item_price' => $product['price'] ?? 0,
             ]],
             'value' => $product['price'] ?? 0,
-            'currency' => $options['currency'] ?? 'ILS',
+            'currency' => $options['currency'] ?? self::CURRENCY,
             'product_catalog_id' => $options['product_catalog_id'] ?? null,
         ];
     }
@@ -782,7 +824,7 @@ JS;
                 'item_price' => $product['price'] ?? 0,
             ]],
             'value' => ($product['price'] ?? 0) * $quantity,
-            'currency' => $options['currency'] ?? 'ILS',
+            'currency' => $options['currency'] ?? self::CURRENCY,
         ];
     }
 
@@ -801,28 +843,26 @@ JS;
             'contents' => $contents,
             'num_items' => count($contents),
             'value' => $cartData['total'] ?? 0,
-            'currency' => $options['currency'] ?? $cartData['currency'] ?? 'ILS',
+            'currency' => $options['currency'] ?? $cartData['currency'] ?? self::CURRENCY,
         ];
     }
 
-    private function buildPurchaseData($order, array $options = []): array
+    private function buildPurchaseData($booking, array $options = []): array
     {
-        $contents = [];
-        foreach ($order->items ?? [] as $item) {
-            $contents[] = [
-                'id' => $item->product_sku ?? $item->sku ?? '',
-                'quantity' => $item->quantity ?? 1,
-                'item_price' => (float) ($item->unit_price ?? $item->price ?? 0),
-            ];
-        }
+        $contents = [[
+            'id' => (string) ($booking->service_id ?? ''),
+            'content_name' => $booking->service_name ?? '',
+            'quantity' => 1,
+            'item_price' => (float) ($booking->service_price ?? 0),
+        ]];
 
         return [
             'contents' => $contents,
             'content_type' => 'product',
-            'num_items' => $order->items->sum('quantity') ?? count($contents),
-            'value' => (float) ($order->total_amount ?? $order->total ?? 0),
-            'currency' => $options['currency'] ?? $order->currency ?? 'ILS',
-            'order_id' => $order->order_number ?? $order->id,
+            'num_items' => 1,
+            'value' => (float) ($booking->total_amount ?? 0),
+            'currency' => $options['currency'] ?? self::CURRENCY,
+            'order_id' => $booking->booking_number ?? $booking->id,
         ];
     }
 
@@ -832,7 +872,7 @@ JS;
             'lead_id' => $leadData['id'] ?? $leadData['lead_id'] ?? '',
             'lead_source' => $leadData['source'] ?? $leadData['lead_source'] ?? $options['lead_source'] ?? '',
             'value' => $leadData['value'] ?? $options['value'] ?? 0,
-            'currency' => $options['currency'] ?? 'ILS',
+            'currency' => $options['currency'] ?? self::CURRENCY,
         ];
     }
 
@@ -841,7 +881,7 @@ JS;
         return [
             'subscription_id' => $options['subscription_id'] ?? '',
             'value' => $options['value'] ?? 0,
-            'currency' => $options['currency'] ?? 'ILS',
+            'currency' => $options['currency'] ?? self::CURRENCY,
             'predicted_ltv' => $options['predicted_ltv'] ?? null,
         ];
     }
@@ -863,23 +903,20 @@ JS;
         ];
     }
 
-    private function buildTikTokPurchaseData($order): array
+    private function buildTikTokPurchaseData($booking): array
     {
-        $contents = [];
-        foreach ($order->items ?? [] as $item) {
-            $contents[] = [
-                'content_id' => $item->product_sku ?? $item->sku ?? '',
-                'content_name' => $item->product_name ?? $item->name ?? '',
-                'quantity' => $item->quantity ?? 1,
-                'price' => (float) ($item->unit_price ?? $item->price ?? 0),
-            ];
-        }
+        $contents = [[
+            'content_id' => (string) ($booking->service_id ?? ''),
+            'content_name' => $booking->service_name ?? '',
+            'quantity' => 1,
+            'price' => (float) ($booking->service_price ?? 0),
+        ]];
 
         return [
             'contents' => $contents,
-            'value' => (float) ($order->total_amount ?? $order->total ?? 0),
-            'currency' => $order->currency ?? 'ILS',
-            'order_id' => $order->order_number ?? $order->id,
+            'value' => (float) ($booking->total_amount ?? 0),
+            'currency' => self::CURRENCY,
+            'order_id' => $booking->booking_number ?? $booking->id,
         ];
     }
 
@@ -890,4 +927,50 @@ JS;
     public function isTestMode(): bool { return $this->testMode; }
     public function getFbPixelId(): ?string { return $this->fbPixelId; }
     public function getTtPixelId(): ?string { return $this->ttPixelId; }
+
+    public function testFacebook(): array
+    {
+        if (!$this->fbCapiEnabled) {
+            return ['success' => false, 'message' => 'CAPI غير مفعل، قم بتفعيل Facebook Conversions API أولاً'];
+        }
+        if (!$this->fbAccessToken) {
+            return ['success' => false, 'message' => 'Access Token فارغ، يرجى إدخال رمز الوصول'];
+        }
+        if (!$this->fbPixelId) {
+            return ['success' => false, 'message' => 'Pixel ID فارغ، يرجى إدخال معرف البيكسل'];
+        }
+        try {
+            $result = $this->sendFacebookCAPI('Test', ['value' => 0, 'currency' => self::CURRENCY], null, [
+                'event_id' => $this->generateEventId('Test'),
+                'event_time' => time(),
+                'event_source_url' => request()->fullUrl(),
+                'action_source' => 'website',
+            ]);
+            if ($result['success'] ?? false) {
+                return ['success' => true, 'message' => 'تم الاتصال بفيسبوك بنجاح'];
+            }
+            $errorMsg = $result['response']['error']['message'] ?? 'خطأ غير معروف من فيسبوك';
+            return ['success' => false, 'message' => 'فشل الاتصال: ' . $errorMsg];
+        } catch (\Exception $e) {
+            Log::error('Facebook test failed', ['error' => $e->getMessage()]);
+            return ['success' => false, 'message' => 'خطأ في الاتصال: ' . $e->getMessage()];
+        }
+    }
+
+    public function testTikTok(): bool
+    {
+        if (!$this->ttCapiEnabled || !$this->ttAccessToken || !$this->ttPixelId) return false;
+        try {
+            $result = $this->sendTikTokEventsAPI('Test', ['value' => 0, 'currency' => self::CURRENCY], [
+                'event_id' => $this->generateEventId('Test'),
+                'event_time' => time(),
+                'event_source_url' => request()->fullUrl(),
+                'action_source' => 'website',
+            ]);
+            return $result['success'] ?? false;
+        } catch (\Exception $e) {
+            Log::error('TikTok test failed', ['error' => $e->getMessage()]);
+            return false;
+        }
+    }
 }

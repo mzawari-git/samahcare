@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'شركة جنين للتجميل - المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية'))">
-    <meta name="keywords" content="@yield('meta_keywords', 'شركة جنين للتجميل, تجميل, عناية, بشرة, منتجات تجميل, العناية بالبشرة, مكياج')">
+    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'سماح كير  - المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية'))">
+    <meta name="keywords" content="@yield('meta_keywords', 'سماح كير, تجميل, عناية, بشرة, خدمات تجميل, حجز موعد, مساج, عناية بالبشرة')">
 
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل') . ' | ' . ($siteSettings['site_description'] ?? ''))">
+    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير ') . ' | ' . ($siteSettings['site_description'] ?? ''))">
     <meta property="og:description" content="@yield('meta_description', $siteSettings['site_description'] ?? 'المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل') . ' | ' . ($siteSettings['site_description'] ?? ''))">
+    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير ') . ' | ' . ($siteSettings['site_description'] ?? ''))">
     <meta name="twitter:description" content="@yield('meta_description', 'المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية')">
     <meta name="twitter:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
 
-    <title>@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))</title>
+    <title>@yield('title', ($siteSettings['site_name'] ?? 'سماح كير '))</title>
 
     {{-- Favicon --}}
     @if(!empty($siteSettings['site_favicon_url']))
@@ -58,17 +58,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="شركة جنين للتجميل">
-    <meta name="application-name" content="شركة جنين للتجميل">
+    <meta name="apple-mobile-web-app-title" content="سماح كير ">
+    <meta name="application-name" content="سماح كير ">
     <meta name="msapplication-TileColor" content="#050505">
     <meta name="msapplication-config" content="{{ asset('browserconfig.xml') }}">
 
     {{-- Active Theme CSS --}}
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}">
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}">
-    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='dark'){document.documentElement.removeAttribute('data-theme-mode');}else{document.documentElement.setAttribute('data-theme-mode','light');}})();</script>
-
-    @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
+    <script>(function(){var m=localStorage.getItem('سماح كير _mode');if(!m){var c=document.cookie.match('سماح كير _mode=([^;]+)');m=c?c[1]:null;}if(m==='dark'){document.documentElement.removeAttribute('data-theme-mode');}else{document.documentElement.setAttribute('data-theme-mode','light');}})();</script>
 
     <style>
         /* ── Floating Social Sidebar ── */
@@ -125,6 +123,8 @@
 
     @stack('styles')
 
+    @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
+
     {{-- Service Worker — unregister old + register fresh --}}
     <script>
         if ('serviceWorker' in navigator && window.location.hostname !== 'localhost') {
@@ -137,6 +137,23 @@
     </script>
 
     <script>window.basePath="{{ rtrim(url('/'), '/') }}";</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2073558763203111');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body class="antialiased bg-surface text-ink">
 
@@ -146,6 +163,7 @@
 
     {{-- Skip to content --}}
     <a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
+
     @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelNoscript() !!} @endif
 
     @include('frontend.layouts.cyber-lab.header')
@@ -166,9 +184,11 @@
     {{-- Core App JS --}}
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelScript() !!} @endif
+
 
     @stack('scripts')
+
+    @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelScript() !!} @endif
 
     {{-- Quick View Modal --}}
     <div class="modal fade" id="quickViewModal" tabindex="-1">
@@ -262,7 +282,7 @@
                     </div>
                 </div>
             `;
-        } catch(e) { body.innerHTML = '<div class="text-center py-4" style="color:#EF4444;">تعذر تحميل المنتج</div>'; }
+        } catch(e) { body.innerHTML = '<div class="text-center py-4" style="color:#EF4444;">تعذر تحميل الخدمة</div>'; }
     }
 
     // ============ WISHLIST TOGGLE ============

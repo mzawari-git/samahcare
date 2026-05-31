@@ -1,26 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl" @if($isLightTheme ?? false) data-theme-mode="light" @endif>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'شركة جنين للتجميل - المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية'))">
-    <meta name="keywords" content="@yield('meta_keywords', 'شركة جنين للتجميل, تجميل, عناية, بشرة, منتجات تجميل, العناية بالبشرة, مكياج')">
+    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'سماح كير  - المنصة الرائدة لتقنيات العناية بالبشرة المتقدمة وحلول الجمال الاحترافية'))">
+    <meta name="keywords" content="@yield('meta_keywords', 'سماح كير, تجميل, عناية, بشرة, خدمات تجميل, حجز موعد, مساج, عناية بالبشرة')">
 
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل') . ' | ' . ($siteSettings['site_description'] ?? ''))">
+    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير ') . ' | ' . ($siteSettings['site_description'] ?? ''))">
     <meta property="og:description" content="@yield('meta_description', $siteSettings['site_description'] ?? '')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل') . ' | ' . ($siteSettings['site_description'] ?? ''))">
+    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير ') . ' | ' . ($siteSettings['site_description'] ?? ''))">
     <meta name="twitter:description" content="@yield('meta_description', '')">
     <meta name="twitter:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
 
-    <title>@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))</title>
+    <title>@yield('title', ($siteSettings['site_name'] ?? 'سماح كير '))</title>
 
     @if(!empty($siteSettings['site_favicon_url']))
         <link rel="icon" type="image/png" sizes="32x32" href="{{ $siteSettings['site_favicon_url'] }}">
@@ -47,8 +47,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="شركة جنين للتجميل">
-    <meta name="application-name" content="شركة جنين للتجميل">
+    <meta name="apple-mobile-web-app-title" content="سماح كير ">
+    <meta name="application-name" content="سماح كير ">
     <meta name="msapplication-TileColor" content="#050a08">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -56,9 +56,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}?v=4">
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}?v=4">
-    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='dark'){document.documentElement.removeAttribute('data-theme-mode');}else{document.documentElement.setAttribute('data-theme-mode','light');}})();</script>
-
-    @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
+    <script>(function(){var m=localStorage.getItem('سماح كير _mode');if(!m){var c=document.cookie.match('سماح كير _mode=([^;]+)');m=c?c[1]:null;}if(m==='dark'){document.documentElement.removeAttribute('data-theme-mode');}else{document.documentElement.setAttribute('data-theme-mode','light');}})();</script>
 
     <style>
         /* ── Organic Spa: Floating Leaf Particles ── */
@@ -134,10 +132,29 @@
 
     @stack('styles')
 
+    @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
+
     <script>if('serviceWorker' in navigator&&window.location.hostname!=='localhost'){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister()})}).then(function(){navigator.serviceWorker.register('{{ asset('sw.js') }}').catch(function(){})})}</script>
     </script>
     <script>window.basePath="{{ rtrim(url('/'), '/') }}";</script>
     <style>html body{background-color:#09090b !important;color:#fafafa !important;}</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2073558763203111');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body class="antialiased" style="background-color: var(--surface) !important; color: var(--ink);">
 
@@ -148,6 +165,7 @@
     <div class="leaf-particle" style="top:80%; left:25%; animation-delay:12s;">🌱</div>
 
     <a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
+
     @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelNoscript() !!} @endif
 
     @include('frontend.layouts.organic-spa.header')
@@ -163,8 +181,10 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="{{ asset('js/behavioral-analysis.js') }}?v=4" defer></script>
     <script src="{{ asset('js/app.js') }}?v=4"></script>
-    @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelScript() !!} @endif
+
     @stack('scripts')
+
+    @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelScript() !!} @endif
 
     <div class="modal fade" id="quickViewModal" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -218,7 +238,7 @@
             const r = await fetch((window.basePath||'') + '/api/product/' + productId + '/quickview');
             const p = await r.json();
             body.innerHTML = '<div class="row g-4"><div class="col-md-5">'+(p.image?'<img src="'+p.image+'" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;">':'<div style="width:100%;aspect-ratio:1/1;background:var(--surface-alt);border-radius:16px;display:flex;align-items:center;justify-content:center;"><i class="ph ph-package" style="font-size:3rem;color:#333;"></i></div>')+'</div><div class="col-md-7">'+(p.category?'<div style="font-size:.75rem;color:var(--brand-500);font-weight:600;margin-bottom:4px;">'+p.category+'</div>':'')+'<h4 style="font-weight:800;margin-bottom:8px;color:var(--ink);">'+p.name+'</h4><div style="font-size:1.3rem;font-weight:800;color:var(--brand-500);margin-bottom:8px;">'+p.price+' ₪</div><div style="background:'+(p.stock.includes('نفذ')?'rgba(220,38,38,.2)':p.stock.includes('تبقى')?'rgba(217,119,6,.2)':'rgba(22,163,74,.2)')+';color:'+(p.stock.includes('نفذ')?'#EF4444':p.stock.includes('تبقى')?'#F59E0B':'#22C55E')+';padding:4px 12px;border-radius:50px;display:inline-block;font-size:.8rem;font-weight:600;margin-bottom:12px;">'+p.stock+'</div>'+(p.description?'<p style="color:var(--ink-muted);font-size:.9rem;line-height:1.7;margin-bottom:16px;">'+p.description+'</p>':'')+'<div class="d-flex gap-2 flex-wrap"><button onclick="addToCart('+p.id+')" class="btn" style="background:var(--ink);color:var(--surface);border-radius:16px;font-weight:700;">أضف للسلة</button><a href="https://wa.me/{{ $siteSettings['whatsapp_number'] ?? '970591234567' }}?text='+encodeURIComponent('السلام عليكم: '+p.name+' - '+p.price)+'" target="_blank" class="btn" style="border:2px solid #25D366;color:#25D366;border-radius:16px;font-weight:700;">واتساب</a><a href="'+p.url+'" class="btn" style="border:2px solid var(--glass-border);color:var(--ink);border-radius:16px;font-weight:700;">تفاصيل</a></div></div></div>';
-        } catch(e) { body.innerHTML = '<div class="text-center py-4 text-red-400">تعذر تحميل المنتج</div>'; }
+        } catch(e) { body.innerHTML = '<div class="text-center py-4 text-red-400">تعذر تحميل الخدمة</div>'; }
     }
 
     async function toggleWishlist(productId, btn) {

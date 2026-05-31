@@ -57,27 +57,6 @@
             </div>
         </div>
 
-        @if($review->order)
-        <div class="card mt-4">
-            <div class="card-header"><i class="fas fa-receipt"></i> معلومات الطلب</div>
-            <div class="card-body">
-                <div class="row g-3">
-                    <div class="col-md-4">
-                        <div class="small text-muted">رقم الطلب</div>
-                        <div class="fw-bold">#{{ $review->order->order_number ?? $review->order_id }}</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="small text-muted">الحالة</div>
-                        <div>{{ $review->order->status }}</div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="small text-muted">مشتريات موثقة</div>
-                        <div>@if($review->is_verified_purchase) <span class="badge bg-success">نعم</span> @else <span class="badge bg-secondary">لا</span> @endif</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
     </div>
 
     <div class="col-lg-4">
@@ -115,16 +94,12 @@
         </div>
 
         <div class="card mt-4">
-            <div class="card-header">المنتج</div>
+            <div class="card-header">الخدمة</div>
             <div class="card-body">
-                @if($review->product)
+                @if($review->service)
                 <div class="d-flex align-items-center gap-2">
-                    @if($review->product->main_image_url)
-                    <img src="{{ $review->product->main_image_url }}" style="width:48px;height:48px;border-radius:8px;object-fit:cover;">
-                    @endif
                     <div>
-                        <div class="fw-bold small">{{ $review->product->name_ar }}</div>
-                        <a href="{{ route('admin.products.edit', $review->product) }}" class="small">عرض المنتج</a>
+                        <div class="fw-bold small">{{ $review->service->name_ar }}</div>
                     </div>
                 </div>
                 @endif

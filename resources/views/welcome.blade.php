@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="شركة جنين للتجميل - منصة العناية بالشعر والبشرة الأولى في فلسطين. منتجات أصلية، توصيل سريع.">
-    <title>شركة جنين للتجميل - منصة العناية بالشعر والبشرة</title>
+    <meta name="description" content="سماح كير  - منصة العناية بالشعر والبشرة الأولى في فلسطين. خدمات احترافية، حجز سريع.">
+    <title>سماح كير  - منصة العناية بالشعر والبشرة</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -65,6 +65,23 @@
             p { font-size:.95rem; }
         }
     </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2073558763203111');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
     <div class="bg-pattern"></div>
@@ -72,19 +89,19 @@
         <div class="logo-icon">JC</div>
         <div class="logo-text">Jeni<span>Care</span></div>
         <h1>منصة العناية بالشعر والبشرة</h1>
-        <p>أفضل منتجات العناية بالشعر والبشرة من أشهر الماركات العالمية. جودة أصلية، توصيل سريع لجميع أنحاء فلسطين.</p>
+        <p>أفضل خدمات العناية بالشعر والبشرة في فلسطين. جودة احترافية، حجز سريع لجميع المناطق.</p>
         <div class="d-flex gap-3 justify-content-center flex-wrap">
             <a href="{{ route('home') }}" class="btn-splash btn-primary">
-                <i class="fas fa-store"></i> دخول المتجر
+                <i class="fas fa-calendar-check"></i> احجز موعدك
             </a>
             <a href="{{ route('login') }}" class="btn-splash btn-outline">
                 <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
             </a>
         </div>
         <div class="features">
-            <div class="feature"><i class="fas fa-truck"></i><span>توصيل سريع</span></div>
-            <div class="feature"><i class="fas fa-shield-alt"></i><span>منتجات أصلية</span></div>
-            <div class="feature"><i class="fas fa-percent"></i><span>أفضل الأسعار</span></div>
+            <div class="feature"><i class="fas fa-calendar-check"></i><span>حجز سهل</span></div>
+            <div class="feature"><i class="fas fa-star"></i><span>خدمات احترافية</span></div>
+            <div class="feature"><i class="fas fa-heart"></i><span>عناية فاخرة</span></div>
         </div>
     </div>
 </body>

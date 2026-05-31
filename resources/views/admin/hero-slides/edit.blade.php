@@ -148,11 +148,11 @@
         <input type="number" name="sort_order" class="form-control" value="{{ old("sort_order", $heroSlide->sort_order) }}">
     </div>
     <div class="col-md-2">
-        <label class="form-label">المنتج</label>
-        <select name="product_id" class="form-select">
+        <label class="form-label">الخدمة</label>
+        <select name="service_id" class="form-select">
             <option value="">بدون</option>
-            @foreach($products as $product)
-            <option value="{{ $product->id }}" {{ old("product_id", $heroSlide->product_id) == $product->id ? "selected" : "" }}>{{ $product->name_ar }}</option>
+            @foreach($services as $service)
+            <option value="{{ $service->id }}" {{ old("service_id", $heroSlide->service_id) == $service->id ? "selected" : "" }}>{{ $service->name_ar }}</option>
             @endforeach
         </select>
     </div>

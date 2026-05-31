@@ -214,14 +214,6 @@ class SocialAuthController extends Controller
             }
         }
 
-        if ($platform === 'shopify') {
-            $shop = request()->input('shop');
-            if ($shop) {
-                \App\Models\MarketingSetting::set('shopify_shop_domain', $shop);
-                \App\Models\MarketingSetting::set('shopify_enabled', true);
-            }
-        }
-
         \App\Models\MarketingSetting::set("{$platform}_connected", true);
         \App\Models\MarketingSetting::set("{$platform}_connected_at", now()->toIso8601String());
     }

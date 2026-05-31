@@ -14,7 +14,7 @@
 /public/storage
 /public/hot
 
-# Temp & debug files
+# Public debug files
 /public/fix-*.php
 /public/ping.php
 /public/clear-cache.php
@@ -22,25 +22,62 @@
 /public/check-settings.php
 /public/reset-admin.php
 /public/diag.php
+/public/reset_opcache.php
 /public/screenshot-*.png
 
-# Root debug files
+# Root temp & debug files
 /fixall.php
 /fixx.php
 /help.php
 /deploy-fix.php
 /index.php
+/_debug_content.php
+/_fix_articles_db.php
+/_inspect_post.php
+/check_json.php
+/check_output.php
+/check_size.php
+/copy_content.php
+/debug_chunk.php
+/debug_content.php
+/fix_json.php
+/format_article12.php
+/gen_chunks.php
+/gen_data_uri.php
+/gen_final_script.php
+/generate_js.php
+/make_10k_chunks.php
+/make_chunks.php
+/split_chunks.php
+
+# Temp content & data files
+/cookies.txt
+/info.txt
+/login_page.html
+/new.md
+/samah.html
+
+# Temp screenshots
+/current-page.png
+/full-page.png
+/page-after.png
+/viewport.png
 
 # Backup files
 *.bak
 *.backup
+*.log
 
-# Screenshots
+# Screenshots directory
 /screenshots
+
+# Planning / roadmap docs (internal)
+/MD/
 
 # Archives
 *.zip
 *.rar
+*.tar.gz
 
 # IDE
 .idea/
@@ -51,5 +88,6 @@
 .DS_Store
 Thumbs.db
 
+# Temp text files
 blog*.txt
 ~$*

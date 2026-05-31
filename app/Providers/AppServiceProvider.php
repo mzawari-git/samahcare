@@ -7,21 +7,17 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\SettingsHelper;
-use App\Models\Cart;
-use Modules\Commerce\Services\CartService;
-use Modules\Commerce\Services\OrderProcessor;
-use App\Services\PricingEngine;
-use Modules\Commerce\Services\MetaCapiService;
-use App\Services\DeduplicationService;
 use App\Services\IdentityService;
 use App\Services\EventSourcingService;
-use App\Services\AttributionService;
 use App\Services\AISanitizerService;
 use App\Services\AI\OpenAIProvider;
 use App\Services\AI\ClaudeProvider;
 use App\Services\AI\LlamaProvider;
 use App\Services\AdAccountHealthService;
-use App\Services\OfflineConversionService;
+use App\Services\AdSpendMonitorService;
+use App\Services\AdAutoPauseService;
+use App\Services\AlertNotifier;
+use App\Services\TrafficQualityService;
 use App\Services\LtvMultiplierService;
 use App\Services\MultiPixelService;
 use App\Services\Sanitization\SanitizationPipeline;
@@ -36,26 +32,6 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(PricingEngine::class, function ($app) {
-            return new PricingEngine();
-        });
-
-        $this->app->singleton(CartService::class, function ($app) {
-            return new CartService($app->make(PricingEngine::class));
-        });
-
-        $this->app->singleton(MetaCapiService::class, function ($app) {
-            return new MetaCapiService();
-        });
-
-        $this->app->singleton(\App\Services\AdvertisingTrackingService::class, function ($app) {
-            return new \App\Services\AdvertisingTrackingService($app->make(DeduplicationService::class));
-        });
-
-        $this->app->singleton(DeduplicationService::class, function ($app) {
-            return new DeduplicationService();
-        });
-
         $this->app->singleton(\App\Services\GoogleAdsService::class, function ($app) {
             return new \App\Services\GoogleAdsService();
         });
@@ -88,12 +64,6 @@ class AppServiceProvider extends ServiceProvider
             return new EventSourcingService();
         });
 
-        $this->app->singleton(AttributionService::class, function ($app) {
-            return new AttributionService(
-                $app->make(EventSourcingService::class)
-            );
-        });
-
         $this->app->singleton(OpenAIProvider::class, function ($app) {
             return new OpenAIProvider();
         });
@@ -118,16 +88,36 @@ class AppServiceProvider extends ServiceProvider
             return new AdAccountHealthService();
         });
 
-        $this->app->singleton(OfflineConversionService::class, function ($app) {
-            return new OfflineConversionService();
-        });
-
         $this->app->singleton(LtvMultiplierService::class, function ($app) {
             return new LtvMultiplierService();
         });
 
         $this->app->singleton(MultiPixelService::class, function ($app) {
             return new MultiPixelService();
+        });
+
+        $this->app->singleton(AlertNotifier::class, function ($app) {
+            return new AlertNotifier();
+        });
+
+        $this->app->singleton(TrafficQualityService::class, function ($app) {
+            return new TrafficQualityService();
+        });
+
+        $this->app->singleton(AdSpendMonitorService::class, function ($app) {
+            return new AdSpendMonitorService(
+                $app->make(\App\Services\Meta\FacebookGraphService::class),
+                $app->make(\App\Services\MetaReportingService::class),
+                $app->make(AdAccountHealthService::class),
+            );
+        });
+
+        $this->app->singleton(AdAutoPauseService::class, function ($app) {
+            return new AdAutoPauseService(
+                $app->make(\App\Services\Meta\FacebookGraphService::class),
+                $app->make(AdAccountHealthService::class),
+                $app->make(AlertNotifier::class),
+            );
         });
 
         $this->app->singleton(SanitizationPipeline::class, function ($app) {
@@ -137,14 +127,6 @@ class AppServiceProvider extends ServiceProvider
                 ->addStep(new PolicyChecker())
                 ->addStep(new ValueFilter())
                 ->addStep(new JunkFilter());
-        });
-
-        $this->app->singleton(OrderProcessor::class, function ($app) {
-            return new OrderProcessor(
-                $app->make(PricingEngine::class),
-                $app->make(CartService::class),
-                $app->make(MetaCapiService::class)
-            );
         });
 
         if (class_exists(\Laravel\Pulse\PulseServiceProvider::class)) {
@@ -181,8 +163,6 @@ class AppServiceProvider extends ServiceProvider
             'contact_email' => 'info@jenincare.com',
             'currency' => 'ILS',
             'currency_symbol' => '₪',
-            'shipping_cost' => 25,
-            'free_shipping_min' => 200,
             'site_theme' => 'minimal',
             'facebook_pixel_enabled' => '1',
             'payment_bank_enabled' => '0',
@@ -194,9 +174,9 @@ class AppServiceProvider extends ServiceProvider
             $settings = SettingsHelper::getAll();
             $s = array_merge($defaultSettings, $settings);
 
-            // ── Read user theme preferences from cookies (persist across logout) ──
+            // Read user theme preferences from cookies (persist across logout)
             $knownThemes = ['rose','midnight','natural','forest','minimal','ocean','sunset','luxury'];
-            $activeTheme = $_COOKIE['شركة جنين للتجميل_color'] ?? $s['site_theme'] ?? 'rose';
+            $activeTheme = $_COOKIE['سماح كير _color'] ?? $s['site_theme'] ?? 'rose';
             if (!in_array($activeTheme, $knownThemes)) {
                 $activeTheme = 'rose';
             }
@@ -210,14 +190,14 @@ class AppServiceProvider extends ServiceProvider
                 default => 'cyber-lab',
             };
             // Architecture cookie overrides (user explicitly chose a layout)
-            if (isset($_COOKIE['شركة جنين للتجميل_arch'])) {
-                $ca = $_COOKIE['شركة جنين للتجميل_arch'];
+            if (isset($_COOKIE['سماح كير _arch'])) {
+                $ca = $_COOKIE['سماح كير _arch'];
                 if (in_array($ca, ['cyber-lab','organic-spa','editorial','luxury-boutique'])) {
                     $layoutArchitecture = $ca;
                 }
             }
 
-            $mode = $_COOKIE['شركة جنين للتجميل_mode'] ?? 'light';
+            $mode = $_COOKIE['سماح كير _mode'] ?? 'light';
             $isLightTheme = $mode !== 'dark';
 
             $view->with('layoutArchitecture', $layoutArchitecture);
@@ -248,15 +228,13 @@ class AppServiceProvider extends ServiceProvider
                 'social_instagram' => $s['instagram_url'] ?? $s['social_instagram'] ?? '',
                 'tiktok_url' => $s['tiktok_url'] ?? $s['social_tiktok'] ?? '',
                 'social_tiktok' => $s['tiktok_url'] ?? $s['social_tiktok'] ?? '',
-                'twitter_url' => $s['twitter_url'] ?? $s['social_twitter'] ?? '',
+                'twitter_url' => $s['twitter_url'] ?? '',
                 'linkedin_url' => $s['linkedin_url'] ?? '',
                 'youtube_url' => $s['youtube_url'] ?? '',
                 'snapchat_url' => $s['snapchat_url'] ?? '',
                 'pinterest_url' => $s['pinterest_url'] ?? '',
                 'currency' => $s['currency'] ?? 'ILS',
                 'currency_symbol' => $s['currency_symbol'] ?? '₪',
-                'shipping_cost' => floatval($s['shipping_cost'] ?? 25),
-                'free_shipping_min' => floatval($s['free_shipping_threshold'] ?? $s['free_shipping_min'] ?? 200),
                 'site_theme' => $s['site_theme'] ?? 'rose',
                 'facebook_pixel_id' => $s['facebook_pixel_id'] ?? '',
                 'facebook_pixel_enabled' => $s['facebook_pixel_enabled'] ?? '1',
@@ -276,18 +254,9 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        // Share cart count with all views
+        // Share default cart count (service booking system - no traditional cart)
         View::composer('*', function ($view) {
-            try {
-                if (Auth::check()) {
-                    $cart = Cart::where('user_id', Auth::id())->where('is_active', true)->first();
-                } else {
-                    $cart = Cart::where('session_id', Session::getId())->where('is_active', true)->first();
-                }
-                $view->with('cartCount', $cart ? $cart->items()->sum('quantity') : 0);
-            } catch (\Exception $e) {
-                $view->with('cartCount', 0);
-            }
+            $view->with('cartCount', 0);
         });
     }
 }

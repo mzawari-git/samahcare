@@ -11,7 +11,7 @@ class HeroSlide extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'product_id', 'title_ar', 'title_en', 'subtitle_ar', 'subtitle_en',
+        'service_id', 'title_ar', 'title_en', 'subtitle_ar', 'subtitle_en',
         'description_ar', 'description_en', 'button_text_ar', 'button_text_en',
         'button_url', 'second_button_text_ar', 'second_button_url',
         'image', 'mobile_image', 'video_url', 'html_content',
@@ -29,9 +29,9 @@ class HeroSlide extends Model
         'overlay_opacity' => 'decimal:2',
     ];
 
-    public function product()
+    public function service()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Service::class);
     }
 
     public function getTitleAttribute()
@@ -66,9 +66,6 @@ class HeroSlide extends Model
                 return $this->image;
             }
             return url('files/' . $this->image);
-        }
-        if ($this->product && $this->product->main_image) {
-            return url('files/' . $this->product->main_image);
         }
         return null;
     }

@@ -19,14 +19,14 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h1 class="h4 mb-1"><i class="fas fa-search" style="color:var(--pink-600);margin-left:8px;"></i>SEO متقدم</h1>
-        <p class="text-muted small mb-0">تحليل وتحسين محركات البحث لجميع المنتجات</p>
+        <p class="text-muted small mb-0">تحليل وتحسين محركات البحث لجميع الخدمات</p>
     </div>
     <div class="d-flex gap-2">
-        <form action="{{ route('admin.seo.auto-all') }}" method="POST" onsubmit="return confirm('توليد SEO تلقائياً لجميع المنتجات الناقصة؟')">
+        <form action="{{ route('admin.seo.auto-all') }}" method="POST" onsubmit="return confirm('توليد SEO تلقائياً لجميع الخدمات الناقصة؟')">
             @csrf
             <button class="btn btn-outline-pink"><i class="fas fa-magic"></i> توليد SEO التلقائي</button>
         </form>
-        <form action="{{ route('admin.seo.ai-all') }}" method="POST" onsubmit="return confirm('توليد SEO ذكي (AI) للمنتجات الناقصة؟ سيتم معالجة 100 منتج في كل مرة.')">
+        <form action="{{ route('admin.seo.ai-all') }}" method="POST" onsubmit="return confirm('توليد SEO ذكي (AI) للخدمات الناقصة؟ سيتم معالجة 100 خدمة في كل مرة.')">
             @csrf
             <button class="btn btn-pink"><i class="fas fa-robot"></i> توليد SEO ذكي AI</button>
         </form>
@@ -38,7 +38,7 @@
     <div class="col-md">
         <div class="stat-card-new text-center">
             <div class="stat-value-new" style="font-size:1.5rem;">{{ $stats['total'] }}</div>
-            <div class="stat-label-new">إجمالي المنتجات</div>
+            <div class="stat-label-new">إجمالي الخدمات</div>
         </div>
     </div>
     <div class="col-md">
@@ -75,11 +75,11 @@
     <div class="card-body py-3">
         <form method="GET" class="row g-2 align-items-end">
             <div class="col-auto">
-                <input type="text" name="search" class="form-control form-control-sm" placeholder="بحث عن منتج..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control form-control-sm" placeholder="بحث عن خدمة..." value="{{ request('search') }}">
             </div>
             <div class="col-auto">
                 <select name="filter" class="form-select form-select-sm" onchange="this.form.submit()">
-                    <option value="">كل المنتجات</option>
+                    <option value="">كل الخدمات</option>
                     <option value="missing_meta" {{ request('filter') === 'missing_meta' ? 'selected' : '' }}>ناقصة Meta</option>
                     <option value="missing_keywords" {{ request('filter') === 'missing_keywords' ? 'selected' : '' }}>ناقصة الكلمات المفتاحية</option>
                     <option value="missing_og" {{ request('filter') === 'missing_og' ? 'selected' : '' }}>ناقصة OG Image</option>
@@ -103,7 +103,7 @@
             <table class="table table-hover mb-0 seo-table align-middle">
                 <thead>
                     <tr>
-                        <th>المنتج</th>
+                        <th>الخدمة</th>
                         <th>Meta Title</th>
                         <th>Meta Description</th>
                         <th>الكلمات المفتاحية</th>
@@ -179,7 +179,7 @@
                         </td>
                     </tr>
                     @empty
-                    <tr><td colspan="7" class="text-center py-5 text-muted">لا توجد منتجات</td></tr>
+                    <tr><td colspan="7" class="text-center py-5 text-muted">لا توجد خدمات</td></tr>
                     @endforelse
                 </tbody>
             </table>

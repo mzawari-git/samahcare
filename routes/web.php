@@ -2,44 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\ShopController;
-use App\Http\Controllers\Frontend\ProductController;
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CheckoutController;
-use App\Http\Controllers\Frontend\AccountController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Frontend\ContactController;
-use App\Http\Controllers\Frontend\AffiliateController as FrontAffiliateController;
 use App\Http\Controllers\Frontend\BlogController as FrontBlogController;
+use App\Http\Controllers\Frontend\BookingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/shop', [ShopController::class, 'index'])->name('shop');
-Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::get('/cart/count', [CartController::class, 'getCartCount'])->name('cart.count');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-Route::post('/cart/coupon', [CartController::class, 'applyCoupon'])->name('cart.coupon');
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
-Route::get('/b2b', function () {
-    return view('frontend.b2b.index');
-})->name('b2b');
+
+// Booking routes
+Route::get('/booking', [BookingController::class, 'index'])->name('booking');
+Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+Route::post('/booking/validate-coupon', [BookingController::class, 'validateCoupon'])->name('booking.coupon');
+Route::get('/booking/success/{id}', [BookingController::class, 'success'])->name('booking.success');
+
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::post('/newsletter/subscribe', [\App\Http\Controllers\Frontend\ContactController::class, 'newsletter'])->name('newsletter.subscribe');
-
-Route::get('/return-policy', function () {
-    return view('frontend.pages.return-policy');
-})->name('return-policy');
-
-Route::get('/shipping-policy', function () {
-    return view('frontend.pages.shipping-policy');
-})->name('shipping-policy');
 
 Route::get('/faq', function () {
     return view('frontend.pages.faq');
@@ -53,15 +32,11 @@ Route::get('/privacy', function () {
     return view('frontend.pages.privacy');
 })->name('privacy');
 
-Route::get('/affiliate', [FrontAffiliateController::class, 'landing'])->name('affiliate.landing');
-Route::get('/affiliate/dashboard', [FrontAffiliateController::class, 'dashboard'])->name('affiliate.dashboard');
-Route::get('/affiliate/tools', [FrontAffiliateController::class, 'marketingTools'])->name('affiliate.tools');
-
+Route::get('/blog-tool', [\App\Http\Controllers\Frontend\BlogController::class, 'designTool'])->name('blog.design-tool');
+Route::post('/blog-tool/insert', [\App\Http\Controllers\Frontend\BlogController::class, 'insertFromTool'])->name('blog.insert-tool');
 Route::get('/blog', [FrontBlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/category/{category}', [FrontBlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/{slug}', [FrontBlogController::class, 'show'])->name('blog.show');
-Route::post('/affiliate/register', [FrontAffiliateController::class, 'register'])->name('affiliate.register');
-Route::post('/affiliate/payout', [FrontAffiliateController::class, 'requestPayout'])->name('affiliate.payout.request');
 
 Route::get('login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
@@ -84,18 +59,9 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/account', [AccountController::class, 'index'])->name('account');
-    Route::get('/orders', [AccountController::class, 'orders'])->name('orders');
-    Route::get('/orders/{id}', [AccountController::class, 'orderShow'])->name('orders.show');
-    Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('wishlist');
-    Route::post('/wishlist/toggle', [\App\Http\Controllers\Frontend\AccountController::class, 'toggleWishlist'])->name('wishlist.toggle');
-    Route::get('/addresses', [AccountController::class, 'addresses'])->name('addresses');
     Route::get('/account/security-question', [AuthController::class, 'showSecurityQuestionSetup'])->name('account.security-question');
     Route::post('/account/security-question', [AuthController::class, 'updateSecurityQuestion'])->name('account.security-question.update');
 });
-
-Route::get('/api/search', [\App\Http\Controllers\Frontend\ShopController::class, 'searchAjax'])->name('api.search');
-Route::get('/api/product/{id}/quickview', [\App\Http\Controllers\Frontend\ProductController::class, 'quickView'])->name('api.quickview');
 
 // Tracking endpoints (client-side analytics, no CSRF needed for sendBeacon)
 Route::post('/api/track/fingerprint', [\App\Http\Controllers\Api\FingerprintController::class, 'store'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);

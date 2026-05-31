@@ -196,26 +196,6 @@ class MarketingSetting extends Model
     public static function isTrackingEnabled(): bool { return (bool) static::get('tracking_enabled', true); }
     public static function isTestMode(): bool { return (bool) static::get('tracking_test_mode', false); }
 
-    public static function saveShopifySettings(array $data): void
-    {
-        $keys = ['shopify_enabled', 'shopify_shop_domain', 'shopify_access_token', 'shopify_api_secret'];
-        foreach ($keys as $key) {
-            if (array_key_exists($key, $data)) {
-                static::setValue($key, $data[$key], 'shopify');
-            }
-        }
-    }
-
-    public static function saveWooCommerceSettings(array $data): void
-    {
-        $keys = ['woocommerce_enabled', 'woocommerce_store_url', 'woocommerce_consumer_key', 'woocommerce_consumer_secret'];
-        foreach ($keys as $key) {
-            if (array_key_exists($key, $data)) {
-                static::setValue($key, $data[$key], 'woocommerce');
-            }
-        }
-    }
-
     public static function saveCustomApiSettings(array $data): void
     {
         $keys = ['custom_api_enabled', 'custom_api_key'];
@@ -226,7 +206,5 @@ class MarketingSetting extends Model
         }
     }
 
-    public static function isShopifyEnabled(): bool { return (bool) static::get('shopify_enabled', false); }
-    public static function isWooCommerceEnabled(): bool { return (bool) static::get('woocommerce_enabled', false); }
     public static function isCustomApiEnabled(): bool { return (bool) static::get('custom_api_enabled', false); }
 }

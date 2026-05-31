@@ -1,57 +1,43 @@
-﻿@extends($layoutPath)
+@extends('frontend.layouts.organic-spa.app')
 
-@section('title', 'سياسة الخصوصية - ' . ($siteSettings['site_name'] ?? 'شركة شركة جنين للتجميل'))
+@section('title', 'سياسة الخصوصية - سماح كير')
+@section('meta_description', 'سياسة الخصوصية لمنصة سماح كير - نوضح كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام خدماتنا.')
+@section('meta_keywords', 'سياسة الخصوصية, الخصوصية, سماح كير, حماية البيانات, معلومات شخصية, فلسطين')
+@section('og_image', asset('assets/images/og-image.webp'))
 
-@section('meta_description', 'سياسة الخصوصية الخاصة بشركة شركة جنين للتجميل. تعرف على كيفية جمع وحماية واستخدام بياناتك الشخصية.')
-
-@section('content')
-
+@push('styles')
 <style>
-.privacy-hero {
-    background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 50%, #A7F3D0 100%);
+html { scroll-behavior: smooth; }
+.terms-hero {
     padding: 140px 0 60px;
     text-align: center;
     margin-bottom: 40px;
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 50%, #FDE68A 100%);
 }
-.privacy-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #065F46;
-    margin-bottom: 15px;
-}
-.privacy-hero p {
-    font-size: 1.1rem;
-    color: #047857;
-    max-width: 700px;
-    margin: 0 auto;
-}
-.privacy-container {
-    max-width: 900px;
-    margin: 0 auto;
-}
-.privacy-section {
+.terms-section {
     background: #fff;
     border-radius: 16px;
-    padding: 35px;
-    margin-bottom: 30px;
+    padding: 24px;
+    margin-bottom: 24px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    border: 1px solid #D1FAE5;
+    border: 1px solid #FEF3C7;
+    width: 100%;
 }
-.privacy-section h2 {
-    color: #059669;
+.terms-section h2 {
+    color: #D97706 !important;
     font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 3px solid #A7F3D0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #FDE68A;
     display: flex;
     align-items: center;
     gap: 12px;
 }
-.privacy-section h2 i {
+.terms-section h2 i {
     width: 42px;
     height: 42px;
-    background: linear-gradient(135deg, #34D399, #059669);
+    background: linear-gradient(135deg, #F59E0B, #D97706);
     color: white;
     border-radius: 10px;
     display: flex;
@@ -59,38 +45,26 @@
     justify-content: center;
     font-size: 1.1rem;
 }
-.privacy-section h3 {
-    color: #047857;
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 25px 0 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.privacy-section p {
-    color: #4B5563;
+.terms-section p {
+    color: #4B5563 !important;
     line-height: 1.9;
     margin-bottom: 15px;
-    text-align: justify;
 }
-.privacy-section ul {
+.terms-section ul {
     list-style: none;
     padding: 0;
     margin: 15px 0;
 }
-.privacy-section ul li {
+.terms-section ul li {
     padding: 12px 18px;
     margin-bottom: 10px;
-    background: #ECFDF5;
+    background: #FFFBEB;
     border-radius: 10px;
-    border-right: 4px solid #34D399;
-    color: #4B5563;
+    border-right: 4px solid #F59E0B;
+    color: #4B5563 !important;
     line-height: 1.7;
 }
-.privacy-section ul li strong {
-    color: #065F46;
-}
+.terms-section ul li strong { color: #92400E !important; }
 .info-box {
     background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
     border: 2px solid #3B82F6;
@@ -99,115 +73,63 @@
     margin: 20px 0;
 }
 .info-box h4 {
-    color: #1E40AF;
+    color: #1E40AF !important;
     font-weight: 700;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
 }
-.info-box h4 i {
-    font-size: 1.2rem;
-}
-.privacy-box {
-    background: linear-gradient(135deg, #FCE7F3, #FBCFE8);
-    border: 2px solid #EC4899;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-}
-.privacy-box h4 {
-    color: #BE185D;
-    font-weight: 700;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.privacy-box h4 i {
-    font-size: 1.2rem;
-}
-.security-box {
-    background: linear-gradient(135deg, #FEF3C7, #FDE68A);
-    border: 2px solid #F59E0B;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-}
-.security-box h4 {
-    color: #B45309;
-    font-weight: 700;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.security-box h4 i {
-    font-size: 1.2rem;
-}
-.highlight-text {
-    background: #D1FAE5;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 600;
-    color: #065F46;
-}
-.privacy-nav {
+.info-box p { color: #1E40AF !important; }
+.terms-nav {
     position: sticky;
     top: 100px;
     background: white;
     border-radius: 12px;
-    padding: 25px;
+    padding: 16px;
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    width: 100%;
 }
-.privacy-nav h4 {
+.terms-nav h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: #065F46;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #A7F3D0;
+    color: #92400E;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #FDE68A;
 }
-.privacy-nav ul {
-    list-style: none;
-    padding: 0;
-}
-.privacy-nav ul li {
-    margin-bottom: 8px;
-}
-.privacy-nav ul li a {
-    color: #6B7280;
+.terms-nav ul { list-style: none; padding: 0; margin: 0; }
+.terms-nav ul li { margin-bottom: 4px; }
+.terms-nav ul li a {
+    color: #6B7280 !important;
     text-decoration: none;
     font-size: 0.9rem;
     display: block;
-    padding: 10px 12px;
+    width: 100%;
+    padding: 8px 12px;
     border-radius: 8px;
     transition: all 0.2s;
 }
-.privacy-nav ul li a:hover {
-    background: #ECFDF5;
-    color: #059669;
+.terms-nav ul li a:hover { background: #FFFBEB; color: #D97706 !important; }
+a.active-section {
+    background: #FEF3C7 !important;
+    color: #D97706 !important;
+    font-weight: 700;
 }
 .contact-cta {
-    background: linear-gradient(135deg, #059669, #10B981);
+    background: linear-gradient(135deg, #D97706, #F59E0B);
     color: white;
-    padding: 40px;
+    padding: 32px 24px;
     border-radius: 16px;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 32px;
 }
-.contact-cta h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-.contact-cta p {
-    margin-bottom: 20px;
-    opacity: 0.95;
-}
+.contact-cta h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; }
+.contact-cta p { margin-bottom: 20px; opacity: 0.95; }
+.contact-cta h3, .contact-cta p { color: #fff !important; }
 .contact-cta .btn {
     background: white;
-    color: #059669;
+    color: #D97706;
     padding: 12px 35px;
     border-radius: 30px;
     font-weight: 600;
@@ -215,161 +137,122 @@
     display: inline-block;
     transition: all 0.3s;
 }
-.contact-cta .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
+.contact-cta .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
 .last-updated {
     text-align: center;
     padding: 20px;
-    background: #D1FAE5;
+    background: #FEF3C7;
     border-radius: 10px;
     margin-bottom: 30px;
-    color: #065F46;
+    color: #92400E !important;
     font-weight: 600;
 }
 @media (max-width: 768px) {
-    .privacy-hero h1 {
-        font-size: 1.8rem;
-    }
-    .privacy-section {
-        padding: 25px;
-    }
-    .privacy-nav {
-        display: none;
-    }
+    .terms-hero h1 { font-size: 1.8rem; }
+    .terms-section { padding: 16px; }
+    .terms-nav { display: none; }
+}
+@media (max-width: 1024px) {
+    .terms-section { padding: 18px; }
 }
 </style>
+@endpush
 
-{{-- Hero Section --}}
-<div class="privacy-hero">
-    <div class="container">
-        <h1><i class="fas fa-lock me-3"></i>سياسة الخصوصية</h1>
-        <p>نلتزم التزاماً صارماً بحماية خصوصية زوار ومستخدمي موقعنا الإلكتروني</p>
+@section('content')
+<div class="terms-hero">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-extrabold" style="color:#92400E;"><i class="fas fa-user-shield me-2"></i>سياسة الخصوصية</h1>
+        <p style="color:#B45309;font-size:1.1rem;">نحن نحترم خصوصيتك ونلتزم بحماية معلوماتك الشخصية.</p>
     </div>
 </div>
 
-<div class="container mb-5">
-    {{-- Last Updated --}}
+<div class="container mx-auto mb-12">
     <div class="last-updated">
-        <i class="fas fa-calendar-alt me-2"></i> آخر تحديث: {{ date('Y/m/d') }}
+        <i class="fas fa-calendar-alt me-2"></i> آخر تحديث: {{ date('Y-m-d') }}
     </div>
-
-    <div class="row">
-        {{-- Sidebar Navigation --}}
-        <div class="col-lg-3 d-none d-lg-block">
-            <div class="privacy-nav">
-                <h4><i class="fas fa-list me-2"></i>محتوى السياسة</h4>
-                <ul>
-                    <li><a href="#section1">البيانات التي نجمعها</a></li>
-                    <li><a href="#section2">التسويق الرقمي</a></li>
-                    <li><a href="#section3">أمن وحماية البيانات</a></li>
-                    <li><a href="#section4">مشاركة البيانات</a></li>
-                    <li><a href="#section5">حقوق المستخدم</a></li>
+    <div class="grid md:grid-cols-12 gap-4 w-full">
+        <aside class="hidden md:block w-full" style="grid-column: span 3 / span 3;">
+            <nav class="terms-nav w-full">
+                <h4><i class="fas fa-list me-2"></i>محتوى الوثيقة</h4>
+                <ul id="privacy-sidebar">
+                    <li><a href="#section1">المعلومات التي نجمعها</a></li>
+                    <li><a href="#section2">كيفية استخدام المعلومات</a></li>
+                    <li><a href="#section3">مشاركة المعلومات</a></li>
+                    <li><a href="#section4">الأمان</a></li>
+                    <li><a href="#section5">حقوقك</a></li>
                     <li><a href="#contact">تواصل معنا</a></li>
                 </ul>
-            </div>
-        </div>
-
-        {{-- Main Content --}}
-        <div class="col-lg-9">
-            
-            {{-- Introduction --}}
-            <div class="privacy-section">
-                <p class="lead" style="color: #4B5563; font-size: 1.1rem; text-align: center; font-weight: 600;">
-                    تلتزم "{{ $siteSettings['site_name'] ?? 'شركة شركة جنين للتجميل' }}" التزاماً صارماً ومطلقاً بحماية خصوصية زوار ومستخدمي موقعها الإلكتروني ({{ request()->getHost() }}). نحن ندرك أهمية سرية بياناتكم، ولذلك صممنا سياساتنا بما يتوافق تماماً مع القوانين والتشريعات الفلسطينية الناظمة لحماية البيانات الشخصية والسرية التجارية.
+            </nav>
+        </aside>
+        <section class="w-full" style="grid-column: span 9 / span 9;">
+            <div class="terms-section">
+                <p class="lead" style="text-align:center;font-weight:600;font-size:1.1rem;color:#4B5563 !important;">
+                    نحن في ساماه كير نولي اهتماماً كبيراً بخصوصيتك. يرجى قراءة ما يلي لمعرفة كيفية جمع واستخدام وحماية معلوماتك.
                 </p>
             </div>
 
-            {{-- Section 1: Data Collection --}}
-            <div class="privacy-section" id="section1">
-                <h2><i class="fas fa-database"></i> 1. البيانات التي نقوم بجمعها</h2>
-                
-                <p>انطلاقاً من مبدأ الشفافية، نود إعلامكم بأننا نقوم بجمع البيانات الضرورية فقط لضمان تقديم خدمة احترافية ومخصصة، وتنقسم هذه البيانات إلى:</p>
-                
-                <div class="privacy-box">
-                    <h4><i class="fas fa-user-shield"></i> المعلومات الشخصية الأساسية</h4>
-                    <p class="mb-0">عند التسجيل أو إتمام عملية الشراء، نطلب معلومات محددة تشمل <span class="highlight-text">(الاسم الكامل، أرقام الهواتف الفعالة، البريد الإلكتروني، والعناوين البريدية أو الجغرافية الدقيقة)</span> في مختلف المدن والقرى والمخيمات الفلسطينية. الغاية الحصرية من هذه البيانات هي تأكيد الطلبات، وإتمام عمليات الشحن والتوصيل بدقة.</p>
-                </div>
-                
-                <h3><i class="fas fa-chart-line"></i> بيانات التصفح والاستخدام</h3>
-                <p>لضمان تحسين مستمر لتجربة التسوق، نقوم بجمع بيانات تقنية غير محددة للهوية الشخصية (مثل نوع المتصفح، نظام التشغيل، والصفحات الأكثر زيارة). تساعدنا هذه البيانات في فهم كيفية تفاعل الزوار مع المنصة وتطويرها بما يلبي تطلعاتكم.</p>
-            </div>
-
-            {{-- Section 2: Digital Marketing --}}
-            <div class="privacy-section" id="section2">
-                <h2><i class="fas fa-bullhorn"></i> 2. التسويق الرقمي وأنظمة التتبع المتقدمة</h2>
-                
-                <p>نسعى دائماً لتقديم عروض تجميلية مخصصة تناسب اهتمامات وتفضيلات عملائنا. لتحقيق ذلك دون المساس بسرعة أو أمان الموقع، تعتمد منصتنا على تقنيات تسويق وتتبع متطورة تعمل في الخلفية بكفاءة عالية عبر نظام <span class="highlight-text">(Queue Jobs)</span>:</p>
-                
-                <div class="info-box">
-                    <h4><i class="fab fa-facebook"></i> بكسل فيسبوك (Facebook Pixel) وتقنية (CAPI)</h4>
-                    <p class="mb-0">لا نعتمد فقط على أدوات التتبع التقليدية، بل نستخدم إعدادات التتبع من جهة الخادم (Server-Side Tracking) عبر واجهة (Conversions API). تضمن هذه التقنية دقة قياس أداء حملاتنا الإعلانية بشكل آمن ومستقل تماماً عن قيود متصفحات الويب، مما يعزز خصوصية نقل البيانات.</p>
-                </div>
-                
-                <h3><i class="fab fa-tiktok"></i> بكسل تيك توك (TikTok Pixel) و (Events API)</h3>
-                <p>تُستخدم هذه الأدوات المتقدمة لتحليل التفاعلات مع المحتوى المرئي والإعلاني بفعالية عالية، مما يساعدنا في تخصيص العروض التي تظهر لكم.</p>
-                
-                <div class="security-box">
-                    <h4><i class="fas fa-cogs"></i> الشفافية والتحكم الإداري</h4>
-                    <p class="mb-0">تمتلك إدارة المنصة صلاحيات كاملة للتحكم في أدوات التتبع واختبار الاتصال (Ping/Test) بشكل فوري وشفاف من خلال صفحة "التسويق والتتبع" المخصصة في لوحة التحكم المركزية، لضمان عملها وفقاً لأعلى معايير الخصوصية.</p>
-                </div>
-            </div>
-
-            {{-- Section 3: Security --}}
-            <div class="privacy-section" id="section3">
-                <h2><i class="fas fa-shield-alt"></i> 3. أمن وحماية البيانات</h2>
-                
-                <p>أمان بياناتكم هو صميم بنيتنا التقنية. نحن نطبق أحدث المعايير وأكثرها صرامة لحماية قواعد البيانات من أي وصول غير مصرح به أو تسريب:</p>
-                
-                <div class="info-box">
-                    <h4><i class="fas fa-lock"></i> سياسة أمن المحتوى (CSP)</h4>
-                    <p class="mb-0">يتم تطبيق بروتوكول سياسة أمن المحتوى (Content Security Policy) بصرامة على كامل المنصة. تعمل هذه التقنية كدرع واقٍ يمنع تنفيذ أي نصوص برمجية (Scripts) خارجية غير مصرح بها أو ضارة على متصفح المستخدم، مما يحمي البيانات المدخلة (مثل كلمات المرور أو معلومات الاتصال) من محاولات الاختراق أو السرقة.</p>
-                </div>
-                
-                <h3><i class="fas fa-sitemap"></i> العزل الهيكلي للبيانات</h3>
-                <p>تعتمد منصتنا على معمارية برمجية متقدمة تفصل بين قواعد البيانات؛ حيث يتم عزل بيانات المستخدمين الحساسة والإعدادات الأساسية <span class="highlight-text">(الموجودة ضمن وحدة Core)</span> بشكل كامل عن بيانات المنتجات وإدارة المتجر <span class="highlight-text">(وحدة Commerce)</span>. يضيف هذا الفصل طبقة أمان برمجية استثنائية تحصّن معلوماتكم الشخصية.</p>
-            </div>
-
-            {{-- Section 4: Data Sharing --}}
-            <div class="privacy-section" id="section4">
-                <h2><i class="fas fa-share-alt"></i> 4. مشاركة البيانات مع أطراف ثالثة</h2>
-                
-                <p>خصوصيتكم أمانة لدينا، وعليه فإننا نؤكد على الآتي:</p>
-                
-                <div class="privacy-box">
-                    <h4><i class="fas fa-handshake"></i> السرية التامة</h4>
-                    <p class="mb-0">لا نقوم مطلقاً، وتحت أي ظرف، ببيع، أو تأجير، أو تداول بياناتك الشخصية لأي جهات خارجية أو وكالات تسويقية.</p>
-                </div>
-                
-                <h3><i class="fas fa-shipping-fast"></i> شركاء الخدمات اللوجستية</h3>
-                <p>يقتصر حصر مشاركة المعلومات الأساسية جداً (الاسم، العنوان المفصل، ورقم الهاتف) مع شركات الشحن والتوصيل المعتمدة والموثوقة في الأراضي الفلسطينية، وذلك لغاية وحيدة تتمثل في ضمان إيصال طلباتكم إلى باب منزلكم بأسرع وقت ممكن.</p>
-            </div>
-
-            {{-- Section 5: User Rights --}}
-            <div class="privacy-section" id="section5">
-                <h2><i class="fas fa-user-check"></i> 5. حقوق المستخدم وتعديلات السياسة</h2>
-                
-                <p>نحن نمنحك السيطرة الكاملة على بياناتك الشخصية:</p>
-                
+            <div class="terms-section" id="section1">
+                <h2><i class="fas fa-info-circle"></i>المعلومات التي نجمعها</h2>
                 <ul>
-                    <li><strong>حقوق الوصول والتعديل:</strong> يحق لك كعميل في أي وقت طلب الوصول إلى بياناتك الشخصية المخزنة في أنظمتنا، أو تعديلها وتحديثها. كما يحق لك المطالبة بحذف حسابك وبياناتك نهائياً من خلال تقديم طلب رسمي لفريق خدمة العملاء.</li>
-                    <li><strong>تحديثات السياسة:</strong> نظراً للتطورات التقنية المستمرة، تحتفظ الشركة بالحق في تعديل أو تحديث "سياسة الخصوصية" هذه بما يتوافق مع أي تحديثات في النظام الأساسي للمنصة أو التعديلات الطارئة في القانون الفلسطيني.</li>
-                    <li><strong>نفاذ التعديلات:</strong> تُعتبر أي تعديلات على هذه السياسة سارية المفعول ونافذة فور نشرها وتحديثها على هذه الصفحة، ونشجعكم على مراجعتها بشكل دوري.</li>
+                    <li><strong>البيانات الشخصية:</strong> مثل الاسم، البريد الإلكتروني، رقم الهاتف عند التسجيل أو الحجز.</li>
+                    <li><strong>معلومات الدفع:</strong> تُعالج عبر بوابة دفع آمنة ولا تُخزن لدينا.</li>
+                    <li><strong>معلومات الاستخدام:</strong> الصفحات التي تزورها داخل الموقع لتحسين التجربة.</li>
                 </ul>
             </div>
 
-            {{-- Contact CTA --}}
-            <div class="contact-cta" id="contact">
-                <h3><i class="fas fa-envelope me-2"></i>هل لديك استفسار حول الخصوصية؟</h3>
-                <p>فريق خصوصية البيانات جاهز لمساعدتك في أي استفسار</p>
-                <a href="{{ route('contact') }}" class="btn">
-                    <i class="fas fa-headset me-2"></i>تواصل معنا
-                </a>
+            <div class="terms-section" id="section2">
+                <h2><i class="fas fa-cogs"></i>كيفية استخدام المعلومات</h2>
+                <p>نستخدم بياناتك للآتي:</p>
+                <ul>
+                    <li>إدارة وحجز المواعيد.</li>
+                    <li>إرسال إشعارات حول الحجز وتحديثات الخدمة.</li>
+                    <li>تحسين خدمات الموقع وتخصيص التجربة.</li>
+                    <li>الامتثال للمتطلبات القانونية.</li>
+                </ul>
             </div>
 
-        </div>
+            <div class="terms-section" id="section3">
+                <h2><i class="fas fa-share-alt"></i>مشاركة المعلومات</h2>
+                <p>لا نشارك معلوماتك الشخصية مع أطراف ثالثة إلا للجهات اللازمة لمعالجة الدفع أو الامتثال للقانون.</p>
+            </div>
+
+            <div class="terms-section" id="section4">
+                <h2><i class="fas fa-lock"></i>الأمان</h2>
+                <p>نتبع إجراءات تقنية وإدارية لحماية بياناتك من الوصول غير المصرح به أو فقدانها.</p>
+            </div>
+
+            <div class="terms-section" id="section5">
+                <h2><i class="fas fa-user-check"></i>حقوقك</h2>
+                <p>يمكنك طلب الوصول إلى بياناتك أو تعديلها أو حذفها في أي وقت عبر <a href="mailto:support@samahcare.com" style="color:#D97706;font-weight:600;">support@samahcare.com</a>.</p>
+            </div>
+
+            <div class="contact-cta" id="contact">
+                <h3><i class="fas fa-envelope me-2"></i>هل لديك سؤال حول الخصوصية؟</h3>
+                <p>فريق الدعم جاهز للرد على استفساراتك.</p>
+                <a href="{{ route('contact') }}" class="btn">تواصل معنا</a>
+            </div>
+        </section>
     </div>
 </div>
-
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var sections = document.querySelectorAll('.terms-section[id]');
+    var links = document.querySelectorAll('#privacy-sidebar a');
+    if (!sections.length || !links.length) return;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                links.forEach(function (l) { l.classList.remove('active-section'); });
+                var id = entry.target.getAttribute('id');
+                var match = document.querySelector('#privacy-sidebar a[href="#' + id + '"]');
+                if (match) match.classList.add('active-section');
+            }
+        });
+    }, { rootMargin: '-80px 0px -50% 0px', threshold: 0 });
+    sections.forEach(function (s) { observer.observe(s); });
+});
+</script>
+@endpush

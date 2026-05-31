@@ -1,6 +1,6 @@
 <?php
 /**
- * Auto-Deploy Webhook for شركة جنين للتجميل
+ * Auto-Deploy Webhook for سماح كير 
  * 
  * Place this file on your production server at: public/deploy.php
  * Then add a GitHub webhook pointing to:

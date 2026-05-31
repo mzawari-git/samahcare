@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\HeroSlide;
-use App\Models\Product;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,14 +12,14 @@ class HeroSlideController extends Controller
 {
     public function index()
     {
-        $slides = HeroSlide::with("product")->orderBy("sort_order")->orderBy("created_at", "desc")->get();
+        $slides = HeroSlide::orderBy("sort_order")->orderBy("created_at", "desc")->get();
         return view("admin.hero-slides.index", compact("slides"));
     }
 
     public function create()
     {
-        $products = Product::where("status", "active")->orderBy("name_ar")->get();
-        return view("admin.hero-slides.create", compact("products"));
+        $services = Service::active()->ordered()->get();
+        return view("admin.hero-slides.create", compact("services"));
     }
 
     public function store(Request $request)
@@ -32,8 +32,8 @@ class HeroSlideController extends Controller
 
     public function edit(HeroSlide $heroSlide)
     {
-        $products = Product::where("status", "active")->orderBy("name_ar")->get();
-        return view("admin.hero-slides.edit", compact("heroSlide", "products"));
+        $services = Service::active()->ordered()->get();
+        return view("admin.hero-slides.edit", compact("heroSlide", "services"));
     }
 
     public function update(Request $request, HeroSlide $heroSlide)
@@ -68,7 +68,7 @@ class HeroSlideController extends Controller
     private function validateSlide(Request $request): array
     {
         return $request->validate([
-            "product_id" => "nullable|exists:products,id",
+            "service_id" => "nullable|exists:services,id",
             "title_ar" => "required|string|max:255",
             "title_en" => "nullable|string|max:255",
             "subtitle_ar" => "nullable|string|max:255",

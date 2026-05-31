@@ -1,6 +1,6 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'إنشاء حساب - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
+@section('title', 'إنشاء حساب - ' . ($siteSettings['site_name'] ?? 'سماح كير '))
 
 @section('content')
 <div class="min-h-[80vh] flex items-center justify-center px-4 pt-32 pb-16">

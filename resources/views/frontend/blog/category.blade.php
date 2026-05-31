@@ -1,6 +1,6 @@
 @extends('frontend.layouts.editorial.app')
 
-@section('title', $categoryTitle . ' | مدونة جنين للتجميل')
+@section('title', $categoryTitle . ' | مدونة سماح كير ')
 
 @php
 function readingTime($content) {

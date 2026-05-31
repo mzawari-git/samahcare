@@ -123,5 +123,7 @@
     </div>
 </div>
 
+@if(method_exists($reviews, 'links'))
 <div class="mt-3">{{ $reviews->links() }}</div>
+@endif
 @endsection

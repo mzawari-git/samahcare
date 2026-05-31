@@ -335,6 +335,23 @@
         @stack('extra-styles')
     </style>
     @stack('styles')
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2073558763203111');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
     <div class="admin-wrapper">
@@ -368,17 +385,8 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         <i class="fas fa-chart-pie"></i> <span>لوحة التحكم</span>
                     </a>
-                    <a href="{{ route('admin.orders.index') }}" class="nav-item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-                        <i class="fas fa-shopping-bag"></i> <span>الطلبات</span>
-                    </a>
                     <a href="{{ route('admin.analytics.index') }}" class="nav-item {{ request()->routeIs('admin.analytics.*') ? 'active' : '' }}">
                         <i class="fas fa-chart-line"></i> <span>تحليلات متقدمة</span>
-                    </a>
-                    <a href="{{ route('admin.reports.index') }}" class="nav-item {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
-                        <i class="fas fa-file-invoice"></i> <span>التقارير والفواتير</span>
-                    </a>
-                    <a href="{{ route('admin.seo.index') }}" class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
-                        <i class="fas fa-search"></i> <span>تحسين محركات البحث</span>
                     </a>
                 </div>
             </nav>
@@ -388,8 +396,11 @@
                     التسويق والإعلانات <i class="fas fa-chevron-down collapse-icon"></i>
                 </div>
                 <div class="nav-items">
-                    <a href="{{ route('admin.meta-marketing.index') }}" class="nav-item {{ request()->routeIs('admin.meta-marketing.*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.meta-marketing.index') }}" class="nav-item {{ request()->routeIs('admin.meta-marketing.*') && !request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
                         <i class="fas fa-rocket"></i> <span>التسويق عبر ميتا</span>
+                    </a>
+                    <a href="{{ route('admin.diagnostics.index') }}" class="nav-item {{ request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
+                        <i class="fas fa-stethoscope"></i> <span>تشخيص CAPI</span>
                     </a>
                     <a href="{{ route('admin.ads.dashboard') }}" class="nav-item {{ request()->routeIs('admin.ads.*') ? 'active' : '' }}">
                         <i class="fas fa-ad"></i> <span>إدارة الإعلانات</span>
@@ -397,11 +408,8 @@
                     <a href="{{ route('admin.leads-hub.index') }}" class="nav-item {{ request()->routeIs('admin.leads-hub.*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i> <span>عملاء فيسبوك</span>
                     </a>
-                    <a href="{{ route('admin.marketing.index') }}" class="nav-item {{ request()->routeIs('admin.marketing.*') ? 'active' : '' }}">
-                        <i class="fas fa-bullhorn"></i> <span>إعدادات التسويق</span>
-                    </a>
-                    <a href="{{ route('admin.roas.index') }}" class="nav-item {{ request()->routeIs('admin.roas.*') ? 'active' : '' }}">
-                        <i class="fas fa-chart-line"></i> <span>True ROAS</span>
+                    <a href="{{ route('admin.account-configuration.index') }}" class="nav-item {{ request()->routeIs('admin.account-configuration.*') ? 'active' : '' }}">
+                        <i class="fas fa-cogs"></i> <span>إعدادات الحساب</span>
                     </a>
                     <a href="{{ route('admin.ai-compliance.index') }}" class="nav-item {{ request()->routeIs('admin.ai-compliance.*') ? 'active' : '' }}">
                         <i class="fas fa-shield-alt"></i> <span>الامتثال AI</span>
@@ -412,62 +420,38 @@
                     <a href="{{ route('admin.reviewer-ips.index') }}" class="nav-item {{ request()->routeIs('admin.reviewer-ips.*') ? 'active' : '' }}">
                         <i class="fas fa-user-secret"></i> <span>IP المراجعين</span>
                     </a>
+                    <a href="{{ route('admin.seo.index') }}" class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
+                        <i class="fas fa-search"></i> <span>SEO متقدم</span>
+                    </a>
+                    <a href="{{ route('admin.roas.index') }}" class="nav-item {{ request()->routeIs('admin.roas.*') ? 'active' : '' }}">
+                        <i class="fas fa-chart-bar"></i> <span>True ROAS</span>
+                    </a>
+                    <a href="{{ route('admin.ad-alerts.index') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.*') ? 'active' : '' }}">
+                        <i class="fas fa-bell"></i> <span>تنبيهات الإعلانات</span>
+                        @php $alertCount = \App\Models\AdAlert::unresolved()->unacknowledged()->count(); @endphp
+                        @if($alertCount > 0)
+                            <span class="badge bg-danger ms-auto">{{ $alertCount }}</span>
+                        @endif
+                    </a>
                 </div>
             </nav>
 
             <nav class="nav-section">
                 <div class="section-title" onclick="toggleSection(this)">
-                    التوصيل <i class="fas fa-chevron-down collapse-icon"></i>
+                    الحجوزات والخدمات <i class="fas fa-chevron-down collapse-icon"></i>
                 </div>
                 <div class="nav-items">
-                    <a href="{{ route('admin.deliveries.index') }}" class="nav-item {{ request()->routeIs('admin.deliveries.*') ? 'active' : '' }}">
-                        <i class="fas fa-truck"></i> <span>إدارة التوصيل</span>
+                    <a href="{{ route('admin.bookings.index') }}" class="nav-item {{ request()->routeIs('admin.bookings.*') ? 'active' : '' }}">
+                        <i class="fas fa-calendar-check"></i> <span>الحجوزات</span>
                     </a>
-                    <a href="{{ route('admin.reports.delivery') }}" class="nav-item {{ request()->routeIs('admin.reports.delivery*') ? 'active' : '' }}">
-                        <i class="fas fa-clipboard-list"></i> <span>تقرير التوصيل</span>
-                    </a>
-                </div>
-            </nav>
-
-            <nav class="nav-section">
-                <div class="section-title" onclick="toggleSection(this)">
-                    الكتالوج <i class="fas fa-chevron-down collapse-icon"></i>
-                </div>
-                <div class="nav-items">
-                    <a href="{{ route('admin.products.index') }}" class="nav-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
-                        <i class="fas fa-box"></i> <span>المنتجات</span>
-                    </a>
-                    <a href="{{ route('admin.categories.index') }}" class="nav-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
-                        <i class="fas fa-tags"></i> <span>التصنيفات</span>
-                    </a>
-                    <a href="{{ route('admin.brands.index') }}" class="nav-item {{ request()->routeIs('admin.brands.*') ? 'active' : '' }}">
-                        <i class="fas fa-certificate"></i> <span>العلامات التجارية</span>
-                    </a>
-                    <a href="{{ route('admin.reviews.index') }}" class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
-                        <i class="fas fa-star"></i> <span>التقييمات</span>
+                    <a href="{{ route('admin.services.index') }}" class="nav-item {{ request()->routeIs('admin.services.*') ? 'active' : '' }}">
+                        <i class="fas fa-spa"></i> <span>الخدمات</span>
                     </a>
                     <a href="{{ route('admin.coupons.index') }}" class="nav-item {{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
                         <i class="fas fa-ticket-alt"></i> <span>كوبونات الخصم</span>
                     </a>
-                    <a href="{{ route('admin.barcodes.index') }}" class="nav-item {{ request()->routeIs('admin.barcodes.*') ? 'active' : '' }}">
-                        <i class="fas fa-barcode"></i> <span>الباركود والطباعة</span>
-                    </a>
-                </div>
-            </nav>
-
-            <nav class="nav-section">
-                <div class="section-title" onclick="toggleSection(this)">
-                    الأعمال <i class="fas fa-chevron-down collapse-icon"></i>
-                </div>
-                <div class="nav-items">
-                    <a href="{{ route('admin.b2b.companies') }}" class="nav-item {{ request()->routeIs('admin.b2b.companies.*') || request()->routeIs('admin.b2b.company-show') ? 'active' : '' }}">
-                        <i class="fas fa-building"></i> <span>شركات الأعمال</span>
-                    </a>
-                    <a href="{{ route('admin.b2b.rfqs') }}" class="nav-item {{ request()->routeIs('admin.b2b.rfqs.*') || request()->routeIs('admin.b2b.rfq-show') ? 'active' : '' }}">
-                        <i class="fas fa-file-invoice"></i> <span>طلبات العروض</span>
-                    </a>
-                    <a href="{{ route('admin.b2b.invoices') }}" class="nav-item {{ request()->routeIs('admin.b2b.invoices.*') || request()->routeIs('admin.b2b.invoice-show') ? 'active' : '' }}">
-                        <i class="fas fa-receipt"></i> <span>الفواتير</span>
+                    <a href="{{ route('admin.reviews.index') }}" class="nav-item {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
+                        <i class="fas fa-star"></i> <span>تقييمات المنتجات</span>
                     </a>
                 </div>
             </nav>
@@ -548,9 +532,8 @@
                                 <i class="fas fa-plus"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="border-radius:12px;border:none;padding:.5rem;">
-                                <li><a class="dropdown-item py-2" href="{{ route('admin.products.create') }}"><i class="fas fa-box text-pink" style="color:var(--pink-600);width:24px;"></i> منتج جديد</a></li>
+                                <li><a class="dropdown-item py-2" href="{{ route('admin.services.create') }}"><i class="fas fa-spa" style="color:var(--pink-600);width:24px;"></i> خدمة جديدة</a></li>
                                 <li><a class="dropdown-item py-2" href="{{ route('admin.coupons.create') }}"><i class="fas fa-ticket" style="color:var(--pink-600);width:24px;"></i> كوبون جديد</a></li>
-                                <li><a class="dropdown-item py-2" href="{{ route('admin.products.import') }}"><i class="fas fa-upload" style="color:var(--pink-600);width:24px;"></i> استيراد منتجات</a></li>
                             </ul>
                         </div>
 

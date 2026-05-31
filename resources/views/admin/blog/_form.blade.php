@@ -58,7 +58,7 @@
                                     </span>
                                     <select name="category" required class="form-select" style="border: 1px solid var(--gray-200); padding: .6rem .75rem;">
                                         <option value="">اختر القسم</option>
-                                        <option value="articles" {{ ($post->category ?? old('category')) === 'articles' ? 'selected' : '' }}>📦 مقالات عن المنتجات</option>
+                                        <option value="articles" {{ ($post->category ?? old('category')) === 'articles' ? 'selected' : '' }}>📦 مقالات عن الخدمات</option>
                                         <option value="tips" {{ ($post->category ?? old('category')) === 'tips' ? 'selected' : '' }}>💡 نصائح للعناية الشاملة</option>
                                         <option value="news" {{ ($post->category ?? old('category')) === 'news' ? 'selected' : '' }}>📰 أخبار التجميل</option>
                                         <option value="guides" {{ ($post->category ?? old('category')) === 'guides' ? 'selected' : '' }}>📖 أدلة الاستخدام</option>
@@ -600,7 +600,7 @@
         html += '</div>';
 
         const catColors = { articles: '#ec4899', tips: '#0891b2', news: '#d4af37', guides: '#16a34a' };
-        const catLabels = { articles: 'مقالات عن المنتجات', tips: 'نصائح للعناية الشاملة', news: 'أخبار التجميل', guides: 'أدلة الاستخدام' };
+        const catLabels = { articles: 'مقالات عن الخدمات', tips: 'نصائح للعناية الشاملة', news: 'أخبار التجميل', guides: 'أدلة الاستخدام' };
         const catEl = document.querySelector('select[name="category"]');
         const catValue = catEl?.value || 'articles';
         const catColor = catColors[catValue] || '#64748b';

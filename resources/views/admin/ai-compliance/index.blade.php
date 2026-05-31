@@ -4,9 +4,11 @@ $settings = app(\App\Models\Setting::class);
 @extends('admin.layouts.app')
 @section('title', 'الامتثال AI')
 @section('content')
-<div class="container-fluid py-4" dir="rtl">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">🤖 لوحة الامتثال AI</h1>
+        <div>
+            <h1 class="h4 mb-1"><i class="fas fa-shield-alt" style="color:var(--pink-600);margin-left:8px;"></i> الامتثال AI</h1>
+            <p class="text-muted small mb-0">مراقبة الامتثال والتنقية للمنصات الإعلانية</p>
+        </div>
         <div>
             <a href="{{ route('admin.trigger-words.index') }}" class="btn btn-outline-primary">
                 <i class="fas fa-list"></i> إدارة الكلمات الممنوعة
@@ -158,7 +160,6 @@ $settings = app(\App\Models\Setting::class);
         </div>
     </div>
     @endif
-</div>
 @endsection
 
 @push('scripts')

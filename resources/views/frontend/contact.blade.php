@@ -1,7 +1,7 @@
 ﻿@extends($layoutPath)
 
-@section('title', 'تواصل معنا - ' . ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))
-@section('meta_description', 'تواصل مع فريق شركة جنين للتجميل نحن هنا لمساعدتك على مدار الساعة.')
+@section('title', 'تواصل معنا - ' . ($siteSettings['site_name'] ?? 'سماح كير '))
+@section('meta_description', 'تواصل مع فريق سماح كير  نحن هنا لمساعدتك على مدار الساعة.')
 
 @section('content')
 <section style="padding:7rem 1rem 3rem;background:linear-gradient(135deg,#fdf2f8,#f8fafc);text-align:center;border-bottom:1px solid #f1f5f9;">
@@ -40,7 +40,7 @@
                 <div style="margin-bottom:1rem;">
                     <select name="subject" style="width:100%;padding:.75rem 1rem;border:1px solid #e2e8f0;border-radius:.75rem;font-size:.9rem;color:#0f172a;outline:none;background:#fff;transition:border-color .2s;" onfocus="this.style.borderColor='#ec4899'" onblur="this.style.borderColor='#e2e8f0'">
                         <option value="">اختر الموضوع</option>
-                        <option value="استفسار عن منتج" {{ old('subject') == 'استفسار عن منتج' ? 'selected' : '' }}>استفسار عن منتج</option>
+                        <option value="استفسار عن خدمة" {{ old('subject') == 'استفسار عن خدمة' ? 'selected' : '' }}>استفسار عن خدمة</option>
                         <option value="طلب شراء B2B" {{ old('subject') == 'طلب شراء B2B' ? 'selected' : '' }}>طلب شراء B2B</option>
                         <option value="شكوى أو اقتراح" {{ old('subject') == 'شكوى أو اقتراح' ? 'selected' : '' }}>شكوى أو اقتراح</option>
                         <option value="أخرى" {{ old('subject') == 'أخرى' ? 'selected' : '' }}>أخرى</option>
@@ -59,7 +59,7 @@
         <div>
             <div style="display:flex;flex-direction:column;gap:.85rem;">
                 @foreach([
-                    ['fas fa-map-marker-alt','#ec4899','العنوان',$siteSettings['site_address'] ?? '📍جنين - مُقابل مخبز و مطعم السينما'],
+                    ['fas fa-map-marker-alt','#ec4899','العنوان',$siteSettings['site_address'] ?? '📍وادي سلامة- مُقابل مخبز و مطعم السينما'],
                     ['fas fa-phone-alt','#0891b2','الهاتف وواتساب',($siteSettings['site_phone'] ?? '+970 59 123 4567').'<br>'.($siteSettings['site_whatsapp'] ?? '+970 59 123 4567')],
                     ['fas fa-envelope','#d4af37','البريد الإلكتروني',$siteSettings['site_email'] ?? 'info@jenincare.com'],
                     ['fas fa-clock','#16a34a','ساعات العمل','السبت - الخميس: 9ص - 9م<br>الجمعة: مغلق'],

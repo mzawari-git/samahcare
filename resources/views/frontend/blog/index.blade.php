@@ -1,7 +1,7 @@
 @extends('frontend.layouts.editorial.app')
 
-@section('title', 'مدونة جنين للتجميل | مقالات ونصائح للعناية الشاملة')
-@section('meta_description', 'مدونة جنين للتجميل - مقالات عن المنتجات، نصائح للعناية الشاملة، أحدث أخبار التجميل، وأدلة استخدام متكاملة.')
+@section('title', 'مدونة سماح كير  | مقالات ونصائح للعناية الشاملة')
+@section('meta_description', 'مدونة سماح كير  - مقالات ونصائح للعناية الشاملة، أحدث أخبار التجميل، وأدلة استخدام متكاملة.')
 
 @php
 function readingTime($content) {
@@ -19,15 +19,15 @@ function readingTime($content) {
         <div style="position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent-500,var(--brand-500)) 8%,transparent) 0%,transparent 70%);pointer-events:none;"></div>
         <div style="max-width:720px;margin:0 auto;position:relative;z-index:1;">
             <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1.25rem;border-radius:9999px;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);background:color-mix(in srgb,var(--brand-500) 6%,var(--surface));margin-bottom:1.75rem;">
-                <span style="font-size:.7rem;font-weight:800;color:var(--brand-500);letter-spacing:.1em;">مدونة جنين للتجميل</span>
+                <span style="font-size:.7rem;font-weight:800;color:var(--brand-500);letter-spacing:.1em;">مدونة سماح كير </span>
             </div>
             <h1 style="font-size:clamp(2rem,5vw,3.25rem);font-weight:900;color:var(--ink);line-height:1.15;margin-bottom:1rem;">جمالكِ يبدأ من <span style="color:var(--brand-500);">المعلومة الصحيحة</span></h1>
-            <p style="color:var(--ink-muted);font-size:1.05rem;line-height:1.8;max-width:580px;margin:0 auto 2rem;">اكتشفي أحدث المقالات والنصائح في عالم التجميل والعناية. كل ما تحتاجين معرفته عن المنتجات، التركيبات، وطرق العناية المثلى.</p>
+            <p style="color:var(--ink-muted);font-size:1.05rem;line-height:1.8;max-width:580px;margin:0 auto 2rem;">اكتشفي أحدث المقالات والنصائح في عالم التجميل والعناية. كل ما تحتاجين معرفته عن الخدمات، وطرق العناية المثلى.</p>
 
             {{-- Category filter pills --}}
             <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;">
                 <a href="{{ route('blog.index') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;background:var(--brand-500);color:#fff;border:none;transition:all .2s;">الكل</a>
-                <a href="{{ route('blog.category', 'articles') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);color:var(--ink);background:transparent;transition:all .2s;">مقالات عن المنتجات</a>
+                <a href="{{ route('blog.category', 'articles') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);color:var(--ink);background:transparent;transition:all .2s;">مقالات عن الخدمات</a>
                 <a href="{{ route('blog.category', 'guides') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);color:var(--ink);background:transparent;transition:all .2s;">أدلة الاستخدام</a>
                 <a href="{{ route('blog.category', 'tips') }}" style="padding:.4rem 1.1rem;border-radius:9999px;font-size:.75rem;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--brand-500) 25%,transparent);color:var(--ink);background:transparent;transition:all .2s;">نصائح للعناية</a>
             </div>
@@ -82,8 +82,8 @@ function readingTime($content) {
                         <i class="ph ph-flask" style="color:var(--brand-500);"></i>
                     </span>
                     <div>
-                        <h2 style="font-size:1.3rem;font-weight:900;color:var(--ink);margin:0;">مقالات عن المنتجات</h2>
-                        <p style="color:var(--ink-muted);font-size:.75rem;margin:.25rem 0 0;">تعرفي على كل ما يخص منتجات التجميل والعناية</p>
+                        <h2 style="font-size:1.3rem;font-weight:900;color:var(--ink);margin:0;">مقالات عن الخدمات</h2>
+                        <p style="color:var(--ink-muted);font-size:.75rem;margin:.25rem 0 0;">تعرفي على كل ما يخص خدمات التجميل والعناية</p>
                     </div>
                 </div>
                 <a href="{{ route('blog.category', 'articles') }}" style="color:var(--brand-500);font-size:.78rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;transition:gap .2s;">عرض الكل <span style="font-size:.85rem;">&larr;</span></a>
@@ -151,7 +151,7 @@ function readingTime($content) {
                     </span>
                     <div>
                         <h2 style="font-size:1.3rem;font-weight:900;color:var(--ink);margin:0;">أدلة الاستخدام</h2>
-                        <p style="color:var(--ink-muted);font-size:.75rem;margin:.25rem 0 0;">أدلة شاملة ومقارنات بين الأجهزة والمنتجات</p>
+                        <p style="color:var(--ink-muted);font-size:.75rem;margin:.25rem 0 0;">أدلة شاملة ومقارنات بين الخدمات</p>
                     </div>
                 </div>
                 <a href="{{ route('blog.category', 'guides') }}" style="color:var(--green-500,#16a34a);font-size:.78rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem;transition:gap .2s;">عرض الكل <span style="font-size:.85rem;">&larr;</span></a>

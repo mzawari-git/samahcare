@@ -22,6 +22,27 @@ class Kernel extends ConsoleKernel
             ->onOneServer()
             ->runInBackground()
             ->appendOutputTo(storage_path('logs/ads-sync.log'));
+
+        $schedule->command('ads:health-check')
+            ->everyFifteenMinutes()
+            ->withoutOverlapping(5)
+            ->onOneServer()
+            ->runInBackground()
+            ->appendOutputTo(storage_path('logs/ads-health.log'));
+
+        $schedule->command('ads:spend-monitor')
+            ->everyThirtyMinutes()
+            ->withoutOverlapping(10)
+            ->onOneServer()
+            ->runInBackground()
+            ->appendOutputTo(storage_path('logs/ads-spend.log'));
+
+        $schedule->command('ads:health-check --platform=all')
+            ->dailyAt('06:00')
+            ->withoutOverlapping(15)
+            ->onOneServer()
+            ->runInBackground()
+            ->appendOutputTo(storage_path('logs/ads-health.log'));
     }
 
     protected function commands(): void

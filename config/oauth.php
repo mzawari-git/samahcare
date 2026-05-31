@@ -45,7 +45,7 @@ return [
         'scopes' => ['user.info.basic', 'ad.management'],
         'auth_url' => 'https://business-api.tiktok.com/open_api/v1.3/oauth/authorize',
         'token_url' => 'https://business-api.tiktok.com/open_api/v1.3/oauth/access_token',
-        'account_service' => \App\Services\AdvertisingTrackingService::class,
+        //'account_service' => \App\Services\AdvertisingTrackingService::class,
     ],
 
     /*
@@ -139,20 +139,5 @@ return [
         'account_service' => \App\Services\LinkedInService::class,
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Shopify (OAuth access via shop install)
-    |--------------------------------------------------------------------------
-    */
-    'shopify' => [
-        'name' => 'Shopify',
-        'icon' => 'fab fa-shopify',
-        'color' => '#96BF48',
-        'client_id' => env('SHOPIFY_API_KEY', ''),
-        'client_secret' => env('SHOPIFY_API_SECRET', ''),
-        'redirect' => '/admin/oauth/shopify/callback',
-        'scopes' => ['read_orders', 'read_products', 'read_customers'],
-        'install_mode' => true,
-        'account_service' => \App\Services\ShopifyService::class,
-    ],
+
 ];

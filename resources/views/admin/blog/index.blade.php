@@ -119,7 +119,7 @@
         </div>
         <select class="filter-select" id="blogCategoryFilter" onchange="filterPosts()">
             <option value="">جميع الأقسام</option>
-            <option value="articles">مقالات عن المنتجات</option>
+            <option value="articles">مقالات عن الخدمات</option>
             <option value="tips">نصائح للعناية</option>
             <option value="news">أخبار التجميل</option>
             <option value="guides">أدلة الاستخدام</option>

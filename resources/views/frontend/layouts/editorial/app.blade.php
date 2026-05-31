@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'شركة جنين للتجميل - المنصة الرائدة لتقنيات العناية بالبشرة'))">
-    <meta name="keywords" content="@yield('meta_keywords', 'شركة جنين للتجميل, تجميل, عناية, بشرة')">
+    <meta name="description" content="@yield('meta_description', ($siteSettings['site_description'] ?? 'سماح كير  - المنصة الرائدة لتقنيات العناية بالبشرة'))">
+    <meta name="keywords" content="@yield('meta_keywords', 'سماح كير , تجميل, عناية, بشرة')">
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))">
+    <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير '))">
     <meta property="og:description" content="@yield('meta_description', $siteSettings['site_description'] ?? '')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))">
+    <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير '))">
     <meta name="twitter:description" content="@yield('meta_description', '')">
     <meta name="twitter:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
-    <title>@yield('title', ($siteSettings['site_name'] ?? 'شركة جنين للتجميل'))</title>
+    <title>@yield('title', ($siteSettings['site_name'] ?? 'سماح كير '))</title>
 
     @if(!empty($siteSettings['site_favicon_url']))
         <link rel="icon" href="{{ $siteSettings['site_favicon_url'] }}">
@@ -39,9 +39,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ asset('css/themes/' . $activeTheme . '.css') }}">
     <link rel="stylesheet" href="{{ asset('css/light-mode.css') }}">
-    <script>(function(){var m=localStorage.getItem('شركة جنين للتجميل_mode');if(!m){var c=document.cookie.match('شركة جنين للتجميل_mode=([^;]+)');m=c?c[1]:null;}if(m==='dark'){document.documentElement.removeAttribute('data-theme-mode');}else{document.documentElement.setAttribute('data-theme-mode','light');}})();</script>
-
-    @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
+    <script>(function(){var m=localStorage.getItem('سماح كير _mode');if(!m){var c=document.cookie.match('سماح كير _mode=([^;]+)');m=c?c[1]:null;}if(m==='dark'){document.documentElement.removeAttribute('data-theme-mode');}else{document.documentElement.setAttribute('data-theme-mode','light');}})();</script>
 
     <style>
         /* ── Editorial: Clean Minimal Typography-Focused ── */
@@ -86,11 +84,32 @@
         @media (max-width:768px) { .floating-social-v3 { left: 10px; bottom: 100px; top: auto; transform: none; } .floating-social-v3 a { width: 38px; height: 38px; font-size: 1rem; } }
     </style>
     @stack('styles')
+
+    @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
+
     <script>if('serviceWorker' in navigator&&window.location.hostname!=='localhost'){navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister()})}).then(function(){navigator.serviceWorker.register('{{ asset('sw.js') }}').catch(function(){})})}</script>
     <script>window.basePath="{{ rtrim(url('/'), '/') }}";</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2073558763203111');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body class="antialiased" style="margin:0;padding:0;background-color:var(--surface);color:var(--ink);">
     <a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
+
     @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelNoscript() !!} @endif
 
     @include('frontend.layouts.editorial.header')
@@ -103,8 +122,10 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="{{ asset('js/behavioral-analysis.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelScript() !!} @endif
+
     @stack('scripts')
+
+    @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelScript() !!} @endif
 
     {{-- QuickView Modal --}}
     <div class="modal fade" id="quickViewModal" tabindex="-1">

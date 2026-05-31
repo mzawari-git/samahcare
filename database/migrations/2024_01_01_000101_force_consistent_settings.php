@@ -14,10 +14,10 @@ return new class extends Migration
     {
         $settings = [
             'site_theme' => 'rose',
-            'site_name' => 'شركة جنين للتجميل',
-            'site_name_ar' => 'شركة جنين للتجميل',
+            'site_name' => 'سماح كير ',
+            'site_name_ar' => 'سماح كير ',
             'site_name_en' => 'Jenin Care',
-            'site_description' => 'متجر الكتروني متخصص في منتجات التجميل والعناية بالبشرة',
+            'site_description' => 'منصة الحجز والخدمات الجمالية الأولى في فلسطين',
             'site_keywords' => 'تجميل, عناية بالبشرة, مكياج, شامبو, صالون',
         ];
 

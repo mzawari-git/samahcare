@@ -15,12 +15,6 @@
 .chart-card { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; }
 .chart-header { padding: 20px 24px; border-bottom: 1px solid #f1f5f9; font-weight: 700; }
 .table-orders th { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gray-500); font-weight: 600; }
-.product-rank { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .85rem; }
-.product-rank.top { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
-.segment-badge { padding: 6px 14px; border-radius: 20px; font-size: .8rem; font-weight: 600; }
-.segment-badge.vip { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
-.segment-badge.returning { background: #dbeafe; color: #1e40af; }
-.segment-badge.new { background: #dcfce7; color: #16a34a; }
 .filter-btn { padding: 8px 20px; border-radius: 10px; font-size: .875rem; font-weight: 500; border: 1px solid #e2e8f0; background: #fff; color: var(--gray-600); transition: all .2s; }
 .filter-btn:hover, .filter-btn.active { background: var(--pink-600); color: #fff; border-color: var(--pink-600); }
 </style>
@@ -28,12 +22,18 @@
 
 @section('content')
 
+@php
+    $vipCount = $customerAnalytics['topCustomers']->filter(fn($c) => $c->total_spent >= 1000)->count();
+    $returningCount = $customerAnalytics['topCustomers']->filter(fn($c) => $c->booking_count > 1 && $c->total_spent < 1000)->count();
+    $newCount = max(1, $customerAnalytics['newCustomers'] - $vipCount - $returningCount);
+@endphp
+
 {{-- Header --}}
 <div class="analytics-header">
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
         <div>
-            <h2 class="mb-1" style="font-weight:800;"><i class="fas fa-chart-line me-2"></i> تحليلات المتجر</h2>
-            <p class="mb-0 opacity-75">تحليل شامل لأداء المتجر وسلوك العملاء</p>
+            <h2 class="mb-1" style="font-weight:800;"><i class="fas fa-chart-line me-2"></i> تحليلات الحجوزات</h2>
+            <p class="mb-0 opacity-75">تحليل شامل لأداء الحجوزات وسلوك العملاء</p>
         </div>
         <div class="d-flex gap-2">
             <a href="{{ route('admin.analytics.export', ['period' => $period]) }}" class="btn btn-light">
@@ -41,7 +41,7 @@
             </a>
         </div>
     </div>
-    
+
     {{-- Period Filter --}}
     <div class="mt-4 d-flex gap-2 flex-wrap">
         @php $periods = [7 => '7 أيام', 30 => '30 يوم', 90 => '3 أشهر', 365 => 'سنة']; @endphp
@@ -68,30 +68,30 @@
     </div>
     <div class="col-xl-3 col-md-6">
         <div class="metric-card">
-            <div class="metric-value" style="color: #0284c7;">{{ number_format($overview['orders']) }}</div>
-            <div class="metric-label">عدد الطلبات</div>
-            <span class="metric-change {{ $overview['ordersGrowth'] >= 0 ? 'positive' : 'negative' }}">
-                <i class="fas fa-arrow-{{ $overview['ordersGrowth'] >= 0 ? 'up' : 'down' }}"></i>
-                {{ abs($overview['ordersGrowth']) }}%
+            <div class="metric-value" style="color: #0284c7;">{{ number_format($overview['bookings']) }}</div>
+            <div class="metric-label">عدد الحجوزات</div>
+            <span class="metric-change {{ $overview['bookingsGrowth'] >= 0 ? 'positive' : 'negative' }}">
+                <i class="fas fa-arrow-{{ $overview['bookingsGrowth'] >= 0 ? 'up' : 'down' }}"></i>
+                {{ abs($overview['bookingsGrowth']) }}%
             </span>
         </div>
     </div>
     <div class="col-xl-3 col-md-6">
         <div class="metric-card">
-            <div class="metric-value" style="color: #16a34a;">{{ number_format($overview['avgOrderValue']) }} ₪</div>
-            <div class="metric-label">متوسط قيمة الطلب</div>
-            <span class="metric-change {{ $overview['avgOrderValueGrowth'] >= 0 ? 'positive' : 'negative' }}">
-                <i class="fas fa-arrow-{{ $overview['avgOrderValueGrowth'] >= 0 ? 'up' : 'down' }}"></i>
-                {{ abs($overview['avgOrderValueGrowth']) }}%
+            <div class="metric-value" style="color: #16a34a;">{{ number_format($overview['avgBookingValue']) }} ₪</div>
+            <div class="metric-label">متوسط قيمة الحجز</div>
+            <span class="metric-change {{ $overview['avgBookingValueGrowth'] >= 0 ? 'positive' : 'negative' }}">
+                <i class="fas fa-arrow-{{ $overview['avgBookingValueGrowth'] >= 0 ? 'up' : 'down' }}"></i>
+                {{ abs($overview['avgBookingValueGrowth']) }}%
             </span>
         </div>
     </div>
     <div class="col-xl-3 col-md-6">
         <div class="metric-card">
-            <div class="metric-value" style="color: #8b5cf6;">{{ $overview['conversionRate'] }}%</div>
-            <div class="metric-label">معدل التحويل</div>
+            <div class="metric-value" style="color: #8b5cf6;">{{ $overview['customers'] }}</div>
+            <div class="metric-label">عملاء جدد</div>
             <span class="metric-change positive">
-                <i class="fas fa-users"></i> {{ $overview['customers'] }} جديد
+                <i class="fas fa-users"></i> خلال الفترة
             </span>
         </div>
     </div>
@@ -105,7 +105,7 @@
                 <span><i class="fas fa-chart-area me-2" style="color:var(--pink-600);"></i> الأداء عبر الوقت</span>
                 <div class="btn-group btn-group-sm">
                     <button class="btn btn-outline-secondary active" onclick="toggleMainChart('revenue')">الإيرادات</button>
-                    <button class="btn btn-outline-secondary" onclick="toggleMainChart('orders')">الطلبات</button>
+                    <button class="btn btn-outline-secondary" onclick="toggleMainChart('bookings')">الحجوزات</button>
                 </div>
             </div>
             <div class="p-4">
@@ -117,17 +117,25 @@
     </div>
     <div class="col-lg-4">
         <div class="chart-card">
-            <div class="chart-header"><i class="fas fa-clock me-2" style="color:var(--pink-600);"></i> توزيع الطلبات بالساعة</div>
+            <div class="chart-header"><i class="fas fa-crown me-2" style="color:var(--pink-600);"></i> أفضل الخدمات</div>
             <div class="p-4">
-                <div style="height: 320px;">
-                    <canvas id="hourlyChart"></canvas>
+                @forelse($bookingAnalytics['topServices'] as $service)
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <span class="fw-bold">{{ $service->name_ar }}</span>
+                    <div>
+                        <span class="badge bg-light text-dark me-2">{{ $service->total_bookings }} حجز</span>
+                        <span class="text-muted small">{{ number_format($service->total_revenue) }} ₪</span>
+                    </div>
                 </div>
+                @empty
+                <div class="text-center text-muted py-4">لا توجد بيانات</div>
+                @endforelse
             </div>
         </div>
     </div>
 </div>
 
-{{-- Customer & Product Analytics --}}
+{{-- Customer & Service Analytics --}}
 <div class="row g-3 mb-4">
     {{-- Customer Segments --}}
     <div class="col-lg-4">
@@ -138,32 +146,33 @@
                     <canvas id="segmentsChart"></canvas>
                 </div>
                 <div class="mt-3">
+
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <span class="d-flex align-items-center gap-2">
-                            <span class="segment-badge vip">VIP</span>
+                            <span class="segment-badge" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;">VIP</span>
                             <small>أكثر من 1000₪</small>
                         </span>
-                        <strong>{{ $customerAnalytics['segments']['vip'] }}</strong>
+                        <strong>{{ $vipCount }}</strong>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <span class="d-flex align-items-center gap-2">
-                            <span class="segment-badge returning">متكرر</span>
-                            <small>أكثر من طلب واحد</small>
+                            <span class="segment-badge" style="background:#dbeafe;color:#1e40af;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;">متكرر</span>
+                            <small>أكثر من حجز واحد</small>
                         </span>
-                        <strong>{{ $customerAnalytics['segments']['returning'] }}</strong>
+                        <strong>{{ $returningCount }}</strong>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="d-flex align-items-center gap-2">
-                            <span class="segment-badge new">جديد</span>
+                            <span class="segment-badge" style="background:#dcfce7;color:#16a34a;padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;">جديد</span>
                             <small>عملاء جدد</small>
                         </span>
-                        <strong>{{ $customerAnalytics['segments']['new'] }}</strong>
+                        <strong>{{ $newCount }}</strong>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     {{-- Top Customers --}}
     <div class="col-lg-8">
         <div class="chart-card h-100">
@@ -176,9 +185,9 @@
                     <thead>
                         <tr>
                             <th>العميل</th>
-                            <th>الطلبات</th>
+                            <th>الحجوزات</th>
                             <th>إجمالي المشتريات</th>
-                            <th>آخر طلب</th>
+                            <th>آخر حجز</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -187,17 +196,17 @@
                             <td>
                                 <div class="d-flex align-items-center gap-2">
                                     <div class="avatar-sm" style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--pink-500),var(--pink-600));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">
-                                        {{ substr($customer->name, 0, 1) }}
+                                        {{ substr($customer->customer_name, 0, 1) }}
                                     </div>
                                     <div>
-                                        <div class="fw-bold">{{ $customer->name }}</div>
-                                        <small class="text-muted">{{ $customer->email }}</small>
+                                        <div class="fw-bold">{{ $customer->customer_name }}</div>
+                                        <small class="text-muted">{{ $customer->customer_email }}</small>
                                     </div>
                                 </div>
                             </td>
-                            <td><span class="badge bg-light text-dark">{{ $customer->order_count }}</span></td>
+                            <td><span class="badge bg-light text-dark">{{ $customer->booking_count }}</span></td>
                             <td class="fw-bold" style="color:var(--pink-600);">{{ number_format($customer->total_spent) }} ₪</td>
-                            <td class="text-muted small">{{ $customer->last_order ? Carbon\Carbon::parse($customer->last_order)->diffForHumans() : '-' }}</td>
+                            <td class="text-muted small">{{ $customer->last_booking ? \Carbon\Carbon::parse($customer->last_booking)->diffForHumans() : '-' }}</td>
                         </tr>
                         @empty
                         <tr><td colspan="4" class="text-center py-4 text-muted">لا توجد بيانات</td></tr>
@@ -209,120 +218,65 @@
     </div>
 </div>
 
-{{-- Products & Categories --}}
+{{-- Services & Booking Details --}}
 <div class="row g-3 mb-4">
-    {{-- Top Products --}}
+    {{-- Top Services --}}
     <div class="col-lg-8">
         <div class="chart-card">
             <div class="chart-header d-flex justify-content-between">
-                <span><i class="fas fa-box-open me-2" style="color:var(--pink-600);"></i> أكثر المنتجات مبيعاً</span>
+                <span><i class="fas fa-concierge-bell me-2" style="color:var(--pink-600);"></i> أكثر الخدمات حجزاً</span>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
                             <th style="width:50px;">#</th>
-                            <th>المنتج</th>
-                            <th>المبيعات</th>
+                            <th>الخدمة</th>
+                            <th>الحجوزات</th>
                             <th>الإيرادات</th>
-                            <th>الطلبات</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($productAnalytics['topProducts'] as $index => $product)
+                        @forelse($bookingAnalytics['topServices'] as $index => $service)
                         <tr>
                             <td>
-                                <div class="product-rank {{ $index < 3 ? 'top' : 'bg-light text-muted' }}">
+                                <div class="product-rank" style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;{{ $index < 3 ? 'background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;' : 'background:#f1f5f9;color:#64748b;' }}">
                                     {{ $index + 1 }}
                                 </div>
                             </td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    @if($product->main_image)
-                                    <img src="{{ url('files/products/' . $product->main_image) }}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
-                                    @else
-                                    <div style="width:40px;height:40px;border-radius:8px;background:var(--pink-50);display:flex;align-items:center;justify-content:center;"><i class="fas fa-box text-muted"></i></div>
-                                    @endif
-                                    <span class="fw-bold">{{ $product->name_ar }}</span>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-success">{{ $product->total_sold }} وحدة</span></td>
-                            <td class="fw-bold">{{ number_format($product->total_revenue) }} ₪</td>
-                            <td>{{ $product->order_count }}</td>
+                            <td><span class="fw-bold">{{ $service->name_ar }}</span></td>
+                            <td><span class="badge bg-success">{{ $service->total_bookings }} حجز</span></td>
+                            <td class="fw-bold">{{ number_format($service->total_revenue) }} ₪</td>
                         </tr>
                         @empty
-                        <tr><td colspan="5" class="text-center py-4 text-muted">لا توجد بيانات</td></tr>
+                        <tr><td colspan="4" class="text-center py-4 text-muted">لا توجد بيانات</td></tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
-    {{-- Category Sales --}}
+
+    {{-- Summary Stats --}}
     <div class="col-lg-4">
         <div class="chart-card">
-            <div class="chart-header"><i class="fas fa-tags me-2" style="color:var(--pink-600);"></i> مبيعات الفئات</div>
+            <div class="chart-header"><i class="fas fa-info-circle me-2" style="color:var(--pink-600);"></i> ملخص الفترة</div>
             <div class="p-4">
-                <div style="height: 300px;">
-                    <canvas id="categoriesChart"></canvas>
+                <div class="mb-4">
+                    <small class="text-muted d-block">إجمالي الحجوزات</small>
+                    <span class="fw-bold" style="font-size:1.5rem;">{{ number_format($bookingAnalytics['totalBookings']) }}</span>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- Geographic & Traffic --}}
-<div class="row g-3">
-    {{-- Cities --}}
-    <div class="col-lg-6">
-        <div class="chart-card">
-            <div class="chart-header"><i class="fas fa-map-marker-alt me-2" style="color:var(--pink-600);"></i> توزيع جغرافي</div>
-            <div class="p-4">
-                @forelse($customerAnalytics['cityDistribution'] as $city)
-                @php
-                    $maxOrders = $customerAnalytics['cityDistribution']->max('order_count');
-                    $percent = $maxOrders > 0 ? ($city->order_count / $maxOrders) * 100 : 0;
-                @endphp
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between align-items-center mb-1">
-                        <span class="fw-bold">{{ $city->city }}</span>
-                        <div class="text-muted small">
-                            <span class="me-2">{{ $city->order_count }} طلب</span>
-                            <span>{{ number_format($city->total_revenue) }} ₪</span>
-                        </div>
-                    </div>
-                    <div class="progress" style="height:8px;border-radius:4px;">
-                        <div class="progress-bar" style="width: {{ $percent }}%;background:linear-gradient(90deg,var(--pink-500),var(--pink-600));border-radius:4px;"></div>
-                    </div>
+                <div class="mb-4">
+                    <small class="text-muted d-block">إجمالي الإيرادات</small>
+                    <span class="fw-bold" style="font-size:1.5rem;color:var(--pink-600);">{{ number_format($bookingAnalytics['totalBookingRevenue']) }} ₪</span>
                 </div>
-                @empty
-                <div class="text-center text-muted py-4">لا توجد بيانات</div>
-                @endforelse
-            </div>
-        </div>
-    </div>
-    
-    {{-- Traffic Sources --}}
-    <div class="col-lg-6">
-        <div class="chart-card">
-            <div class="chart-header"><i class="fas fa-globe me-2" style="color:var(--pink-600);"></i> مصادر الزيارات</div>
-            <div class="p-4">
-                <div style="height: 250px;">
-                    <canvas id="sourcesChart"></canvas>
+                <div class="mb-4">
+                    <small class="text-muted d-block">عملاء جدد</small>
+                    <span class="fw-bold" style="font-size:1.5rem;color:#16a34a;">{{ number_format($customerAnalytics['newCustomers']) }}</span>
                 </div>
-                <div class="mt-3">
-                    @forelse($trafficSources['sources'] as $source)
-                    <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                        <span class="text-capitalize">{{ $source->source }}</span>
-                        <div>
-                            <span class="badge bg-light text-dark me-2">{{ $source->count }} طلب</span>
-                            <span class="text-muted small">{{ number_format($source->revenue) }} ₪</span>
-                        </div>
-                    </div>
-                    @empty
-                    <div class="text-center text-muted py-4">لا توجد بيانات</div>
-                    @endforelse
+                <div>
+                    <small class="text-muted d-block">عملاء نشطون</small>
+                    <span class="fw-bold" style="font-size:1.5rem;color:#0284c7;">{{ number_format($customerAnalytics['activeCustomers']) }}</span>
                 </div>
             </div>
         </div>
@@ -339,21 +293,26 @@ Chart.defaults.color = '#64748b';
 
 // Main Trend Chart
 const trendCtx = document.getElementById('mainTrendChart').getContext('2d');
+const dailyData = @json($bookingAnalytics['dailyBookings']);
+const labels = dailyData.map(d => d.date);
+const revenueData = dailyData.map(d => d.revenue);
+const bookingsData = dailyData.map(d => d.count);
+
 const trendChart = new Chart(trendCtx, {
     type: 'line',
     data: {
-        labels: {!! json_encode($salesData['timeline']->pluck('date')) !!},
+        labels: labels,
         datasets: [{
             label: 'الإيرادات',
-            data: {!! json_encode($salesData['timeline']->pluck('revenue')) !!},
+            data: revenueData,
             borderColor: '#db2777',
             backgroundColor: 'rgba(219, 39, 119, 0.1)',
             fill: true,
             tension: 0.4,
             yAxisID: 'y'
         }, {
-            label: 'الطلبات',
-            data: {!! json_encode($salesData['timeline']->pluck('orders')) !!},
+            label: 'الحجوزات',
+            data: bookingsData,
             borderColor: '#0284c7',
             backgroundColor: 'rgba(2, 132, 199, 0.1)',
             fill: true,
@@ -377,37 +336,11 @@ const trendChart = new Chart(trendCtx, {
 
 function toggleMainChart(type) {
     trendChart.data.datasets[0].hidden = type !== 'revenue';
-    trendChart.data.datasets[1].hidden = type !== 'orders';
+    trendChart.data.datasets[1].hidden = type !== 'bookings';
     trendChart.update();
     event.target.parentElement.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
 }
-
-// Hourly Distribution
-const hourlyCtx = document.getElementById('hourlyChart').getContext('2d');
-const hours = Array.from({length: 24}, (_, i) => i + ':00');
-const hourlyData = {!! json_encode($salesData['hourly']) !!};
-new Chart(hourlyCtx, {
-    type: 'bar',
-    data: {
-        labels: hours,
-        datasets: [{
-            label: 'الطلبات',
-            data: hours.map((_, i) => hourlyData[i] || 0),
-            backgroundColor: 'rgba(219, 39, 119, 0.7)',
-            borderRadius: 4
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { grid: { display: false } },
-            y: { grid: { color: '#f1f5f9' } }
-        }
-    }
-});
 
 // Customer Segments
 const segmentsCtx = document.getElementById('segmentsChart').getContext('2d');
@@ -416,11 +349,7 @@ new Chart(segmentsCtx, {
     data: {
         labels: ['VIP', 'متكرر', 'جديد'],
         datasets: [{
-            data: [
-                {{ $customerAnalytics['segments']['vip'] }},
-                {{ $customerAnalytics['segments']['returning'] }},
-                {{ $customerAnalytics['segments']['new'] }}
-            ],
+            data: [{{ $vipCount }}, {{ $returningCount }}, {{ max(1, $newCount) }}],
             backgroundColor: ['#f59e0b', '#3b82f6', '#10b981'],
             borderWidth: 0
         }]
@@ -432,52 +361,6 @@ new Chart(segmentsCtx, {
             legend: { position: 'bottom', rtl: true, labels: { usePointStyle: true, padding: 15 } }
         },
         cutout: '60%'
-    }
-});
-
-// Categories Chart
-const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
-new Chart(categoriesCtx, {
-    type: 'bar',
-    data: {
-        labels: {!! json_encode($productAnalytics['categorySales']->pluck('category')) !!},
-        datasets: [{
-            label: 'المبيعات',
-            data: {!! json_encode($productAnalytics['categorySales']->pluck('total_sold')) !!},
-            backgroundColor: 'rgba(219, 39, 119, 0.8)',
-            borderRadius: 6
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: {
-            x: { grid: { color: '#f1f5f9' } },
-            y: { grid: { display: false } }
-        }
-    }
-});
-
-// Traffic Sources
-const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
-new Chart(sourcesCtx, {
-    type: 'pie',
-    data: {
-        labels: {!! json_encode($trafficSources['sources']->pluck('source')) !!},
-        datasets: [{
-            data: {!! json_encode($trafficSources['sources']->pluck('count')) !!},
-            backgroundColor: ['#db2777', '#0284c7', '#10b981', '#f59e0b', '#8b5cf6', '#64748b'],
-            borderWidth: 0
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'right', rtl: true, labels: { boxWidth: 12, padding: 10 } }
-        }
     }
 });
 </script>

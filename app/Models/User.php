@@ -27,31 +27,6 @@ class User extends Authenticatable
         'is_active' => 'boolean',
     ];
 
-    public function addresses(): HasMany
-    {
-        return $this->hasMany(UserAddress::class);
-    }
-
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function cart()
-    {
-        return $this->hasOne(Cart::class)->where('is_active', true);
-    }
-
-    public function wishlists(): HasMany
-    {
-        return $this->hasMany(Wishlist::class);
-    }
-
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(ProductReview::class);
-    }
-
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
@@ -70,10 +45,5 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
-    }
-
-    public function isB2B(): bool
-    {
-        return $this->role === 'b2b';
     }
 }

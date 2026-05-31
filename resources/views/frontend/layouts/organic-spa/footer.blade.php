@@ -5,8 +5,8 @@
 {{-- Newsletter --}}
 <section class="py-16 relative overflow-hidden" style="border-top:2px solid var(--glass-border);">
     <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-        <h2 class="text-2xl md:text-3xl font-black mb-3" style="color:var(--brand-500);">انضمي إلى حديقة {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}</h2>
-        <p class="text-ink-dim mb-8 max-w-lg mx-auto text-sm">احصلي على خصم 10% على طلبك الأول، وكوني أول من يعرف عن العروض الحصرية والمنتجات الجديدة.</p>
+        <h2 class="text-2xl md:text-3xl font-black mb-3" style="color:var(--brand-500);">انضمي إلى حديقة {{ $siteSettings['site_name'] ?? 'سماح كير ' }}</h2>
+        <p class="text-ink-dim mb-8 max-w-lg mx-auto text-sm">احصلي على خصم 10% على حجزك الأول، وكوني أول من يعرف عن العروض الحصرية والخدمات الجديدة.</p>
         <form class="max-w-md mx-auto relative flex items-center" id="newsletterFormV3">
             @csrf
             <input type="email" name="email" placeholder="بريدك الإلكتروني" required class="w-full bg-white/5 border border-white/10 text-white py-3.5 px-6 pl-28 rounded-full focus:outline-none focus:border-brand-500 transition-all text-sm placeholder:text-white/30">
@@ -23,7 +23,7 @@
             <div class="flex flex-col items-center text-center p-5 rounded-2xl border" style="border-color:var(--glass-border);background:var(--glass-bg);">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center mb-3" style="background:var(--brand-500);"><i class="fa-solid fa-shield-check text-xl text-white"></i></div>
                 <h3 class="font-bold text-white text-sm mb-1">أصلي 100%</h3>
-                <p class="text-ink-dim text-xs">منتجات أصلية ومستوردة</p>
+                <p class="text-ink-dim text-xs">خدمات احترافية مضمونة</p>
             </div>
             <div class="flex flex-col items-center text-center p-5 rounded-2xl border" style="border-color:var(--glass-border);background:var(--glass-bg);">
                 <div class="w-12 h-12 rounded-full flex items-center justify-center mb-3" style="background:var(--brand-600);"><i class="fa-solid fa-truck-fast text-xl text-white"></i></div>
@@ -53,9 +53,9 @@
             <div class="lg:col-span-4 text-right">
                 <div class="flex items-center gap-3 mb-5 justify-end">
                     @if(!empty($siteSettings['site_logo_url']))
-                        <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}" class="h-10 w-auto object-contain" style="max-height:40px;">
+                        <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'سماح كير ' }}" class="h-10 w-auto object-contain" style="max-height:40px;">
                     @else
-                        <span class="text-2xl font-extrabold text-white">{{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}<span style="color:var(--brand-500);">.</span></span>
+                        <span class="text-2xl font-extrabold text-white">{{ $siteSettings['site_name'] ?? 'سماح كير ' }}<span style="color:var(--brand-500);">.</span></span>
                     @endif
                 </div>
                 <p class="text-ink-dim text-sm leading-relaxed mb-6 max-w-sm ml-auto">
@@ -69,15 +69,14 @@
                 </div>
             </div>
 
-            {{-- Shop --}}
+            {{-- Services --}}
             <div class="lg:col-span-2 text-right">
-                <h5 class="font-bold text-white mb-5 text-sm">المتجر</h5>
+                <h5 class="font-bold text-white mb-5 text-sm">خدماتنا</h5>
                 <ul class="space-y-3 text-ink-dim text-sm">
-                    <li><a href="{{ route('shop') }}" class="hover:text-brand-500 transition-colors">جميع المنتجات</a></li>
-                    @php $ftCats = $headerCategories ?? \App\Models\Category::active()->withCount('products')->having('products_count','>',0)->orderBy('sort_order')->get(); @endphp
-                    @foreach($ftCats->take(5) as $fc)
-                        @php $al = preg_replace('/\s{2,}/',' ',trim(preg_replace('/[a-zA-Z&\-\(\)]+/','',$fc->name_ar))); $al = !empty($al)?$al:$fc->name_ar; @endphp
-                        <li><a href="{{ route('shop',['category'=>$fc->slug]) }}" class="hover:text-brand-500 transition-colors">{{ $al }}</a></li>
+                    <li><a href="{{ route('booking') }}" class="hover:text-brand-500 transition-colors">احجزي موعد</a></li>
+                    @php $ftSvc = $headerServices ?? \App\Models\Service::active()->ordered()->get(); @endphp
+                    @foreach($ftSvc->take(5) as $s)
+                        <li><a href="{{ route('booking') }}" class="hover:text-brand-500 transition-colors">{{ $s->name_ar }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -86,11 +85,9 @@
             <div class="lg:col-span-2 text-right">
                 <h5 class="font-bold text-white mb-5 text-sm">خدمة العملاء</h5>
                 <ul class="space-y-3 text-ink-dim text-sm">
-                    <li><a href="{{ route('shipping-policy') }}" class="hover:text-brand-500 transition-colors">الشحن والتوصيل</a></li>
-                    <li><a href="{{ route('return-policy') }}" class="hover:text-brand-500 transition-colors">سياسة الإرجاع</a></li>
                     <li><a href="{{ route('faq') }}" class="hover:text-brand-500 transition-colors">الأسئلة الشائعة</a></li>
-                    <li><a href="{{ route('terms') }}" class="hover:text-brand-500 transition-colors">الشروط والأحكام</a></li>
-                    <li><a href="{{ route('privacy') }}" class="hover:text-brand-500 transition-colors">حماية البيانات</a></li>
+                    <li><a href="{{ route('terms') }}" class="hover:text-brand-500 transition-colors" style="color:var(--brand-500);">الشروط والأحكام</a></li>
+                    <li><a href="{{ route('privacy') }}" class="hover:text-brand-500 transition-colors" style="color:var(--brand-500);">حماية البيانات</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-brand-500 transition-colors">تواصل معنا</a></li>
                 </ul>
             </div>
@@ -121,9 +118,9 @@
 
         {{-- Copyright --}}
         <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-dim" style="border-top:2px solid var(--glass-border);">
-            <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'شركة جنين للتجميل' }}. جميع الحقوق محفوظة.</p>
+            <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'سماح كير ' }}. جميع الحقوق محفوظة.</p>
             <div class="flex gap-2 text-xs">
-                <span class="px-3 py-1 rounded-full" style="border:1px solid var(--glass-border);">الدفع عند الاستلام</span>
+                <span class="px-3 py-1 rounded-full" style="border:1px solid var(--glass-border);">الدفع عند الحضور</span>
                 @if(($siteSettings['payment_jawwal_enabled'] ?? '0') == '1')<span class="px-3 py-1 rounded-full" style="color:var(--brand-500);border:1px solid var(--glass-border);">جوال باي</span>@endif
             </div>
         </div>

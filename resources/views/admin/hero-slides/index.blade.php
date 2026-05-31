@@ -18,7 +18,7 @@
                 <tr>
                     <th style="width:60px;">#</th>
                     <th>العنوان</th>
-                    <th>المنتج</th>
+                    <th>الخدمة</th>
                     <th>الرابط</th>
                     <th>الترتيب</th>
                     <th>الحالة</th>
@@ -43,8 +43,8 @@
                         </div>
                     </td>
                     <td>
-                        @if($slide->product)
-                        <span class="badge bg-light text-dark">{{ $slide->product->name_ar }}</span>
+                        @if($slide->service)
+                        <span class="badge bg-light text-dark">{{ $slide->service->name_ar }}</span>
                         @else
                         <span class="text-muted">-</span>
                         @endif

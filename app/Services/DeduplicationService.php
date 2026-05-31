@@ -16,8 +16,8 @@ class DeduplicationService
 
     public function __construct()
     {
-        $this->defaultWindow = (int) config('tracking.dedup_window', self::DEFAULT_WINDOW_SECONDS);
-        $this->windows = config('tracking.dedup_windows', [
+        $this->defaultWindow = self::DEFAULT_WINDOW_SECONDS;
+        $this->windows = [
             'ViewContent' => 60,
             'AddToCart' => 120,
             'InitiateCheckout' => 300,
@@ -26,7 +26,7 @@ class DeduplicationService
             'Subscribe' => 86400,
             'Search' => 30,
             'Contact' => 86400,
-        ]);
+        ];
     }
 
     public function isDuplicate(string $eventName, array $identifiers): bool

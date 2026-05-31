@@ -7,8 +7,6 @@ use App\Models\Affiliate;
 use App\Models\AffiliateClick;
 use App\Models\AffiliateCommission;
 use App\Models\AffiliatePayout;
-use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -147,18 +145,7 @@ class AffiliateController extends Controller
         }
         $affiliate = $this->autoCreateAffiliate();
 
-        $products = Product::active()->showInB2C()
-            ->with('category')
-            ->latest()
-            ->limit(30)
-            ->get();
-
-        $categories = Category::active()
-            ->withCount(['products' => fn($q) => $q->active()->showInB2C()])
-            ->having('products_count', '>', 0)
-            ->get();
-
-        return view('frontend.affiliate.tools', compact('affiliate', 'products', 'categories'));
+        return view('frontend.affiliate.tools', compact('affiliate'));
     }
 
     private function autoCreateAffiliate(): Affiliate

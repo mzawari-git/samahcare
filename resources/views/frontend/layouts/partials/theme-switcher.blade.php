@@ -94,13 +94,13 @@ function toggleDarkLight() {
     var isLight = html.getAttribute('data-theme-mode') === 'light';
     if (isLight) {
         html.removeAttribute('data-theme-mode');
-        localStorage.setItem('شركة جنين للتجميل_mode', 'dark');
-        setCookie('شركة جنين للتجميل_mode', 'dark', 365);
+        localStorage.setItem('سماح كير _mode', 'dark');
+        setCookie('سماح كير _mode', 'dark', 365);
         updateDarkLightIcon(false);
     } else {
         html.setAttribute('data-theme-mode', 'light');
-        localStorage.setItem('شركة جنين للتجميل_mode', 'light');
-        setCookie('شركة جنين للتجميل_mode', 'light', 365);
+        localStorage.setItem('سماح كير _mode', 'light');
+        setCookie('سماح كير _mode', 'light', 365);
         updateDarkLightIcon(true);
     }
 }
@@ -126,30 +126,30 @@ function toggleThemePalette() {
 function switchArchitecture(arch) {
     var colorMap = { 'cyber-lab': ['rose','midnight'], 'organic-spa': ['natural','forest'], 'editorial': ['minimal','ocean'], 'luxury-boutique': ['sunset','luxury'] };
     var defaults = { 'cyber-lab': 'rose', 'organic-spa': 'natural', 'editorial': 'minimal', 'luxury-boutique': 'sunset' };
-    var currentColor = localStorage.getItem('شركة جنين للتجميل_color') || defaults[arch] || 'rose';
+    var currentColor = localStorage.getItem('سماح كير _color') || defaults[arch] || 'rose';
     var compatibleColors = colorMap[arch] || [];
     // If current color doesn't belong to new architecture, switch to default color for that architecture
     if (compatibleColors.indexOf(currentColor) === -1) {
         currentColor = defaults[arch] || 'rose';
     }
-    localStorage.setItem('شركة جنين للتجميل_architecture', arch);
-    localStorage.setItem('شركة جنين للتجميل_color', currentColor);
-    setCookie('شركة جنين للتجميل_arch', arch, 365);
-    setCookie('شركة جنين للتجميل_color', currentColor, 365);
+    localStorage.setItem('سماح كير _architecture', arch);
+    localStorage.setItem('سماح كير _color', currentColor);
+    setCookie('سماح كير _arch', arch, 365);
+    setCookie('سماح كير _color', currentColor, 365);
     location.reload();
 }
 
 function switchColor(color) {
     // Only change color, keep current architecture
-    localStorage.setItem('شركة جنين للتجميل_color', color);
-    setCookie('شركة جنين للتجميل_color', color, 365);
+    localStorage.setItem('سماح كير _color', color);
+    setCookie('سماح كير _color', color, 365);
     // Do NOT change architecture cookie
     location.reload();
 }
 
 function switchFont(font) {
-    localStorage.setItem('شركة جنين للتجميل_font', font);
-    setCookie('شركة جنين للتجميل_font', font, 365);
+    localStorage.setItem('سماح كير _font', font);
+    setCookie('سماح كير _font', font, 365);
     var link = document.getElementById('googleFontsLink');
     if(link) {
         link.href = 'https://fonts.googleapis.com/css2?family=' + font.replace('+','+') + ':wght@300;400;500;700;800;900&display=swap';
@@ -162,11 +162,11 @@ function switchFont(font) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var savedArch = localStorage.getItem('شركة جنين للتجميل_architecture') || 'cyber-lab';
-    var savedColor = localStorage.getItem('شركة جنين للتجميل_color') || 'rose';
-    var savedFont = localStorage.getItem('شركة جنين للتجميل_font') || 'Tajawal';
+    var savedArch = localStorage.getItem('سماح كير _architecture') || 'cyber-lab';
+    var savedColor = localStorage.getItem('سماح كير _color') || 'rose';
+    var savedFont = localStorage.getItem('سماح كير _font') || 'Tajawal';
     // Default light mode — user can toggle to dark
-    var savedMode = localStorage.getItem('شركة جنين للتجميل_mode') || 'light';
+    var savedMode = localStorage.getItem('سماح كير _mode') || 'light';
 
     var archBtns = document.querySelectorAll('.arch-btn');
     archBtns.forEach(function(b) { b.classList.remove('border-white/40','bg-white/10'); b.classList.add('border-white/5','bg-white/5'); });

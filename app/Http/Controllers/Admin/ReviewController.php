@@ -3,71 +3,39 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductReview;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
     public function index(Request $request)
     {
-        $query = ProductReview::with(['product', 'user']);
-
-        if ($request->filled('status')) {
-            if ($request->status === 'pending') {
-                $query->where('is_approved', false);
-            } elseif ($request->status === 'approved') {
-                $query->where('is_approved', true);
-            }
-        }
-
-        if ($request->filled('rating')) {
-            $query->where('rating', $request->rating);
-        }
-
-        $reviews = $query->orderBy('created_at', 'desc')->paginate(20);
-
+        $reviews = collect([]);
         $stats = [
-            'total' => ProductReview::count(),
-            'pending' => ProductReview::where('is_approved', false)->count(),
-            'approved' => ProductReview::where('is_approved', true)->count(),
+            'total' => 0,
+            'pending' => 0,
+            'approved' => 0,
         ];
 
         return view('admin.reviews.index', compact('reviews', 'stats'));
     }
 
-    public function show(ProductReview $review)
+    public function show($id)
     {
-        $review->load(['product', 'user', 'order']);
-        return view('admin.reviews.show', compact('review'));
+        return redirect()->route('admin.reviews.index')->with('error', 'التقييم غير موجود');
     }
 
-    public function approve(ProductReview $review)
+    public function approve($id)
     {
-        $review->update([
-            'is_approved' => true,
-            'approved_by' => auth()->id(),
-            'approved_at' => now(),
-        ]);
-
-        return redirect()->back()->with('success', 'تم اعتماد التقييم بنجاح');
+        return redirect()->route('admin.reviews.index')->with('info', 'إدارة التقييمات غير متاحة حالياً');
     }
 
-    public function reject(ProductReview $review)
+    public function reject($id)
     {
-        $review->update([
-            'is_approved' => false,
-            'approved_by' => auth()->id(),
-            'approved_at' => now(),
-        ]);
-
-        return redirect()->back()->with('success', 'تم رفض التقييم');
+        return redirect()->route('admin.reviews.index')->with('info', 'إدارة التقييمات غير متاحة حالياً');
     }
 
-    public function destroy(ProductReview $review)
+    public function destroy($id)
     {
-        $review->delete();
-
-        return redirect()->route('admin.reviews.index')
-            ->with('success', 'تم حذف التقييم بنجاح');
+        return redirect()->route('admin.reviews.index')->with('info', 'إدارة التقييمات غير متاحة حالياً');
     }
 }

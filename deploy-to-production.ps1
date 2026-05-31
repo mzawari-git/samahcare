@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════
-# شركة جنين للتجميل Auto-Deploy Script (Local Windows → Production)
+# سماح كير  Auto-Deploy Script (Local Windows → Production)
 # ═══════════════════════════════════════════════════════════════
 # 
 # This script pushes changes to GitHub then triggers a
@@ -18,7 +18,7 @@ $ErrorActionPreference = "Stop"
 $deployUrl = "https://www.jenincare.shop/deploy.php"
 $deploySecret = "jenincare-deploy-2026"
 
-Write-Host "═══ شركة جنين للتجميل Auto Deploy ═══" -ForegroundColor Cyan
+Write-Host "═══ سماح كير  Auto Deploy ═══" -ForegroundColor Cyan
 
 # Step 1: Push to GitHub
 Write-Host "[1/3] Pushing to GitHub..." -ForegroundColor Yellow
@@ -33,7 +33,7 @@ git push origin master
 Write-Host "  Pushed to GitHub." -ForegroundColor Green
 
 # Step 2: Trigger webhook deploy on production
-Write-Host "[2/3] Triggering deploy on www.jenincare.shop..." -ForegroundColor Yellow
+Write-Host "[2/3] Triggering deploy on www.samahcare.com..." -ForegroundColor Yellow
 $payload = @{ ref = "refs/heads/master" } | ConvertTo-Json
 $signature = "sha256=" + (Get-HMAC -Text $payload -Key $deploySecret -Algorithm SHA256)
 
@@ -51,7 +51,7 @@ try {
 Write-Host "[3/3] Done!" -ForegroundColor Green
 Write-Host ""
 Write-Host "If webhook failed, deploy manually on your server:" -ForegroundColor Yellow
-Write-Host "  1. SSH to jenincare.shop" -ForegroundColor White
+Write-Host "  1. SSH to samahcare.shop" -ForegroundColor White
 Write-Host "  2. cd public_html && git pull origin master" -ForegroundColor White
 Write-Host "  3. php artisan migrate --force && php artisan optimize:clear" -ForegroundColor White
 
