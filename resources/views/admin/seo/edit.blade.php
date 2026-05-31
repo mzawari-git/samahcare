@@ -1,111 +1,198 @@
 @extends('admin.layouts.app')
 
-@section('title', 'تعديل SEO')
+@section('title', 'تعديل SEO - ' . ($page['title'] ?? ''))
 
 @section('content')
-<div class="mb-4">
-    <a href="{{ route('admin.seo.index') }}" class="text-muted text-decoration-none small"><i class="fas fa-arrow-right"></i> العودة لـ SEO</a>
-    <h1 class="h4 mt-2">تعديل SEO: {{ $product->name_ar }}</h1>
-</div>
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="mb-1 fw-bold">
+                <i class="fas fa-edit text-primary me-2"></i>تعديل SEO
+                <span class="text-muted fs-6">{{ $page['title'] }}</span>
+            </h4>
+            <p class="text-muted mb-0 small">{{ $page['url'] }}</p>
+        </div>
+        <a href="{{ route('admin.seo.index') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="fas fa-arrow-right me-1"></i>العودة
+        </a>
+    </div>
 
-<div class="row g-4">
-    {{-- SEO Form --}}
-    <div class="col-lg-8">
-        <div class="card">
-            <div class="card-header"><i class="fas fa-search" style="color:var(--pink-600);margin-left:6px;"></i> إعدادات SEO</div>
-            <div class="card-body">
-                <form action="{{ route('admin.seo.update', $product->id) }}" method="POST">
-                    @csrf @method('PUT')
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label class="form-label fw-bold">Meta Title <small class="text-muted">(يظهر في نتائج البحث)</small></label>
-                            <input type="text" name="meta_title" class="form-control font-monospace" dir="ltr" value="{{ old('meta_title', $product->meta_title) }}" maxlength="160" placeholder="Product Name - Category | JeninCare">
-                            <small class="text-muted">الأفضل 50-60 حرفاً. الحالي: <span id="mtCount">{{ strlen($product->meta_title ?? '') }}</span></small>
+    <div class="row">
+        <div class="col-lg-8">
+            <form action="{{ route('admin.seo.update', $page['key']) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white border-bottom">
+                        <h6 class="mb-0 fw-bold"><i class="fas fa-tag me-2"></i>Meta Tags</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Meta Title</label>
+                            <input type="text" class="form-control" name="meta_title" value="{{ $page['meta_title'] }}" maxlength="200">
+                            <small class="text-muted">60 characters recommended | {{ strlen($page['meta_title'] ?? '') }}/200</small>
                         </div>
-                        <div class="col-12">
-                            <label class="form-label fw-bold">Meta Title (بالعربية)</label>
-                            <input type="text" name="meta_title_ar" class="form-control" value="{{ old('meta_title_ar', $product->meta_title) }}" maxlength="160">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Meta Description</label>
+                            <textarea class="form-control" name="meta_description" rows="3" maxlength="500">{{ $page['meta_description'] }}</textarea>
+                            <small class="text-muted">160 characters recommended | {{ strlen($page['meta_description'] ?? '') }}/500</small>
                         </div>
-                        <div class="col-12">
-                            <label class="form-label fw-bold">Meta Description <small class="text-muted">(وصف مختصر للبحث)</small></label>
-                            <textarea name="meta_description" class="form-control font-monospace" dir="ltr" rows="3" maxlength="320" placeholder="وصف مختصر للمنتج...">{{ old('meta_description', $product->meta_description) }}</textarea>
-                            <small class="text-muted">الأفضل 150-160 حرفاً. الحالي: <span id="mdCount">{{ strlen($product->meta_description ?? '') }}</span></small>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label fw-bold">Meta Description (بالعربية)</label>
-                            <textarea name="meta_description_ar" class="form-control" rows="2" maxlength="320">{{ old('meta_description_ar', $product->meta_description) }}</textarea>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label fw-bold">الكلمات المفتاحية <small class="text-muted">(Meta Keywords - افصل بينها بفاصلة)</small></label>
-                            @php
-                                $kws = $product->meta_keywords;
-                                if (is_string($kws)) {
-                                    $decoded = json_decode($kws, true);
-                                    if (is_array($decoded)) $kws = implode(', ', $decoded);
-                                }
-                            @endphp
-                            <input type="text" name="meta_keywords" class="form-control" value="{{ old('meta_keywords', is_array($kws) ? implode(', ', $kws) : $kws) }}" placeholder="كلمة1, كلمة2, كلمة3...">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label fw-bold">رابط صورة OG <small class="text-muted">(Open Graph - تظهر عند مشاركة الرابط)</small></label>
-                            <input type="text" name="og_image" class="form-control" dir="ltr" value="{{ old('og_image', $product->og_image) }}" placeholder="https://...">
-                            @if($product->og_image)
-                            <div class="mt-2">
-                                <img src="{{ $product->og_image }}" style="max-width:200px;max-height:120px;border-radius:8px;object-fit:contain;border:1px solid var(--gray-200);">
-                            </div>
-                            @endif
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-pink"><i class="fas fa-save"></i> حفظ SEO</button>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Keywords</label>
+                            <input type="text" class="form-control" name="keywords" value="{{ $page['keywords'] }}" maxlength="500">
+                            <small class="text-muted">Comma-separated | {{ strlen($page['keywords'] ?? '') }}/500</small>
                         </div>
                     </div>
-                </form>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white border-bottom">
+                        <h6 class="mb-0 fw-bold"><i class="fas fa-share-alt me-2"></i>Open Graph (Facebook/WhatsApp)</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">OG Title</label>
+                            <input type="text" class="form-control" name="og_title" value="{{ $page['og_title'] }}" maxlength="200">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">OG Description</label>
+                            <textarea class="form-control" name="og_description" rows="2" maxlength="500">{{ $page['og_description'] }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">OG Image URL</label>
+                            <input type="url" class="form-control" name="og_image" value="{{ $page['og_image'] }}">
+                            <small class="text-muted">1200x630px recommended</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white border-bottom">
+                        <h6 class="mb-0 fw-bold"><i class="fas fa-code me-2"></i>Schema Markup</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Schema Type</label>
+                            <select class="form-select" name="schema_type">
+                                <option value="WebSite" {{ $page['schema_type'] === 'WebSite' ? 'selected' : '' }}>WebSite</option>
+                                <option value="LocalBusiness" {{ $page['schema_type'] === 'LocalBusiness' ? 'selected' : '' }}>LocalBusiness</option>
+                                <option value="Service" {{ $page['schema_type'] === 'Service' ? 'selected' : '' }}>Service</option>
+                                <option value="FAQPage" {{ $page['schema_type'] === 'FAQPage' ? 'selected' : '' }}>FAQPage</option>
+                                <option value="Article" {{ $page['schema_type'] === 'Article' ? 'selected' : '' }}>Article</option>
+                                <option value="BreadcrumbList" {{ $page['schema_type'] === 'BreadcrumbList' ? 'selected' : '' }}>BreadcrumbList</option>
+                                <option value="Product" {{ $page['schema_type'] === 'Product' ? 'selected' : '' }}>Product</option>
+                                <option value="WebPage" {{ $page['schema_type'] === 'WebPage' ? 'selected' : '' }}>WebPage</option>
+                                <option value="ContactPage" {{ $page['schema_type'] === 'ContactPage' ? 'selected' : '' }}>ContactPage</option>
+                                <option value="Blog" {{ $page['schema_type'] === 'Blog' ? 'selected' : '' }}>Blog</option>
+                                <option value="ItemList" {{ $page['schema_type'] === 'ItemList' ? 'selected' : '' }}>ItemList</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="fas fa-save me-1"></i>حفظ التغييرات
+                </button>
+            </form>
+        </div>
+
+        <!-- Preview -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="mb-0 fw-bold"><i class="fas fa-eye me-2"></i>معاينة Google</h6>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded p-3" style="font-family: Arial, sans-serif;">
+                        <div style="color: #1a0dab; font-size: 18px; line-height: 1.3; cursor: pointer;" id="previewTitle">
+                            {{ $page['meta_title'] ?: 'Page Title' }}
+                        </div>
+                        <div style="color: #006621; font-size: 14px; margin-top: 2px;" id="previewUrl">
+                            {{ $page['url'] }}
+                        </div>
+                        <div style="color: #545454; font-size: 13px; line-height: 1.4; margin-top: 4px;" id="previewDesc">
+                            {{ $page['meta_description'] ?: 'Page description...' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="mb-0 fw-bold"><i class="fab fa-facebook me-2"></i>معاينة Facebook</h6>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded overflow-hidden">
+                        <div style="height:150px; background: linear-gradient(135deg, #ec4899, #8b5cf6); display:flex; align-items:center; justify-content:center;">
+                            <i class="fas fa-image text-white fa-2x opacity-50"></i>
+                        </div>
+                        <div class="p-2">
+                            <div class="text-muted small text-uppercase" id="previewOgDomain">samahcare.shop</div>
+                            <div class="fw-bold" style="font-size:14px;" id="previewOgTitle">{{ $page['og_title'] ?: $page['title'] }}</div>
+                            <div class="text-muted small" id="previewOgDesc">{{ $page['og_description'] ?: 'Description...' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h6 class="mb-0 fw-bold"><i class="fas fa-list-check me-2"></i>SEO Checklist</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center gap-2 mb-2" id="checkTitle">
+                        <i class="fas fa-circle" style="font-size:8px;"></i>
+                        <small>Meta Title exists</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mb-2" id="checkDesc">
+                        <i class="fas fa-circle" style="font-size:8px;"></i>
+                        <small>Meta Description exists</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mb-2" id="checkKeywords">
+                        <i class="fas fa-circle" style="font-size:8px;"></i>
+                        <small>Keywords set</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mb-2" id="checkOg">
+                        <i class="fas fa-circle" style="font-size:8px;"></i>
+                        <small>OG Tags configured</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-2" id="checkSchema">
+                        <i class="fas fa-circle" style="font-size:8px;"></i>
+                        <small>Schema Markup type</small>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    {{-- Preview --}}
-    <div class="col-lg-4">
-        <div class="card mb-4">
-            <div class="card-header"><i class="fab fa-google" style="color:var(--pink-600);margin-left:6px;"></i> معاينة Google</div>
-            <div class="card-body">
-                <div style="font-size:1.1rem;color:#1a0dab;line-height:1.3;margin-bottom:3px;word-break:break-word;">
-                    {{ $product->meta_title ?: ($product->name_ar . ' - ' . ($product->category->name_ar ?? '') . ' | JeninCare') }}
-                </div>
-                <div style="font-size:.8rem;color:#006621;line-height:1.4;margin-bottom:2px;">
-                    {{ url('/product/' . $product->slug) }}
-                </div>
-                <div style="font-size:.8rem;color:#545454;line-height:1.4;word-break:break-word;">
-                    {{ \Str::limit($product->meta_description ?: strip_tags($product->description_ar ?? ''), 160) }}
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-4">
-            <div class="card-header">معلومات المنتج</div>
-            <div class="card-body">
-                <div class="mb-2"><strong>الاسم:</strong> {{ $product->name_ar }}</div>
-                <div class="mb-2"><strong>Slug:</strong> <code>{{ $product->slug }}</code></div>
-                <div class="mb-2"><strong>التصنيف:</strong> {{ $product->category->name_ar ?? '—' }}</div>
-                <div><strong>السعر:</strong> {{ number_format($product->b2c_price, 2) }} ₪</div>
-            </div>
-        </div>
-
-        <form action="{{ route('admin.seo.auto', $product->id) }}" method="POST">
-            @csrf
-            <button class="btn btn-outline-info w-100"><i class="fas fa-magic"></i> توليد SEO تلقائياً</button>
-        </form>
     </div>
 </div>
-@endsection
 
-@push('scripts')
 <script>
-document.querySelector('[name="meta_title"]').addEventListener('input', function() {
-    document.getElementById('mtCount').textContent = this.value.length;
-});
-document.querySelector('[name="meta_description"]').addEventListener('input', function() {
-    document.getElementById('mdCount').textContent = this.value.length;
-});
+function updateChecklist() {
+    const title = document.querySelector('[name="meta_title"]').value;
+    const desc = document.querySelector('[name="meta_description"]').value;
+    const keywords = document.querySelector('[name="keywords"]').value;
+    const ogTitle = document.querySelector('[name="og_title"]').value;
+
+    updateCheck('checkTitle', title.length > 0);
+    updateCheck('checkDesc', desc.length > 0);
+    updateCheck('checkKeywords', keywords.length > 0);
+    updateCheck('checkOg', ogTitle.length > 0);
+    updateCheck('checkSchema', true);
+
+    document.getElementById('previewTitle').textContent = title || 'Page Title';
+    document.getElementById('previewDesc').textContent = desc || 'Page description...';
+    document.getElementById('previewOgTitle').textContent = ogTitle || title || 'Page Title';
+    document.getElementById('previewOgDesc').textContent = document.querySelector('[name="og_description"]').value || desc || 'Description...';
+}
+
+function updateCheck(id, ok) {
+    const el = document.getElementById(id);
+    const icon = el.querySelector('i');
+    icon.className = ok ? 'fas fa-check-circle text-success' : 'fas fa-times-circle text-danger';
+}
+
+document.querySelectorAll('[name]').forEach(el => el.addEventListener('input', updateChecklist));
+updateChecklist();
 </script>
-@endpush
+@endsection

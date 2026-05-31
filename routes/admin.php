@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/seo/auto-all', [SeoController::class, 'autoGenerateAll'])->name('admin.seo.auto-all');
     Route::post('/seo/ai-all', [SeoController::class, 'aiGenerateAll'])->name('admin.seo.ai-all');
     Route::put('/seo/{id}', [SeoController::class, 'update'])->name('admin.seo.update');
+    Route::get('/seo/{id}/schema', [SeoController::class, 'schema'])->name('admin.seo.schema');
     Route::get('/meta-marketing', [MarketingTrackingController::class, 'metaMarketingDashboard'])->name('admin.meta-marketing.index');
     Route::post('/meta-marketing/import-page', [MarketingTrackingController::class, 'importPage'])->name('admin.meta-marketing.import-page');
     Route::post('/meta-marketing/search-page', [MarketingTrackingController::class, 'searchPage'])->name('admin.meta-marketing.search-page');
