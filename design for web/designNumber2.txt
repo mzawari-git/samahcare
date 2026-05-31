@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سماح كلينيك | الفخامة في العناية بالبشرة</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo for Arabic, Cormorant Garamond for elegant English/Numbers -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0F241D',      // Deep Forest Green
+                            gold: '#C5A880',      // Champagne Gold
+                            lightgold: '#E5D5C1', // Light Gold
+                            cream: '#FAF8F5',     // Soft Cream Background
+                            sage: '#E3E9E4',      // Soft Sage Green
+                            text: '#2C3532',      // Dark Grey/Green for text
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #FAF8F5;
+            color: #2C3532;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Luxury Arch Shape */
+        .img-arch {
+            border-radius: 200px 200px 0 0;
+            overflow: hidden;
+        }
+        
+        .img-arch-full {
+            border-radius: 200px;
+            overflow: hidden;
+        }
+
+        /* Outline Text Effect */
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px #C5A880;
+            opacity: 0.5;
+        }
+
+        /* Luxury Button */
+        .btn-luxury {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background-color: #0F241D;
+            color: #C5A880;
+            font-weight: 600;
+            border: 1px solid #0F241D;
+            overflow: hidden;
+            transition: color 0.4s ease;
+            z-index: 1;
+        }
+
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background-color: #C5A880;
+            transition: height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: -1;
+        }
+
+        .btn-luxury:hover {
+            color: #0F241D;
+            border-color: #C5A880;
+        }
+
+        .btn-luxury:hover::before {
+            height: 100%;
+        }
+
+        .btn-luxury-outline {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background-color: transparent;
+            color: #0F241D;
+            font-weight: 600;
+            border: 1px solid #0F241D;
+            transition: all 0.4s ease;
+        }
+
+        .btn-luxury-outline:hover {
+            background-color: #0F241D;
+            color: #C5A880;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        /* Smooth Image Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 1.5s ease;
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .nav-scrolled {
+            background-color: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FAF8F5; }
+        ::-webkit-scrollbar-thumb { background: #C5A880; }
+        
+        /* Line Decor */
+        .decor-line {
+            width: 1px;
+            height: 100px;
+            background-color: #C5A880;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <!-- Navigation -->
+    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-500 pt-6 pb-4">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 z-50">
+                <div class="text-brand-dark flex flex-col justify-center border-l-2 border-brand-gold pl-3">
+                    <span class="text-3xl font-serif font-bold tracking-wider leading-none">SAMAH</span>
+                    <span class="text-[10px] tracking-[0.3em] uppercase mt-1">Aesthetics</span>
+                </div>
+                <div class="text-2xl font-bold text-brand-dark leading-none pt-1">
+                    سماح
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-10">
+                <a href="#home" class="text-brand-dark hover:text-brand-gold transition-colors text-sm font-semibold tracking-wide">الرئيسية</a>
+                <a href="#philosophy" class="text-brand-dark hover:text-brand-gold transition-colors text-sm font-semibold tracking-wide">فلسفتنا</a>
+                <a href="#services" class="text-brand-dark hover:text-brand-gold transition-colors text-sm font-semibold tracking-wide">الخدمات</a>
+                <a href="#clinic" class="text-brand-dark hover:text-brand-gold transition-colors text-sm font-semibold tracking-wide">العيادة</a>
+            </nav>
+
+            <!-- Book Button Desktop -->
+            <div class="hidden md:block">
+                <a href="#book" class="btn-luxury text-sm py-3 px-8">حجز موعد</a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-btn" class="md:hidden text-brand-dark text-2xl z-50 relative focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Fullscreen Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-dark text-brand-cream z-40 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-opacity duration-500">
+            <nav class="flex flex-col text-center gap-8 text-2xl font-serif">
+                <a href="#home" class="mobile-link hover:text-brand-gold transition-colors">الرئيسية</a>
+                <a href="#philosophy" class="mobile-link hover:text-brand-gold transition-colors">فلسفتنا</a>
+                <a href="#services" class="mobile-link hover:text-brand-gold transition-colors">الخدمات</a>
+                <a href="#clinic" class="mobile-link hover:text-brand-gold transition-colors">العيادة</a>
+                <a href="#book" class="mobile-link text-brand-gold mt-4 text-xl font-sans border border-brand-gold py-3 px-8 rounded-full">احجزي الآن</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-brand-sage -z-10 opacity-30"></div>
+        
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="order-2 lg:order-1 reveal-up">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-[1px] bg-brand-gold"></div>
+                        <span class="text-brand-gold uppercase tracking-[0.2em] text-xs font-bold">الرقي في التفاصيل</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-bold text-brand-dark leading-[1.2] mb-6">
+                        فن العناية <br>
+                        <span class="font-serif italic text-6xl md:text-8xl text-brand-gold font-normal">بالجمال</span>
+                    </h1>
+                    
+                    <p class="text-brand-text/80 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+                        اكتشفي الجمال الطبيعي مع أحدث تقنيات الليزر والعناية بالبشرة في بيئة مصممة لراحتك المطلقة. تجربة استثنائية تعيد لكِ إشراقتك.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-5">
+                        <a href="#services" class="btn-luxury">اكتشفي الخدمات</a>
+                        <a href="#book" class="btn-luxury-outline">استشارة مجانية</a>
+                    </div>
+                </div>
+                
+                <!-- Hero Image -->
+                <div class="order-1 lg:order-2 relative reveal-up delay-200">
+                    <!-- English large background text -->
+                    <div class="absolute -top-10 -right-10 text-[120px] font-serif text-outline select-none -z-10">
+                        SAMAH
+                    </div>
+                    
+                    <div class="relative w-full max-w-[450px] mx-auto lg:ml-0">
+                        <div class="img-arch img-zoom-container shadow-2xl relative z-10">
+                            <!-- High end placeholder image -->
+                            <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&q=80&w=800" alt="Samah Clinic" class="w-full h-[600px] object-cover">
+                        </div>
+                        
+                        <!-- Floating Info Card -->
+                        <div class="absolute -bottom-8 -right-8 bg-white p-6 shadow-xl z-20 w-48 border border-brand-cream hidden md:block">
+                            <p class="font-serif text-4xl text-brand-dark mb-1">15<span class="text-brand-gold">+</span></p>
+                            <p class="text-sm font-bold text-brand-text">سنة من التميز</p>
+                            <div class="w-8 h-[2px] bg-brand-gold mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 reveal-up delay-300">
+            <span class="text-[10px] uppercase tracking-widest text-brand-dark/50">تمرير</span>
+            <div class="w-[1px] h-12 bg-brand-dark/20 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-brand-dark animate-[slideDown_2s_infinite]"></div>
+            </div>
+        </div>
+        
+        <style>
+            @keyframes slideDown {
+                0% { transform: translateY(-100%); }
+                100% { transform: translateY(200%); }
+            }
+        </style>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="py-24 bg-brand-dark text-white relative">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Images Grid -->
+                <div class="grid grid-cols-2 gap-6 reveal-up">
+                    <div class="space-y-6 pt-12">
+                        <div class="img-arch img-zoom-container h-64">
+                            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600" alt="Skin Care" class="w-full h-full object-cover">
+                        </div>
+                        <div class="bg-brand-gold p-8 text-brand-dark flex flex-col justify-center">
+                            <i class="fas fa-leaf text-3xl mb-4"></i>
+                            <h4 class="font-bold text-xl mb-2">مواد طبيعية</h4>
+                            <p class="text-sm opacity-80">نستخدم أفضل المنتجات العالمية الآمنة.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="img-arch-full img-zoom-container h-80">
+                            <img src="https://images.unsplash.com/photo-1512496015851-a12fb44a72d7?auto=format&fit=crop&q=80&w=600" alt="Treatment" class="w-full h-full object-cover">
+                        </div>
+                        <div class="border border-brand-gold/30 p-8 flex flex-col justify-center items-center text-center h-48">
+                            <p class="font-serif text-5xl text-brand-gold mb-2">99%</p>
+                            <p class="text-sm text-brand-lightgold tracking-widest">نسبة الرضا</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="reveal-up delay-200">
+                    <h4 class="text-brand-gold font-serif text-2xl italic mb-4">فلسفتنا</h4>
+                    <h2 class="text-4xl md:text-5xl font-bold leading-[1.3] mb-8">
+                        ليس مجرد تجميل، <br>بل <span class="text-brand-gold">تجديد للثقة</span>
+                    </h2>
+                    <p class="text-brand-cream/70 text-lg leading-relaxed mb-6">
+                        في عيادات سماح، نؤمن بأن كل امرأة تمتلك جمالاً خاصاً يستحق أن يبرز بأبهى صورة. نهجنا يجمع بين الدقة الطبية واللمسة الفنية المتقنة.
+                    </p>
+                    <p class="text-brand-cream/70 text-lg leading-relaxed mb-10">
+                        طاقمنا الطبي لا يقدم الحلول الجاهزة، بل يستمع إليكِ بدقة ليبني خطة علاجية مخصصة تناسب تفاصيل بشرتك وتطلعاتك، لضمان نتائج طبيعية تدوم طويلاً.
+                    </p>
+                    
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 rounded-full border border-brand-gold/50 flex items-center justify-center p-1">
+                            <img src="https://ui-avatars.com/api/?name=Dr+Samah&background=C5A880&color=0F241D" alt="Dr. Samah" class="w-full h-full rounded-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-bold text-xl text-brand-gold">د. سماح</p>
+                            <p class="text-sm text-brand-cream/50">المدير الطبي والمؤسس</p>
+                        </div>
+                        <!-- Signature Fake Image (using text for demo) -->
+                        <div class="font-serif italic text-3xl text-brand-gold/40 mr-auto opacity-50">
+                            Samah.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-cream relative">
+        <div class="decor-line absolute top-0 left-1/2 transform -translate-x-1/2"></div>
+        
+        <div class="container mx-auto px-6 lg:px-12 pt-10">
+            <div class="text-center mb-16 reveal-up">
+                <span class="text-brand-gold uppercase tracking-[0.2em] text-xs font-bold block mb-4">الخدمات الطبية</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-brand-dark mb-6">باقات <span class="font-serif italic text-brand-gold font-normal">الرعاية</span></h2>
+                <p class="text-brand-text/70 max-w-2xl mx-auto">نقدم مجموعة متكاملة من أحدث الخدمات التجميلية غير الجراحية، مصممة خصيصاً لتمنحك النتائج المثالية بأعلى معايير الأمان.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Service 1 -->
+                <div class="group reveal-up delay-100 cursor-pointer">
+                    <div class="relative overflow-hidden mb-6 h-80">
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800" alt="Laser" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                        <div class="absolute top-4 right-4 bg-brand-cream text-brand-dark font-serif text-xl px-3 py-1 font-bold">01</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3 group-hover:text-brand-gold transition-colors">إزالة الشعر بالليزر</h3>
+                    <p class="text-brand-text/70 mb-4 line-clamp-2">أحدث أجهزة الليزر البارد المتطورة (جنتل ماكس برو) لنتائج آمنة وسريعة لجميع أنواع البشرة بدون ألم.</p>
+                    <a href="#book" class="inline-flex items-center gap-2 text-brand-dark font-bold text-sm border-b border-brand-dark pb-1 group-hover:text-brand-gold group-hover:border-brand-gold transition-all">
+                        احجزي الجلسة <i class="fas fa-arrow-left text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group reveal-up delay-200 cursor-pointer">
+                    <div class="relative overflow-hidden mb-6 h-80">
+                        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=800" alt="Facial" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                        <div class="absolute top-4 right-4 bg-brand-cream text-brand-dark font-serif text-xl px-3 py-1 font-bold">02</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3 group-hover:text-brand-gold transition-colors">نضارة وعناية بالبشرة</h3>
+                    <p class="text-brand-text/70 mb-4 line-clamp-2">بروتوكولات علاجية متكاملة تشمل الهيدرافيشال، التقشير البارد، والميزوثيرايبي لإعادة الحيوية والإشراق.</p>
+                    <a href="#book" class="inline-flex items-center gap-2 text-brand-dark font-bold text-sm border-b border-brand-dark pb-1 group-hover:text-brand-gold group-hover:border-brand-gold transition-all">
+                        احجزي الجلسة <i class="fas fa-arrow-left text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group reveal-up delay-300 cursor-pointer">
+                    <div class="relative overflow-hidden mb-6 h-80">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800" alt="Injections" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                        <div class="absolute top-4 right-4 bg-brand-cream text-brand-dark font-serif text-xl px-3 py-1 font-bold">03</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-dark mb-3 group-hover:text-brand-gold transition-colors">الحقن التجميلي</h3>
+                    <p class="text-brand-text/70 mb-4 line-clamp-2">فيلر وبوتوكس بأعلى معايير الجودة العالمية لنحت الوجه وإخفاء التجاعيد بلمسات فنية وطبيعية جداً.</p>
+                    <a href="#book" class="inline-flex items-center gap-2 text-brand-dark font-bold text-sm border-b border-brand-dark pb-1 group-hover:text-brand-gold group-hover:border-brand-gold transition-all">
+                        احجزي الجلسة <i class="fas fa-arrow-left text-xs"></i>
+                    </a>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-16 reveal-up">
+                 <a href="#book" class="btn-luxury-outline">عرض القائمة الكاملة للخدمات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Banner -->
+    <section id="clinic" class="py-20 bg-brand-dark relative overflow-hidden">
+        <!-- Abstract minimal line background -->
+        <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #C5A880 0, #C5A880 1px, transparent 0, transparent 50%); background-size: 30px 30px;"></div>
+        
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="bg-brand-dark border border-brand-gold/30 p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 reveal-up">
+                
+                <div class="w-full md:w-1/2">
+                    <h3 class="font-serif text-3xl md:text-5xl text-brand-gold mb-4">The Clinic</h3>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">بيئة تعكس <br>احترامنا لخصوصيتك</h2>
+                    <p class="text-brand-cream/60 text-lg">
+                        تم تصميم كل زاوية في عيادات سماح لتوفير أقصى درجات الراحة والاسترخاء. غرف علاج خاصة، تعقيم وفق أعلى المعايير الطبية، وضيافة ترتقي لتوقعاتك.
+                    </p>
+                </div>
+                
+                <div class="w-full md:w-1/2 relative">
+                    <div class="relative overflow-hidden shadow-2xl h-64 md:h-80 w-full group">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000" alt="Clinic Interior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-dark/40 flex items-center justify-center group-hover:bg-brand-dark/20 transition-colors">
+                            <div class="w-20 h-20 rounded-full border border-brand-gold flex items-center justify-center backdrop-blur-sm bg-brand-dark/30 cursor-pointer hover:bg-brand-gold hover:text-brand-dark text-brand-gold transition-all">
+                                <i class="fas fa-play text-xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative block -->
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-gold -z-10"></div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="book" class="py-24 bg-white">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row shadow-[0_20px_50px_rgba(15,36,29,0.08)]">
+                
+                <!-- Info Side -->
+                <div class="w-full lg:w-5/12 bg-brand-sage p-12 lg:p-16 flex flex-col justify-center reveal-up">
+                    <h3 class="font-serif text-4xl text-brand-dark mb-4">Contact Us</h3>
+                    <h2 class="text-3xl font-bold text-brand-dark mb-8">خطوتك الأولى <br>نحو التألق</h2>
+                    
+                    <div class="space-y-6 mb-12">
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-map-marker-alt text-brand-gold text-xl mt-1"></i>
+                            <div>
+                                <p class="font-bold text-brand-dark">الموقع</p>
+                                <p class="text-brand-text/70 text-sm">برج الصفوة، الدور الخامس<br>طريق الملك فهد، الرياض</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-phone text-brand-gold text-xl mt-1"></i>
+                            <div>
+                                <p class="font-bold text-brand-dark">التواصل المباشر</p>
+                                <p class="text-brand-text/70 text-sm" dir="ltr">+966 50 000 0000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-clock text-brand-gold text-xl mt-1"></i>
+                            <div>
+                                <p class="font-bold text-brand-dark">ساعات العمل</p>
+                                <p class="text-brand-text/70 text-sm">يومياً من 10 ص حتى 10 م<br>ماعدا الجمعة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Side -->
+                <div class="w-full lg:w-7/12 bg-white p-12 lg:p-16 reveal-up delay-200">
+                    <h2 class="text-2xl font-bold text-brand-dark mb-8 border-b border-brand-sage pb-4">طلب استشارة أو موعد</h2>
+                    
+                    <form id="appointmentForm" onsubmit="event.preventDefault(); submitForm();" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-brand-text">الاسم بالكامل</label>
+                                <input type="text" required class="w-full bg-brand-cream border-none p-4 focus:ring-2 focus:ring-brand-gold outline-none transition-shadow text-brand-dark" placeholder="أدخلي اسمك">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-bold text-brand-text">رقم الهاتف</label>
+                                <input type="tel" required class="w-full bg-brand-cream border-none p-4 focus:ring-2 focus:ring-brand-gold outline-none transition-shadow text-brand-dark" placeholder="05X XXX XXXX" dir="ltr">
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-brand-text">الخدمة المطلوبة</label>
+                            <select class="w-full bg-brand-cream border-none p-4 focus:ring-2 focus:ring-brand-gold outline-none transition-shadow text-brand-dark cursor-pointer appearance-none">
+                                <option value="" disabled selected>اختاري الخدمة</option>
+                                <option>إزالة الشعر بالليزر</option>
+                                <option>العناية بالبشرة (نضارة / تقشير)</option>
+                                <option>حقن تجميلي (فيلر / بوتوكس)</option>
+                                <option>استشارة مجانية</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-brand-text">رسالة (اختياري)</label>
+                            <textarea rows="4" class="w-full bg-brand-cream border-none p-4 focus:ring-2 focus:ring-brand-gold outline-none transition-shadow text-brand-dark resize-none" placeholder="أي تفاصيل تودين إضافتها..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-luxury w-full py-4 text-lg mt-4 w-full">
+                            تأكيد الطلب
+                        </button>
+                    </form>
+                    
+                    <!-- Success message -->
+                    <div id="formSuccess" class="hidden mt-6 bg-[#E3E9E4] text-[#0F241D] p-4 border-l-4 border-[#0F241D]">
+                        <p class="font-bold"><i class="fas fa-check-circle mr-2 ml-2"></i>تم استلام طلبك بنجاح.</p>
+                        <p class="text-sm mt-1">سيتواصل معك فريقنا لتأكيد الموعد في أقرب وقت.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-brand-cream pt-20 pb-10">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="text-3xl font-serif font-bold text-brand-gold tracking-wider">SAMAH</span>
+                    </div>
+                    <p class="text-brand-cream/60 text-sm leading-relaxed mb-6">
+                        العيادة الرائدة في مجال العناية بالبشرة والليزر. نلتزم بتقديم أرقى مستويات الخدمة الطبية لضمان حصولك على نتائج مبهرة وآمنة.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-brand-gold font-bold mb-6 text-lg">روابط سريعة</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-brand-cream/70 hover:text-brand-gold transition-colors text-sm">الرئيسية</a></li>
+                        <li><a href="#philosophy" class="text-brand-cream/70 hover:text-brand-gold transition-colors text-sm">فلسفتنا</a></li>
+                        <li><a href="#services" class="text-brand-cream/70 hover:text-brand-gold transition-colors text-sm">الخدمات الطبية</a></li>
+                        <li><a href="#clinic" class="text-brand-cream/70 hover:text-brand-gold transition-colors text-sm">عن العيادة</a></li>
+                    </ul>
+                </div>
+
+                <!-- Socials -->
+                <div>
+                    <h4 class="text-brand-gold font-bold mb-6 text-lg">تواصل معنا</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-brand-cream/70 hover:text-brand-gold transition-colors text-sm flex items-center gap-2"><i class="fab fa-instagram w-5"></i> إنستغرام</a></li>
+                        <li><a href="#" class="text-brand-cream/70 hover:text-brand-gold transition-colors text-sm flex items-center gap-2"><i class="fab fa-snapchat-ghost w-5"></i> سناب شات</a></li>
+                        <li><a href="#" class="text-brand-cream/70 hover:text-brand-gold transition-colors text-sm flex items-center gap-2"><i class="fab fa-whatsapp w-5"></i> واتساب</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-brand-gold font-bold mb-6 text-lg">النشرة الإخبارية</h4>
+                    <p class="text-brand-cream/60 text-sm mb-4">انضمي لقائمتنا البريدية للحصول على نصائح وعروض حصرية.</p>
+                    <div class="relative">
+                        <input type="email" placeholder="بريدك الإلكتروني" class="w-full bg-transparent border-b border-brand-cream/30 py-2 text-sm focus:border-brand-gold outline-none transition-colors text-brand-cream placeholder-brand-cream/30">
+                        <button class="absolute left-0 top-2 text-brand-gold hover:text-white transition-colors">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-brand-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-brand-cream/40">
+                <p>&copy; 2024 عيادات سماح للتجميل. جميع الحقوق محفوظة.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-brand-gold transition-colors">الشروط والأحكام</a>
+                    <a href="#" class="hover:text-brand-gold transition-colors">سياسة الخصوصية</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('nav-scrolled');
+                header.classList.remove('pt-6');
+            } else {
+                header.classList.remove('nav-scrolled');
+                header.classList.add('pt-6');
+            }
+        });
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                menuBtn.innerHTML = '<i class="fas fa-times text-brand-cream"></i>';
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                menuBtn.innerHTML = '<i class="fas fa-bars text-brand-dark"></i>';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                menuBtn.innerHTML = '<i class="fas fa-bars text-brand-dark"></i>';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Scroll Reveal Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal-up');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Unobserve once animated
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15, // Trigger when 15% visible
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Form Submission Simulation
+        function submitForm() {
+            const btn = document.querySelector('#appointmentForm button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            // Loading state
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> جاري الإرسال...';
+            btn.style.pointerEvents = 'none';
+
+            // Simulate Network Request
+            setTimeout(() => {
+                document.getElementById('appointmentForm').reset();
+                document.getElementById('formSuccess').classList.remove('hidden');
+                
+                btn.innerHTML = originalText;
+                btn.style.pointerEvents = 'auto';
+
+                // Hide success message after a few seconds
+                setTimeout(() => {
+                    document.getElementById('formSuccess').classList.add('hidden');
+                }, 6000);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

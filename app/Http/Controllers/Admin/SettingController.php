@@ -16,7 +16,7 @@ class SettingController extends Controller
         'site_name_en' => 'JeninCare',
         'site_logo' => null,
         'site_favicon' => null,
-        'site_theme' => 'natural',
+        'site_theme' => '1',
         'site_description_ar' => '',
         'site_description_en' => '',
         'contact_email' => 'info@jenincare.com',
@@ -94,7 +94,6 @@ class SettingController extends Controller
     {
         $tab = $request->get('tab', 'general');
 
-        // Handle file uploads
         if ($request->hasFile('site_logo')) {
             $logoPath = $request->file('site_logo')->store('settings', 'public');
             Setting::updateOrCreate(['key' => 'site_logo'], ['value' => $logoPath]);
@@ -105,15 +104,21 @@ class SettingController extends Controller
             Setting::updateOrCreate(['key' => 'site_favicon'], ['value' => $faviconPath]);
         }
 
-        // Save other settings
-        foreach ($request->except('_token', '_method', 'tab', 'site_logo', 'site_favicon') as $key => $value) {
+        for ($i = 1; $i <= 5; $i++) {
+            $imageKey = 'theme' . $i . '_hero_image';
+            if ($request->hasFile($imageKey)) {
+                $imagePath = $request->file($imageKey)->store('themes', 'public');
+                Setting::updateOrCreate(['key' => $imageKey], ['value' => $imagePath]);
+            }
+        }
+
+        foreach ($request->except('_token', '_method', 'tab', 'site_logo', 'site_favicon', 'theme1_hero_image', 'theme2_hero_image', 'theme3_hero_image', 'theme4_hero_image', 'theme5_hero_image') as $key => $value) {
             Setting::updateOrCreate(
                 ['key' => $key],
                 ['value' => is_array($value) ? json_encode($value) : ($value ?? '')]
             );
         }
 
-        // Clear settings cache so changes apply immediately
         SettingsHelper::clearCache();
 
         return redirect()->route('admin.settings', ['tab' => $tab])

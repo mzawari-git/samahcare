@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سماح كلينيك | النقاء والجمال</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Kufi Arabic for modern clean Arabic, Outfit for English -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pure: {
+                            cream: '#FDFCF8',      // Off-white/Cream background
+                            sand: '#EAE3D9',       // Soft sand for shapes
+                            terracotta: '#C88B76', // Muted dusty rose/copper accent
+                            charcoal: '#2D2D2D',   // Deep gray for text (softer than black)
+                            lightGray: '#8A8A8A',  // Secondary text
+                            white: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Kufi Arabic', 'sans-serif'],
+                        en: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            background-color: #FDFCF8;
+            color: #2D2D2D;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-en {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Smooth reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image reveal effect */
+        .img-reveal-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-reveal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #EAE3D9;
+            z-index: 10;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            transform-origin: top;
+        }
+
+        .img-reveal-container.active .img-reveal-overlay {
+            transform: scaleY(0);
+        }
+
+        .img-zoom {
+            transition: transform 2s ease-out;
+            transform: scale(1.1);
+        }
+
+        .img-reveal-container.active .img-zoom {
+            transform: scale(1);
+        }
+
+        /* Elegant Button */
+        .btn-elegant {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background-color: #2D2D2D;
+            color: #FFFFFF;
+            border: 1px solid #2D2D2D;
+            border-radius: 0; /* Sharp edges for editorial look */
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-elegant::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #C88B76;
+            top: 100%;
+            left: 0;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .btn-elegant:hover::after {
+            top: 0;
+        }
+
+        .btn-elegant span, .btn-elegant i {
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        .btn-elegant:hover {
+            border-color: #C88B76;
+        }
+
+        /* Minimal Input Fields */
+        .minimal-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #EAE3D9;
+            padding: 1rem 0;
+            color: #2D2D2D;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .minimal-input:focus {
+            outline: none;
+            border-bottom-color: #C88B76;
+        }
+
+        .minimal-input::placeholder {
+            color: #8A8A8A;
+            font-weight: 300;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FDFCF8; }
+        ::-webkit-scrollbar-thumb { background: #EAE3D9; }
+        ::-webkit-scrollbar-thumb:hover { background: #C88B76; }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background-color: #2D2D2D;
+            color: #FDFCF8;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Fullscreen Menu */
+        .menu-overlay {
+            clip-path: circle(0% at top right);
+            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .menu-overlay.open {
+            clip-path: circle(150% at top right);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-pure-terracotta selection:text-white">
+
+    <div class="marquee-container hidden md:block">
+        <div class="marquee-content font-en text-xs tracking-[0.3em] uppercase">
+            <span class="mx-8">Advanced Laser Therapy</span> • 
+            <span class="mx-8">Medical Skincare</span> • 
+            <span class="mx-8">Aesthetic Injectables</span> • 
+            <span class="mx-8">Dermatology Consultations</span> •
+            <span class="mx-8">Advanced Laser Therapy</span> • 
+            <span class="mx-8">Medical Skincare</span> • 
+            <span class="mx-8">Aesthetic Injectables</span> • 
+            <span class="mx-8">Dermatology Consultations</span>
+        </div>
+    </div>
+
+    <header id="header" class="fixed w-full z-50 transition-all duration-500 py-6" style="top: auto;">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-btn" class="text-pure-charcoal focus:outline-none z-50 w-10 h-10 flex flex-col justify-center items-center gap-1.5 group">
+                <span class="w-6 h-[1px] bg-pure-charcoal transition-all duration-300"></span>
+                <span class="w-6 h-[1px] bg-pure-charcoal transition-all duration-300 w-4 group-hover:w-6"></span>
+            </button>
+
+            <!-- Logo -->
+            <a href="#" class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center z-50">
+                <span class="font-en font-semibold text-2xl tracking-[0.2em] text-pure-charcoal">SAMAH</span>
+                <span class="text-[9px] tracking-widest text-pure-lightGray uppercase mt-1 font-en">Medical Clinic</span>
+            </a>
+
+            <!-- CTA Desktop -->
+            <a href="#booking" class="hidden md:inline-block text-xs font-bold text-pure-charcoal tracking-widest uppercase hover:text-pure-terracotta transition-colors z-50 pb-1 border-b border-transparent hover:border-pure-terracotta">
+                احجز موعداً
+            </a>
+            <!-- Placeholder for mobile spacing -->
+            <div class="w-10 md:hidden"></div>
+        </div>
+    </header>
+
+    <div id="full-menu" class="menu-overlay fixed inset-0 bg-pure-sand z-40 flex flex-col items-center justify-center">
+        <nav class="flex flex-col text-center gap-8">
+            <a href="#hero" class="menu-link text-4xl font-light text-pure-charcoal hover:text-pure-terracotta transition-colors">الرئيسية</a>
+            <a href="#philosophy" class="menu-link text-4xl font-light text-pure-charcoal hover:text-pure-terracotta transition-colors">فلسفتنا</a>
+            <a href="#services" class="menu-link text-4xl font-light text-pure-charcoal hover:text-pure-terracotta transition-colors">الخدمات العلاجية</a>
+            <a href="#booking" class="menu-link text-4xl font-light text-pure-charcoal hover:text-pure-terracotta transition-colors">حجز استشارة</a>
+        </nav>
+        <div class="mt-16 text-center">
+            <p class="text-sm text-pure-charcoal mb-4 font-en tracking-widest uppercase">Contact</p>
+            <p class="text-pure-charcoal text-lg" dir="ltr">+966 50 000 0000</p>
+        </div>
+    </div>
+
+    <section id="hero" class="relative min-h-screen flex items-center pt-24 pb-12">
+        <div class="container mx-auto px-6 lg:px-12 h-full flex flex-col justify-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-5 order-2 lg:order-1 reveal z-10">
+                    <p class="font-en text-xs tracking-[0.3em] text-pure-terracotta uppercase mb-6">Purity & Perfection</p>
+                    <h1 class="text-5xl lg:text-7xl font-light leading-[1.2] mb-8 text-pure-charcoal">
+                        إشراقة <br>
+                        <span class="font-semibold">تبدأ من الأعماق</span>
+                    </h1>
+                    <p class="text-pure-lightGray text-lg leading-relaxed mb-10 max-w-md font-light">
+                        نقدم لكِ أحدث ما توصل إليه الطب التجميلي وتقنيات الليزر في بيئة تتسم بالنقاء والهدوء المطلق، لنتائج طبيعية ومستدامة.
+                    </p>
+                    <a href="#services" class="btn-elegant">
+                        <span>اكتشفي خدماتنا</span>
+                        <i class="fas fa-arrow-left mr-4"></i>
+                    </a>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="lg:col-span-7 order-1 lg:order-2 h-[50vh] lg:h-[80vh] w-full relative pl-0 lg:pl-12">
+                    <div class="img-reveal-container w-full h-full">
+                        <div class="img-reveal-overlay"></div>
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=1600" alt="Pure Beauty" class="img-zoom w-full h-full object-cover rounded-tl-[100px] rounded-br-[100px]">
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-pure-sand rounded-full -z-10 hidden lg:block"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="py-24 bg-pure-white relative">
+        <div class="container mx-auto px-6 lg:px-12 text-center max-w-4xl">
+            <div class="reveal">
+                <i class="fas fa-leaf text-pure-terracotta text-2xl mb-6"></i>
+                <h2 class="text-3xl md:text-5xl font-light leading-relaxed text-pure-charcoal mb-8">
+                    "فلسفتنا لا تعتمد على تغيير ملامحك، بل على <span class="text-pure-terracotta font-semibold">إبراز النقاء الطبيعي</span> وتجديد خلايا البشرة بأعلى المعايير الطبية."
+                </h2>
+                <p class="font-en text-sm tracking-widest text-pure-lightGray uppercase">Dr. Samah - Head Dermatologist</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 border-t border-pure-sand pt-12 reveal">
+                <div class="text-center">
+                    <span class="block font-en text-4xl text-pure-charcoal font-light mb-2">2026</span>
+                    <span class="text-xs text-pure-lightGray tracking-wider">أحدث التقنيات</span>
+                </div>
+                <div class="text-center">
+                    <span class="block font-en text-4xl text-pure-charcoal font-light mb-2">10+</span>
+                    <span class="text-xs text-pure-lightGray tracking-wider">سنوات خبرة طبية</span>
+                </div>
+                <div class="text-center">
+                    <span class="block font-en text-4xl text-pure-charcoal font-light mb-2">100%</span>
+                    <span class="text-xs text-pure-lightGray tracking-wider">طاقم مرخص</span>
+                </div>
+                <div class="text-center">
+                    <span class="block font-en text-4xl text-pure-charcoal font-light mb-2">FDA</span>
+                    <span class="text-xs text-pure-lightGray tracking-wider">أجهزة معتمدة</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-pure-cream relative">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="mb-20 text-center reveal">
+                <span class="font-en text-xs tracking-[0.2em] text-pure-terracotta uppercase block mb-4">Our Treatments</span>
+                <h2 class="text-4xl text-pure-charcoal font-light">باقات العناية المتكاملة</h2>
+            </div>
+
+            <div class="space-y-24">
+                
+                <!-- Service 1 (Image Left) -->
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2 h-[400px] img-reveal-container">
+                        <div class="img-reveal-overlay"></div>
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=800" alt="Laser Hair Removal" class="img-zoom w-full h-full object-cover rounded-tr-[80px]">
+                    </div>
+                    <div class="w-full md:w-1/2 max-w-md reveal">
+                        <span class="text-pure-lightGray text-4xl font-en font-light block mb-4 opacity-30">01</span>
+                        <h3 class="text-3xl text-pure-charcoal font-semibold mb-4">إزالة الشعر بالليزر البارد</h3>
+                        <p class="text-pure-lightGray font-light leading-relaxed mb-6">
+                            نستخدم أجهزة ليزر متطورة مزودة بأنظمة تبريد فائقة لضمان جلسات خالية من الألم ونتائج دائمة لجميع أنواع البشرة، تحت إشراف طبي كامل.
+                        </p>
+                        <ul class="space-y-2 text-sm text-pure-charcoal font-light mb-8">
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> جهاز كانديلا جنتل ماكس برو</li>
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> بدون ألم أو حروق</li>
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> نتائج ملحوظة من الجلسة الأولى</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 2 (Image Right) -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+                    <div class="w-full md:w-1/2 h-[400px] img-reveal-container">
+                        <div class="img-reveal-overlay"></div>
+                        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=800" alt="Skin Care" class="img-zoom w-full h-full object-cover rounded-tl-[80px]">
+                    </div>
+                    <div class="w-full md:w-1/2 max-w-md reveal text-right md:text-left">
+                        <span class="text-pure-lightGray text-4xl font-en font-light block mb-4 opacity-30">02</span>
+                        <h3 class="text-3xl text-pure-charcoal font-semibold mb-4">نضارة وتجديد البشرة</h3>
+                        <p class="text-pure-lightGray font-light leading-relaxed mb-6">
+                            بروتوكولات علاجية مخصصة تشمل الهيدرافيشال، التقشير الكيميائي البارد، والإبر الدقيقة (ميكرونيدلينغ) لاستعادة بريق بشرتك وإزالة التصبغات.
+                        </p>
+                        <ul class="space-y-2 text-sm text-pure-charcoal font-light mb-8">
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> توحيد لون البشرة</li>
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> علاج حب الشباب وآثاره</li>
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> ترطيب عميق ومكثف</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 3 (Image Left) -->
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2 h-[400px] img-reveal-container">
+                        <div class="img-reveal-overlay"></div>
+                        <img src="https://images.unsplash.com/photo-1596755389378-c5b6ff49071c?auto=format&fit=crop&q=80&w=800" alt="Injectables" class="img-zoom w-full h-full object-cover rounded-tr-[80px]">
+                    </div>
+                    <div class="w-full md:w-1/2 max-w-md reveal">
+                        <span class="text-pure-lightGray text-4xl font-en font-light block mb-4 opacity-30">03</span>
+                        <h3 class="text-3xl text-pure-charcoal font-semibold mb-4">اللمسات التجميلية (الحقن)</h3>
+                        <p class="text-pure-lightGray font-light leading-relaxed mb-6">
+                            فن إبراز الجمال بأيدي أطباء مهرة. نستخدم أفضل المواد المعتمدة عالمياً للحقن التجميلي للحفاظ على مظهر شاب وطبيعي.
+                        </p>
+                        <ul class="space-y-2 text-sm text-pure-charcoal font-light mb-8">
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> بوتوكس للتجاعيد التعبيرية</li>
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> فيلر الشفايف وتحديد الفك</li>
+                            <li><i class="fas fa-check text-pure-terracotta ml-2 text-xs"></i> إبر النضارة (البروفايلو)</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-24 bg-pure-white border-t border-pure-sand">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="bg-pure-sand/30 rounded-[40px] p-8 md:p-16 relative overflow-hidden">
+                <!-- Abstract shape -->
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-pure-white rounded-full opacity-50 pointer-events-none"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10">
+                    
+                    <div class="reveal">
+                        <h2 class="text-4xl text-pure-charcoal font-light mb-6">احجزي <span class="font-semibold">استشارتك</span></h2>
+                        <p class="text-pure-lightGray font-light mb-10 leading-relaxed max-w-md">
+                            دعي خبراؤنا يقيمون احتياجات بشرتك ويصممون خطة علاجية مخصصة لكِ. املئي النموذج وسنقوم بالتواصل معكِ في أقرب وقت.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <i class="fas fa-map-marker-alt text-pure-terracotta w-5"></i>
+                                <span class="text-pure-charcoal font-light">الرياض، طريق الملك عبدالعزيز، حي الربيع</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <i class="far fa-clock text-pure-terracotta w-5"></i>
+                                <span class="text-pure-charcoal font-light">يومياً من 10 صباحاً حتى 10 مساءً</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-pure-white p-8 rounded-2xl shadow-sm reveal">
+                        <form id="bookingForm" onsubmit="event.preventDefault(); submitForm();" class="space-y-6">
+                            <div>
+                                <input type="text" placeholder="الاسم الكريم" required class="minimal-input">
+                            </div>
+                            <div>
+                                <input type="tel" dir="ltr" placeholder="رقم الجوال" required class="minimal-input text-right">
+                            </div>
+                            <div>
+                                <select required class="minimal-input text-pure-lightGray appearance-none">
+                                    <option value="" disabled selected>اختاري الخدمة المهتمة بها...</option>
+                                    <option value="laser">إزالة الشعر بالليزر</option>
+                                    <option value="skin">العناية بالبشرة (نضارة وتقشير)</option>
+                                    <option value="inject">الحقن (بوتوكس/فيلر)</option>
+                                    <option value="consult">استشارة طبيب جلدية</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-elegant w-full mt-4 border-none bg-pure-charcoal text-white hover:bg-pure-terracotta cursor-pointer">
+                                <span>تأكيد طلب الحجز</span>
+                            </button>
+                        </form>
+                        
+                        <!-- رسالة النجاح -->
+                        <div id="successMessage" class="hidden mt-6 text-center text-green-600 bg-green-50 p-4 rounded text-sm font-light">
+                            تم استلام طلبك بنجاح، موظفة الاستقبال ستتواصل معك قريباً.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-pure-charcoal text-pure-white py-16">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-white/10 pb-12 mb-8">
+                
+                <div class="col-span-1">
+                    <span class="font-en font-semibold text-3xl tracking-[0.2em] text-pure-white block mb-2">SAMAH</span>
+                    <span class="text-[10px] tracking-widest text-pure-terracotta uppercase font-en block mb-6">Medical Clinic</span>
+                    <p class="text-sm font-light text-pure-white/60 leading-relaxed">
+                        وجهتكِ الأولى للرعاية الطبية التجميلية المتكاملة، حيث يلتقي العلم بالجمال لتوفير أقصى درجات النقاء والإشراق.
+                    </p>
+                </div>
+
+                <div class="col-span-1">
+                    <h4 class="font-en text-xs tracking-widest text-pure-terracotta uppercase mb-6">Links</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#hero" class="text-sm font-light text-pure-white/60 hover:text-pure-white transition-colors">الرئيسية</a></li>
+                        <li><a href="#philosophy" class="text-sm font-light text-pure-white/60 hover:text-pure-white transition-colors">فلسفتنا</a></li>
+                        <li><a href="#services" class="text-sm font-light text-pure-white/60 hover:text-pure-white transition-colors">الخدمات</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-1">
+                    <h4 class="font-en text-xs tracking-widest text-pure-terracotta uppercase mb-6">Social</h4>
+                    <div class="flex gap-6">
+                        <a href="#" class="text-pure-white/60 hover:text-pure-terracotta transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-pure-white/60 hover:text-pure-terracotta transition-colors text-xl"><i class="fab fa-snapchat-ghost"></i></a>
+                        <a href="#" class="text-pure-white/60 hover:text-pure-terracotta transition-colors text-xl"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light text-pure-white/40">
+                <p>&copy; 2026 Samah Clinics. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-pure-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-pure-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إعداد الهيدر عند التمرير
+        const header = document.getElementById('header');
+        const marquee = document.querySelector('.marquee-container');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                header.classList.add('bg-pure-cream/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+                header.classList.remove('py-6');
+                if(marquee) marquee.style.display = 'none'; // إخفاء الماركي عند النزول
+                header.style.top = '0';
+            } else {
+                header.classList.remove('bg-pure-cream/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+                header.classList.add('py-6');
+                if(marquee && window.innerWidth >= 768) marquee.style.display = 'block';
+                header.style.top = 'auto';
+            }
+        });
+
+        // القائمة الجانبية للموبايل
+        const menuBtn = document.getElementById('menu-btn');
+        const fullMenu = document.getElementById('full-menu');
+        const menuLinks = document.querySelectorAll('.menu-link');
+        const lines = menuBtn.querySelectorAll('span');
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                fullMenu.classList.add('open');
+                // تغيير شكل الزر إلى (X)
+                lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                lines[1].style.transform = 'rotate(-45deg) translate(2px, -2px)';
+                lines[1].style.width = '1.5rem';
+                document.body.style.overflow = 'hidden';
+            } else {
+                closeMenu();
+            }
+        });
+
+        function closeMenu() {
+            menuOpen = false;
+            fullMenu.classList.remove('open');
+            lines[0].style.transform = 'none';
+            lines[1].style.transform = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+        // مراقب التمرير (Intersection Observer) لظهور العناصر والصور
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // مراقبة النصوص
+        document.querySelectorAll('.reveal').forEach((elem) => {
+            observer.observe(elem);
+        });
+
+        // مراقبة الصور (تأثير الستارة)
+        document.querySelectorAll('.img-reveal-container').forEach((elem) => {
+            observer.observe(elem);
+        });
+
+        // محاكاة إرسال النموذج
+        function submitForm() {
+            const btn = document.querySelector('#bookingForm button[type="submit"] span');
+            const originalText = btn.innerText;
+            
+            btn.innerText = 'جاري الإرسال...';
+            
+            setTimeout(() => {
+                document.getElementById('bookingForm').reset();
+                document.getElementById('successMessage').classList.remove('hidden');
+                btn.innerText = originalText;
+                
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.add('hidden');
+                }, 4000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

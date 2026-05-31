@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="{{ $activeTheme ?? 1 }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,14 +35,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}?v=6">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/themes/clean.css') }}?v=6">
+    
+    <link id="themeStylesheet" rel="stylesheet" href="{{ asset('css/themes/samah-' . ($activeTheme ?? 1) . '.css') }}?v={{ time() }}">
+    
     <meta name="theme-color" content="#ffffff">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
@@ -54,21 +55,26 @@
 
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"/></noscript>
 </head>
-<body class="antialiased" style="background-color: var(--surface); color: var(--ink);">
+<body class="antialiased">
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:right-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-bold" style="background:var(--ink);color:var(--surface);">الانتقال إلى المحتوى</a>
 
     @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelNoscript() !!} @endif
 
-    @include('frontend.layouts.clean-minimal.header')
+    @include('frontend.layouts.unified.header')
 
     <main id="main-content" style="min-height:60vh;">
         @yield('content')
     </main>
 
-    @include('frontend.layouts.clean-minimal.footer')
+    @include('frontend.layouts.unified.footer')
+
+    @include('frontend.layouts.partials.floating-social')
+
+    @include('frontend.layouts.partials.theme-toast')
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="{{ asset('js/theme-manager.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/app.js') }}?v=6"></script>
 
     @stack('scripts')

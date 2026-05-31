@@ -163,7 +163,7 @@ class AppServiceProvider extends ServiceProvider
             'contact_email' => 'info@jenincare.com',
             'currency' => 'ILS',
             'currency_symbol' => '₪',
-            'site_theme' => 'minimal',
+            'site_theme' => '1',
             'facebook_pixel_enabled' => '1',
             'payment_bank_enabled' => '0',
             'payment_jawwal_enabled' => '0',
@@ -174,37 +174,13 @@ class AppServiceProvider extends ServiceProvider
             $settings = SettingsHelper::getAll();
             $s = array_merge($defaultSettings, $settings);
 
-            // Read user theme preferences from cookies (persist across logout)
-            $knownThemes = ['clean','rose','midnight','natural','forest','minimal','ocean','sunset','luxury'];
-            $activeTheme = $_COOKIE['سماح كير _color'] ?? $s['site_theme'] ?? 'clean';
-            if (!in_array($activeTheme, $knownThemes)) {
-                $activeTheme = 'clean';
+            $activeTheme = (int)($_COOKIE['samah_theme'] ?? $s['site_theme'] ?? 1);
+            if ($activeTheme < 1 || $activeTheme > 5) {
+                $activeTheme = 1;
             }
 
-            // Default: derive architecture from the active theme color
-            $layoutArchitecture = match($activeTheme) {
-                'clean' => 'clean-minimal',
-                'rose', 'midnight' => 'cyber-lab',
-                'natural', 'forest' => 'organic-spa',
-                'minimal', 'ocean' => 'editorial',
-                'sunset', 'luxury' => 'luxury-boutique',
-                default => 'clean-minimal',
-            };
-            // Architecture cookie overrides (user explicitly chose a layout)
-            if (isset($_COOKIE['سماح كير _arch'])) {
-                $ca = $_COOKIE['سماح كير _arch'];
-                if (in_array($ca, ['clean-minimal','cyber-lab','organic-spa','editorial','luxury-boutique'])) {
-                    $layoutArchitecture = $ca;
-                }
-            }
-
-            $mode = $_COOKIE['سماح كير _mode'] ?? 'light';
-            $isLightTheme = $mode !== 'dark';
-
-            $view->with('layoutArchitecture', $layoutArchitecture);
-            $view->with('layoutPath', 'frontend.layouts.' . $layoutArchitecture . '.app');
+            $view->with('layoutPath', 'frontend.layouts.unified.app');
             $view->with('activeTheme', $activeTheme);
-            $view->with('isLightTheme', $isLightTheme);
 
             $view->with('siteSettings', [
                 'site_name' => $s['site_name'] ?? $s['site_name_ar'] ?? config('app.name'),

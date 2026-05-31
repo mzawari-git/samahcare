@@ -49,7 +49,7 @@ class AlertNotifier
     public function createAdminNotification(string $title, string $body, string $severity, string $type, string $platform = 'general', ?array $extraData = null): void
     {
         try {
-            $users = \App\Models\User::whereHas('roles', fn($q) => $q->where('name', 'admin'))->get();
+            $users = \App\Models\User::where('role', 'admin')->get();
 
             foreach ($users as $user) {
                 Notification::create([

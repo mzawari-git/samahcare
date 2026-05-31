@@ -1,13 +1,8 @@
-{{-- ═══════════════════════════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════════════════════════ --}}
 <footer style="background: var(--neutral-900); color: var(--neutral-300);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {{-- Main Footer --}}
         <div class="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
             
-            {{-- Brand Column --}}
             <div class="lg:col-span-4">
                 <div class="flex items-center gap-2.5 mb-6">
                     @if(!empty($siteSettings['site_logo_url']))
@@ -22,7 +17,6 @@
                     {{ $siteSettings['site_description'] ?? 'وجهتكِ الأولى لخدمات العناية بالبشرة والتجميل. نقدم لكِ تجربة جمالية استثنائية بأيدي خبيرات معتمدات.' }}
                 </p>
                 
-                {{-- Social Links --}}
                 <div class="flex gap-2">
                     @if(!empty($siteSettings['facebook_url']))
                     <a href="{{ $siteSettings['facebook_url'] }}" target="_blank" class="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-110" style="background: var(--neutral-800); color: var(--neutral-300);">
@@ -47,7 +41,6 @@
                 </div>
             </div>
 
-            {{-- Quick Links --}}
             <div class="lg:col-span-2">
                 <h5 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">روابط سريعة</h5>
                 <ul class="space-y-3">
@@ -58,7 +51,6 @@
                 </ul>
             </div>
 
-            {{-- Support --}}
             <div class="lg:col-span-2">
                 <h5 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">الدعم</h5>
                 <ul class="space-y-3">
@@ -68,7 +60,6 @@
                 </ul>
             </div>
 
-            {{-- Contact Info --}}
             <div class="lg:col-span-4">
                 <h5 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">تواصلي معنا</h5>
                 <ul class="space-y-4">
@@ -100,7 +91,6 @@
             </div>
         </div>
 
-        {{-- Bottom Bar --}}
         <div class="py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm" style="border-top: 1px solid var(--neutral-800); color: var(--neutral-500);">
             <p>&copy; {{ date('Y') }} {{ $siteSettings['site_name'] ?? 'سماح كير' }}. جميع الحقوق محفوظة.</p>
             <div class="flex gap-2">
@@ -119,7 +109,6 @@
     </div>
 </footer>
 
-{{-- Footer Link Style --}}
 <style>
 .footer-link {
     color: var(--neutral-400);

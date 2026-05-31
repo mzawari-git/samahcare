@@ -1,8 +1,5 @@
 @php if(!isset($headerServices)){$headerServices=\App\Models\Service::active()->ordered()->get();} @endphp
 
-{{-- ═══════════════════════════════════════════════════════════════
-     ANNOUNCEMENT BAR
-     ═══════════════════════════════════════════════════════════════ --}}
 <div class="w-full py-2.5 px-4 text-center" style="background: var(--gradient-primary);">
     <p class="text-xs sm:text-sm font-medium text-white">
         <i class="ph ph-sparkle ml-1"></i>
@@ -11,14 +8,10 @@
     </p>
 </div>
 
-{{-- ═══════════════════════════════════════════════════════════════
-     MAIN HEADER
-     ═══════════════════════════════════════════════════════════════ --}}
 <header class="sticky top-0 w-full z-50 transition-all duration-300" id="mainHeader" style="background: var(--header-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: var(--border-subtle);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 lg:h-20">
             
-            {{-- Logo --}}
             <a href="{{ route('home') }}" class="flex items-center gap-2.5 flex-shrink-0 group">
                 @if(!empty($siteSettings['site_logo_url']))
                     <img src="{{ $siteSettings['site_logo_url'] }}" alt="{{ $siteSettings['site_name'] ?? 'سماح كير' }}" class="h-9 lg:h-11 w-auto object-contain transition-transform group-hover:scale-105">
@@ -29,7 +22,6 @@
                 @endif
             </a>
 
-            {{-- Desktop Navigation --}}
             <nav class="hidden lg:flex items-center gap-1">
                 <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                     <i class="ph ph-house"></i>
@@ -53,15 +45,12 @@
                 </a>
             </nav>
 
-            {{-- Actions --}}
             <div class="flex items-center gap-2 lg:gap-3">
-                {{-- Cart --}}
                 <button class="relative w-10 h-10 lg:w-11 lg:h-11 rounded-xl flex items-center justify-center transition-all hover:scale-105" style="background: var(--neutral-100); color: var(--ink);">
                     <i class="ph ph-shopping-bag text-lg"></i>
                     <span class="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style="background: var(--brand-500);">3</span>
                 </button>
 
-                {{-- Account --}}
                 @auth
                     <a href="{{ route('booking') }}" class="hidden sm:flex w-10 h-10 lg:w-11 lg:h-11 rounded-xl items-center justify-center transition-all hover:scale-105" style="background: var(--neutral-100); color: var(--ink);">
                         <i class="ph ph-user-circle text-lg"></i>
@@ -72,13 +61,11 @@
                     </a>
                 @endauth
 
-                {{-- CTA Button --}}
                 <a href="{{ route('booking') }}" class="hidden lg:inline-flex btn btn-primary py-2.5 px-5 text-sm">
                     <i class="ph ph-calendar-plus"></i>
                     <span>احجزي الآن</span>
                 </a>
 
-                {{-- Mobile Menu Toggle --}}
                 <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105" style="background: var(--neutral-100); color: var(--ink);">
                     <i class="ph ph-list text-lg" id="mobileMenuIcon"></i>
                 </button>
@@ -87,17 +74,11 @@
     </div>
 </header>
 
-{{-- ═══════════════════════════════════════════════════════════════
-     MOBILE MENU
-     ═══════════════════════════════════════════════════════════════ --}}
 <div id="mobileMenu" class="fixed inset-0 z-[60] hidden" style="direction: rtl;">
-    {{-- Overlay --}}
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
     
-    {{-- Panel --}}
     <div class="absolute top-0 right-0 w-[320px] sm:w-[380px] h-full shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col" id="mobilePanel" style="background: var(--surface);">
         
-        {{-- Header --}}
         <div class="px-6 py-5 flex items-center justify-between" style="border-bottom: var(--border-subtle);">
             @if(!empty($siteSettings['site_logo_url']))
                 <img src="{{ $siteSettings['site_logo_url'] }}" alt="سماح كير" class="h-8 w-auto object-contain">
@@ -109,7 +90,6 @@
             </button>
         </div>
 
-        {{-- CTA --}}
         <div class="px-5 pt-5">
             <a href="{{ route('booking') }}" class="btn btn-primary w-full justify-center">
                 <i class="ph ph-calendar-plus text-lg"></i>
@@ -117,7 +97,6 @@
             </a>
         </div>
 
-        {{-- Navigation --}}
         <div class="flex-1 overflow-y-auto px-4 py-5 space-y-1">
             <a href="{{ route('home') }}" class="mobile-link {{ request()->routeIs('home') ? 'active' : '' }}">
                 <i class="ph ph-house"></i>
@@ -140,10 +119,8 @@
                 <span>الأسئلة الشائعة</span>
             </a>
 
-            {{-- Divider --}}
             <div class="my-4" style="border-top: var(--border-subtle);"></div>
 
-            {{-- Auth --}}
             @auth
                 <form method="POST" action="{{ route('logout') }}" style="display: contents;">
                     @csrf
@@ -164,7 +141,6 @@
             @endauth
         </div>
 
-        {{-- Footer --}}
         <div class="px-6 py-5" style="border-top: var(--border-subtle);">
             <p class="text-xs font-semibold mb-3" style="color: var(--ink-dim);">تابعينا على</p>
             <div class="flex items-center gap-2">
@@ -193,11 +169,7 @@
     </div>
 </div>
 
-{{-- ═══════════════════════════════════════════════════════════════
-     STYLES
-     ═══════════════════════════════════════════════════════════════ --}}
 <style>
-/* Desktop Navigation */
 .nav-link {
     display: flex;
     align-items: center;
@@ -222,7 +194,6 @@
     font-weight: 600;
 }
 
-/* Mobile Navigation */
 .mobile-link {
     display: flex;
     align-items: center;
@@ -254,9 +225,6 @@
 }
 </style>
 
-{{-- ═══════════════════════════════════════════════════════════════
-     SCRIPTS
-     ═══════════════════════════════════════════════════════════════ --}}
 <script>
 function toggleMobileMenu() {
     var menu = document.getElementById('mobileMenu');

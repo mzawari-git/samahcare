@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سماح كلينيك | جمال مستوحى من طبيعة وادي سلامة</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo for Arabic, Lora for elegant serif English -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wadi: {
+                            dark: '#2C3E2D',    // Deep forest green (Shadows of the valley)
+                            olive: '#5C715E',   // Olive green (Trees of Wadi Salama)
+                            sage: '#899F8A',    // Soft sage (Leaves in the mist)
+                            water: '#7BA4A8',   // Clear stream water
+                            stone: '#E6E2DD',   // Light river stone
+                            sand: '#F4F1ED',    // Natural sand/earth
+                            bark: '#4A3B32'     // Tree bark / text color
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #F4F1ED;
+            color: #4A3B32;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-serif {
+            font-family: 'Lora', serif;
+        }
+
+        /* Organic Fluid Blob Shape for Images */
+        .blob-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .blob-shape-2 {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph2 10s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            50% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        }
+
+        @keyframes morph2 {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        /* Fade Up Animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Organic Button */
+        .btn-nature {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background-color: #2C3E2D;
+            color: #F4F1ED;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #2C3E2D;
+            z-index: 1;
+        }
+
+        .btn-nature::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #5C715E;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+
+        .btn-nature:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .btn-nature:hover {
+            box-shadow: 0 10px 20px rgba(44, 62, 45, 0.2);
+            border-color: #5C715E;
+        }
+
+        /* Flowing Lines Background */
+        .bg-lines {
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 1px,
+                #E6E2DD 1px,
+                #E6E2DD 2px
+            );
+            background-size: 100% 40px;
+        }
+
+        /* Inputs */
+        .leaf-input {
+            width: 100%;
+            background-color: #E6E2DD;
+            border: 1px solid transparent;
+            border-radius: 20px 2px 20px 2px;
+            padding: 1rem 1.5rem;
+            color: #4A3B32;
+            transition: all 0.3s ease;
+        }
+        .leaf-input:focus {
+            outline: none;
+            border-color: #5C715E;
+            background-color: #F4F1ED;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F4F1ED; }
+        ::-webkit-scrollbar-thumb { background: #899F8A; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5C715E; }
+    </style>
+</head>
+<body class="antialiased selection:bg-wadi-olive selection:text-white">
+
+    <header id="header" class="fixed w-full z-50 transition-all duration-500 py-4">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center bg-wadi-sand/80 backdrop-blur-md rounded-full shadow-sm py-3 px-6 border border-wadi-stone/50">
+            
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="text-wadi-dark focus:outline-none lg:hidden flex flex-col gap-1.5 z-50">
+                <span class="w-6 h-[2px] bg-wadi-dark block"></span>
+                <span class="w-4 h-[2px] bg-wadi-dark block"></span>
+                <span class="w-6 h-[2px] bg-wadi-dark block"></span>
+            </button>
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-wadi-dark flex items-center justify-center text-wadi-sand">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-xl text-wadi-dark leading-none">سماح</span>
+                    <span class="text-[10px] text-wadi-olive tracking-wider">للتجميل والليزر</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-wadi-bark">
+                <a href="#hero" class="hover:text-wadi-olive transition-colors">الرئيسية</a>
+                <a href="#nature" class="hover:text-wadi-olive transition-colors">سر وادي سلامة</a>
+                <a href="#services" class="hover:text-wadi-olive transition-colors">ينابيع الجمال</a>
+            </nav>
+
+            <!-- CTA -->
+            <a href="#booking" class="hidden lg:inline-flex items-center justify-center px-6 py-2 bg-wadi-water text-white rounded-full text-sm font-bold hover:bg-wadi-olive transition-colors shadow-sm">
+                احجزي موعدك
+            </a>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-wadi-dark z-40 hidden flex-col items-center justify-center text-wadi-sand">
+        <button onclick="toggleMobileMenu()" class="absolute top-10 right-10 text-3xl"><i class="fas fa-times"></i></button>
+        <nav class="flex flex-col gap-8 text-2xl font-bold text-center">
+            <a href="#hero" onclick="toggleMobileMenu()" class="hover:text-wadi-water">الرئيسية</a>
+            <a href="#nature" onclick="toggleMobileMenu()" class="hover:text-wadi-water">سر وادي سلامة</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="hover:text-wadi-water">ينابيع الجمال</a>
+            <a href="#booking" onclick="toggleMobileMenu()" class="text-wadi-water">احجزي موعدك</a>
+        </nav>
+    </div>
+
+    <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-lines">
+        <!-- Decorative water splash element -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-wadi-water/10 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-wadi-olive/10 rounded-full blur-3xl -z-10"></div>
+
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                
+                <!-- Text Content -->
+                <div class="w-full lg:w-1/2 text-center lg:text-right fade-up mt-12 lg:mt-0">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-wadi-stone text-wadi-olive text-sm font-semibold mb-6">
+                        <i class="fas fa-droplet text-wadi-water"></i> نقاء الطبيعة، بين يديكِ
+                    </div>
+                    <h1 class="text-4xl lg:text-6xl font-bold text-wadi-dark leading-tight mb-6">
+                        جمال يتدفق كنقاء <br>
+                        <span class="text-wadi-olive font-serif italic text-5xl lg:text-7xl">وادي سلامة</span>
+                    </h1>
+                    <p class="text-lg text-wadi-bark mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        استوحينا من هدوء وينابيع وادي سلامة فلسفتنا في العناية بجمالك. نقدم لكِ أحدث تقنيات الليزر والعناية بالبشرة لنعيد لكِ إشراقتك الطبيعية بكل أمان ورقة.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#booking" class="btn-nature">
+                            رحلة نضارتك تبدأ هنا
+                        </a>
+                        <a href="#services" class="inline-flex items-center justify-center px-8 py-3 rounded-full text-wadi-dark font-bold hover:bg-wadi-stone transition-colors">
+                            استكشفي خدماتنا
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Organic Images -->
+                <div class="w-full lg:w-1/2 relative h-[500px] lg:h-[600px] fade-up delay-200">
+                    <!-- Image 1: Nature/Water (Wadi Salama vibe) -->
+                    <div class="absolute top-0 right-10 w-2/3 h-[400px] blob-shape shadow-2xl z-10 border-4 border-wadi-sand">
+                        <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=800" alt="طبيعة وادي سلامة" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-wadi-olive/20 mix-blend-multiply"></div>
+                    </div>
+                    <!-- Image 2: Beauty/Skin -->
+                    <div class="absolute bottom-0 left-0 w-3/5 h-[350px] blob-shape-2 shadow-xl z-20 border-4 border-wadi-sand">
+                        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=800" alt="نضارة البشرة" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute top-1/2 -right-4 lg:-right-8 bg-white/90 backdrop-blur rounded-2xl p-4 shadow-lg z-30 flex items-center gap-4 animate-bounce" style="animation-duration: 3s;">
+                        <div class="w-12 h-12 rounded-full bg-wadi-water/20 flex items-center justify-center text-wadi-water text-xl">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-wadi-bark font-bold">مواد عضوية & آمنة</p>
+                            <p class="text-wadi-dark font-bold">100% طبيعي</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="nature" class="py-24 bg-wadi-dark text-wadi-sand relative overflow-hidden">
+        <!-- Abstract Topographic lines overlay (symbolizing the valley) -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 50 Q 250 100 500 50 T 1000 50\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'2\'/%3E%3Cpath d=\'M0 150 Q 250 200 500 150 T 1000 150\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'2\'/%3E%3Cpath d=\'M0 250 Q 250 300 500 250 T 1000 250\' fill=\'none\' stroke=\'%23ffffff\' stroke-width=\'2\'/%3E%3C/svg%3E'); background-size: cover;"></div>
+
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="text-center max-w-3xl mx-auto fade-up">
+                <i class="fas fa-water text-4xl text-wadi-water mb-6"></i>
+                <h2 class="text-3xl lg:text-4xl font-bold mb-8 leading-relaxed">
+                    كما تجدد مياه "وادي سلامة" حيوية الأرض، <br>
+                    <span class="text-wadi-sage font-serif italic text-4xl lg:text-5xl">نحن نجدد حيوية بشرتك</span>
+                </h2>
+                <p class="text-wadi-stone text-lg leading-relaxed font-light">
+                    في سماح كلينيك، نؤمن أن الجمال الحقيقي ينبع من الطبيعة. نستلهم من أشجار الزيتون الصامدة وينابيع المياه العذبة في وادي سلامة لنقدم لكِ أحدث الحلول الطبية (الليزر البارد، وحقن النضارة) بطريقة تحافظ على ملامحك الأصلية وتبرز نقائك الفطري.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+                <div class="bg-wadi-olive/20 p-8 rounded-[40px] rounded-br-none border border-wadi-olive/30 text-center fade-up delay-100 backdrop-blur-sm">
+                    <div class="w-16 h-16 mx-auto bg-wadi-dark rounded-full flex items-center justify-center text-wadi-water mb-6 text-2xl">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">هواء نقي (تقنيات مبردة)</h3>
+                    <p class="text-wadi-stone/80 text-sm">أجهزة ليزر متطورة مزودة بتبريد عالي يماثل نسمات الوادي الباردة، لجلسات بدون أي ألم.</p>
+                </div>
+                <div class="bg-wadi-olive/20 p-8 rounded-[40px] text-center fade-up delay-200 backdrop-blur-sm mt-0 md:-mt-8">
+                    <div class="w-16 h-16 mx-auto bg-wadi-dark rounded-full flex items-center justify-center text-wadi-water mb-6 text-2xl">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">نمو وتجدد (علاج الخلايا)</h3>
+                    <p class="text-wadi-stone/80 text-sm">تحفيز الكولاجين الطبيعي في البشرة وإعادة بناء الخلايا للحصول على مظهر شاب وحيوي.</p>
+                </div>
+                <div class="bg-wadi-olive/20 p-8 rounded-[40px] rounded-bl-none border border-wadi-olive/30 text-center fade-up delay-300 backdrop-blur-sm">
+                    <div class="w-16 h-16 mx-auto bg-wadi-dark rounded-full flex items-center justify-center text-wadi-water mb-6 text-2xl">
+                        <i class="fas fa-droplet"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">ارتواء عميق (ترطيب)</h3>
+                    <p class="text-wadi-stone/80 text-sm">إبر نضارة وجلسات هيدرافيشال تروي عطش بشرتك كما تروي مياه النبع الأرض العطشى.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-wadi-sand relative">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="text-center mb-20 fade-up">
+                <span class="text-wadi-olive font-bold tracking-wider text-sm mb-2 block">خدماتنا العلاجية</span>
+                <h2 class="text-4xl lg:text-5xl font-bold text-wadi-dark">ينابيع الجمال المتدفقة</h2>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Service 1 -->
+                <div class="group bg-wadi-stone/50 hover:bg-wadi-stone rounded-[40px] p-4 lg:p-8 transition-colors duration-500 fade-up">
+                    <div class="flex flex-col lg:flex-row items-center gap-10">
+                        <div class="w-full lg:w-1/3 h-64 overflow-hidden rounded-[30px]">
+                            <img src="https://images.unsplash.com/photo-1596755389378-c5b6ff49071c?auto=format&fit=crop&q=80&w=600" alt="Laser Hair Removal" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="w-full lg:w-2/3">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="w-12 h-12 rounded-full bg-wadi-water/20 text-wadi-water flex items-center justify-center"><i class="fas fa-spa"></i></span>
+                                <h3 class="text-2xl font-bold text-wadi-dark">صفاء الصخر النهرى (الليزر البارد)</h3>
+                            </div>
+                            <p class="text-wadi-bark mb-6 max-w-2xl">
+                                تخلصي من الشعر الزائد بأحدث أجهزة الليزر العالمية. نوفر لكِ بشرة ملساء ونقية تماماً كصخور الوادي المصقولة بفعل المياه العذبة، مع ضمان الراحة التامة.
+                            </p>
+                            <ul class="flex flex-wrap gap-4 text-sm font-semibold text-wadi-olive">
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">جنتل ماكس برو</li>
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">تبريد فوري</li>
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">لجميع أنواع البشرة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group bg-wadi-stone/50 hover:bg-wadi-stone rounded-[40px] p-4 lg:p-8 transition-colors duration-500 fade-up">
+                    <div class="flex flex-col lg:flex-row-reverse items-center gap-10">
+                        <div class="w-full lg:w-1/3 h-64 overflow-hidden rounded-[30px]">
+                            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600" alt="Skin Hydration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="w-full lg:w-2/3 text-right lg:text-left rtl:lg:text-right">
+                            <div class="flex items-center gap-4 mb-4 justify-start">
+                                <span class="w-12 h-12 rounded-full bg-wadi-sage/20 text-wadi-olive flex items-center justify-center"><i class="fas fa-hand-holding-droplet"></i></span>
+                                <h3 class="text-2xl font-bold text-wadi-dark">نضارة الينابيع (العناية بالبشرة)</h3>
+                            </div>
+                            <p class="text-wadi-bark mb-6 max-w-2xl">
+                                بروتوكولات مخصصة لتنظيف وترطيب البشرة بعمق (الهيدرافيشال والتقشير). نعيد لبشرتك حيويتها لتصبح نضرة ومشرقة كطبيعة الربيع في الوادي.
+                            </p>
+                            <ul class="flex flex-wrap gap-4 text-sm font-semibold text-wadi-olive">
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">توحيد اللون</li>
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">تنظيف عميق</li>
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">علاج التصبغات</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group bg-wadi-stone/50 hover:bg-wadi-stone rounded-[40px] p-4 lg:p-8 transition-colors duration-500 fade-up">
+                    <div class="flex flex-col lg:flex-row items-center gap-10">
+                        <div class="w-full lg:w-1/3 h-64 overflow-hidden rounded-[30px]">
+                            <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=600" alt="Injectables" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="w-full lg:w-2/3">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="w-12 h-12 rounded-full bg-wadi-dark/10 text-wadi-dark flex items-center justify-center"><i class="fas fa-magic"></i></span>
+                                <h3 class="text-2xl font-bold text-wadi-dark">تجدد الفصول (اللمسات التجميلية)</h3>
+                            </div>
+                            <p class="text-wadi-bark mb-6 max-w-2xl">
+                                لمسات فنية دقيقة بالبوتوكس والفيلر لإبراز جمالك الطبيعي وتخفيف علامات الإرهاق والزمن، لتبقي دائماً في أبهى حلة وكأنك في فصل الربيع الدائم.
+                            </p>
+                            <ul class="flex flex-wrap gap-4 text-sm font-semibold text-wadi-olive">
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">فيلر الشفاه والخدود</li>
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">بوتوكس التجاعيد</li>
+                                <li class="bg-wadi-sand px-4 py-2 rounded-full">إبر البروفايلو</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-24 bg-wadi-olive relative text-white overflow-hidden">
+        <!-- Abstract leaves in background -->
+        <i class="fas fa-leaf absolute text-9xl text-wadi-dark/20 -top-10 -right-10 transform rotate-45"></i>
+        <i class="fas fa-leaf absolute text-[15rem] text-wadi-dark/10 -bottom-20 -left-20 transform -rotate-45"></i>
+
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center bg-wadi-dark/40 backdrop-blur-lg rounded-[50px] p-8 lg:p-16 border border-wadi-sage/30 shadow-2xl">
+                
+                <div class="fade-up">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-wadi-sand">اغمري بشرتك بالجمال</h2>
+                    <p class="text-wadi-stone text-lg mb-10 leading-relaxed font-light">
+                        احجزي جلستك الآن في "سماح كلينيك". دعي طاقمنا الطبي المتخصص يعتني بكِ في بيئة هادئة ومريحة مستوحاة من سكون وادي سلامة.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 bg-wadi-dark/50 p-4 rounded-2xl">
+                            <div class="w-12 h-12 bg-wadi-water/20 rounded-full flex items-center justify-center text-wadi-water text-xl">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-wadi-sage">الموقع</span>
+                                <span class="font-bold">فلسطين، نابلس، بالقرب من وادي سلامة</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-wadi-dark/50 p-4 rounded-2xl">
+                            <div class="w-12 h-12 bg-wadi-water/20 rounded-full flex items-center justify-center text-wadi-water text-xl">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-wadi-sage">للتواصل المباشر</span>
+                                <span class="font-bold" dir="ltr">+970 59 000 0000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-wadi-sand rounded-[40px] p-8 shadow-xl fade-up delay-200">
+                    <h3 class="text-2xl font-bold text-wadi-dark mb-8">نموذج الحجز السريع</h3>
+                    <form id="bookingForm" onsubmit="event.preventDefault(); submitForm();" class="space-y-5">
+                        <div>
+                            <input type="text" placeholder="الاسم الكامل" required class="leaf-input">
+                        </div>
+                        <div>
+                            <input type="tel" dir="ltr" placeholder="رقم الموبايل" required class="leaf-input text-right">
+                        </div>
+                        <div>
+                            <select required class="leaf-input appearance-none">
+                                <option value="" disabled selected>اختاري نبع الجمال (الخدمة)...</option>
+                                <option value="laser">إزالة الشعر بالليزر</option>
+                                <option value="skin">نضارة وعناية بالبشرة</option>
+                                <option value="inject">فيلر وبوتوكس</option>
+                                <option value="consult">استشارة طبية</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-wadi-dark text-wadi-sand rounded-xl font-bold hover:bg-wadi-water transition-colors mt-4 text-lg">
+                            <span id="btnText">تأكيد الموعد</span>
+                        </button>
+                    </form>
+                    
+                    <!-- رسالة النجاح -->
+                    <div id="successMessage" class="hidden mt-6 text-center text-wadi-dark bg-wadi-sage/30 p-4 rounded-xl text-sm font-bold border border-wadi-olive">
+                        <i class="fas fa-check-circle text-wadi-olive ml-2"></i> تم استلام طلبك بنجاح، كوني مستعدة لرحلة الجمال!
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-wadi-dark text-wadi-stone py-12 border-t border-wadi-olive/30">
+        <div class="container mx-auto px-6 lg:px-12 text-center">
+            <div class="w-16 h-16 mx-auto bg-wadi-olive rounded-full flex items-center justify-center text-wadi-sand text-2xl mb-6">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-wadi-sand mb-2">سماح كلينيك</h2>
+            <p class="text-wadi-sage text-sm mb-8">جمال مستوحى من طبيعة وادي سلامة</p>
+            
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="w-10 h-10 rounded-full bg-wadi-olive/30 flex items-center justify-center hover:bg-wadi-water hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-wadi-olive/30 flex items-center justify-center hover:bg-wadi-water hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-wadi-olive/30 flex items-center justify-center hover:bg-wadi-water hover:text-white transition-colors"><i class="fab fa-tiktok"></i></a>
+            </div>
+            
+            <p class="text-xs text-wadi-stone/60">
+                &copy; 2026 سماح كلينيك - نابلس. جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        // Scroll animations using Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach((elem) => {
+            observer.observe(elem);
+        });
+
+        // Sticky Header effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+
+        // Form Submission Simulation
+        function submitForm() {
+            const btnText = document.getElementById('btnText');
+            const originalText = btnText.innerText;
+            
+            btnText.innerText = 'جاري تسجيل الموعد...';
+            
+            setTimeout(() => {
+                document.getElementById('bookingForm').reset();
+                document.getElementById('successMessage').classList.remove('hidden');
+                btnText.innerText = originalText;
+                
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.add('hidden');
+                }, 5000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

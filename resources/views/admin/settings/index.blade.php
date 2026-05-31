@@ -1,5 +1,5 @@
 @php
-$tabs = ['general', 'seo', 'business', 'social', 'payment', 'features'];
+$tabs = ['general', 'seo', 'business', 'social', 'payment', 'features', 'themes'];
 $activeTab = request('tab', 'general');
 @endphp
 @extends('admin.layouts.app')
@@ -44,6 +44,7 @@ $activeTab = request('tab', 'general');
         <a href="#" class="tab-link {{ $activeTab === 'social' ? 'active' : '' }}" data-tab="social"><i class="fas fa-share-alt"></i> التواصل الاجتماعي</a>
         <a href="#" class="tab-link {{ $activeTab === 'payment' ? 'active' : '' }}" data-tab="payment"><i class="fas fa-credit-card"></i> الدفع</a>
         <a href="#" class="tab-link {{ $activeTab === 'features' ? 'active' : '' }}" data-tab="features"><i class="fas fa-star"></i> الميزات</a>
+        <a href="#" class="tab-link {{ $activeTab === 'themes' ? 'active' : '' }}" data-tab="themes"><i class="fas fa-palette"></i> التصاميم</a>
     </div>
 
     {{-- General --}}
@@ -128,12 +129,15 @@ $activeTab = request('tab', 'general');
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>ثيم الموقع</label>
+                        <label>التصميم الافتراضي</label>
                         <select name="site_theme" class="form-select">
-                            <option value="natural" {{ ($settings['site_theme'] ?? 'natural') === 'natural' ? 'selected' : '' }}>طبيعي (Natural)</option>
-                            <option value="dark" {{ ($settings['site_theme'] ?? '') === 'dark' ? 'selected' : '' }}>داكن (Dark)</option>
-                            <option value="light" {{ ($settings['site_theme'] ?? '') === 'light' ? 'selected' : '' }}>فاتح (Light)</option>
+                            <option value="1" {{ ($settings['site_theme'] ?? '1') == '1' ? 'selected' : '' }}>1 - الأناقة الذهبية (Rose Gold)</option>
+                            <option value="2" {{ ($settings['site_theme'] ?? '') == '2' ? 'selected' : '' }}>2 - الفخامة الخضراء (Forest Luxury)</option>
+                            <option value="3" {{ ($settings['site_theme'] ?? '') == '3' ? 'selected' : '' }}>3 - النقاء العصري (Pure Editorial)</option>
+                            <option value="4" {{ ($settings['site_theme'] ?? '') == '4' ? 'selected' : '' }}>4 - وادي سلامة (Wadi Nature)</option>
+                            <option value="5" {{ ($settings['site_theme'] ?? '') == '5' ? 'selected' : '' }}>5 - التقنية المتقدمة (Tech Medical)</option>
                         </select>
+                        <small class="hint">المستخدم يمكنه التبديل بالضغط على Ctrl+1 إلى Ctrl+5</small>
                     </div>
                 </div>
             </div>
@@ -466,6 +470,109 @@ $activeTab = request('tab', 'general');
                         </label>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Themes --}}
+    <div class="setting-section {{ $activeTab === 'themes' ? 'active' : '' }}" id="tab-themes">
+        <div class="setting-card">
+            <h6><i class="fas fa-palette" style="color:var(--pink-600);margin-left:6px;"></i> إعدادات التصاميم الخمسة</h6>
+            <p class="text-muted small mb-4">يمكنك تخصيص النصوص والصور لكل تصميم من التصاميم الخمسة. المستخدم يمكنه التبديل بين التصاميم بالضغط على Ctrl+1 إلى Ctrl+5</p>
+            
+            <div class="accordion" id="themesAccordion">
+                @php
+                $themeNames = [
+                    1 => ['name' => 'الأناقة الذهبية', 'color' => '#B76E79', 'icon' => 'fas fa-gem'],
+                    2 => ['name' => 'الفخامة الخضراء', 'color' => '#0F241D', 'icon' => 'fas fa-crown'],
+                    3 => ['name' => 'النقاء العصري', 'color' => '#C88B76', 'icon' => 'fas fa-leaf'],
+                    4 => ['name' => 'وادي سلامة', 'color' => '#5C715E', 'icon' => 'fas fa-tree'],
+                    5 => ['name' => 'التقنية المتقدمة', 'color' => '#0055FF', 'icon' => 'fas fa-microchip'],
+                ];
+                @endphp
+                
+                @foreach($themeNames as $num => $theme)
+                <div class="card mb-3" style="border: 2px solid {{ $theme['color'] }}20;">
+                    <div class="card-header p-3" style="background: {{ $theme['color'] }}10; cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#theme{{ $num }}Collapse">
+                        <div class="d-flex align-items-center gap-3">
+                            <div style="width: 40px; height: 40px; background: {{ $theme['color'] }}; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <i class="{{ $theme['icon'] }} text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold">التصميم {{ $num }}: {{ $theme['name'] }}</h6>
+                                <small class="text-muted">Ctrl+{{ $num }} للتفعيل</small>
+                            </div>
+                            <i class="fas fa-chevron-down ms-auto"></i>
+                        </div>
+                    </div>
+                    <div id="theme{{ $num }}Collapse" class="collapse {{ $num === 1 ? 'show' : '' }}" data-bs-parent="#themesAccordion">
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>عنوان القسم الرئيسية (Hero Title)</label>
+                                        <input type="text" name="theme{{ $num }}_hero_title" class="form-control" value="{{ old('theme' . $num . '_hero_title', $settings['theme' . $num . '_hero_title'] ?? '') }}" placeholder="اكتشفي جمالكِ الحقيقي">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>العنوان الفرعي (Hero Subtitle)</label>
+                                        <input type="text" name="theme{{ $num }}_hero_subtitle" class="form-control" value="{{ old('theme' . $num . '_hero_subtitle', $settings['theme' . $num . '_hero_subtitle'] ?? '') }}" placeholder="خدمات عناية بالبشرة وتجميل فاخرة">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>وصف القسم الرئيسية (Hero Description)</label>
+                                        <textarea name="theme{{ $num }}_hero_description" class="form-control" rows="2">{{ old('theme' . $num . '_hero_description', $settings['theme' . $num . '_hero_description'] ?? '') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>صورة الخلفية الرئيسية</label>
+                                        @if(!empty($settings['theme' . $num . '_hero_image']))
+                                        <div class="mb-2"><img src="{{ Storage::url($settings['theme' . $num . '_hero_image']) }}" style="width:100%;max-width:200px;height:120px;object-fit:cover;border-radius:8px;"></div>
+                                        @endif
+                                        <input type="file" name="theme{{ $num }}_hero_image" class="form-control" accept="image/*">
+                                        <small class="hint">يفضل صورة بحجم 1920x1080</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>نص الزر الرئيسي (CTA Button)</label>
+                                        <input type="text" name="theme{{ $num }}_cta_text" class="form-control" value="{{ old('theme' . $num . '_cta_text', $settings['theme' . $num . '_cta_text'] ?? '') }}" placeholder="احجزي موعدكِ الآن">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>عنوان قسم الخدمات</label>
+                                        <input type="text" name="theme{{ $num }}_services_title" class="form-control" value="{{ old('theme' . $num . '_services_title', $settings['theme' . $num . '_services_title'] ?? '') }}" placeholder="خدماتنا المختارة">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>وصف قسم الخدمات</label>
+                                        <textarea name="theme{{ $num }}_services_description" class="form-control" rows="2">{{ old('theme' . $num . '_services_description', $settings['theme' . $num . '_services_description'] ?? '') }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="setting-card">
+            <h6><i class="fas fa-info-circle" style="color:var(--pink-600);margin-left:6px;"></i> معلومات التصاميم</h6>
+            <div class="alert alert-info mb-0">
+                <h6 class="alert-heading"><i class="fas fa-lightbulb"></i> كيف يعمل نظام التصاميم؟</h6>
+                <ul class="mb-0 small">
+                    <li>الموقع يحتوي على 5 تصاميم احترافية مختلفة</li>
+                    <li>يمكن للمستخدم التبديل بين التصاميم بالضغط على <strong>Ctrl+1</strong> إلى <strong>Ctrl+5</strong></li>
+                    <li>كل تصميم له ألوان وخطوط وأنيميشن مختلفة</li>
+                    <li>يمكنك تخصيص النصوص والصور لكل تصميم من هنا</li>
+                    <li>التصميم الافتراضي هو التصميم رقم 1 (الأناقة الذهبية)</li>
+                </ul>
             </div>
         </div>
     </div>
