@@ -53,6 +53,7 @@
 @php
 $catLabels = ['face' => 'العناية بالوجه', 'body' => 'العناية بالجسم', 'extremities' => 'سبا الأطراف'];
 $catColors = ['face' => '#f472b6', 'body' => '#34d399', 'extremities' => '#a78bfa'];
+$hasServices = $stats['total'] > 0;
 @endphp
 
 {{-- Stats --}}
@@ -105,6 +106,7 @@ $catColors = ['face' => '#f472b6', 'body' => '#34d399', 'extremities' => '#a78bf
     </a>
 </div>
 
+@if($hasServices)
 {{-- Filter Bar --}}
 <form method="GET" class="filter-bar mb-3">
     <div class="row g-2 align-items-end">
@@ -205,7 +207,7 @@ $catColors = ['face' => '#f472b6', 'body' => '#34d399', 'extremities' => '#a78bf
                     </td>
                     <td><span class="sort-badge">{{ $service->sort_order }}</span></td>
                     <td>
-                        <form action="{{ route('admin.services.toggle', $service->id) }}" method="POST" id="toggleForm{{ $service->id }}" style="display:inline;">
+                        <form action="{{ route('admin.services.toggle', $service->id) }}" method="POST" style="display:inline;">
                             @csrf
                             <button type="submit" class="toggle-btn {{ $service->is_active ? 'active' : 'inactive' }}" title="{{ $service->is_active ? 'إيقاف' : 'تفعيل' }}">
                                 <i class="fas {{ $service->is_active ? 'fa-eye' : 'fa-eye-slash' }}"></i>
@@ -232,11 +234,11 @@ $catColors = ['face' => '#f472b6', 'body' => '#34d399', 'extremities' => '#a78bf
                 @empty
                 <tr>
                     <td colspan="9">
-                        <div class="empty-state">
-                            <i class="fas fa-spa"></i>
-                            <p>لا توجد خدمات حالياً</p>
-                            <a href="{{ route('admin.services.create') }}" class="btn btn-pink btn-sm">
-                                <i class="fas fa-plus"></i> إضافة أول خدمة
+                        <div class="empty-state" style="padding:2rem 1rem;">
+                            <i class="fas fa-search" style="font-size:2rem;color:#cbd5e1;margin-bottom:.75rem;"></i>
+                            <p style="color:#94a3b8;">لا توجد خدمات تطابق البحث</p>
+                            <a href="{{ route('admin.services.index') }}" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-times"></i> إلغاء الفلترة
                             </a>
                         </div>
                     </td>
@@ -247,7 +249,27 @@ $catColors = ['face' => '#f472b6', 'body' => '#34d399', 'extremities' => '#a78bf
     </div>
 </div>
 
-<div class="mt-3 fade-in-up">
-    {{ $services->links() }}
+@if($services->hasPages())
+    <div class="mt-3 fade-in-up">
+        {{ $services->links() }}
+    </div>
+@endif
+
+@else
+{{-- Empty State --}}
+<div class="card">
+    <div class="card-body">
+        <div class="empty-state">
+            <div style="width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,#fdf2f8,#fce7f3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+                <i class="fas fa-spa" style="font-size:2rem;color:#ec4899;"></i>
+            </div>
+            <h5 style="color:#1e293b;font-weight:700;margin-bottom:.5rem;">لا توجد خدمات بعد</h5>
+            <p style="color:#94a3b8;font-size:.9rem;margin-bottom:1.5rem;max-width:400px;margin-left:auto;margin-right:auto;">أضف خدماتك الأولى وستظهر هنا. يمكنك إضافة الخدمات مع الأسعار والمدة والصور.</p>
+            <a href="{{ route('admin.services.create') }}" class="btn btn-pink">
+                <i class="fas fa-plus"></i> إضافة أول خدمة
+            </a>
+        </div>
+    </div>
 </div>
+@endif
 @endsection
