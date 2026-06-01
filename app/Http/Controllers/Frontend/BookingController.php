@@ -24,7 +24,13 @@ class BookingController extends Controller
         $settings = Setting::pluck('value', 'key')->toArray();
         $paymentMethods = $this->getActivePaymentMethods($settings);
 
-        return view('frontend.booking.index', compact('services', 'groupedServices', 'settings', 'paymentMethods'));
+        $timeSlots = [];
+        for ($h = 9; $h <= 20; $h++) {
+            $timeSlots[] = sprintf('%02d:00', $h);
+            $timeSlots[] = sprintf('%02d:30', $h);
+        }
+
+        return view('frontend.booking.index', compact('services', 'groupedServices', 'settings', 'paymentMethods', 'timeSlots'));
     }
 
     public function store(Request $request)
@@ -66,6 +72,7 @@ class BookingController extends Controller
                 'service_id' => $service->id,
                 'service_name' => $service->name_ar,
                 'service_price' => $service->final_price,
+                'sessions_count' => $sessionsCount,
                 'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
                 'customer_email' => $request->customer_email,
@@ -74,7 +81,7 @@ class BookingController extends Controller
                 'total_amount' => $totalAmount,
                 'discount_amount' => $discountAmount,
                 'coupon_code' => $request->coupon_code,
-                'notes' => ($sessionsCount > 1 ? "[عدد الجلسات: {$sessionsCount}] " : '') . ($request->notes ?? ''),
+                'notes' => $request->notes,
                 'status' => 'pending',
                 'payment_status' => 'pending',
                 'payment_method' => $request->payment_method,

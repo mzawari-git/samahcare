@@ -248,8 +248,8 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
 
     <form action="{{ route('booking.store') }}" method="POST" id="bookingForm">
         @csrf
-        <div class="row g-4">
-            <div class="col-lg-7">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 lg:col-span-7">
 
                 {{-- ═══════ STEP 1: SERVICE SELECTION ═══════ --}}
                 <div class="wizard-step active" id="wizardStep1">
@@ -268,11 +268,11 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
 
                         @foreach($categories as $catKey => $catInfo)
                         <div class="cat-section {{ $loop->first ? 'active' : '' }}" id="cat-{{ $catKey }}">
-                            <div class="row g-2">
+                            <div class="grid grid-cols-12 gap-2">
                                 @if(isset($groupedServices[$catKey]))
                                 @foreach($groupedServices[$catKey] as $service)
                                 @php $sIcon = $serviceIcons[$service->name_ar] ?? ['icon' => 'fas fa-spa', 'color' => 'var(--brand-500)']; @endphp
-                                <div class="col-6 col-md-4">
+                                <div class="col-span-6 md:col-span-4">
                                     <div class="service-card {{ old('service_id') == $service->id ? 'selected' : '' }}" data-service-id="{{ $service->id }}" data-price="{{ $service->final_price }}" data-name="{{ $service->name_ar }}" onclick="selectService(this)">
                                         <div class="card-check"><i class="fas fa-check"></i></div>
                                         @if($service->is_on_sale)<div class="card-badge">خصم</div>@endif
@@ -302,7 +302,7 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
 
                         <input type="hidden" name="service_id" id="selectedServiceId" value="{{ old('service_id') }}">
                         <input type="hidden" name="sessions_count" id="sessionsCount" value="1">
-                        @error('service_id') <small class="text-danger d-block mt-2">{{ $message }}</small> @enderror
+                        @error('service_id') <span class="text-red-500 block mt-2 text-xs">{{ $message }}</span> @enderror
 
                         <div class="wizard-nav">
                             <div></div>
@@ -318,18 +318,18 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
                 <div class="wizard-step" id="wizardStep2">
                     <div class="bp-card">
                         <div class="section-title"><i class="fas fa-user"></i> معلوماتك الشخصية</div>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">الاسم الكامل <span style="color:var(--brand-500);">*</span></label>
-                                <div class="input-wrap"><i class="far fa-user input-icon"></i><input type="text" name="customer_name" class="form-input" required placeholder="نورة أحمد" value="{{ old('customer_name') }}"></div>
-                                @error('customer_name') <small class="text-danger d-block mt-1">{{ $message }}</small> @enderror
+                        <div class="grid grid-cols-12 gap-3">
+                            <div class="col-span-12 md:col-span-6">
+                                <label class="form-label">الاسم الكريم <span class="text-red-500">*</span></label>
+                                <div class="input-wrap"><i class="fas fa-user input-icon"></i><input type="text" name="customer_name" class="form-input" required placeholder="أدخلي اسمك" value="{{ old('customer_name') }}"></div>
+                                @error('customer_name') <span class="text-red-500 block mt-1 text-xs">{{ $message }}</span> @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">رقم الهاتف <span style="color:var(--brand-500);">*</span></label>
-                                <div class="input-wrap"><i class="fas fa-phone input-icon"></i><input type="tel" name="customer_phone" class="form-input" required placeholder="0523843781" value="{{ old('customer_phone') }}" dir="ltr"></div>
-                                @error('customer_phone') <small class="text-danger d-block mt-1">{{ $message }}</small> @enderror
+                            <div class="col-span-12 md:col-span-6">
+                                <label class="form-label">رقم الهاتف <span class="text-red-500">*</span></label>
+                                <div class="input-wrap"><i class="fas fa-phone input-icon"></i><input type="tel" name="customer_phone" class="form-input" required placeholder="05X XXX XXXX" value="{{ old('customer_phone') }}" dir="ltr"></div>
+                                @error('customer_phone') <span class="text-red-500 block mt-1 text-xs">{{ $message }}</span> @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-span-12 md:col-span-6">
                                 <label class="form-label">البريد الإلكتروني <span style="color:#9ca3af;font-size:0.65rem;font-weight:400;">(اختياري)</span></label>
                                 <div class="input-wrap"><i class="far fa-envelope input-icon"></i><input type="email" name="customer_email" class="form-input" placeholder="example@email.com" value="{{ old('customer_email') }}" dir="ltr"></div>
                             </div>
@@ -347,38 +347,38 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
                 <div class="wizard-step" id="wizardStep3">
                     <div class="bp-card">
                         <div class="section-title"><i class="fas fa-calendar"></i> اختاري الموعد</div>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">التاريخ <span style="color:var(--brand-500);">*</span></label>
-                                <div class="input-wrap"><i class="far fa-calendar input-icon"></i><input type="date" name="booking_date" class="form-input" required min="{{ date('Y-m-d') }}" value="{{ old('booking_date') }}"></div>
-                                @error('booking_date') <small class="text-danger d-block mt-1">{{ $message }}</small> @enderror
+                        <div class="grid grid-cols-12 gap-3">
+                            <div class="col-span-12 md:col-span-6">
+                                <label class="form-label">التاريخ <span class="text-red-500">*</span></label>
+                                <input type="date" name="booking_date" class="form-input" id="bookingDate" value="{{ old('booking_date') }}" required min="{{ date('Y-m-d') }}">
+                                @error('booking_date') <span class="text-red-500 block mt-1 text-xs">{{ $message }}</span> @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">الوقت <span style="color:var(--brand-500);">*</span></label>
-                                <div class="input-wrap"><i class="far fa-clock input-icon"></i>
-                                    <select name="booking_time" class="form-input" required>
-                                        <option value="">اختاري الوقت</option>
-                                        @php $times = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00']; @endphp
-                                        @foreach($times as $time)<option value="{{ $time }}" {{ old('booking_time') == $time ? 'selected' : '' }}>{{ \Carbon\Carbon::createFromFormat('H:i', $time)->format('g:i A') }}</option>@endforeach
-                                    </select>
-                                </div>
-                                @error('booking_time') <small class="text-danger d-block mt-1">{{ $message }}</small> @enderror
+                            <div class="col-span-12 md:col-span-6">
+                                <label class="form-label">الوقت <span class="text-red-500">*</span></label>
+                                <select name="booking_time" class="form-input" id="bookingTime" required>
+                                    <option value="">اختاري الوقت</option>
+                                    @foreach($timeSlots as $slot)
+                                    <option value="{{ $slot }}" {{ old('booking_time') == $slot ? 'selected' : '' }}>{{ $slot }}</option>
+                                    @endforeach
+                                </select>
+                                @error('booking_time') <span class="text-red-500 block mt-1 text-xs">{{ $message }}</span> @enderror
                             </div>
+
                         </div>
                     </div>
 
                     <div class="bp-card mt-3">
                         <div class="section-title"><i class="fas fa-tag"></i> كود الخصم والملاحظات</div>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">كود الخصم</label>
+                        <div class="grid grid-cols-12 gap-3">
+                            <div class="col-span-12 md:col-span-6">
+                                <label class="form-label"><i class="fas fa-tag" style="color:var(--brand-500);margin-left:0.3rem;"></i> كود خصم</label>
                                 <div class="coupon-row">
-                                    <input type="text" name="coupon_code" class="form-input" placeholder="أدخلي الكود" value="{{ old('coupon_code') }}" id="couponInput" style="max-width:200px;">
-                                    <button type="button" onclick="applyCoupon()" class="coupon-btn" id="couponBtn">تطبيق</button>
+                                    <input type="text" name="coupon_code" class="form-input" id="couponCode" placeholder="أدخلي الكود إن وجد" value="{{ old('coupon_code') }}">
+                                    <button type="button" class="coupon-btn" id="applyCoupon">تطبيق</button>
                                 </div>
-                                <div id="couponMsg" class="coupon-msg"></div>
+                                <div id="couponMessage" class="coupon-msg" style="display:none;"></div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-span-12 md:col-span-6">
                                 <label class="form-label">ملاحظات</label>
                                 <textarea name="notes" class="form-input" rows="2" placeholder="أي استفسار أو ملاحظة ...">{{ old('notes') }}</textarea>
                             </div>
@@ -430,14 +430,14 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
                         <div class="payment-grid" id="paymentMethods">
                             @foreach($paymentMethods as $method)
                             <div class="payment-option {{ old('payment_method') == $method['id'] ? 'selected' : '' }}" onclick="selectPayment('{{ $method['id'] }}', this)">
-                                <div class="d-flex gap-2 align-items-start">
+                                <div class="flex gap-2 items-start">
                                     <div class="radio-dot"></div>
-                                    <div class="flex-grow-1">
-                                        <div class="d-flex align-items-center gap-2 mb-1">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-1">
                                             <i class="fas {{ $method['icon'] }}" style="color:{{ $method['color'] }};font-size:1rem;"></i>
-                                            <span class="fw-bold" style="color:var(--ink);font-size:0.85rem;">{{ $method['name'] }}</span>
+                                            <span class="font-bold" style="color:var(--ink);font-size:0.85rem;">{{ $method['name'] }}</span>
                                         </div>
-                                        <small class="d-block" style="color:#6b7280;font-size:0.72rem;">{{ $method['description'] }}</small>
+                                        <span class="block" style="color:#6b7280;font-size:0.72rem;">{{ $method['description'] }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -459,7 +459,7 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
             </div>
 
             {{-- ═══════ SIDEBAR: SUMMARY ═══════ --}}
-            <div class="col-lg-5">
+            <div class="col-span-12 lg:col-span-5">
                 <div class="bp-summary">
                     <div class="summary-head"><i class="fas fa-receipt"></i><h5>ملخص الحجز</h5></div>
                     <div id="summaryContent"><div class="summary-empty"><i class="fas fa-spa"></i><small>اختاري خدمة لعرض الملخص</small></div></div>
@@ -471,28 +471,22 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
 
                 {{-- Center Info Card --}}
                 <div class="bp-card mt-3" style="background: var(--brand-50); border-color: var(--brand-200);">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <i class="fas fa-store" style="color: var(--brand-500);"></i>
-                        <span class="fw-bold" style="color: var(--ink); font-size: 0.85rem;">{{ $siteSettings['site_name'] ?? 'سماح كير' }}</span>
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="summary-icon"><i class="fas fa-store"></i></div>
+                        <span class="font-bold" style="color: var(--ink); font-size: 0.85rem;">{{ $siteSettings['site_name'] ?? 'سماح كير' }}</span>
                     </div>
-                    @if(!empty($siteSettings['site_address']))
-                    <div class="d-flex align-items-center gap-2 mb-1" style="font-size:0.8rem;color:var(--ink-muted);">
-                        <i class="fas fa-location-dot" style="color:var(--brand-400);width:14px;"></i>
-                        <span>{{ $siteSettings['site_address'] }}</span>
+                    <div class="flex items-center gap-2 mb-1" style="font-size:0.8rem;color:var(--ink-muted);">
+                        <i class="fas fa-spa" style="width:16px;color:var(--brand-500);"></i>
+                        <span id="summaryService">-</span>
                     </div>
-                    @endif
-                    @if(!empty($siteSettings['site_phone']))
-                    <div class="d-flex align-items-center gap-2 mb-1" style="font-size:0.8rem;color:var(--ink-muted);" dir="ltr">
-                        <i class="fas fa-phone" style="color:var(--brand-400);width:14px;"></i>
-                        <span>{{ $siteSettings['site_phone'] }}</span>
+                    <div class="flex items-center gap-2 mb-1" style="font-size:0.8rem;color:var(--ink-muted);" dir="ltr">
+                        <i class="fas fa-layer-group" style="width:16px;color:var(--brand-500);"></i>
+                        <span id="summarySessions">1 جلسة</span>
                     </div>
-                    @endif
-                    @if(!empty($siteSettings['working_hours']))
-                    <div class="d-flex align-items-center gap-2" style="font-size:0.8rem;color:var(--ink-muted);">
+                    <div class="flex items-center gap-2" style="font-size:0.8rem;color:var(--ink-muted);">
                         <i class="far fa-clock" style="color:var(--brand-400);width:14px;"></i>
                         <span>{{ $siteSettings['working_hours'] }}</span>
                     </div>
-                    @endif
                 </div>
             </div>
         </div>

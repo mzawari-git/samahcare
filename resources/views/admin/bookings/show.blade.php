@@ -9,6 +9,7 @@
                 <table class="table table-bordered">
                     <tr><th>رقم الحجز</th><td>{{ $booking->booking_number }}</td></tr>
                     <tr><th>الخدمة</th><td>{{ $booking->service_name }}</td></tr>
+                    <tr><th>عدد الجلسات</th><td>{{ $booking->sessions_count ?? 1 }}</td></tr>
                     <tr><th>السعر</th><td>{{ number_format($booking->service_price) }} ₪</td></tr>
                     @if($booking->discount_amount > 0)
                     <tr><th>الخصم</th><td>-{{ number_format($booking->discount_amount) }} ₪</td></tr>
