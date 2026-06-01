@@ -81,6 +81,15 @@
             font-size: .95rem; flex-shrink: 0;
         }
         .admin-sidebar .nav-item span { line-height: 1.3; }
+        .admin-sidebar .nav-sub-label {
+            font-size: .7rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: .6rem 1.5rem .25rem;
+            margin-top: .25rem;
+        }
         .admin-sidebar .sidebar-footer {
             border-top: 1px solid rgba(255,255,255,0.06);
             padding: .75rem 1.5rem; margin-top: auto; flex-shrink: 0;
@@ -391,25 +400,51 @@ src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
                 </div>
             </nav>
 
+            {{-- ═══════════════════════════════════════════════════════ --}}
+            {{-- ═══ META / FACEBOOK HUB — كل أدوات فيسبوك في مكان واحد ═══ --}}
+            {{-- ═══════════════════════════════════════════════════════ --}}
             <nav class="nav-section">
                 <div class="section-title" onclick="toggleSection(this)">
-                    التسويق والإعلانات <i class="fas fa-chevron-down collapse-icon"></i>
+                    <i class="fab fa-facebook" style="color:#1877F2;margin-left:4px;"></i>
+                    منصة Meta <i class="fas fa-chevron-down collapse-icon"></i>
                 </div>
                 <div class="nav-items">
+                    {{-- ── Meta Hub - الصفحة الرئيسية ── --}}
+                    <a href="{{ route('admin.meta-hub.index') }}" class="nav-item {{ request()->routeIs('admin.meta-hub.*') ? 'active' : '' }}" style="background:rgba(24,119,242,0.1);border-right-color:#1877F2;">
+                        <i class="fab fa-facebook" style="color:#1877F2;"></i> <span><b>منصة Meta المتكاملة</b></span>
+                    </a>
+
+                    {{-- ── لوحة التحكم الرئيسية ── --}}
+                    <div class="nav-sub-label">لوحة التحكم</div>
                     <a href="{{ route('admin.meta-marketing.index') }}" class="nav-item {{ request()->routeIs('admin.meta-marketing.*') && !request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
                         <i class="fas fa-rocket"></i> <span>التسويق عبر ميتا</span>
                     </a>
+                    <a href="{{ route('admin.roas.index') }}" class="nav-item {{ request()->routeIs('admin.roas.*') ? 'active' : '' }}">
+                        <i class="fas fa-chart-bar"></i> <span>True ROAS</span>
+                    </a>
+
+                    {{-- ── إدارة الإعلانات ── --}}
+                    <div class="nav-sub-label">إدارة الإعلانات</div>
                     <a href="{{ route('admin.ads.dashboard') }}" class="nav-item {{ request()->routeIs('admin.ads.*') ? 'active' : '' }}">
-                        <i class="fab fa-facebook"></i> <span>إعلانات Meta</span>
+                        <i class="fas fa-bullhorn"></i> <span>إنشاء وإدارة الإعلانات</span>
                     </a>
-                    <a href="{{ route('admin.google-ads.index') }}" class="nav-item {{ request()->routeIs('admin.google-ads.*') ? 'active' : '' }}">
-                        <i class="fab fa-google"></i> <span>إعلانات Google</span>
+                    <a href="{{ route('admin.ai-creative.index') }}" class="nav-item {{ request()->routeIs('admin.ai-creative.*') ? 'active' : '' }}">
+                        <i class="fas fa-magic"></i> <span>AI Creative</span>
                     </a>
+                    <a href="{{ route('admin.ab-tests.index') }}" class="nav-item {{ request()->routeIs('admin.ab-tests.*') ? 'active' : '' }}">
+                        <i class="fas fa-flask"></i> <span>A/B Testing</span>
+                    </a>
+
+                    {{-- ── العملاء المحتملين ── --}}
+                    <div class="nav-sub-label">العملاء المحتملين</div>
                     <a href="{{ route('admin.leads-hub.index') }}" class="nav-item {{ request()->routeIs('admin.leads-hub.*') ? 'active' : '' }}">
-                        <i class="fas fa-user-friends"></i> <span>العملاء المحتملون</span>
+                        <i class="fas fa-user-friends"></i> <span>مركز العملاء المحتملين</span>
                     </a>
+
+                    {{-- ── التواصل ── --}}
+                    <div class="nav-sub-label">التواصل</div>
                     <a href="{{ route('admin.meta-tools.conversations') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.conversations*') ? 'active' : '' }}">
-                        <i class="fab fa-facebook-messenger"></i> <span>المحادثات</span>
+                        <i class="fab fa-facebook-messenger"></i> <span>Messenger المحادثات</span>
                     </a>
                     <a href="{{ route('admin.meta-tools.whatsapp') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.whatsapp*') ? 'active' : '' }}">
                         <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
@@ -417,39 +452,51 @@ src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
                     <a href="{{ route('admin.meta-tools.instagram') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.instagram*') ? 'active' : '' }}">
                         <i class="fab fa-instagram"></i> <span>Instagram</span>
                     </a>
-                    <a href="{{ route('admin.ai-creative.index') }}" class="nav-item {{ request()->routeIs('admin.ai-creative.*') ? 'active' : '' }}">
-                        <i class="fas fa-magic"></i> <span>AI Creative</span>
-                    </a>
+
+                    {{-- ── الجماهير ── --}}
+                    <div class="nav-sub-label">الجماهير والاستهداف</div>
                     <a href="{{ route('admin.audiences.index') }}" class="nav-item {{ request()->routeIs('admin.audiences.*') ? 'active' : '' }}">
                         <i class="fas fa-bullseye"></i> <span>بناء الجماهير</span>
                     </a>
                     <a href="{{ route('admin.meta-tools.audience-upload') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.audience-upload*') ? 'active' : '' }}">
                         <i class="fas fa-upload"></i> <span>رفع بيانات الجمهور</span>
                     </a>
-                    <a href="{{ route('admin.ab-tests.index') }}" class="nav-item {{ request()->routeIs('admin.ab-tests.*') ? 'active' : '' }}">
-                        <i class="fas fa-flask"></i> <span>A/B Testing</span>
+
+                    {{-- ── أدوات متقدمة ── --}}
+                    <div class="nav-sub-label">أدوات متقدمة</div>
+                    <a href="{{ route('admin.meta-advanced.dashboard') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.*') ? 'active' : '' }}">
+                        <i class="fas fa-cogs"></i> <span>الأدوات المتقدمة</span>
                     </a>
+                    <a href="{{ route('admin.meta-advanced.analytics') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.analytics') ? 'active' : '' }}">
+                        <i class="fas fa-chart-line"></i> <span>التحليلات المتقدمة</span>
+                    </a>
+                    <a href="{{ route('admin.meta-advanced.automation') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.automation') ? 'active' : '' }}">
+                        <i class="fas fa-robot"></i> <span>الأتمتة</span>
+                    </a>
+                    <a href="{{ route('admin.meta-advanced.creative') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.creative') ? 'active' : '' }}">
+                        <i class="fas fa-palette"></i> <span>تحسين التصميمات</span>
+                    </a>
+                    <a href="{{ route('admin.meta-advanced.compliance') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.compliance') ? 'active' : '' }}">
+                        <i class="fas fa-shield-alt"></i> <span>الامتثال والمراقبة</span>
+                    </a>
+                    <a href="{{ route('admin.meta-advanced.leads') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.leads') ? 'active' : '' }}">
+                        <i class="fas fa-users-cog"></i> <span>إدارة العملاء</span>
+                    </a>
+                    <a href="{{ route('admin.meta-advanced.targeting') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.targeting') ? 'active' : '' }}">
+                        <i class="fas fa-crosshairs"></i> <span>الاستهداف المتقدم</span>
+                    </a>
+                    <a href="{{ route('admin.meta-advanced.reports') }}" class="nav-item {{ request()->routeIs('admin.meta-advanced.reports') ? 'active' : '' }}">
+                        <i class="fas fa-file-alt"></i> <span>التقارير الآلية</span>
+                    </a>
+
+                    {{-- ── المراقبة والإعدادات ── --}}
+                    <div class="nav-sub-label">المراقبة والإعدادات</div>
                     <a href="{{ route('admin.meta-tools.pixel-helper') }}" class="nav-item {{ request()->routeIs('admin.meta-tools.pixel-helper*') ? 'active' : '' }}">
                         <i class="fas fa-plug"></i> <span>Pixel Helper</span>
                     </a>
                     <a href="{{ route('admin.diagnostics.index') }}" class="nav-item {{ request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
                         <i class="fas fa-stethoscope"></i> <span>تشخيص CAPI</span>
                     </a>
-                    <a href="{{ route('admin.account-configuration.index') }}" class="nav-item {{ request()->routeIs('admin.account-configuration.*') ? 'active' : '' }}">
-                        <i class="fas fa-cogs"></i> <span>إعدادات الحساب</span>
-                    </a>
-                    <a href="{{ route('admin.ai-compliance.index') }}" class="nav-item {{ request()->routeIs('admin.ai-compliance.*') ? 'active' : '' }}">
-                        <i class="fas fa-shield-alt"></i> <span>الامتثال AI</span>
-                    </a>
-                    <a href="{{ route('admin.trigger-words.index') }}" class="nav-item {{ request()->routeIs('admin.trigger-words.*') ? 'active' : '' }}">
-                        <i class="fas fa-ban"></i> <span>الكلمات الممنوعة</span>
-                    </a>
-                    <a href="{{ route('admin.seo.index') }}" class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
-                        <i class="fas fa-search"></i> <span>SEO Management</span>
-                    </a>
-                    <a href="{{ route('admin.roas.index') }}" class="nav-item {{ request()->routeIs('admin.roas.*') ? 'active' : '' }}">
-                        <i class="fas fa-chart-bar"></i> <span>True ROAS</span>
-                    </a>
                     <a href="{{ route('admin.ad-alerts.index') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.*') ? 'active' : '' }}">
                         <i class="fas fa-bell"></i> <span>تنبيهات الإعلانات</span>
                         @php $alertCount = \App\Models\AdAlert::unresolved()->unacknowledged()->count(); @endphp
@@ -460,54 +507,49 @@ src="https://www.facebook.com/tr?id=2073558763203111&ev=PageView&noscript=1"
                     <a href="{{ route('admin.ad-alerts.pause-log') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.pause-log') ? 'active' : '' }}">
                         <i class="fas fa-pause-circle"></i> <span>سجل الإيقاف التلقائي</span>
                     </a>
-                    <a href="{{ route('admin.diagnostics.index') }}" class="nav-item {{ request()->routeIs('admin.diagnostics.*') ? 'active' : '' }}">
-                        <i class="fas fa-stethoscope"></i> <span>تشخيص CAPI</span>
-                    </a>
-                    <a href="{{ route('admin.ads.dashboard') }}" class="nav-item {{ request()->routeIs('admin.ads.*') ? 'active' : '' }}">
-                        <i class="fab fa-facebook"></i> <span>إعلانات Meta</span>
-                    </a>
-                    <a href="{{ route('admin.google-ads.index') }}" class="nav-item {{ request()->routeIs('admin.google-ads.*') ? 'active' : '' }}">
-                        <i class="fab fa-google"></i> <span>إعلانات Google</span>
-                    </a>
-                    <a href="{{ route('admin.leads-hub.index') }}" class="nav-item {{ request()->routeIs('admin.leads-hub.*') ? 'active' : '' }}">
-                        <i class="fas fa-user-friends"></i> <span>العملاء المحتملون</span>
-                    </a>
-                    <a href="{{ route('admin.ai-creative.index') }}" class="nav-item {{ request()->routeIs('admin.ai-creative.*') ? 'active' : '' }}">
-                        <i class="fas fa-magic"></i> <span>AI Creative</span>
-                    </a>
-                    <a href="{{ route('admin.audiences.index') }}" class="nav-item {{ request()->routeIs('admin.audiences.*') ? 'active' : '' }}">
-                        <i class="fas fa-bullseye"></i> <span>بناء الجماهير</span>
-                    </a>
-                    <a href="{{ route('admin.account-configuration.index') }}" class="nav-item {{ request()->routeIs('admin.account-configuration.*') ? 'active' : '' }}">
-                        <i class="fas fa-cogs"></i> <span>إعدادات الحساب</span>
-                    </a>
                     <a href="{{ route('admin.ai-compliance.index') }}" class="nav-item {{ request()->routeIs('admin.ai-compliance.*') ? 'active' : '' }}">
                         <i class="fas fa-shield-alt"></i> <span>الامتثال AI</span>
                     </a>
                     <a href="{{ route('admin.trigger-words.index') }}" class="nav-item {{ request()->routeIs('admin.trigger-words.*') ? 'active' : '' }}">
                         <i class="fas fa-ban"></i> <span>الكلمات الممنوعة</span>
+                    </a>
+                    <a href="{{ route('admin.account-configuration.index') }}" class="nav-item {{ request()->routeIs('admin.account-configuration.*') ? 'active' : '' }}">
+                        <i class="fas fa-cogs"></i> <span>إعدادات الحساب</span>
+                    </a>
+                </div>
+            </nav>
+
+            {{-- ═══════════════════════════════════════════════════════ --}}
+            {{-- ═══ إعلانات Google ═══ --}}
+            {{-- ═══════════════════════════════════════════════════════ --}}
+            <nav class="nav-section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <i class="fab fa-google" style="color:#EA4335;margin-left:4px;"></i>
+                    إعلانات Google <i class="fas fa-chevron-down collapse-icon"></i>
+                </div>
+                <div class="nav-items">
+                    <a href="{{ route('admin.google-ads.index') }}" class="nav-item {{ request()->routeIs('admin.google-ads.*') ? 'active' : '' }}">
+                        <i class="fab fa-google"></i> <span>إدارة إعلانات Google</span>
+                    </a>
+                </div>
+            </nav>
+
+            {{-- ═══════════════════════════════════════════════════════ --}}
+            {{-- ═══ أدوات التسويق العامة ═══ --}}
+            {{-- ═══════════════════════════════════════════════════════ --}}
+            <nav class="nav-section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    التسويق العام <i class="fas fa-chevron-down collapse-icon"></i>
+                </div>
+                <div class="nav-items">
+                    <a href="{{ route('admin.seo.index') }}" class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
+                        <i class="fas fa-search"></i> <span>SEO Management</span>
                     </a>
                     <a href="{{ route('admin.predictive.index') }}" class="nav-item {{ request()->routeIs('admin.predictive.*') ? 'active' : '' }}">
                         <i class="fas fa-brain"></i> <span>التوقع AI</span>
                     </a>
                     <a href="{{ route('admin.reviewer-ips.index') }}" class="nav-item {{ request()->routeIs('admin.reviewer-ips.*') ? 'active' : '' }}">
                         <i class="fas fa-user-secret"></i> <span>IP المراجعين</span>
-                    </a>
-                    <a href="{{ route('admin.seo.index') }}" class="nav-item {{ request()->routeIs('admin.seo.*') ? 'active' : '' }}">
-                        <i class="fas fa-search"></i> <span>SEO متقدم</span>
-                    </a>
-                    <a href="{{ route('admin.roas.index') }}" class="nav-item {{ request()->routeIs('admin.roas.*') ? 'active' : '' }}">
-                        <i class="fas fa-chart-bar"></i> <span>True ROAS</span>
-                    </a>
-                    <a href="{{ route('admin.ad-alerts.index') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.*') ? 'active' : '' }}">
-                        <i class="fas fa-bell"></i> <span>تنبيهات الإعلانات</span>
-                        @php $alertCount = \App\Models\AdAlert::unresolved()->unacknowledged()->count(); @endphp
-                        @if($alertCount > 0)
-                            <span class="badge bg-danger ms-auto">{{ $alertCount }}</span>
-                        @endif
-                    </a>
-                    <a href="{{ route('admin.ad-alerts.pause-log') }}" class="nav-item {{ request()->routeIs('admin.ad-alerts.pause-log') ? 'active' : '' }}">
-                        <i class="fas fa-pause-circle"></i> <span>سجل الإيقاف التلقائي</span>
                     </a>
                 </div>
             </nav>

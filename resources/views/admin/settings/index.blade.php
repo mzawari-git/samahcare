@@ -472,6 +472,46 @@ $activeTab = request('tab', 'general');
                 </div>
             </div>
         </div>
+
+        <div class="setting-card">
+            <h6><i class="fas fa-book-open" style="color:var(--pink-600);margin-left:6px;"></i> صفحة الدليل المرجعي (داخلي)</h6>
+            <p class="text-muted small mb-3">صفحة تعليمية داخلية للخبيرات والأخصائيات تحتوي على بروتوكولات الجلسات. لا تظهر في الموقع أو محركات البحث، ولا يمكن الوصول إليها إلا عبر رابط خاص.</p>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="d-flex align-items-center gap-2">
+                            <input type="hidden" name="reference_page_enabled" value="0">
+                            <input type="checkbox" name="reference_page_enabled" class="form-check-input" value="1" {{ ($settings['reference_page_enabled'] ?? '0') == '1' ? 'checked' : '' }}>
+                            تفعيل صفحة الدليل
+                        </label>
+                        <small class="hint d-block mt-1">عند التعطيل، لن يعمل الرابط حتى لو كان صحيحاً</small>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>رابط المشاركة</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control font-monospace" id="refLink" value="{{ url('ref/' . ($settings['reference_page_token'] ?? '')) }}" dir="ltr" readonly>
+                            <button type="button" class="btn btn-outline-secondary" onclick="navigator.clipboard.writeText(document.getElementById('refLink').value); this.innerHTML='<i class=\'fas fa-check\'></i> تم'; setTimeout(()=>this.innerHTML='<i class=\'fas fa-copy\'></i> نسخ', 2000)"><i class="fas fa-copy"></i> نسخ</button>
+                        </div>
+                        <small class="hint d-block mt-1">شارك هذا الرابط مع الخبيرات فقط. لا تنشره على وسائل التواصل.</small>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>إعادة توليد الرابط</label>
+                        <div class="d-flex align-items-center gap-3">
+                            <label class="d-flex align-items-center gap-2">
+                                <input type="hidden" name="regenerate_reference_token" value="0">
+                                <input type="checkbox" name="regenerate_reference_token" class="form-check-input" value="1">
+                                توليد رابط جديد عند الحفظ
+                            </label>
+                            <small class="hint">⚠️ سيؤدي هذا إلى إبطال الروابط القديمة</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- Themes --}}

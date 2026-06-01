@@ -47,6 +47,8 @@
     <meta name="theme-color" content="#ffffff">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
+    @include("frontend.themes.theme-" . ($activeTheme ?? 1) . ".styles")
+
     @stack('styles')
 
     @php $tracking = app(\App\Services\AdvertisingTrackingService::class); @endphp
@@ -61,13 +63,13 @@
 
     @if($tracking->isEnabled()) {!! $tracking->getBrowserPixelNoscript() !!} @endif
 
-    @include('frontend.layouts.unified.header')
+    @include("frontend.themes.theme-" . ($activeTheme ?? 1) . ".header")
 
     <main id="main-content" style="min-height:60vh;">
         @yield('content')
     </main>
 
-    @include('frontend.layouts.unified.footer')
+    @include("frontend.themes.theme-" . ($activeTheme ?? 1) . ".footer")
 
     @include('frontend.layouts.partials.floating-social')
 

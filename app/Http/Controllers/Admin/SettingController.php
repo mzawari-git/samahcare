@@ -67,6 +67,10 @@ class SettingController extends Controller
         'maintenance_mode' => '0',
         'registration_enabled' => '1',
 
+        // Reference Page
+        'reference_page_enabled' => '0',
+        'reference_page_token' => '',
+
         // Payment Methods
         'payment_cod_enabled' => '1',
         'payment_bank_enabled' => '0',
@@ -112,10 +116,18 @@ class SettingController extends Controller
             }
         }
 
-        foreach ($request->except('_token', '_method', 'tab', 'site_logo', 'site_favicon', 'theme1_hero_image', 'theme2_hero_image', 'theme3_hero_image', 'theme4_hero_image', 'theme5_hero_image') as $key => $value) {
+        foreach ($request->except('_token', '_method', 'tab', 'site_logo', 'site_favicon', 'theme1_hero_image', 'theme2_hero_image', 'theme3_hero_image', 'theme4_hero_image', 'theme5_hero_image', 'regenerate_reference_token') as $key => $value) {
             Setting::updateOrCreate(
                 ['key' => $key],
                 ['value' => is_array($value) ? json_encode($value) : ($value ?? '')]
+            );
+        }
+
+        if ($request->get('regenerate_reference_token') == '1' || !SettingsHelper::get('reference_page_token')) {
+            $token = bin2hex(random_bytes(16));
+            Setting::updateOrCreate(
+                ['key' => 'reference_page_token'],
+                ['value' => $token]
             );
         }
 

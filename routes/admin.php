@@ -42,6 +42,12 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/seo/ai-all', [SeoController::class, 'aiGenerateAll'])->name('admin.seo.ai-all');
     Route::put('/seo/{id}', [SeoController::class, 'update'])->name('admin.seo.update');
     Route::get('/seo/{id}/schema', [SeoController::class, 'schema'])->name('admin.seo.schema');
+
+    // Meta Hub - الصفحة الرئيسية الموحدة لكل أدوات Meta
+    Route::get('/meta-hub', function () {
+        return view('admin.meta-hub');
+    })->name('admin.meta-hub.index');
+
     Route::get('/meta-marketing', [MarketingTrackingController::class, 'metaMarketingDashboard'])->name('admin.meta-marketing.index');
     Route::post('/meta-marketing/import-page', [MarketingTrackingController::class, 'importPage'])->name('admin.meta-marketing.import-page');
     Route::post('/meta-marketing/search-page', [MarketingTrackingController::class, 'searchPage'])->name('admin.meta-marketing.search-page');
@@ -355,4 +361,54 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     // Enhanced Matching
     Route::post('/meta-tools/enhanced-matching/test', [MetaToolsController::class, 'enhancedMatchingTest'])->name('admin.meta-tools.enhanced-matching');
+
+    // ============================================================
+    // Meta Advanced Features (Analytics, Automation, Creative, Compliance, Leads, Targeting)
+    // ============================================================
+
+    Route::prefix('meta-advanced')->name('admin.meta-advanced.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'dashboard'])->name('dashboard');
+
+        // Analytics
+        Route::get('/analytics', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'analyticsIndex'])->name('analytics');
+
+        // Automation
+        Route::get('/automation', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'automationIndex'])->name('automation');
+        Route::post('/automation/rules', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'createAutomationRule'])->name('automation.rules.store');
+        Route::put('/automation/rules/{id}', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'updateAutomationRule'])->name('automation.rules.update');
+        Route::delete('/automation/rules/{id}', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'deleteAutomationRule'])->name('automation.rules.destroy');
+        Route::post('/automation/execute', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'executeAutomationRules'])->name('automation.execute');
+        Route::post('/automation/schedule', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'scheduleCampaignAction'])->name('automation.schedule');
+        Route::post('/automation/scheduled/{id}/cancel', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'cancelScheduledAction'])->name('automation.schedule.cancel');
+
+        // Creative Optimization
+        Route::get('/creative', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'creativeIndex'])->name('creative');
+        Route::get('/creative/{id}/analyze', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'analyzeCreativeFatigue'])->name('creative.analyze');
+        Route::get('/creative/{id}/suggestions', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'getCreativeSuggestions'])->name('creative.suggestions');
+        Route::post('/creative/compare', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'compareCreatives'])->name('creative.compare');
+
+        // Compliance
+        Route::get('/compliance', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'complianceIndex'])->name('compliance');
+        Route::post('/compliance/issues/{id}/resolve', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'resolveComplianceIssue'])->name('compliance.resolve');
+        Route::get('/compliance/health/{accountId}', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'checkAccountHealth'])->name('compliance.health');
+        Route::post('/compliance/spending-limits', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'createSpendingLimit'])->name('compliance.limits.store');
+        Route::post('/compliance/check-limits', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'checkSpendingLimits'])->name('compliance.limits.check');
+
+        // Leads
+        Route::get('/leads', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'leadsIndex'])->name('leads');
+        Route::post('/leads/{leadId}/conversion', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'trackLeadConversion'])->name('leads.conversion');
+        Route::post('/leads/auto-score', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'autoScoreLeads'])->name('leads.auto-score');
+
+        // Targeting
+        Route::get('/targeting', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'targetingIndex'])->name('targeting');
+        Route::post('/targeting/lookalike', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'createLookalikeAudience'])->name('targeting.lookalike');
+        Route::post('/targeting/retargeting', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'createRetargetingAudience'])->name('targeting.retargeting');
+        Route::get('/targeting/suggestions/{campaignId}', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'getAudienceSuggestions'])->name('targeting.suggestions');
+
+        // Reports
+        Route::get('/reports', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'reportsIndex'])->name('reports');
+        Route::post('/reports', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'createAutomatedReport'])->name('reports.store');
+        Route::post('/reports/{id}/generate', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'generateReport'])->name('reports.generate');
+        Route::delete('/reports/{id}', [\App\Http\Controllers\Admin\MetaAdvancedController::class, 'deleteAutomatedReport'])->name('reports.destroy');
+    });
 });

@@ -7,8 +7,12 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\BlogController as FrontBlogController;
 use App\Http\Controllers\Frontend\BookingController;
+use App\Http\Controllers\Frontend\ReferenceController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Internal reference/training page (token-protected, not indexed)
+Route::get('/ref/{token}', [ReferenceController::class, 'show'])->name('reference');
 
 // Booking routes
 Route::get('/booking', [BookingController::class, 'index'])->name('booking');

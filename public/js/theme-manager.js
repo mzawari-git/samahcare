@@ -31,15 +31,11 @@
         localStorage.setItem('samah_theme', num);
         document.cookie = 'samah_theme=' + num + ';path=/;max-age=31536000';
 
-        var html = document.documentElement;
-        html.setAttribute('data-theme', num);
-
-        var link = document.getElementById('themeStylesheet');
-        if (link) {
-            link.href = window.basePath + '/css/themes/samah-' + num + '.css?v=' + Date.now();
-        }
-
         showToast(themeNames[num] || 'التصميم ' + num);
+
+        setTimeout(function() {
+            window.location.reload();
+        }, 800);
     }
 
     function showToast(name) {
