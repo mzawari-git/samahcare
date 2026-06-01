@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\BookingItem;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Coupon;
@@ -39,7 +40,8 @@ class BookingController extends Controller
             'customer_name' => 'required|string|max:255',
             'customer_phone' => 'required|string|max:20',
             'customer_email' => 'nullable|email|max:255',
-            'service_id' => 'required|exists:services,id',
+            'service_ids' => 'required|array|min:1',
+            'service_ids.*' => 'exists:services,id',
             'booking_date' => 'required|date|after_or_equal:today',
             'booking_time' => 'required|string',
             'notes' => 'nullable|string|max:1000',
@@ -50,35 +52,35 @@ class BookingController extends Controller
 
         DB::beginTransaction();
         try {
-            $service = Service::findOrFail($request->service_id);
+            $services = Service::whereIn('id', $request->service_ids)->get();
             $sessionsCount = $request->input('sessions_count', 1);
-            $totalAmount = $service->final_price * $sessionsCount;
+            $subtotal = $services->sum(fn($s) => $s->final_price * $sessionsCount);
             $discountAmount = 0;
 
             if ($request->coupon_code) {
                 $coupon = Coupon::where('code', $request->coupon_code)->where('is_active', true)->first();
                 if ($coupon) {
                     if ($coupon->type === 'percentage') {
-                        $discountAmount = round($totalAmount * ($coupon->value / 100), 2);
+                        $discountAmount = round($subtotal * ($coupon->value / 100), 2);
                     } else {
-                        $discountAmount = min($coupon->value, $totalAmount);
+                        $discountAmount = min($coupon->value, $subtotal);
                     }
-                    $totalAmount = max(0, $totalAmount - $discountAmount);
+                    $subtotal = max(0, $subtotal - $discountAmount);
                 }
             }
 
             $booking = Booking::create([
                 'booking_number' => Booking::generateBookingNumber(),
-                'service_id' => $service->id,
-                'service_name' => $service->name_ar,
-                'service_price' => $service->final_price,
+                'service_id' => $services->first()->id,
+                'service_name' => $services->first()->name_ar,
+                'service_price' => $services->first()->final_price,
                 'sessions_count' => $sessionsCount,
                 'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
                 'customer_email' => $request->customer_email,
                 'booking_date' => $request->booking_date,
                 'booking_time' => $request->booking_time,
-                'total_amount' => $totalAmount,
+                'total_amount' => $subtotal,
                 'discount_amount' => $discountAmount,
                 'coupon_code' => $request->coupon_code,
                 'notes' => $request->notes,
@@ -87,6 +89,15 @@ class BookingController extends Controller
                 'payment_method' => $request->payment_method,
                 'ip_address' => $request->ip(),
             ]);
+
+            foreach ($services as $service) {
+                BookingItem::create([
+                    'booking_id' => $booking->id,
+                    'service_id' => $service->id,
+                    'service_name' => $service->name_ar,
+                    'service_price' => $service->final_price,
+                ]);
+            }
 
             DB::commit();
 

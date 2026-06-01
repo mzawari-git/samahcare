@@ -273,7 +273,7 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
                                 @foreach($groupedServices[$catKey] as $service)
                                 @php $sIcon = $serviceIcons[$service->name_ar] ?? ['icon' => 'fas fa-spa', 'color' => 'var(--brand-500)']; @endphp
                                 <div class="col-span-6 md:col-span-4">
-                                    <div class="service-card {{ old('service_id') == $service->id ? 'selected' : '' }}" data-service-id="{{ $service->id }}" data-price="{{ $service->final_price }}" data-name="{{ $service->name_ar }}" onclick="selectService(this)">
+                                    <div class="service-card" data-service-id="{{ $service->id }}" data-price="{{ $service->final_price }}" data-name="{{ $service->name_ar }}" onclick="toggleService(this)">
                                         <div class="card-check"><i class="fas fa-check"></i></div>
                                         @if($service->is_on_sale)<div class="card-badge">خصم</div>@endif
                                         <div class="card-icon" style="background:{{ $sIcon['color'] }}12;color:{{ $sIcon['color'] }};"><i class="{{ $sIcon['icon'] }}"></i></div>
@@ -300,9 +300,9 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
                             </div>
                         </div>
 
-                        <input type="hidden" name="service_id" id="selectedServiceId" value="{{ old('service_id') }}">
+                        <div id="selectedServicesContainer"></div>
                         <input type="hidden" name="sessions_count" id="sessionsCount" value="1">
-                        @error('service_id') <span class="text-red-500 block mt-2 text-xs">{{ $message }}</span> @enderror
+                        @error('service_ids') <span class="text-red-500 block mt-2 text-xs">{{ $message }}</span> @enderror
 
                         <div class="wizard-nav">
                             <div></div>
@@ -398,9 +398,9 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
                         <div class="section-title"><i class="fas fa-check-circle"></i> تأكيد الحجز</div>
 
                         <div class="confirm-grid">
-                            <div class="confirm-item">
-                                <div class="confirm-label">الخدمة</div>
-                                <div class="confirm-value" id="confirmService">-</div>
+                            <div class="confirm-item" style="grid-column:1/-1;">
+                                <div class="confirm-label">الخدمات المختارة</div>
+                                <div class="confirm-value" id="confirmServices">-</div>
                             </div>
                             <div class="confirm-item">
                                 <div class="confirm-label">عدد الجلسات</div>
@@ -477,7 +477,7 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
                     </div>
                     <div class="flex items-center gap-2 mb-1" style="font-size:0.8rem;color:var(--ink-muted);">
                         <i class="fas fa-spa" style="width:16px;color:var(--brand-500);"></i>
-                        <span id="summaryService">-</span>
+                        <span id="summaryServiceCount">-</span>
                     </div>
                     <div class="flex items-center gap-2 mb-1" style="font-size:0.8rem;color:var(--ink-muted);" dir="ltr">
                         <i class="fas fa-layer-group" style="width:16px;color:var(--brand-500);"></i>
@@ -506,9 +506,7 @@ textarea.form-input { min-height: 76px; resize: vertical; padding-top: 0.75rem; 
 
 <script>
 let currentStep = 1;
-let selectedServiceId = {{ old('service_id') ?: 'null' }};
-let selectedServicePrice = 0;
-let selectedServiceName = '';
+let selectedServices = [];
 let couponDiscount = 0;
 let sessionsCount = 1;
 
@@ -519,15 +517,33 @@ function switchCategory(cat) {
     document.getElementById('cat-' + cat).classList.add('active');
 }
 
-function selectService(el) {
-    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedServiceId = parseInt(el.dataset.serviceId);
-    selectedServicePrice = parseFloat(el.dataset.price);
-    selectedServiceName = el.dataset.name;
-    document.getElementById('selectedServiceId').value = selectedServiceId;
-    document.getElementById('step1Next').disabled = false;
+function toggleService(el) {
+    const id = parseInt(el.dataset.serviceId);
+    const price = parseFloat(el.dataset.price);
+    const name = el.dataset.name;
+    const idx = selectedServices.findIndex(s => s.id === id);
+    if (idx > -1) {
+        selectedServices.splice(idx, 1);
+        el.classList.remove('selected');
+    } else {
+        selectedServices.push({id, price, name});
+        el.classList.add('selected');
+    }
+    updateHiddenInputs();
+    document.getElementById('step1Next').disabled = selectedServices.length === 0;
     updateSummary();
+}
+
+function updateHiddenInputs() {
+    const container = document.getElementById('selectedServicesContainer');
+    container.innerHTML = '';
+    selectedServices.forEach(s => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'service_ids[]';
+        input.value = s.id;
+        container.appendChild(input);
+    });
 }
 
 function setSessions(count) {
@@ -541,10 +557,9 @@ function setSessions(count) {
 function goToStep(step) {
     if (step < 1 || step > 4) return;
 
-    // Validate before proceeding
     if (step > currentStep + 1 || step === currentStep + 1) {
-        if (currentStep === 1 && !selectedServiceId) {
-            showStepError('الرجاء اختيار خدمة أولاً');
+        if (currentStep === 1 && selectedServices.length === 0) {
+            showStepError('الرجاء اختيار خدمة واحدة على الأقل');
             return;
         }
         if (currentStep === 2) {
@@ -603,7 +618,10 @@ function updateConfirmation() {
     const timeSelect = document.querySelector('[name="booking_time"]');
     const time = timeSelect.options[timeSelect.selectedIndex]?.text || '-';
 
-    document.getElementById('confirmService').textContent = selectedServiceName || '-';
+    const servicesHtml = selectedServices.map((s, i) =>
+        `${i + 1}. ${s.name} (${s.price.toFixed(0)} ₪)`
+    ).join('<br>');
+    document.getElementById('confirmServices').innerHTML = servicesHtml || '-';
     document.getElementById('confirmSessions').textContent = sessionsCount;
     document.getElementById('confirmName').textContent = name;
     document.getElementById('confirmPhone').textContent = phone;
@@ -612,13 +630,16 @@ function updateConfirmation() {
 }
 
 function updateSummary() {
-    const subtotal = selectedServicePrice * sessionsCount;
+    const subtotal = selectedServices.reduce((sum, s) => sum + s.price, 0) * sessionsCount;
     const total = Math.max(0, subtotal - couponDiscount);
     const summary = document.getElementById('summaryContent');
     const totalLine = document.getElementById('totalLine');
-    if (selectedServiceId) {
-        let html = `<div class="summary-line"><span class="label">الخدمة</span><span class="value">${selectedServiceName}</span></div>`;
-        html += `<div class="summary-line"><span class="label">سعر الجلسة</span><span class="value" style="color:var(--brand-500);">${selectedServicePrice.toFixed(0)} ₪</span></div>`;
+    const svcCount = document.getElementById('summaryServiceCount');
+
+    if (selectedServices.length > 0) {
+        let html = selectedServices.map(s =>
+            `<div class="summary-line"><span class="label">${s.name}</span><span class="value" style="color:var(--brand-500);">${(s.price * sessionsCount).toFixed(0)} ₪</span></div>`
+        ).join('');
         if (sessionsCount > 1) {
             html += `<div class="summary-line"><span class="label">عدد الجلسات</span><span class="value">${sessionsCount}</span></div>`;
             html += `<div class="summary-line"><span class="label">المجموع الفرعي</span><span class="value">${subtotal.toFixed(0)} ₪</span></div>`;
@@ -630,9 +651,11 @@ function updateSummary() {
         totalLine.style.display = 'block';
         document.getElementById('totalDisplay').textContent = total.toFixed(0) + ' ₪';
         document.getElementById('totalAmountInput').value = total;
+        svcCount.textContent = `${selectedServices.length} خدمة`;
     } else {
         summary.innerHTML = `<div class="summary-empty"><i class="fas fa-spa"></i><small>اختاري خدمة لعرض الملخص</small></div>`;
         totalLine.style.display = 'none';
+        svcCount.textContent = '-';
     }
 }
 
@@ -643,19 +666,26 @@ function selectPayment(id, el) {
 }
 
 function applyCoupon() {
-    const code = document.getElementById('couponInput').value.trim();
-    const msg = document.getElementById('couponMsg');
-    const btn = document.getElementById('couponBtn');
-    if (!code) { msg.className = 'coupon-msg error'; msg.innerHTML = '<i class="fas fa-circle-exclamation"></i> الرجاء إدخال كود الخصم'; return; }
+    const code = document.getElementById('couponCode').value.trim();
+    const msg = document.getElementById('couponMessage');
+    const btn = document.getElementById('applyCoupon');
+    if (!code) { msg.style.display = 'block'; msg.className = 'coupon-msg error'; msg.innerHTML = '<i class="fas fa-circle-exclamation"></i> الرجاء إدخال كود الخصم'; return; }
     btn.classList.add('loading'); btn.textContent = '...';
-    msg.className = 'coupon-msg'; msg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحقق...';
-    fetch('{{ route("booking.coupon") }}', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content }, body: JSON.stringify({ code: code, amount: selectedServicePrice * sessionsCount || 0 }) })
+    msg.style.display = 'block'; msg.className = 'coupon-msg'; msg.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحقق...';
+    const total = selectedServices.reduce((sum, s) => sum + s.price, 0) * sessionsCount || 0;
+    fetch('{{ route("booking.coupon") }}', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content }, body: JSON.stringify({ code, amount: total }) })
     .then(r => r.json()).then(data => {
         btn.classList.remove('loading'); btn.textContent = 'تطبيق';
-        if (data.success) { couponDiscount = data.discount || 0; msg.className = 'coupon-msg success'; msg.innerHTML = '<i class="fas fa-check-circle"></i> ' + (data.message || 'تم تطبيق الخصم'); }
-        else { couponDiscount = 0; msg.className = 'coupon-msg error'; msg.innerHTML = '<i class="fas fa-circle-exclamation"></i> ' + (data.message || 'كود خصم غير صالح'); }
+        msg.className = 'coupon-msg ' + (data.success ? 'success' : 'error');
+        msg.innerHTML = data.success ? '<i class="fas fa-check-circle"></i> ' + data.message : '<i class="fas fa-circle-exclamation"></i> ' + data.message;
+        couponDiscount = data.success ? (data.discount || 0) : 0;
         updateSummary();
-    }).catch(() => { btn.classList.remove('loading'); btn.textContent = 'تطبيق'; couponDiscount = 0; msg.className = 'coupon-msg error'; msg.innerHTML = '<i class="fas fa-circle-exclamation"></i> خطأ في الاتصال'; updateSummary(); });
+    }).catch(() => {
+        btn.classList.remove('loading'); btn.textContent = 'تطبيق';
+        couponDiscount = 0; msg.style.display = 'block'; msg.className = 'coupon-msg error';
+        msg.innerHTML = '<i class="fas fa-circle-exclamation"></i> خطأ في الاتصال';
+        updateSummary();
+    });
 }
 
 function switchThemeFromPage(num) {
@@ -679,12 +709,15 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
 
 document.addEventListener('DOMContentLoaded', function() {
     highlightCurrentTheme();
-    @if(old('service_id'))
-    const el = document.querySelector(`.service-card[data-service-id="{{ old('service_id') }}"]`);
-    if (el) {
-        const cat = el.closest('.cat-section')?.id?.replace('cat-', '');
-        if (cat) switchCategory(cat);
-        selectService(el);
+    @if(old('service_ids'))
+    const ids = {{ json_encode(old('service_ids')) }};
+    ids.forEach(function(id) {
+        const el = document.querySelector(`.service-card[data-service-id="${id}"]`);
+        if (el) {
+            toggleService(el);
+        }
+    });
+    if (selectedServices.length > 0) {
         goToStep(4);
     }
     @endif

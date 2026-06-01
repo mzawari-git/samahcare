@@ -9,10 +9,36 @@ use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::orderBy('sort_order')->orderBy('name_ar')->paginate(20);
-        return view('admin.services.index', compact('services'));
+        $query = Service::orderBy('sort_order')->orderBy('name_ar');
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name_ar', 'LIKE', "%{$search}%")
+                  ->orWhere('name_en', 'LIKE', "%{$search}%");
+            });
+        }
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+        if ($request->filled('status')) {
+            $query->where('is_active', $request->status === 'active');
+        }
+
+        $services = $query->paginate(20)->withQueryString();
+
+        $stats = [
+            'total' => Service::count(),
+            'active' => Service::where('is_active', true)->count(),
+            'inactive' => Service::where('is_active', false)->count(),
+            'featured' => Service::where('is_featured', true)->count(),
+        ];
+
+        $categories = Service::select('category')->distinct()->whereNotNull('category')->pluck('category');
+
+        return view('admin.services.index', compact('services', 'stats', 'categories'));
     }
 
     public function create()
