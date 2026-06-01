@@ -67,7 +67,7 @@
                 ['ph ph-map-pin', 'var(--brand-500)', 'var(--brand-50)', 'العنوان', $siteSettings['site_address'] ?? 'فلسطين، رام الله'],
                 ['ph ph-phone', '#0891b2', '#ecfeff', 'الهاتف', $siteSettings['site_phone'] ?? '+972 56 903 0203'],
                 ['ph ph-envelope', '#d97706', '#fffbeb', 'البريد الإلكتروني', $siteSettings['site_email'] ?? 'hello@samahcare.com'],
-                ['ph ph-clock', '#16a34a', '#dcfce7', 'ساعات العمل', 'يومياً 9:00 ص - 10:00 م'],
+                ['ph ph-clock', '#16a34a', '#dcfce7', 'ساعات العمل', $siteSettings['working_hours'] ?? 'يومياً 9:00 ص - 10:00 م'],
             ] as $info)
             <div class="flex items-center gap-4 p-5 rounded-2xl" style="background:white;border:1px solid rgba(0,0,0,0.04);">
                 <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:{{ $info[2] }};">
@@ -89,6 +89,12 @@
                     <a href="https://wa.me/{{ preg_replace('/[^0-9]/','',$siteSettings['whatsapp_number'] ?? '970591234567') }}" target="_blank" class="w-10 h-10 rounded-full flex items-center justify-center text-white" style="background:#25D366;"><i class="ph-fill ph-whatsapp-logo text-lg"></i></a>
                 </div>
             </div>
+
+            @if(!empty($siteSettings['location_embed']))
+            <div class="rounded-2xl overflow-hidden mt-4" style="border:1px solid rgba(0,0,0,0.04);">
+                {!! $siteSettings['location_embed'] !!}
+            </div>
+            @endif
         </div>
     </div>
 </div>

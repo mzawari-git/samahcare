@@ -46,7 +46,7 @@
                     </li>
                     <li class="flex items-start gap-3">
                         <i class="far fa-clock mt-1 text-xs" style="color: var(--accent-400);"></i>
-                        <span class="text-sm" style="color: rgba(250, 248, 245, 0.6);">يومياً: 9 صباحاً - 10 مساءً</span>
+                        <span class="text-sm" style="color: rgba(250, 248, 245, 0.6);">{{ $siteSettings['working_hours'] ?? 'يومياً: 9 صباحاً - 10 مساءً' }}</span>
                     </li>
                 </ul>
             </div>

@@ -16,7 +16,7 @@
                 مع {{ $siteSettings['site_name'] ?? 'سماح كير' }}
             </h1>
             <p class="text-lg mb-8 leading-relaxed t1-animate-fade-up t1-delay-200" style="color: var(--ink-muted);">
-                نقدم لكِ أحدث تقنيات الليزر والعناية بالبشرة على أيدي خبراء متخصصين. تجربة فريدة تجمع بين الرفاهية والنتائج المذهلة لجمال يدوم.
+                {{ $siteSettings['about_center_ar'] ?? 'نقدم لكِ أحدث تقنيات الليزر والعناية بالبشرة على أيدي خبراء متخصصين. تجربة فريدة تجمع بين الرفاهية والنتائج المذهلة لجمال يدوم.' }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 t1-animate-fade-up t1-delay-300">
                 <a href="{{ route('booking') }}" class="t1-btn-primary px-8 py-4 rounded-full font-bold text-center flex items-center justify-center gap-2 text-lg">

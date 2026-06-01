@@ -16,7 +16,7 @@
             </h1>
 
             <p class="text-lg mb-8 leading-relaxed max-w-lg t5-reveal t5-reveal-d2" style="color: var(--ink-muted);">
-                نستخدم أحدث أجهزة الليزر والتقنيات الطبية المعتمدة عالمياً لنقدم لكِ نتائج استثنائية بأعلى معايير الأمان والفعالية.
+                {{ $siteSettings['about_center_ar'] ?? 'نستخدم أحدث أجهزة الليزر والتقنيات الطبية المعتمدة عالمياً لنقدم لكِ نتائج استثنائية بأعلى معايير الأمان والفعالية.' }}
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 t5-reveal t5-reveal-d3">

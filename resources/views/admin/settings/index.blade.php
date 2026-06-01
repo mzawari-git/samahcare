@@ -101,6 +101,44 @@ $activeTab = request('tab', 'general');
                         <input type="text" name="address" class="form-control" value="{{ old('address', $settings['address'] ?? '') }}">
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>ساعات العمل</label>
+                        <input type="text" name="working_hours" class="form-control" value="{{ old('working_hours', $settings['working_hours'] ?? '') }}" placeholder="مثال: السبت - الخميس 9:00 صباحاً - 8:00 مساءً">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>عن المركز (عربي)</label>
+                        <textarea name="about_center_ar" class="form-control" rows="2" placeholder="نبذة عن المركز...">{{ old('about_center_ar', $settings['about_center_ar'] ?? '') }}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>عن المركز (English)</label>
+                        <textarea name="about_center_en" class="form-control" rows="2" dir="ltr" placeholder="About the center...">{{ old('about_center_en', $settings['about_center_en'] ?? '') }}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>رابط خريطة الموقع (Google Maps Embed)</label>
+                        <input type="text" name="location_embed" class="form-control" value="{{ old('location_embed', $settings['location_embed'] ?? '') }}" dir="ltr" placeholder="<iframe src='https://www.google.com/maps/embed?pb=...'></iframe>">
+                        <small class="hint">انسخ كود iframe من Google Maps</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>إحداثيات الموقع (Latitude / Longitude)</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="text" name="location_lat" class="form-control" value="{{ old('location_lat', $settings['location_lat'] ?? '') }}" dir="ltr" placeholder="31.9037">
+                            </div>
+                            <div class="col-6">
+                                <input type="text" name="location_lng" class="form-control" value="{{ old('location_lng', $settings['location_lng'] ?? '') }}" dir="ltr" placeholder="35.2054">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

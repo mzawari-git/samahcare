@@ -85,7 +85,7 @@
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: var(--neutral-800);">
                             <i class="ph-fill ph-clock text-base" style="color: var(--brand-400);"></i>
                         </div>
-                        <span>يومياً 9:00 ص - 10:00 م</span>
+                        <span>{{ $siteSettings['working_hours'] ?? 'يومياً 9:00 ص - 10:00 م' }}</span>
                     </li>
                 </ul>
             </div>

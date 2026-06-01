@@ -23,6 +23,12 @@ class SettingController extends Controller
         'contact_phone' => '',
         'whatsapp_number' => '',
         'address' => '',
+        'working_hours' => '',
+        'about_center_ar' => '',
+        'about_center_en' => '',
+        'location_embed' => '',
+        'location_lat' => '',
+        'location_lng' => '',
 
         // SEO
         'meta_title_ar' => '',

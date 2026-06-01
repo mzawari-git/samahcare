@@ -168,6 +168,12 @@ class AppServiceProvider extends ServiceProvider
             'payment_bank_enabled' => '0',
             'payment_jawwal_enabled' => '0',
             'payment_reflect_enabled' => '0',
+            'working_hours' => '',
+            'about_center_ar' => '',
+            'about_center_en' => '',
+            'location_embed' => '',
+            'location_lat' => '',
+            'location_lng' => '',
         ];
 
         View::composer('*', function ($view) use ($defaultSettings) {
@@ -218,6 +224,12 @@ class AppServiceProvider extends ServiceProvider
                 'payment_bank_enabled' => $s['payment_bank_enabled'] ?? '0',
                 'payment_jawwal_enabled' => $s['payment_jawwal_enabled'] ?? '0',
                 'payment_reflect_enabled' => $s['payment_reflect_enabled'] ?? '0',
+                'working_hours' => $s['working_hours'] ?? '',
+                'about_center_ar' => $s['about_center_ar'] ?? '',
+                'about_center_en' => $s['about_center_en'] ?? '',
+                'location_embed' => $s['location_embed'] ?? '',
+                'location_lat' => $s['location_lat'] ?? '',
+                'location_lng' => $s['location_lng'] ?? '',
             ]);
         });
 

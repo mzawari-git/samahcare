@@ -8,7 +8,7 @@
                     يبدأ من <span style="color: var(--brand-400);">هنا</span>
                 </h1>
                 <p class="text-base font-light leading-relaxed mb-10" style="color: var(--ink-muted); max-width: 400px;">
-                    نقدم لكِ تجربة تجميلية استثنائية تجمع بين أحدث التقنيات العالمية ولمسة الخبراء المتخصصين.
+                    {{ $siteSettings['about_center_ar'] ?? 'نقدم لكِ تجربة تجميلية استثنائية تجمع بين أحدث التقنيات العالمية ولمسة الخبراء المتخصصين.' }}
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <a href="{{ route('booking') }}" class="t3-btn-elegant">

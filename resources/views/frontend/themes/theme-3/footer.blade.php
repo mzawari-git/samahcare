@@ -47,6 +47,7 @@
                 </div>
                 <p class="text-sm font-light" style="color: var(--neutral-400);" dir="ltr">{{ $siteSettings['site_phone'] ?? '+972 56 903 0203' }}</p>
                 <p class="text-sm font-light mt-1" style="color: var(--neutral-400);">{{ $siteSettings['site_address'] ?? 'رام الله، فلسطين' }}</p>
+                <p class="text-sm font-light mt-1" style="color: var(--neutral-400);">{{ $siteSettings['working_hours'] ?? '' }}</p>
             </div>
         </div>
 
