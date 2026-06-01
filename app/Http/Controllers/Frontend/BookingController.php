@@ -20,10 +20,11 @@ class BookingController extends Controller
     public function index()
     {
         $services = Service::active()->ordered()->get();
+        $groupedServices = $services->groupBy('category');
         $settings = Setting::pluck('value', 'key')->toArray();
         $paymentMethods = $this->getActivePaymentMethods($settings);
 
-        return view('frontend.booking.index', compact('services', 'settings', 'paymentMethods'));
+        return view('frontend.booking.index', compact('services', 'groupedServices', 'settings', 'paymentMethods'));
     }
 
     public function store(Request $request)
@@ -38,12 +39,14 @@ class BookingController extends Controller
             'notes' => 'nullable|string|max:1000',
             'coupon_code' => 'nullable|string|max:50',
             'payment_method' => 'nullable|string|in:cod,bank_transfer,jawwal_pay,reflect',
+            'sessions_count' => 'nullable|integer|min:1|max:5',
         ]);
 
         DB::beginTransaction();
         try {
             $service = Service::findOrFail($request->service_id);
-            $totalAmount = $service->final_price;
+            $sessionsCount = $request->input('sessions_count', 1);
+            $totalAmount = $service->final_price * $sessionsCount;
             $discountAmount = 0;
 
             if ($request->coupon_code) {
@@ -71,7 +74,7 @@ class BookingController extends Controller
                 'total_amount' => $totalAmount,
                 'discount_amount' => $discountAmount,
                 'coupon_code' => $request->coupon_code,
-                'notes' => $request->notes,
+                'notes' => ($sessionsCount > 1 ? "[عدد الجلسات: {$sessionsCount}] " : '') . ($request->notes ?? ''),
                 'status' => 'pending',
                 'payment_status' => 'pending',
                 'payment_method' => $request->payment_method,
