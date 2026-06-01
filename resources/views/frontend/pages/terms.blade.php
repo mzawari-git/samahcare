@@ -3,7 +3,7 @@
 @section('title', 'الشروط والأحكام - سماح كير')
 @section('meta_description', 'الشروط والأحكام المنظمة لاستخدام منصة سماح كير للخدمات الجمالية والحجز الإلكتروني في فلسطين.')
 @section('meta_keywords', 'شروط الاستخدام, الأحكام, سماح كير, حجز, خدمات تجميل, فلسطين')
-@section('og_image', asset('assets/images/og-image.webp'))
+@section('og_image', $siteSettings['site_logo_url'] ?? asset('favicon-32x32.png'))
 
 @push('styles')
 <style>

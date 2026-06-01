@@ -11,7 +11,7 @@
   "@type": "Organization",
   "name": "{{ $siteSettings['site_name'] ?? 'سماح كير' }}",
   "url": "{{ url('/') }}",
-  "logo": "{{ asset('assets/images/logo.png') }}",
+  "logo": "{{ $siteSettings['site_logo_url'] ?? asset('favicon-32x32.png') }}",
   "description": "منصة حجز خدمات التجميل والعناية بالبشرة",
   "address": { "@type": "PostalAddress", "addressLocality": "رام الله", "addressCountry": "PS" },
   "contactPoint": { "@type": "ContactPoint", "telephone": "{{ $siteSettings['site_phone'] ?? '+972 56 903 0203' }}", "contactType": "customer service" },

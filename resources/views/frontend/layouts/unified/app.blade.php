@@ -13,12 +13,12 @@
     <meta property="og:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير') . ' | منصة الحجز والخدمات الجمالية')">
     <meta property="og:description" content="@yield('meta_description', $siteSettings['site_description'] ?? '')">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
+    <meta property="og:image" content="@yield('og_image', $siteSettings['site_logo_url'] ?? asset('favicon-32x32.png'))">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('title', ($siteSettings['site_name'] ?? 'سماح كير'))">
     <meta name="twitter:description" content="@yield('meta_description', '')">
-    <meta name="twitter:image" content="@yield('og_image', asset('assets/images/og-image.webp'))">
+    <meta name="twitter:image" content="@yield('og_image', $siteSettings['site_logo_url'] ?? asset('favicon-32x32.png'))">
 
     <title>@yield('title', ($siteSettings['site_name'] ?? 'سماح كير'))</title>
 

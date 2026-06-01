@@ -4,14 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
-use App\Models\HeroSlide;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $slides = HeroSlide::active()->ordered()->get();
-
         $featuredServices = Service::featured()
             ->active()
             ->ordered()
@@ -21,8 +18,6 @@ class HomeController extends Controller
             $featuredServices = Service::active()->ordered()->get();
         }
 
-        return view("frontend.home.index", compact(
-            "slides", "featuredServices"
-        ));
+        return view("frontend.home.index", compact("featuredServices"));
     }
 }

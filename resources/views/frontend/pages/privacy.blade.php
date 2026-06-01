@@ -3,7 +3,7 @@
 @section('title', 'سياسة الخصوصية - سماح كير')
 @section('meta_description', 'سياسة الخصوصية لمنصة سماح كير - نوضح كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدام خدماتنا.')
 @section('meta_keywords', 'سياسة الخصوصية, الخصوصية, سماح كير, حماية البيانات, معلومات شخصية, فلسطين')
-@section('og_image', asset('assets/images/og-image.webp'))
+@section('og_image', $siteSettings['site_logo_url'] ?? asset('favicon-32x32.png'))
 
 @push('styles')
 <style>
