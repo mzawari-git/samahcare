@@ -16,6 +16,7 @@ class BlogPostSeeder extends Seeder
                 'category' => 'articles',
                 'is_featured' => true,
                 'sort_order' => 1,
+                'image' => $this->getImage('wellnesspod-main.jpg'),
                 'meta_title' => 'جهاز إزالة الشعر ALMA Soprano | دليل شامل للتقنية والنتائج',
                 'meta_description' => 'دليل متكامل عن جهاز ALMA Soprano لإزالة الشعر بالليزر: تقنية Trio Clustered Diode، نظام SHR، تقنية ICE Plus، والمقارنة بين الأطوال الموجية 755 و 810 و 1064 نانومتر.',
                 'excerpt_ar' => 'دليل متكامل عن جهاز ALMA Soprano لإزالة الشعر بالليزر بتقنية Trio Clustered Diode الثلاثية، ونظام Super Hair Removal الأحدث عالمياً.',
@@ -26,6 +27,7 @@ class BlogPostSeeder extends Seeder
                 'category' => 'articles',
                 'is_featured' => true,
                 'sort_order' => 2,
+                'image' => $this->getImage('post-2-main.jpg'),
                 'meta_title' => 'جهاز الليزر الكربوني Fractional CO2 | التجديد العميق للبشرة',
                 'meta_description' => 'كل ما تحتاج معرفته عن جهاز الليزر الكربوني الجزئي Fractional CO2: آلية العمل، المناطق العلاجية، تقنية المسح 360 درجة، والمزايا مقارنة بالتقنيات الأخرى.',
                 'excerpt_ar' => 'تعرف على جهاز الليزر الكربوني الجزئي Fractional CO2 وكيف يمنح بشرتك تجديداً عميقاً من خلال تحفيز الكولاجين الطبيعي.',
@@ -36,6 +38,7 @@ class BlogPostSeeder extends Seeder
                 'category' => 'articles',
                 'is_featured' => false,
                 'sort_order' => 3,
+                'image' => $this->getImage('post-3-main.jpg'),
                 'meta_title' => 'جهاز Q-switched Nd:YAG | إزالة التاتو والتصبغات الجلدية',
                 'meta_description' => 'دليل شامل عن جهاز ليزر Q-switched Nd:YAG لإزالة التاتو والتصبغات: مبدأ النبضات فائقة القصر، الأطوال الموجية 1064nm و 532nm، وتقنية هوليوود بيل.',
                 'excerpt_ar' => 'دليل شامل عن جهاز Q-switched Nd:YAG لإزالة التاتو والتصبغات الجلدية بتقنية النبضات فائقة القصر.',
@@ -46,6 +49,7 @@ class BlogPostSeeder extends Seeder
                 'category' => 'articles',
                 'is_featured' => true,
                 'sort_order' => 4,
+                'image' => $this->getImage('post-4-main.jpg'),
                 'meta_title' => 'جهاز هيدروجين أوكسجين 18 في 1 | العناية الشاملة بالبشرة',
                 'meta_description' => 'اكتشفي جهاز هيدروجين أوكسجين 18 في 1 متعدد الوظائف للعناية بالوجه: 18 تقنية متكاملة تشمل التنظيف، التقشير، التغذية، الرفع، ومكافحة الشيخوخة.',
                 'excerpt_ar' => 'جهاز هيدروجين أوكسجين 18 في 1 يقدم 18 وظيفة متكاملة للعناية بالوجه من التنظيف العميق إلى شد البشرة وتجديدها.',
@@ -56,6 +60,7 @@ class BlogPostSeeder extends Seeder
                 'category' => 'articles',
                 'is_featured' => false,
                 'sort_order' => 5,
+                'image' => $this->getImage('post-5-main.jpg'),
                 'meta_title' => 'جهاز هايدرو 8 في 1 | التقشير المائي المتطور للبشرة',
                 'meta_description' => 'دليل متكامل عن جهاز هايدرو 8 في 1 للتقشير المائي: Hydro-dermabrasion، قناع LED الضوئي، الترددات الراديوية، الموجات فوق الصوتية، وتقنية الأوكسجين.',
                 'excerpt_ar' => 'دليل متكامل عن جهاز هايدرو 8 في 1 للتقشير المائي والعناية بالبشرة بتقنيات متطورة وبسعر اقتصادي.',
@@ -66,10 +71,44 @@ class BlogPostSeeder extends Seeder
                 'category' => 'guides',
                 'is_featured' => false,
                 'sort_order' => 6,
+                'image' => $this->getImage('post-6-main.jpg'),
                 'meta_title' => 'مقارنة أجهزة العناية بالبشرة | دليل اختيار الجهاز المناسب',
                 'meta_description' => 'مقارنة شاملة بين أجهزة الليزر والعناية بالبشرة الاحترافية: Soprano، CO2 Fractional، Nd:YAG، هيدروجين أوكسجين، وهايدرو فيشل. مقارنة الأسعار، الاستخدامات، والفعالية.',
                 'excerpt_ar' => 'مقارنة شاملة بين أجهزة العناية بالبشرة الاحترافية لمساعدتك في اختيار الجهاز الأنسب لصالونك أو عيادتك.',
                 'content_ar' => $this->post6Content(),
+            ],
+            [
+                'title_ar' => '5 نصائح ذهبية للعناية بالبشرة بعد جلسات التقشير المائي',
+                'category' => 'tips',
+                'is_featured' => true,
+                'sort_order' => 7,
+                'image' => $this->getImage('skinanalyzer-main.jpg'),
+                'meta_title' => 'نصائح العناية بالبشرة بعد التقشير المائي | دليل ما بعد الجلسة',
+                'meta_description' => '5 نصائح أساسية للعناية بالبشرة بعد جلسات التقشير المائي: الترطيب، الوقاية من الشمس، المكونات المناسبة، والممنوعات بعد الجلسة.',
+                'excerpt_ar' => 'احصلي على أفضل نتائج من جلسات التقشير المائي مع 5 نصائح ذهبية للعناية بالبشرة بعد الجلسة.',
+                'content_ar' => $this->tipsContent(),
+            ],
+            [
+                'title_ar' => 'دليل المبتدئات: كيف تختارين جهاز العناية بالبشرة المناسب لصالونك',
+                'category' => 'guides',
+                'is_featured' => true,
+                'sort_order' => 8,
+                'image' => $this->getImage('candela-main.png'),
+                'meta_title' => 'دليل شراء أجهزة العناية بالبشرة | نصائح للمبتدئات',
+                'meta_description' => 'دليل شامل للمبتدئات في عالم التجميل لاختيار جهاز العناية بالبشرة المناسب: الميزانية، المساحة، الخدمات المطلوبة، والعائد على الاستثمار.',
+                'excerpt_ar' => 'دليل شامل يساعدك على اختيار أفضل جهاز للعناية بالبشرة يناسب احتياجات صالونك وميزانيتك.',
+                'content_ar' => $this->guideContent(),
+            ],
+            [
+                'title_ar' => 'أحدث تقنيات شد البشرة: الترددات الراديوية مقابل الموجات فوق الصوتية',
+                'category' => 'tips',
+                'is_featured' => false,
+                'sort_order' => 9,
+                'image' => $this->getImage('bodysculpt-main.jpg'),
+                'meta_title' => 'مقارنة تقنيات شد البشرة | RF أم Ultrasound أيهما أفضل؟',
+                'meta_description' => 'مقارنة شاملة بين تقنيتي الترددات الراديوية (RF) والموجات فوق الصوتية (Ultrasound) لشد البشرة: آلية العمل، النتائج، عدد الجلسات، والأسعار.',
+                'excerpt_ar' => 'تعرفي على الفرق بين الترددات الراديوية والموجات فوق الصوتية وأيهما更适合 لشد بشرتك.',
+                'content_ar' => $this->tips2Content(),
             ],
         ];
 
@@ -91,7 +130,191 @@ class BlogPostSeeder extends Seeder
         return $slug ?: 'article-' . uniqid();
     }
 
+    // ─── Tips 1 ─────────────────────────────────────────────────────
+    private function tipsContent(): string
+    {
+        return <<<'HTML'
+<div class="blog-section">
+    <h2><i class="fas fa-star"></i> نصائح ذهبية بعد التقشير المائي</h2>
+    <p>جلسات التقشير المائي (Hydro-dermabrasion) من أفضل العلاجات التجميلية للحصول على بشرة نضرة ومشرقة. لكن للحصول على أفضل النتائج، يجب اتباع روتين عناية خاص بعد الجلسة. إليك 5 نصائح ذهبية:</p>
+
+    <h3><i class="fas fa-tint"></i> 1. الترطيب المكثف هو المفتاح</h3>
+    <p>بعد التقشير المائي، تكون البشرة في حالتها الأكثر تقبلاً للمواد المرطبة. استخدمي سيروم حمض الهيالورونيك (Hyaluronic Acid) مباشرة بعد الجلسة، يليه كريم مرطب غني بالببتيدات والسيراميد. سيساعد ذلك على تعويض الرطوبة المفقودة وتعزيز حاجز البشرة الطبيعي.</p>
+
+    <h3><i class="fas fa-sun"></i> 2. الحماية من الشمس إلزامية</h3>
+    <p>بعد التقشير، تصبح البشرة أكثر حساسية للأشعة فوق البنفسجية. استخدمي واقي شمسي طبي بعامل حماية لا يقل عن <span class="blog-highlight">SPF 50+</span> حتى في الأيام الغائمة. أعيدي تطبيقه كل 3-4 ساعات. تجنبي التعرض المباشر للشمس لمدة 48 ساعة على الأقل بعد الجلسة.</p>
+
+    <h3><i class="fas fa-ban"></i> 3. تجنبي المكونات القاسية</h3>
+    <p>لمدة 72 ساعة على الأقل بعد الجلسة، تجنبي استخدام المنتجات التي تحتوي على:
+    <ul>
+        <li><strong>أحماض التقشير:</strong> مثل أحماض AHA، BHA، وحمض الجليكوليك.</li>
+        <li><strong>الريتينويدات:</strong> مثل الريتينول والتريتينوين ومشتقات فيتامين A.</li>
+        <li><strong>المقشرات الفيزيائية:</strong> مثل سكراب الوجه والفرشاة الدوارة.</li>
+        <li><strong>الكحول:</strong> التونر والمنتجات التي تحتوي على كحول مجفف.</li>
+    </ul></p>
+
+    <h3><i class="fas fa-water"></i> 4. اشربي الكثير من الماء</h3>
+    <p>ترطيب البشرة يبدأ من الداخل. احرصي على شرب ما لا يقل عن 8 أكواب من الماء يومياً بعد الجلسة. يساعد الماء على طرد السموم وتحسين مرونة الجلد. يمكنك أيضاً إضافة مشروبات غنية بمضادات الأكسدة مثل الشاي الأخضر.</p>
+
+    <h3><i class="fas fa-calendar-check"></i> 5. التزمي بجدول الجلسات</h3>
+    <p>للحصول على أفضل النتائج، يُنصح بتكرار جلسات التقشير المائي كل <span class="blog-highlight">3 إلى 4 أسابيع</span>. هذا الجدول يمنح البشرة وقتاً كافياً لتجديد نفسها بين الجلسات مع ضمان الاستمرارية في تحسين نسيج البشرة ولونها.</p>
+
+    <div class="blog-info-box">
+        <h4><i class="fas fa-check-circle"></i> الخلاصة</h4>
+        <p class="mb-0">التقشير المائي ليس مجرد جلسة، بل هو استثمار في صحة بشرتك. باتباع هذه النصائح، ستضمنين الحصول على أقصى استفادة من كل جلسة والحفاظ على نتائجها لأطول فترة ممكنة.</p>
+    </div>
+</div>
+HTML;
+    }
+
+    // ─── Guide 1 ─────────────────────────────────────────────────────
+    private function guideContent(): string
+    {
+        return <<<'HTML'
+<div class="blog-section">
+    <h2><i class="fas fa-compass"></i> كيف تختارين جهاز العناية بالبشرة المناسب؟</h2>
+    <p>عند اتخاذ قرار شراء جهاز عناية بالبشرة لصالونك أو مركزك، هناك عدة عوامل أساسية يجب مراعاتها لضمان اختيار الجهاز الأنسب لاحتياجاتك. إليك دليل شامل يساعدك في اتخاذ القرار الصحيح.</p>
+
+    <h2><i class="fas fa-dollar-sign"></i> 1. الميزانية والعائد على الاستثمار</h2>
+    <p>تتراوح أسعار أجهزة العناية بالبشرة من <strong>2,500 شيكل</strong> للأجهزة الاقتصادية (مثل هايدرو 8 في 1) إلى <strong>65,000 شيكل</strong> للأجهزة المتطورة (مثل ALMA Soprano). احسبي عدد الجلسات التي تحتاجين لتنفيذها شهرياً لتحقيق عائد على الاستثمار خلال فترة 6-12 شهراً. الأجهزة متعددة الوظائف (مثل هيدروجين أوكسجين 18 في 1) توفر عائداً أسرع لأنها تقدم خدمات متعددة بجهاز واحد.</p>
+
+    <h2><i class="fas fa-store"></i> 2. المساحة والبنية التحتية</h2>
+    <ul>
+        <li><strong>المساحة المتوفرة:</strong> الأجهزة الكبيرة مثل ALMA Soprano تحتاج مساحة ثابتة، بينما الأجهزة المحمولة مثل هايدرو 8 في 1 يمكن نقلها بسهولة.</li>
+        <li><strong>المتطلبات الكهربائية:</strong> بعض الأجهزة المتطورة تحتاج مصدر طاقة 220 فولت بتيار أعلى من المعتاد.</li>
+        <li><strong>التهوية:</strong> أجهزة الليزر تحتاج غرفة جيدة التهوية مع نظام تكييف مناسب.</li>
+    </ul>
+
+    <h2><i class="fas fa-hand-sparkles"></i> 3. الخدمات الأكثر طلباً في منطقتك</h2>
+    <p>قبل الشراء، ابحثي عن الخدمات الأكثر طلباً في منطقتك:
+    <ul>
+        <li>إذا كانت <strong>إزالة الشعر</strong> هي الخدمة الأكثر طلباً → استثمري في ALMA Soprano.</li>
+        <li>إذا كانت <strong>العناية بالوجه والبشرة</strong> هي الأكثر شيوعاً → اختاري هيدروجين أوكسجين 18 في 1 أو هايدرو 8 في 1.</li>
+        <li>إذا كنت تستهدفين <strong>علاج مشاكل جلدية محددة</strong> → فكري في Fractional CO2 أو Q-switched Nd:YAG.</li>
+    </ul></p>
+
+    <h2><i class="fas fa-graduation-cap"></i> 4. مستوى الخبرة والتدريب</h2>
+    <p>بعض الأجهزة تحتاج خبرة متقدمة (مثل Fractional CO2 و ALMA Soprano)، بينما أجهزة أخرى يمكن استخدامها بمستوى خبرة متوسط أو مبتدئ (مثل هايدرو 8 في 1). تأكدي من توفر تدريب مناسب لفريقك قبل شراء الجهاز.</p>
+
+    <div class="blog-info-box">
+        <h4><i class="fas fa-lightbulb"></i> نصيحة الخبراء</h4>
+        <p class="mb-0">ابدئي بجهاز متعدد الاستخدامات وبسعر معقول (مثل هيدروجين أوكسجين 18 في 1) لتختبر السوق وتكوّن قاعدة عملاء، ثم أضيفي الأجهزة المتخصصة تدريجياً مع نمو عملك.</p>
+    </div>
+
+    <h2><i class="fas fa-chart-line"></i> 5. ما بعد البيع والضمان والدعم الفني</h2>
+    <p>تأكدي من:
+    <ul>
+        <li>فترة ضمان كافية (سنتان على الأقل للأجهزة الرئيسية).</li>
+        <li>توفر قطع الغيار والصيانة محلياً.</li>
+        <li>دعم فني سريع عبر الهاتف أو الواتساب.</li>
+        <li>تدريب مجاني لفريق العمل على استخدام الجهاز.</li>
+    </ul></p>
+</div>
+HTML;
+    }
+
+    // ─── Tips 2 ─────────────────────────────────────────────────────
+    private function tips2Content(): string
+    {
+        return <<<'HTML'
+<div class="blog-section">
+    <h2><i class="fas fa-bolt"></i> مقدمة: ثورة شد البشرة غير الجراحي</h2>
+    <p>مع تزايد الإقبال على العلاجات غير الجراحية لشد البشرة، برزت تقنيتان كأكثر الخيارات فعالية وطلباً: <strong>الترددات الراديوية (RF)</strong> و<strong>الموجات فوق الصوتية (Ultrasound)</strong>. في هذا المقال، نقدم مقارنة شاملة بينهما لمساعدتك في اختيار الأنسب لكِ أو لصالونك.</p>
+
+    <h2><i class="fas fa-wave-square"></i> الترددات الراديوية (RF) – التسخين العميق للكولاجين</h2>
+    <p>تعمل تقنية <strong>الترددات الراديوية (Radiofrequency)</strong> عن طريق إصدار موجات كهرومغناطيسية بترددات محددة (عادةً 1-6 ميجاهرتز) تخترق الجلد لتصل إلى طبقة الأدمة (Dermis). تعمل هذه الموجات على <span class="blog-highlight">تسخين ألياف الكولاجين إلى درجة حرارة تتراوح بين 45-65 درجة مئوية</span>، مما يُسبب انكماشاً فورياً للألياف (Collagen Contraction) وتحفيزاً طويل الأمد لإنتاج كولاجين جديد.</p>
+
+    <h3>مميزات الترددات الراديوية:</h3>
+    <ul>
+        <li><strong>آمنة لجميع أنواع البشرة:</strong> لا تتأثر بلون البشرة أو كمية الميلانين، مما يجعلها مثالية للبشرة الداكنة.</li>
+        <li><strong>بدون ألم:</strong> معظم الأجهزة مزودة بنظام تبريد يضمن راحة تامة أثناء الجلسة.</li>
+        <li><strong>نتائج فورية وتراكمية:</strong> تشعرين بالشد مباشرة بعد الجلسة، وتتحسن النتائج تدريجياً على مدى 3-6 أشهر.</li>
+        <li><strong>مناسبة لجميع مناطق الجسم:</strong> الوجه، الرقبة، البطن، الذراعين، والفخذين.</li>
+    </ul>
+
+    <h2><i class="fas fa-soundcloud"></i> الموجات فوق الصوتية (Ultrasound) – الدقة في العمق</h2>
+    <p>تقنية <strong>الموجات فوق الصوتية (High-Intensity Focused Ultrasound - HIFU)</strong> تركز الطاقة الصوتية في نقطة محددة داخل طبقة الـ SMAS (النظام العضلي السطحي)، وهي نفس الطبقة التي يستهدفها جراحو التجميل أثناء عمليات شد الوجه الجراحية. تصل درجة الحرارة في نقطة التركيز إلى <span class="blog-highlight">65-70 درجة مئوية</span>، محدثة نقاط تخثر دقيقة تُحفز استجابة قوية لإنتاج الكولاجين.</p>
+
+    <h3>مميزات الموجات فوق الصوتية:</h3>
+    <ul>
+        <li><strong>دقة استثنائية:</strong> يمكن استهداف أعماق محددة بدقة تصل إلى 1.5mm، 3.0mm، و 4.5mm تحت الجلد.</li>
+        <li><strong>نتائج طويلة الأمد:</strong> تدوم نتائج HIFU لمدة 12-18 شهراً، وهي أطول من نتائج RF.</li>
+        <li><strong>نقاهة سريعة:</strong> يمكن العودة للنشاطات اليومية فوراً بعد الجلسة.</li>
+        <li><strong>جلسة واحدة فقط:</strong> في كثير من الحالات، تكفي جلسة واحدة لرؤية نتائج ملحوظة.</li>
+    </ul>
+
+    <h2><i class="fas fa-balance-scale"></i> جدول المقارنة</h2>
+    <table style="width:100%;border-collapse:collapse;margin:20px 0;">
+        <tr style="background:linear-gradient(135deg,#F59E0B,#D97706);color:white;">
+            <th style="padding:12px;border:1px solid #D97706;text-align:right;">المعيار</th>
+            <th style="padding:12px;border:1px solid #D97706;text-align:center;">RF (ترددات راديوية)</th>
+            <th style="padding:12px;border:1px solid #D97706;text-align:center;">HIFU (موجات فوق صوتية)</th>
+        </tr>
+        <tr>
+            <td style="padding:10px;border:1px solid #FDE68A;">آلية العمل</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">تسخين الأدمة بالتيار الكهربائي</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">تسخين نقطي دقيق بالطاقة الصوتية</td>
+        </tr>
+        <tr style="background:#FFFBEB;">
+            <td style="padding:10px;border:1px solid #FDE68A;">العمق المستهدف</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">2-4 ملم</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">1.5 - 4.5 ملم</td>
+        </tr>
+        <tr>
+            <td style="padding:10px;border:1px solid #FDE68A;">عدد الجلسات الموصى بها</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">4-6 جلسات</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">1-2 جلسات</td>
+        </tr>
+        <tr style="background:#FFFBEB;">
+            <td style="padding:10px;border:1px solid #FDE68A;">مدة النتائج</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">6-9 أشهر</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">12-18 شهراً</td>
+        </tr>
+        <tr>
+            <td style="padding:10px;border:1px solid #FDE68A;">الشعور أثناء الجلسة</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">دافئ ومريح</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">وخز خفيف مع حرارة عميقة</td>
+        </tr>
+        <tr style="background:#FFFBEB;">
+            <td style="padding:10px;border:1px solid #FDE68A;">السعر التقريبي للجهاز</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">5,000 - 15,000 شيكل</td>
+            <td style="padding:10px;border:1px solid #FDE68A;text-align:center;">20,000 - 50,000 شيكل</td>
+        </tr>
+    </table>
+
+    <h2><i class="fas fa-check-double"></i> أيهما تختارين؟</h2>
+    <div class="blog-info-box">
+        <h4><i class="fas fa-heart"></i> اختاري الترددات الراديوية (RF) إذا...</h4>
+        <ul class="mb-0">
+            <li>تبحثين عن جهاز اقتصادي متعدد الاستخدامات.</li>
+            <li>تريدين علاجاً مريحاً بدون ألم لمدة 4-6 جلسات.</li>
+            <li>تستهدفين شداً معتدلاً للبشرة مع تحسين عام في نسيج الجلد.</li>
+        </ul>
+    </div>
+    <div class="blog-info-box">
+        <h4><i class="fas fa-star"></i> اختاري الموجات فوق الصوتية (HIFU) إذا...</h4>
+        <ul class="mb-0">
+            <li>تبحثين عن نتائج دراماتيكية وسريعة (جلسة واحدة أو جلستان).</li>
+            <li>تريدين نتائج تدوم لأكثر من عام.</li>
+            <li>لديكِ ميزانية أعلى وتستهدفين شداً يشبه النتائج الجراحية.</li>
+        </ul>
+    </div>
+
+    <div class="blog-warning-box">
+        <h4><i class="fas fa-info-circle"></i> نصيحة مهمة</h4>
+        <p class="mb-0">للمراكز المتطورة، نوصي بتوفير كلا الجهازين. استخدمي HIFU للعلاجات الرئيسية والفعالة (جلسة واحدة كل 12-18 شهراً)، وRF للجلسات الداعمة والمتابعة للحفاظ على النتائج بين جلسات HIFU.</p>
+    </div>
+</div>
+HTML;
+    }
+
     // ─── Article 1: ALMA Soprano ────────────────────────────────────
+    private function getImage(string $name): ?string
+    {
+        $path = public_path("uploads/blog/$name");
+        return file_exists($path) ? "uploads/blog/$name" : null;
+    }
+
     private function post1Content(): string
     {
         return <<<'HTML'
