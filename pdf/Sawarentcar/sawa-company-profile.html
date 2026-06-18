@@ -1,0 +1,1530 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>سوى لتأجير السيارات — الملف التعريفي</title>
+  <style>
+    :root{
+      --primary:#C8A24A;
+      --primary-2:#F2D27A;
+      --ink:#111111;
+      --muted:#5e5e5e;
+      --paper:#ffffff;
+      --bg:#0d0f13;
+      --line:#e9e9e9;
+      --shadow:0 18px 50px rgba(0,0,0,.10);
+    }
+
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background:#f4f4f6;
+      font-family: Tahoma, "Segoe UI", Arial, "Noto Naskh Arabic", "Noto Sans Arabic", system-ui, sans-serif;
+      color:var(--ink);
+      text-rendering:optimizeLegibility;
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+    }
+
+    .print-controls{
+      position:fixed;
+      top:12px;
+      left:12px;
+      z-index:9999;
+      display:flex;
+      gap:8px;
+      direction:rtl;
+      font-family:inherit;
+    }
+
+    .print-controls button{
+      appearance:none;
+      border:1px solid rgba(18,18,18,.18);
+      background:#ffffff;
+      color:#1f1f1f;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:10.2pt;
+      font-weight:700;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      cursor:pointer;
+    }
+
+    .print-controls button:active{transform:translateY(1px);}
+
+    html.cover-white .cover{
+      background:#ffffff !important;
+      color:#111111 !important;
+    }
+
+    html.cover-white .cover .pill{
+      border-color:rgba(200,162,74,.55);
+      background:rgba(200,162,74,.12);
+      color:#6a5300;
+    }
+
+    html.cover-white .cover .cover-title p,
+    html.cover-white .cover .cover-footer .contact,
+    html.cover-white .cover .cover-footer .stamp,
+    html.cover-white .cover .cover-brand h2,
+    html.cover-white .cover .muted{
+      color:#2b2b2b !important;
+    }
+
+    html.cover-white .cover .cover-right{
+      background:transparent;
+      backdrop-filter:none;
+      border:1px solid rgba(18,18,18,.12);
+    }
+
+    html.cover-white .cover .seal{
+      border:1px solid rgba(18,18,18,.12);
+      background:#fafafa;
+    }
+
+    html.cover-white .cover .seal .d{color:#4a4a4a;}
+
+    .page{
+      width:210mm;
+      min-height:297mm;
+      margin:10px auto;
+      background:var(--paper);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .page-inner{padding:15mm 14mm;}
+
+    .logo{
+      display:block;
+      height:18mm;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .logo-full{
+      display:block;
+      height:24mm;
+      width:auto;
+      max-width:150mm;
+      object-fit:contain;
+    }
+
+    .ltr{
+      direction:ltr;
+      unicode-bidi:embed;
+    }
+
+    .topbar .logo{height:9mm;}
+    .cover .logo{height:16mm; filter: drop-shadow(0 8px 22px rgba(0,0,0,.20));}
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      border-bottom:1px solid var(--line);
+      padding:7mm 14mm 5mm;
+      direction:rtl;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      direction:rtl;
+    }
+
+    .brand h2{
+      margin:0;
+      font-size:14.5pt;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      direction:rtl;
+      text-align:right;
+    }
+
+    .meta{
+      text-align:left;
+      font-size:9.5pt;
+      color:var(--muted);
+      line-height:1.35;
+      direction:ltr;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid rgba(200,162,74,.35);
+      background:rgba(200,162,74,.08);
+      color:#6a5300;
+      font-weight:700;
+      font-size:9.5pt;
+      margin-bottom:5px;
+    }
+
+    h1{margin:0; font-size:26pt; letter-spacing:.2px;}
+    h3{margin:0; font-size:12pt; color:#2b2b2b;}
+    .muted{color:var(--muted);}
+
+    .cover{
+      color:#fff;
+      background:
+        radial-gradient(1100px 560px at 10% 0%, rgba(242,210,122,.38) 0%, rgba(242,210,122,0) 60%),
+        radial-gradient(900px 600px at 100% 30%, rgba(200,162,74,.40) 0%, rgba(200,162,74,0) 62%),
+        linear-gradient(135deg, #0c0f14 0%, #0b0c0f 55%, #0f1116 100%);
+    }
+
+    .cover .page-inner{padding:18mm 14mm;}
+
+    .cover-brand{
+      margin-top:6mm;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:4mm;
+      direction:rtl;
+    }
+
+    .cover-brand h2{
+      margin:0;
+      color:#fff;
+      font-size:16pt;
+      letter-spacing:.2px;
+    }
+
+    .cover-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:14mm;
+      align-items:stretch;
+      margin-top:8mm;
+    }
+
+    .cover-title{margin-top:8mm;}
+
+    .cover-title h1{
+      font-size:34pt;
+      line-height:1.10;
+      margin:0;
+      letter-spacing:.2px;
+    }
+
+    .cover-title p{
+      margin:7mm 0 0;
+      font-size:12.2pt;
+      color:rgba(255,255,255,.86);
+      line-height:1.65;
+    }
+
+    .cover-right{
+      padding:12mm;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(8px);
+      min-height:150mm;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:10mm;
+    }
+
+    .seal{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:9px 10px;
+    }
+
+    .seal .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
+      flex:0 0 auto;
+    }
+
+    .seal .t{
+      font-weight:700;
+      font-size:10.6pt;
+      letter-spacing:.1px;
+    }
+
+    .seal .d{
+      margin-top:2px;
+      font-size:9.9pt;
+      color:rgba(255,255,255,.84);
+      line-height:1.55;
+    }
+
+    .cover-footer{
+      margin-top:14mm;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10mm;
+    }
+
+    .cover-footer .contact{
+      font-size:10pt;
+      color:rgba(255,255,255,.86);
+      line-height:1.65;
+      direction:rtl;
+      text-align:right;
+    }
+
+    .cover-footer .stamp{
+      text-align:right;
+      font-size:9.5pt;
+      color:rgba(255,255,255,.70);
+      line-height:1.45;
+    }
+
+    .content h1{font-size:20pt; line-height:1.2; margin:0 0 4mm;}
+
+    .content p,
+    .lead{
+      text-align:justify;
+      text-justify:inter-word;
+      hyphens:auto;
+    }
+
+    .content li{
+      text-align:right;
+      text-justify:auto;
+      hyphens:none;
+    }
+
+    .lead{
+      font-size:11.2pt;
+      line-height:1.85;
+      margin:0 0 8mm;
+      color:#2b2b2b;
+    }
+
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:10mm;}
+
+    .grid,
+    .card{
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:7mm;
+      background:#fff;
+    }
+
+    .card h3{margin:0 0 3mm; font-size:12.5pt;}
+
+    .card p{margin:0; color:#2b2b2b; font-size:10.7pt; line-height:1.85;}
+
+    ul{margin:0; padding-right:18px; color:#2b2b2b; font-size:10.7pt; line-height:1.85;}
+    li{margin:2.2mm 0;}
+
+    .kpi{display:grid; grid-template-columns:repeat(3, 1fr); gap:6mm; margin-top:6mm;}
+
+    .kpi .box{
+      border:1px solid rgba(200,162,74,.25);
+      background:rgba(200,162,74,.06);
+      border-radius:14px;
+      padding:6mm;
+    }
+
+    .kpi .num{font-size:18pt; font-weight:800; color:#6a5300; line-height:1.1; direction:ltr; text-align:left;}
+    .kpi .lbl{margin-top:2mm; font-size:9.8pt; color:#6b6b6b; line-height:1.45;}
+
+    .section-note{
+      margin-top:6mm;
+      border-right:4px solid var(--primary);
+      background:linear-gradient(270deg, rgba(200,162,74,.10) 0%, rgba(200,162,74,0) 70%);
+      border-radius:10px;
+      padding:5mm 6mm;
+      color:#2b2b2b;
+      font-size:10.5pt;
+      line-height:1.85;
+      text-align:right;
+      text-justify:auto;
+      hyphens:none;
+    }
+
+    .toc{display:grid; grid-template-columns:1fr; gap:5mm; margin-top:6mm;}
+
+    .toc-item{display:flex; align-items:baseline; gap:10px;}
+    .toc-item .name{font-weight:800;}
+    .toc-item .dots{flex:1 1 auto; border-bottom:1px dotted #cfcfcf; transform:translateY(-2px);}
+    .toc-item .toc-page{font-weight:800; color:#6a5300; direction:ltr; text-align:left;}
+
+    .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:4mm;}
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:9.7pt;
+      border:1px solid rgba(18,18,18,.12);
+      color:#2b2b2b;
+      background:#fafafa;
+    }
+
+    .badge .b{width:8px; height:8px; border-radius:999px; background:linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);}
+
+    .columns{display:grid; grid-template-columns:1.2fr .8fr; gap:10mm;}
+    .list-tight li{margin:1.8mm 0;}
+
+    .divider{height:1px; background:var(--line); margin:6mm 0;}
+
+    .fill{
+      display:inline-block;
+      min-width:52mm;
+      border-bottom:1px solid #cfcfcf;
+      transform:translateY(-1px);
+    }
+
+    .fill.sm{min-width:28mm;}
+    .fill.lg{min-width:80mm;}
+
+    .kv{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4mm 8mm;
+      margin-top:4mm;
+    }
+
+    .kv .row{font-size:10.7pt; line-height:1.9; color:#2b2b2b;}
+
+    .kv b{color:#1f1f1f;}
+
+    .small{font-size:9.6pt; line-height:1.65;}
+    .small li{margin:1.4mm 0;}
+
+    .footer{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      padding:5mm 14mm;
+      border-top:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:9.3pt;
+      color:#707070;
+    }
+
+    .footer b{color:#3a3a3a;}
+
+    @page{size:A4; margin:0;}
+
+    @media print{
+      body{background:#fff;}
+      .print-controls{display:none !important;}
+      .page{margin:0; box-shadow:none;}
+      section.page{break-after:page;}
+      section.page:last-of-type{break-after:auto;}
+      @supports not (break-after: page){
+        section.page{page-break-after:always;}
+        section.page:last-of-type{page-break-after:auto;}
+      }
+      .page-inner{padding:12mm 12mm;}
+      .topbar{padding:6mm 12mm 3mm;}
+      .cover .page-inner{padding:14mm 12mm;}
+      .footer{padding:4mm 12mm;}
+      .grid{gap:7mm;}
+      .columns{gap:7mm;}
+      .card{padding:6mm;}
+      .divider{margin:5mm 0;}
+      .lead{margin:0 0 6mm; line-height:1.75;}
+      .kpi{gap:5mm;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-controls" aria-hidden="true">
+    <button type="button" id="printDefault">حفظ PDF (الغلاف الأصلي)</button>
+    <button type="button" id="printCoverWhite">حفظ PDF (غلاف أبيض)</button>
+  </div>
+
+  <section class="page cover">
+    <div class="page-inner">
+      <div class="pill">Company Profile</div>
+
+      <div class="cover-brand">
+        <img class="logo-full" src="logo.png" alt="Sawa Rent a Car" />
+        <div style="display:flex; align-items:center; gap:10px; min-width:0;">
+          <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+          <div style="min-width:0;">
+            <h2>شركة سوى لتأجير السيارات</h2>
+            <div class="muted" style="color:rgba(255,255,255,.78); font-size:10.6pt; margin-top:2px;"><span class="ltr">Sawa Rent a Car</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-grid">
+        <div>
+          <div class="cover-title">
+            <h1>الملف التعريفي<br/>للشركة</h1>
+            <p>
+              شريككم الموثوق في التنقّل: سيارات حديثة، أسعار تنافسية، وخدمة منظمة تضمن تجربة استئجار واضحة وآمنة.
+            </p>
+          </div>
+
+          <div class="cover-footer">
+            <div class="contact">
+              <div><b>الموقع الإلكتروني</b>: <span class="ltr">https://sawarentcar.online</span></div>
+              <div><b>الهاتف / واتساب</b>: <span class="ltr">0597492182</span> | <span class="ltr">0599930120</span></div>
+              <div><b>البريد الإلكتروني</b>: <span class="ltr">info@sawarentcar.online</span></div>
+              <div><b>العنوان</b>: فلسطين، البيرة، حي البالوع، بالقرب من شركة جوال</div>
+              <div><b>ساعات العمل</b>: من السبت إلى الخميس (09:00 – 18:00)</div>
+            </div>
+            <div class="stamp">
+              <div style="font-weight:800; color:rgba(255,255,255,.92);">Sawa Rent a Car</div>
+              <div>وثيقة أعمال رسمية</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cover-right">
+          <div>
+            <div class="seal">
+              <div class="dot" aria-hidden="true"></div>
+              <div>
+                <div class="t">سيارات حديثة ومعايير سلامة</div>
+                <div class="d">تجهيزات نظيفة، فحص دوري، وجاهزية تشغيل عالية.</div>
+              </div>
+            </div>
+
+            <div class="seal" style="margin-top:8mm;">
+              <div class="dot" aria-hidden="true"></div>
+              <div>
+                <div class="t">عقود واضحة وشفافية مالية</div>
+                <div class="d">تسعير مُعلن بدون رسوم مخفية مع فواتير ضريبية حسب الأصول.</div>
+              </div>
+            </div>
+
+            <div class="seal" style="margin-top:8mm;">
+              <div class="dot" aria-hidden="true"></div>
+              <div>
+                <div class="t">حلول مرنة للأفراد والمؤسسات</div>
+                <div class="d">تأجير قصير وطويل المدى مع دعم لوجستي لتغطية متطلبات العمل الميداني.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid rgba(255,255,255,.12); padding-top:10mm;">
+            <div style="font-size:10.6pt; color:rgba(255,255,255,.84); line-height:1.7;">
+              <div style="font-weight:800; color:#fff; margin-bottom:3mm;">نطاق الخدمة</div>
+              <div>فلسطين — خدمة الاستلام والتسليم ضمن مناطق الخدمة حسب الاتفاق.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>سوى لتأجير السيارات</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">الفهرس</div>
+        <div>Company Profile</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>المحتويات</h1>
+      <div class="toc">
+        <div class="toc-item"><div class="name">نبذة عن الشركة</div><div class="dots"></div><div class="toc-page">02</div></div>
+        <div class="toc-item"><div class="name">الرؤية والرسالة</div><div class="dots"></div><div class="toc-page">03</div></div>
+        <div class="toc-item"><div class="name">الخدمات</div><div class="dots"></div><div class="toc-page">04</div></div>
+        <div class="toc-item"><div class="name">الأسطول ومعايير الجاهزية</div><div class="dots"></div><div class="toc-page">05</div></div>
+        <div class="toc-item"><div class="name">لماذا تختارون سوى؟</div><div class="dots"></div><div class="toc-page">06</div></div>
+        <div class="toc-item"><div class="name">سابقة الأعمال والشركاء</div><div class="dots"></div><div class="toc-page">07</div></div>
+        <div class="toc-item"><div class="name">سياسة الخصوصية وحماية البيانات</div><div class="dots"></div><div class="toc-page">08</div></div>
+        <div class="toc-item"><div class="name">الشروط والأحكام العامة للتأجير</div><div class="dots"></div><div class="toc-page">09</div></div>
+        <div class="toc-item"><div class="name">إجراءات الاستلام والتسليم</div><div class="dots"></div><div class="toc-page">10</div></div>
+        <div class="toc-item"><div class="name">سياسة التأمين وإدارة المخاطر</div><div class="dots"></div><div class="toc-page">11</div></div>
+        <div class="toc-item"><div class="name">عقد التأجير (أفراد / شركات صغيرة)</div><div class="dots"></div><div class="toc-page">12</div></div>
+        <div class="toc-item"><div class="name">عقد التأجير المؤسسي (شركات / تأمين)</div><div class="dots"></div><div class="toc-page">13</div></div>
+        <div class="toc-item"><div class="name">ملحق: استلام/تسليم وفحص المركبة</div><div class="dots"></div><div class="toc-page">14</div></div>
+        <div class="toc-item"><div class="name">التواصل والقنوات الرسمية</div><div class="dots"></div><div class="toc-page">15</div></div>
+      </div>
+
+      <div class="section-note" style="margin-top:12mm;">
+        تم إعداد هذا الملف ليكون مرجعًا مختصرًا وعمليًا يُوضح نموذج عمل الشركة، نطاق الخدمات، والالتزام القانوني والتشغيلي.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — الملف التعريفي</div>
+      <div>صفحة 01</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>نبذة عن الشركة</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 1</div>
+        <div>About Us</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>1) من نحن</h1>
+      <p class="lead">
+        تُعد شركة <b>سوى لتأجير السيارات</b> من الشركات الحديثة في قطاع تأجير المركبات في فلسطين. نتخذ من مدينة <b>البيرة</b> (حي البالوع) موقعًا استراتيجيًا يسهّل على الأفراد والمؤسسات الوصول إلى خدماتنا بسرعة ومرونة.
+      </p>
+
+      <div class="columns">
+        <div>
+          <div class="card">
+            <h3>تعريف مختصر</h3>
+            <p>
+              نوفّر تجربة استئجار منظمة وواضحة: مركبة جاهزة، عقد شفاف، ودعم سريع عند الحاجة — بهدف تمكين عملائنا من التنقّل بثقة ودون تعقيدات.
+            </p>
+            <div class="badges">
+              <span class="badge"><span class="b" aria-hidden="true"></span>أسعار واضحة</span>
+              <span class="badge"><span class="b" aria-hidden="true"></span>جاهزية تشغيل عالية</span>
+              <span class="badge"><span class="b" aria-hidden="true"></span>دعم للمؤسسات</span>
+              <span class="badge"><span class="b" aria-hidden="true"></span>إجراءات تسليم واستلام مرنة</span>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:10mm;">
+            <h3>مبدأنا في الخدمة</h3>
+            <p>
+              نؤمن أن استئجار السيارة ليس مجرد توفير مركبة، بل تقديم <b>تجربة قيادة آمنة ومريحة</b>، مع التزام بأعلى معايير الجودة والصيانة والنظافة.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3>مزايا تشغيلية</h3>
+            <ul class="list-tight">
+              <li>موقع قريب من مراكز المدن الرئيسية لتسريع الاستجابة.</li>
+              <li>سياسات واضحة تسهّل الاعتماد ضمن قوائم الموردين.</li>
+              <li>مرونة في مدد التأجير: يومي، أسبوعي، شهري وسنوي.</li>
+              <li>التزام بإجراءات تسليم منظمة واستلام موثق.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-note" style="margin-top:10mm;">
+        نقدم حلول تنقّل تلائم احتياجات السوق الفلسطيني، للرحلات القصيرة أو عقود المؤسسات طويلة الأمد.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — نبذة عن الشركة</div>
+      <div>صفحة 02</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>الرؤية والرسالة</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 2</div>
+        <div>Vision &amp; Mission</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>2) رؤيتنا ورسالتنا</h1>
+      <p class="lead">
+        نعمل برؤية واضحة تهدف إلى بناء شراكات طويلة الأمد مع المؤسسات والشركات، من خلال أسطول موثوق، إجراءات منضبطة، وخدمة عملاء عالية الاستجابة.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>الرؤية</h3>
+          <p>
+            أن نكون الخيار الأول والأكثر موثوقية للمؤسسات والمنظمات غير الحكومية والشركات في فلسطين لتلبية احتياجات أساطيل النقل.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>الرسالة</h3>
+          <p>
+            توفير أسطول سيارات حديث وآمن، مع ضمان الشفافية المالية والإدارية، وتقديم خدمة عملاء مهنية لضمان راحة البال لشركائنا.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>قيمنا التشغيلية</h3>
+        <ul>
+          <li><b>الانضباط</b>: إجراءات واضحة في التسليم والاستلام والمتابعة.</li>
+          <li><b>الجاهزية</b>: مركبات مهيأة ومُفحوصة دوريًا لتقليل الأعطال.</li>
+          <li><b>الشفافية</b>: عروض أسعار واضحة وعقود قابلة للتدقيق.</li>
+          <li><b>الاستجابة</b>: دعم سريع لتسهيل استمرارية عمل الجهات الشريكة.</li>
+        </ul>
+      </div>
+
+      <div class="section-note" style="margin-top:10mm;">
+        نهدف إلى تقديم تجربة استئجار سهلة ومريحة، مع التركيز على المتطلبات المؤسسية (التوثيق، الفوترة، والالتزام) كأولوية.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — الرؤية والرسالة</div>
+      <div>صفحة 03</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>الخدمات</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 3</div>
+        <div>Our Services</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>3) خدماتنا</h1>
+      <p class="lead">
+        نقدم باقة متكاملة من خدمات التأجير المصممة لتلبية احتياجات <b>الأفراد</b> و<b>الشركات</b> و<b>المؤسسات</b>، مع مرونة عالية في المدد وآلية عمل واضحة.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>تأجير قصير المدى</h3>
+          <p>
+            حلول يومية وأسبوعية لتغطية الاحتياجات الطارئة، الزيارات الميدانية، أو الاستخدام الشخصي، مع إجراءات تسليم واستلام سريعة.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>تأجير طويل المدى (Corporate Leasing)</h3>
+          <p>
+            عقود شهرية وسنوية للشركات والمؤسسات بأسعار تفضيلية، مع إمكانية تضمين الصيانة والتأمين والترخيص حسب الاتفاق وبنود الامتثال المطلوبة.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:10mm;">
+        <div class="card">
+          <h3>الدعم اللوجستي واستمرارية التشغيل</h3>
+          <p>
+            توفير حلول بديلة عند الحاجة (حسب التوفر وبنود العقد) لضمان عدم تعطّل المهام الأساسية.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>مرونة التسليم والاستلام</h3>
+          <p>
+            إمكانية تسليم المركبات في المواقع التي يحددها العميل ضمن مناطق الخدمة وبما يتوافق مع سياسات التشغيل.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-note" style="margin-top:10mm;">
+        للشركات والمؤسسات: يمكن تخصيص العقود لتناسب سياسات المشتريات الداخلية ومتطلبات الامتثال (الفوترة الضريبية، شهادات الخصم من المصدر عند اللزوم، وآلية التسليم والاستبدال).
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — الخدمات</div>
+      <div>صفحة 04</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>الأسطول</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 4</div>
+        <div>Our Fleet</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>4) أسطولنا ومعايير الجاهزية</h1>
+      <p class="lead">
+        نحرص على تحديث الأسطول بشكل دوري لضمان الكفاءة وتقليل الأعطال. كما نخضع المركبات لإجراءات فحص ونظافة قبل كل عملية تسليم.
+      </p>
+
+      <div class="columns">
+        <div>
+          <div class="card">
+            <h3>تنوع الأسطول</h3>
+            <ul class="list-tight">
+              <li>سيارات سيدان اقتصادية وعملية مناسبة للتحركات الإدارية والميدانية.</li>
+              <li>موديلات حديثة لتعزيز معايير السلامة على الطرقات.</li>
+              <li>خيارات ملائمة للعقود المؤسسية طويلة الأمد.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:10mm;">
+            <h3>مثال على الفئة</h3>
+            <p>
+              سيارات مثل <b>Kia Cerato</b> توفر توازنًا ممتازًا بين الراحة، رحابة المقصورة، واقتصاد الوقود.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3>الصيانة والنظافة</h3>
+            <ul class="list-tight">
+              <li>فحص فني دوري وفق جدول صيانة واضح.</li>
+              <li>تنظيف وتعقيم شامل قبل التسليم.</li>
+              <li>توثيق ملاحظات المركبة عند التسليم والاستلام.</li>
+            </ul>
+          </div>
+
+          <div class="section-note" style="margin-top:10mm;">
+            تركيزنا هو جاهزية المركبة في وقت التسليم، وتقليل فرص الأعطال، وضمان تجربة قيادة مريحة وآمنة.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — الأسطول</div>
+      <div>صفحة 05</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>لماذا سوى؟</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 5</div>
+        <div>Why Choose Us</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>5) لماذا تختارون "سوى"؟</h1>
+      <p class="lead">
+        نعتمد نموذج تشغيل يوازن بين <b>الامتثال</b> و<b>السرعة</b> و<b>الوضوح</b>، بما يسهّل على الجهات الشريكة إدارة احتياجاتها من المركبات بثقة.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>الامتثال القانوني والضريبي</h3>
+          <p>
+            شركة مسجلة رسميًا ومرخصة حسب الأصول، وملتزمة بإصدار الفواتير الضريبية وتقديم شهادات الخصم من المصدر وفق المتطلبات.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>الشفافية المطلقة</h3>
+          <p>
+            تسعير واضح بدون رسوم مخفية، وعقود منظمة تضمن معرفة جميع البنود قبل توقيع الاتفاق.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:10mm;">
+        <div class="card">
+          <h3>موقع استراتيجي</h3>
+          <p>
+            قربنا من مركز مدينة البيرة والمناطق الحيوية يدعم سرعة الاستجابة وخدمة التسليم عند الحاجة.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>خدمة عملاء مهنية</h3>
+          <p>
+            فريق دعم متاح يوميًا ضمن ساعات العمل المعلنة للرد على الاستفسارات ومعالجة الحالات التشغيلية بأسرع وقت.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-note" style="margin-top:10mm;">
+        نرحّب بالعقود المؤسسية التي تتطلب إجراءات وثائقية محددة، ونحرص على المواءمة مع سياسات الشراء والالتزام المعتمدة لدى الجهات الشريكة.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — لماذا سوى</div>
+      <div>صفحة 06</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>سابقة الأعمال</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 6</div>
+        <div>Partners</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>6) سابقة الأعمال والشركاء</h1>
+      <p class="lead">
+        نؤمن بأن الثقة تُبنى بالالتزام، ولذلك نركز على تقديم تجربة مستقرة يمكن الاعتماد عليها للأفراد والمؤسسات.
+      </p>
+
+      <div class="card">
+        <h3>نص تعريفي</h3>
+        <p>
+          حازت شركة <b>سوى</b> على ثقة العديد من العملاء في القطاع الخاص، ونسعى لتوسيع شراكاتنا الاستراتيجية مع القطاع الأهلي والمؤسسات الدولية، مستندين إلى سمعتنا الطيبة في الالتزام بالمواعيد وجودة المركبات وحسن إدارة العقود.
+        </p>
+        <div class="divider"></div>
+        <p style="margin:0; font-size:10.5pt; line-height:1.85; color:#2b2b2b;">
+          في حال توفر قائمة شركاء أو مشاريع محددة (أسماء مؤسسات/عقود/مدد)، يمكن إدراجها هنا بشكل نقاط مختصر.
+        </p>
+      </div>
+
+      <div class="section-note" style="margin-top:10mm;">
+        جاهزون لخدمتكم ونتطلع لأن نكون ضمن قائمة الموردين المعتمدين لديكم، والمساهمة في تسهيل مهامكم التشغيلية.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — الشركاء</div>
+      <div>صفحة 07</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>سياسة الخصوصية</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 7</div>
+        <div>Privacy Policy</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>7) سياسة الخصوصية وحماية البيانات</h1>
+      <p class="lead">
+        تلتزم <b>سوى لتأجير السيارات</b> بحماية بيانات العملاء وتطبيق مبادئ الخصوصية المتعارف عليها دوليًا ضمن حدود القوانين المحلية، بما يشمل: الشفافية، تحديد الغرض، تقليل البيانات، الحد من مدة الاحتفاظ، وأمن المعلومات.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>البيانات التي نقوم بجمعها</h3>
+          <ul class="list-tight">
+            <li>بيانات التعريف: الاسم، رقم الهوية/جواز السفر، ومعلومات التواصل.</li>
+            <li>بيانات القيادة: رخصة القيادة وصلاحيتها وأي بيانات لازمة للتحقق من الأهلية.</li>
+            <li>بيانات التعاقد: تفاصيل الحجز، مدة الإيجار، المبالغ المستحقة وفق العقد.</li>
+            <li>بيانات الاستخدام: قراءات العداد وسجل الحوادث/المخالفات المتعلقة بالعقد، وبيانات GPS إن كانت متوفرة.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>الغرض والأساس القانوني</h3>
+          <ul class="list-tight">
+            <li>إبرام وتنفيذ عقد الإيجار والتحقق من الهوية والأهلية.</li>
+            <li>الالتزام بمتطلبات قانونية/تنظيمية والاستجابة للطلبات الرسمية وفق القانون.</li>
+            <li>إدارة المخاطر وحماية الحقوق، بما في ذلك مطالبات التأمين عند الحاجة.</li>
+            <li>التواصل التشغيلي المتعلق بالحجز/العقد (وليس لأغراض تسويق دون موافقة صريحة حيث يلزم).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:10mm;">
+        <div class="card">
+          <h3>مشاركة البيانات مع الغير</h3>
+          <p>
+            لا نقوم ببيع بيانات العملاء ولا مشاركتها لأغراض تسويقية. قد تتم مشاركة البيانات عند الضرورة فقط مع شركات التأمين/مقدمي الخدمات المرتبطين بالعقد بالحد الأدنى اللازم، أو مع الجهات الرسمية المختصة عند وجود طلب رسمي أو حادث/مخالفة وفقًا للقانون.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>أمن المعلومات والاحتفاظ وحقوق العميل</h3>
+          <ul class="list-tight">
+            <li>نعتمد إجراءات تنظيمية وتقنية معقولة لحماية البيانات وتقييد الوصول إليها.</li>
+            <li>نحتفظ بالوثائق للمدة اللازمة للتعاقد والالتزام القانوني وتسوية المطالبات/المنازعات ثم يتم إتلافها أو إخفاء هويتها بطريقة آمنة.</li>
+            <li>يحق للعميل طلب الاطلاع على بياناته أو تصحيحها/تحديثها ضمن الحدود التي يسمح بها القانون.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — سياسة الخصوصية</div>
+      <div>صفحة 08</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>الشروط والأحكام</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 8</div>
+        <div>Terms &amp; Conditions</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>8) الشروط والأحكام العامة للتأجير</h1>
+      <p class="lead">
+        تُعد البنود التالية إطارًا عامًا، وتُفصَّل في عقد الإيجار المُوقَّع. يخضع العقد للقانون الفلسطيني ما لم يتم الاتفاق كتابيًا على غير ذلك.
+      </p>
+
+      <div class="columns">
+        <div>
+          <div class="card">
+            <h3>الأهلية والسائقون المصرّح لهم</h3>
+            <ul class="list-tight">
+              <li>يشترط توفر وثائق هوية سارية ورخصة قيادة سارية للمستأجر.</li>
+              <li>يُسمح بالقيادة فقط للسائق/السائقين المدرجين في العقد.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:10mm;">
+            <h3>استلام المركبة وإعادتها</h3>
+            <ul class="list-tight">
+              <li>يقر المستأجر باستلام المركبة بحالة تشغيلية جيدة وفق نموذج الاستلام/التسليم.</li>
+              <li>يجب إعادة المركبة في الوقت/المكان المتفق عليهما، وأي تأخير يخضع لرسوم العقد ما لم يتم تمديد الحجز كتابيًا.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3>الاستخدام المحظور</h3>
+            <ul class="list-tight">
+              <li>القيادة تحت تأثير الكحول أو المخدرات.</li>
+              <li>السباقات أو القيادة الخطرة أو الطرق الوعرة/غير المعبدة (ما لم يُنص خلاف ذلك).</li>
+              <li>أي استخدام غير مشروع أو مخالف للقانون.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:10mm;">
+            <h3>التأمين، الحوادث، والمخالفات</h3>
+            <ul class="list-tight">
+              <li>المركبة مؤمّنة وفق بوليصة التأمين السارية وشروطها.</li>
+              <li>قد يلتزم المستأجر بمبلغ التحمل/الإعفاء (Excess) حسب البوليصة والعقد، مع اشتراط تقرير شرطة رسمي عند اللزوم.</li>
+              <li>يتحمل المستأجر المخالفات والرسوم التي تترتب خلال فترة الإيجار وفق ما هو منصوص عليه في العقد.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-note" style="margin-top:10mm;">
+        <b>النطاق الجغرافي وGPS إن وجد:</b> تُستخدم المركبة ضمن النطاق الجغرافي المتفق عليه. وقد تكون بعض المركبات مزودة بنظام تتبع لأغراض الحماية وإدارة الأسطول والاستجابة للحوادث/السرقة، ويتم التعامل مع بياناته وفق سياسة الخصوصية وبما يحقق التناسب والضرورة.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — الشروط والأحكام</div>
+      <div>صفحة 09</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>الاستلام والتسليم</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 9</div>
+        <div>Delivery &amp; Return</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>9) إجراءات الاستلام والتسليم</h1>
+      <p class="lead">
+        تهدف هذه الإجراءات إلى توحيد عملية التسليم والاستلام وضمان توثيق الحالة التشغيلية للمركبة بشكل واضح ومهني.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>متطلبات الاستلام</h3>
+          <ul class="list-tight">
+            <li>إبراز هوية/جواز سفر ساري ورخصة قيادة سارية للسائق/السائقين المعتمدين في العقد.</li>
+            <li>توقيع عقد الإيجار والملحقات (إن وجدت) وتسليم الوديعة/الدفع وفق الاتفاق.</li>
+            <li>تسليم نسخة من الوثائق المطلوبة لأغراض التوثيق والامتثال.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>فحص المركبة والتوثيق</h3>
+          <ul class="list-tight">
+            <li>توثيق حالة المركبة عبر نموذج استلام/تسليم: الهيكل، الإطارات، الأنوار، الزجاج، الداخلية.</li>
+            <li>تسجيل قراءة العداد ومستوى الوقود عند التسليم والاستلام.</li>
+            <li>أي ملاحظات تُثبت في النموذج وتُوقع من الطرفين.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:10mm;">
+        <div class="card">
+          <h3>الوقود والمسافة والتمديد</h3>
+          <ul class="list-tight">
+            <li>سياسة الوقود تحدد في العقد (عادةً: تسليم/استلام بنفس المستوى).</li>
+            <li>أي حد مسافة يومي/شهري يُذكر بوضوح في العقد إن كان مطبقًا.</li>
+            <li>التمديد يتطلب موافقة مسبقة قبل انتهاء مدة الإيجار.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>التأخير والتسليم خارج الدوام</h3>
+          <ul class="list-tight">
+            <li>تطبق رسوم التأخير وفق العقد عند إعادة المركبة بعد الوقت المحدد.</li>
+            <li>يمكن الاتفاق على التسليم/الاستلام خارج الدوام ضمن ترتيبات مسبقة.</li>
+            <li>يُمنع ترك المركبة دون تسليم رسمي إلا بموافقة مكتوبة.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-note" style="margin-top:10mm;">
+        <b>ملاحظة:</b> نموذج ملحق الفحص والاستلام/التسليم موجود ضمن الملحق في نهاية الملف ويمكن طباعته واستخدامه لكل عملية تأجير.
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — الاستلام والتسليم</div>
+      <div>صفحة 10</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>التأمين وإدارة المخاطر</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 10</div>
+        <div>Insurance &amp; Risk</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>10) سياسة التأمين وإدارة المخاطر</h1>
+      <p class="lead">
+        تُطبق سياسة التأمين وفق بوليصة التأمين السارية وشروطها، وبما يضمن وضوح المسؤوليات وتقليل المخاطر التشغيلية.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>التأمين والتحمل (Excess)</h3>
+          <ul class="list-tight">
+            <li>نوع التغطية (شامل/طرف ثالث) يحدد في العقد أو الملحق.</li>
+            <li>حد التحمل/الإعفاء (Excess) يحدد صراحةً في العقد/الملحق.</li>
+            <li>قد تُستثنى التغطية في حالات الاستخدام المحظور أو مخالفة شروط العقد.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>الحوادث والإبلاغ</h3>
+          <ul class="list-tight">
+            <li>الإبلاغ الفوري للشركة عند حادث/ضرر/عطل.</li>
+            <li>تقرير رسمي عند اللزوم حسب متطلبات التأمين والقانون.</li>
+            <li>عدم إجراء إصلاحات جوهرية دون موافقة الشركة (إلا للضرورة القصوى للسلامة).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:10mm;">
+        <div class="card">
+          <h3>السائقون المصرّح لهم والاستخدام المحظور</h3>
+          <ul class="list-tight">
+            <li>القيادة فقط للسائقين المدرجين في العقد.</li>
+            <li>يُحظر: الكحول/المخدرات، السباقات/القيادة الخطرة، الطرق الوعرة غير المصرح بها، والاستخدام غير المشروع.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>النطاق الجغرافي وGPS</h3>
+          <ul class="list-tight">
+            <li>النطاق الجغرافي يُحدد في العقد، وأي خروج يتطلب موافقة مكتوبة وتغطية إضافية عند الحاجة.</li>
+            <li>قد تتضمن المركبة GPS لأغراض الحماية وإدارة الأسطول وفق سياسة الخصوصية.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — التأمين وإدارة المخاطر</div>
+      <div>صفحة 11</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>عقد التأجير</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 11</div>
+        <div>Rental Agreement</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>11) عقد تأجير مركبة (أفراد / شركات صغيرة)</h1>
+      <p class="lead">
+        عقد تأجير يُستخدم للأفراد والشركات الصغيرة، ويشمل البنود الأساسية ضمن هذه الصفحة، ويُستكمل ببيانات الأطراف والمركبة ومدة الإيجار.
+      </p>
+
+      <div class="card">
+        <h3>أولاً: بيانات الأطراف</h3>
+        <div class="kv">
+          <div class="row"><b>المؤجر (الشركة)</b>: SAWA RENT CAR</div>
+          <div class="row"><b>رقم الهاتف</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>المستأجر</b>: <span class="fill lg"></span></div>
+          <div class="row"><b>رقم الهوية/جواز السفر</b>: <span class="fill"></span></div>
+          <div class="row"><b>رقم رخصة القيادة</b>: <span class="fill"></span></div>
+          <div class="row"><b>تاريخ انتهاء الرخصة</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>العنوان</b>: <span class="fill lg"></span></div>
+          <div class="row"><b>هاتف/واتساب</b>: <span class="fill"></span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>ثانياً: بيانات المركبة ومدة الإيجار</h3>
+        <div class="kv">
+          <div class="row"><b>نوع/موديل</b>: <span class="fill"></span></div>
+          <div class="row"><b>رقم اللوحة</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>سنة الصنع</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>لون المركبة</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>تاريخ ووقت الاستلام</b>: <span class="fill"></span></div>
+          <div class="row"><b>تاريخ ووقت الإعادة</b>: <span class="fill"></span></div>
+          <div class="row"><b>مكان الاستلام</b>: <span class="fill"></span></div>
+          <div class="row"><b>مكان الإعادة</b>: <span class="fill"></span></div>
+          <div class="row"><b>قراءة العداد عند الاستلام</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>قراءة العداد عند الإعادة</b>: <span class="fill sm"></span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>ثالثاً: الرسوم والتأمين والالتزامات</h3>
+        <div class="kv">
+          <div class="row"><b>سعر الإيجار (يومي/أسبوعي/شهري)</b>: <span class="fill"></span></div>
+          <div class="row"><b>الوديعة/التأمين النقدي</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>حد التحمل/الإعفاء (Excess)</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>طريقة الدفع</b>: <span class="fill"></span></div>
+        </div>
+        <div class="divider"></div>
+        <ul class="list-tight small">
+          <li>المستأجر مسؤول عن قيادة المركبة بشكل قانوني وآمن، ويوافق أن الاستخدام محصور بالسائقين المدرجين في العقد.</li>
+          <li>يُعاد تسليم المركبة بالحالة التشغيلية ذاتها وفق نموذج الاستلام/التسليم، مع احتساب أي أضرار غير موثقة عند الاستلام.</li>
+          <li>يتحمل المستأجر المخالفات المرورية والرسوم والغرامات التي تترتب خلال مدة الإيجار.</li>
+          <li>يسري التأمين وفق بوليصة التأمين وشروطها. عند حادث/ضرر يلتزم المستأجر بالإبلاغ الفوري وتقديم تقرير رسمي عند اللزوم، وقد يلتزم بمبلغ التحمل/الإعفاء (Excess) وفق العقد.</li>
+          <li>يُحظر: القيادة تحت تأثير الكحول/المخدرات، السباقات/القيادة الخطرة، الطرق الوعرة غير المصرح بها، أو أي استخدام غير مشروع.</li>
+          <li>التمديد أو تغيير مكان/وقت الإعادة يتطلب موافقة مسبقة. أي تأخير يخضع لرسوم العقد.</li>
+          <li>النطاق الجغرافي يحدد في العقد. أي خروج عنه يتطلب موافقة مكتوبة وتغطية إضافية عند الحاجة.</li>
+          <li>قد تكون المركبة مزودة بـGPS لأغراض الحماية وإدارة الأسطول وفق سياسة الخصوصية.</li>
+          <li>تسري أحكام القانون الفلسطيني والاختصاص للمحاكم الفلسطينية المختصة ما لم يتفق كتابياً على غير ذلك.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>رابعاً: التوقيعات</h3>
+        <div class="kv">
+          <div class="row"><b>توقيع المؤجر</b>: <span class="fill"></span></div>
+          <div class="row"><b>الختم</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>توقيع المستأجر</b>: <span class="fill"></span></div>
+          <div class="row"><b>التاريخ</b>: <span class="fill sm"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — عقد التأجير</div>
+      <div>صفحة 12</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>عقد التأجير المؤسسي</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 12</div>
+        <div>Corporate Agreement</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>12) عقد تأجير مركبات (شركات / مؤسسات / تأمين)</h1>
+      <p class="lead">
+        عقد مخصص للتعاقدات المؤسسية ويشمل البنود الأساسية ضمن هذه الصفحة، مع إمكانية إضافة ملاحق للأسطول والأسعار ونقاط الاتصال حسب الاتفاق.
+      </p>
+
+      <div class="card">
+        <h3>أولاً: بيانات الشركة/المؤسسة المستأجرة</h3>
+        <div class="kv">
+          <div class="row"><b>اسم الشركة/المؤسسة</b>: <span class="fill lg"></span></div>
+          <div class="row"><b>رقم تسجيل/ترخيص</b>: <span class="fill"></span></div>
+          <div class="row"><b>العنوان</b>: <span class="fill lg"></span></div>
+          <div class="row"><b>المفوض بالتوقيع</b>: <span class="fill"></span></div>
+          <div class="row"><b>رقم هوية المفوض</b>: <span class="fill"></span></div>
+          <div class="row"><b>هاتف/واتساب</b>: <span class="fill"></span></div>
+          <div class="row"><b>البريد الإلكتروني</b>: <span class="fill lg"></span></div>
+          <div class="row"><b>اسم مسؤول المتابعة</b>: <span class="fill"></span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>ثانياً: نطاق الخدمة والمدة</h3>
+        <div class="kv">
+          <div class="row"><b>مدة العقد</b>: <span class="fill"></span></div>
+          <div class="row"><b>عدد المركبات</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>نطاق الخدمة</b>: <span class="fill lg"></span></div>
+          <div class="row"><b>آلية التسليم/التسلم</b>: <span class="fill lg"></span></div>
+        </div>
+        <div class="divider"></div>
+        <ul class="list-tight small">
+          <li>تحدد قائمة المركبات في <b>ملحق (A)</b> (نوع/موديل، رقم اللوحة، مدة التخصيص، حالة الاستلام، السائقون المعتمدون).</li>
+          <li>تحدد الأسعار والخصومات في <b>ملحق (B)</b> وفق عرض السعر المعتمد (شهري/سنوي/لكل مركبة) وآلية احتساب الإضافات.</li>
+          <li>آلية الاستبدال/المركبة البديلة تُحدد ضمن العقد أو الملحق وفق التوفر وبما يضمن استمرارية التشغيل.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>ثالثاً: التأمين وإدارة الحوادث</h3>
+        <ul class="list-tight small">
+          <li>تكون المركبات مؤمنة وفق بوليصة التأمين السارية وشروطها، ويتم تحديد التحمل/الإعفاء (Excess) في ملحق الأسعار أو في عقد الإيجار.</li>
+          <li>في حال حادث، يتم الإبلاغ فوراً وتقديم تقرير رسمي عند اللزوم، والتعاون مع شركة التأمين والجهات المختصة.</li>
+          <li>يمكن تضمين بند <b>مركبة بديلة</b> وفق التوفر وبنود العقد لتأمين استمرارية التشغيل.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>رابعاً: الفوترة والدفع</h3>
+        <div class="kv">
+          <div class="row"><b>دورية الفواتير</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>طريقة الدفع</b>: <span class="fill"></span></div>
+          <div class="row"><b>مدة السداد</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>بيانات الفوترة</b>: <span class="fill lg"></span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>خامساً: التوقيعات</h3>
+        <div class="kv">
+          <div class="row"><b>عن SAWA RENT CAR</b>: <span class="fill"></span></div>
+          <div class="row"><b>الختم</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>عن الشركة/المؤسسة</b>: <span class="fill"></span></div>
+          <div class="row"><b>التاريخ</b>: <span class="fill sm"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — عقد مؤسسي</div>
+      <div>صفحة 13</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>ملحق الفحص</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 13</div>
+        <div>Vehicle Checklist</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>13) ملحق: استلام/تسليم وفحص المركبة</h1>
+      <p class="lead">
+        يُستخدم هذا الملحق لتوثيق حالة المركبة عند الاستلام والإعادة، ويُعتبر جزءًا مكملاً للعقد.
+      </p>
+
+      <div class="card">
+        <h3>بيانات أساسية</h3>
+        <div class="kv">
+          <div class="row"><b>اسم المستأجر/الجهة</b>: <span class="fill lg"></span></div>
+          <div class="row"><b>رقم العقد</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>نوع/موديل</b>: <span class="fill"></span></div>
+          <div class="row"><b>رقم اللوحة</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>تاريخ الاستلام</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>تاريخ الإعادة</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>عداد الاستلام</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>عداد الإعادة</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>وقود الاستلام</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>وقود الإعادة</b>: <span class="fill sm"></span></div>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:10mm;">
+        <div class="card">
+          <h3>فحص خارجي</h3>
+          <ul class="list-tight small">
+            <li>هيكل السيارة/خدوش/صدمات: <span class="fill"></span></li>
+            <li>الإطارات/الجنطات: <span class="fill"></span></li>
+            <li>الأنوار/الإشارات: <span class="fill"></span></li>
+            <li>الزجاج/المرايا: <span class="fill"></span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>فحص داخلي وملحقات</h3>
+          <ul class="list-tight small">
+            <li>نظافة/مقاعد/فرش: <span class="fill"></span></li>
+            <li>مكيف/تشغيل: <span class="fill"></span></li>
+            <li>مثلث/طفاية/عدة: <span class="fill"></span></li>
+            <li>مفتاح إضافي/وثائق: <span class="fill"></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>ملاحظات</h3>
+        <div class="row"><span class="fill lg"></span></div>
+        <div class="row" style="margin-top:4mm;"><span class="fill lg"></span></div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>توقيعات الاستلام/التسليم</h3>
+        <div class="kv">
+          <div class="row"><b>توقيع المؤجر</b>: <span class="fill"></span></div>
+          <div class="row"><b>توقيع المستأجر</b>: <span class="fill"></span></div>
+          <div class="row"><b>تاريخ الاستلام</b>: <span class="fill sm"></span></div>
+          <div class="row"><b>تاريخ الإعادة</b>: <span class="fill sm"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — ملحق الفحص</div>
+      <div>صفحة 14</div>
+    </div>
+  </section>
+
+  <section class="page content">
+    <div class="topbar">
+      <div class="brand">
+        <img class="logo" src="logosmall.png" alt="Sawa Rent a Car" />
+        <h2>التواصل</h2>
+      </div>
+      <div class="meta">
+        <div class="pill" style="margin:0;">القسم 14</div>
+        <div>Contact</div>
+      </div>
+    </div>
+
+    <div class="page-inner">
+      <h1>14) معلومات التواصل والقنوات الرسمية</h1>
+      <p class="lead">
+        للاستفسارات والعقود المؤسسية، يرجى استخدام القنوات التالية. كما يمكن ترتيب آلية التواصل الرسمية حسب متطلباتكم.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>البيانات الأساسية</h3>
+          <ul>
+            <li><b>العنوان</b>: فلسطين، البيرة، حي البالوع، بالقرب من شركة جوال.</li>
+            <li><b>الموقع الإلكتروني</b>: <span class="ltr">https://sawarentcar.online</span></li>
+            <li><b>الهاتف / واتساب</b>: <span class="ltr">0597492182</span> | <span class="ltr">0599930120</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>البريد الإلكتروني</h3>
+          <p>
+            يُرجى اعتماد بريد رسمي للعروض والمراسلات.
+          </p>
+          <div class="section-note" style="margin-top:6mm;">
+            البريد المقترح: <b>info@sawarentcar.online</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:10mm;">
+        <h3>ملاحظات تشغيلية</h3>
+        <ul>
+          <li>للأفراد: خيارات يومية/أسبوعية واضحة مع إجراءات تسليم واستلام مبسطة ومواعيد مرنة حسب التوفر.</li>
+          <li>للشركات: إمكانية بناء خطة تأجير شهرية/سنوية تشمل أكثر من مركبة مع نقاط اتصال موحدة ومتابعة تشغيلية.</li>
+          <li>للمؤسسات والمنظمات: يمكن تجهيز نسخة تعاقدية تتضمن نطاق الخدمة، بنود التأمين، وآلية الاستبدال عند الطوارئ وفق سياسة الجهة.</li>
+          <li>يمكن إضافة أرقام واتساب/طوارئ أو قناة دعم مخصصة حسب نوع العقد وطبيعة التشغيل.</li>
+          <li>يمكن تزويدكم بقالب عرض أسعار (Quotation) وقالب اتفاقية تأجير (Agreement) عند الطلب.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div><b>سوى لتأجير السيارات</b> — التواصل</div>
+      <div>صفحة 15</div>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      var root = document.documentElement;
+      var btnDefault = document.getElementById('printDefault');
+      var btnCoverWhite = document.getElementById('printCoverWhite');
+
+      function cleanup(){
+        root.classList.remove('cover-white');
+      }
+
+      function doPrint(whiteCover){
+        cleanup();
+        if(whiteCover){
+          root.classList.add('cover-white');
+        }
+        window.print();
+        setTimeout(cleanup, 1200);
+      }
+
+      if(btnDefault){
+        btnDefault.addEventListener('click', function(){ doPrint(false); });
+      }
+      if(btnCoverWhite){
+        btnCoverWhite.addEventListener('click', function(){ doPrint(true); });
+      }
+
+      window.addEventListener('afterprint', cleanup);
+    })();
+  </script>
+
+</body>
+</html>

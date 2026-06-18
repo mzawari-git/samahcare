@@ -1,0 +1,7 @@
+<IfModule mod_autoindex.c>
+IndexIgnore *
+</IfModule>
+
+<FilesMatch "\.(log|txt)$">
+Require all denied
+</FilesMatch>

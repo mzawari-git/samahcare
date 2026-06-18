@@ -1,0 +1,151 @@
+# =============================================================================
+# ROBOTS.TXT - Sawa Rent Car
+# Complete SEO Optimization for All Search Engines
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# ALLOW ALL SEARCH ENGINES
+# -----------------------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# -----------------------------------------------------------------------------
+# GOOGLE
+# -----------------------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /uploads/
+User-agent: Googlebot-News
+Allow: /
+User-agent: Googlebot-Video
+Allow: /
+
+# -----------------------------------------------------------------------------
+# BING & MICROSOFT
+# -----------------------------------------------------------------------------
+User-agent: Bingbot
+Allow: /
+User-agent: msnbot
+Allow: /
+User-agent: MSNBot-Media
+Allow: /uploads/
+User-agent: MSNBot-News
+Allow: /
+User-agent: bingbot
+Allow: /
+
+# -----------------------------------------------------------------------------
+# YAHOO
+# -----------------------------------------------------------------------------
+User-agent: Slurp
+Allow: /
+User-agent: Yahoo! Slurp
+Allow: /
+
+# -----------------------------------------------------------------------------
+# YANDEX (Russia)
+# -----------------------------------------------------------------------------
+User-agent: Yandex
+Allow: /
+User-agent: YandexBot
+Allow: /
+User-agent: YandexImages
+Allow: /uploads/
+
+# -----------------------------------------------------------------------------
+# BAIDU (China)
+# -----------------------------------------------------------------------------
+User-agent: Baidu
+Allow: /
+User-agent: Baiduspider
+Allow: /
+User-agent: BaiduImagespider
+Allow: /uploads/
+
+# -----------------------------------------------------------------------------
+# NAVER (Korea)
+# -----------------------------------------------------------------------------
+User-agent: NaverBot
+Allow: /
+User-agent: Yeti
+Allow: /
+
+# -----------------------------------------------------------------------------
+# DUCKDUCKGO
+# -----------------------------------------------------------------------------
+User-agent: DuckDuckBot
+Allow: /
+
+# -----------------------------------------------------------------------------
+# OTHER SEARCH ENGINES
+# -----------------------------------------------------------------------------
+User-agent: Exabot
+Allow: /
+User-agent: FacebookBot
+Allow: /
+User-agent: Twitterbot
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: AhrefsBot
+Allow: /
+User-agent: SemrushBot
+Allow: /
+User-agent: MJ12bot
+Allow: /
+User-agent: DotBot
+Allow: /
+
+# -----------------------------------------------------------------------------
+# DISALLOW SENSITIVE DIRECTORIES
+# -----------------------------------------------------------------------------
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /logs/
+Disallow: /api/
+Disallow: /pdf/
+Disallow: /database*.sql
+Disallow: /uploads/.htaccess
+Disallow: /debug
+Disallow: /test_
+Disallow: /.env
+Disallow: /.git
+Disallow: /error.log
+
+# -----------------------------------------------------------------------------
+# DISALLOW ADMIN & LOGIN PAGES
+# -----------------------------------------------------------------------------
+Disallow: /admin/login
+Disallow: /admin/logout
+Disallow: /admin/setup
+Disallow: /admin/register
+
+# -----------------------------------------------------------------------------
+# DISALLOW PARAMETERS (Optional - Uncomment if needed)
+# -----------------------------------------------------------------------------
+# Disallow: /*?
+# Disallow: /*.php$
+# Disallow: /*.js$
+# Disallow: /*.css$
+
+# -----------------------------------------------------------------------------
+# CRAWL DELAY (Preserve Server Resources)
+# -----------------------------------------------------------------------------
+Crawl-delay: 1
+
+# -----------------------------------------------------------------------------
+# SITEMAP LOCATIONS
+# -----------------------------------------------------------------------------
+Sitemap: /sitemap.xml
+Sitemap: /sitemap-index.xml
+
+# -----------------------------------------------------------------------------
+# HOST DIRECTIVE (For Yandex)
+# -----------------------------------------------------------------------------
+Host: sawarentcar.online
+
+# =============================================================================
+# END OF ROBOTS.TXT
+# =============================================================================

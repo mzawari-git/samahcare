@@ -1,0 +1,9 @@
+{
+  "ignoredUrls": [
+    "files/.*"
+  ],
+  "hints": {
+    "no-inline-styles": "off"
+  },
+  "hintsTimeout": 10000
+}
