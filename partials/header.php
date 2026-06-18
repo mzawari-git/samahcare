@@ -259,6 +259,10 @@ if ($favicon !== ''): ?>
 
     <!-- CTA -->
     <div class="nav-cta">
+      <!-- Language Switcher -->
+      <a href="?lang=<?= $lang === 'ar' ? 'en' : 'ar' ?>" class="nav-lang-switch" title="<?= $lang === 'ar' ? 'English' : 'العربية' ?>">
+        <span><?= $lang === 'ar' ? 'EN' : 'AR' ?></span>
+      </a>
       <?php if ($phone1 !== ''): ?>
       <a href="https://wa.me/<?= e($wa) ?>" target="_blank" class="nav-cta" style="width:38px;height:38px;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#25d366;font-size:17px;text-decoration:none;transition:all .25s;">
         <i class="fab fa-whatsapp"></i>

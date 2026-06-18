@@ -4,6 +4,21 @@ declare(strict_types=1);
 
 function current_lang(): string
 {
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    if (isset($_GET['lang'])) {
+        $lang = strtolower((string)$_GET['lang']);
+        if (in_array($lang, ['ar', 'en'], true)) {
+            $_SESSION['lang'] = $lang;
+        }
+    }
+
+    if (isset($_SESSION['lang']) && in_array((string)$_SESSION['lang'], ['ar', 'en'], true)) {
+        return (string)$_SESSION['lang'];
+    }
+
     return defined('DEFAULT_LANG') ? DEFAULT_LANG : 'en';
 }
 
