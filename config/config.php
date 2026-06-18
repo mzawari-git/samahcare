@@ -15,8 +15,8 @@ function env_str(string $key, string $default): string {
 
 $defaultDbHost = 'localhost';
 $defaultDbName = 'u920699383_sawa';
-$defaultDbUser = 'root';
-$defaultDbPass = '';
+$defaultDbUser = 'u920699383_sawa';
+$defaultDbPass = 'Mohammed@#!135';
 
 define('DB_HOST', env_str('DB_HOST', $defaultDbHost));
 define('DB_NAME', env_str('DB_NAME', $defaultDbName));
@@ -24,7 +24,7 @@ define('DB_USER', env_str('DB_USER', $defaultDbUser));
 define('DB_PASS', env_str('DB_PASS', $defaultDbPass));
 
 $dbPortEnv = getenv('DB_PORT');
-define('DB_PORT', $dbPortEnv !== false && $dbPortEnv !== '' ? (int)$dbPortEnv : 3307);
+define('DB_PORT', $dbPortEnv !== false && $dbPortEnv !== '' ? (int)$dbPortEnv : 3306);
 
 define('UPLOADS_DIR', __DIR__ . '/../uploads');
 define('UPLOADS_URL', 'uploads');
