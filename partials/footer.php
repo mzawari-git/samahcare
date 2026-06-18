@@ -57,18 +57,15 @@ $socialLinks = [
       <div class="footer-title"><?= e($lang === 'ar' ? 'روابط سريعة' : 'Quick Links') ?></div>
       <div class="footer-links">
         <a href="<?= e($homePrefix) ?>#cars"    class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e(t('nav_cars')) ?></a>
+        <a href="services.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'خدماتنا' : 'Services') ?></a>
+        <a href="fleet.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'أسطول السيارات' : 'Our Fleet') ?></a>
         <a href="special-deal.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'عروض خاصة' : 'Special Deals') ?></a>
-        <a href="blog.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'المدونة' : 'Blog') ?></a>
-        
-        <a href="services.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === "rtl" ? "left" : "right" ?>"></i> <?= e($lang === "ar" ? "الخدمات" : "Services") ?></a>
-        <a href="fleet.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === "rtl" ? "left" : "right" ?>"></i> <?= e($lang === "ar" ? "الأسطول" : "Fleet") ?></a>
-        <a href="testimonials.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === "rtl" ? "left" : "right" ?>"></i> <?= e($lang === "ar" ? "آراء العملاء" : "Testimonials") ?></a>
-        <a href="locations.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === "rtl" ? "left" : "right" ?>"></i> <?= e($lang === "ar" ? "فروعنا" : "Locations") ?></a>
-        <a href="contact.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === "rtl" ? "left" : "right" ?>"></i> <?= e($lang === "ar" ? "اتصل بنا" : "Contact") ?></a>
-        <a href="about.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === "rtl" ? "left" : "right" ?>"></i> <?= e($lang === "ar" ? "من نحن" : "About Us") ?></a>
-        <a href="about.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'من نحن' : 'About Us') ?></a>
         <a href="<?= e($homePrefix) ?>#offers"  class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e(t('nav_offers')) ?></a>
         <a href="<?= e($homePrefix) ?>#booking" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'احجز الآن' : 'Book Now') ?></a>
+        <a href="testimonials.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'آراء العملاء' : 'Testimonials') ?></a>
+        <a href="contact.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'اتصل بنا' : 'Contact') ?></a>
+        <a href="locations.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'فروعنا' : 'Locations') ?></a>
+        <a href="about.php" class="footer-link"><i class="fas fa-chevron-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i> <?= e($lang === 'ar' ? 'من نحن' : 'About Us') ?></a>
       </div>
     </div>
 
@@ -138,8 +135,6 @@ $socialLinks = [
 $debug_info = "digits=[$digits] wa=[$wa]";
 echo "<!-- DEBUG: $debug_info -->"; 
 if (true): ?>
-<!-- Floating CTA test - should appear here -->
-<div class="floating-cta" style="background:red;padding:20px;color:white;z-index:9999;position:fixed;bottom:0;left:0;">FLOATING CTA TEST</div>
   <?php if (isset($wa) && $wa !== ''): ?>
   <a href="https://wa.me/<?= e($wa) ?>" target="_blank" rel="noopener" class="floating-btn whatsapp" title="WhatsApp">
     <i class="fab fa-whatsapp"></i>

@@ -233,16 +233,28 @@ if ($favicon !== ''): ?>
     <ul class="nav-links">
       <li><a href="<?= e($homePrefix) ?>#cars"><i class="fas fa-car fa-sm"></i> <?= e(t('nav_cars')) ?></a></li>
       <li><a href="special-deal.php"><i class="fas fa-fire fa-sm"></i> <?= e($lang === 'ar' ? 'صفقة مميزة' : 'Best Deal') ?></a></li>
-      <li><a href="blog.php"><i class="fas fa-blog fa-sm"></i> <?= e($lang === 'ar' ? 'المدونة' : 'Blog') ?></a></li>
-      <li><a href="about.php"><i class="fas fa-info-circle fa-sm"></i> <?= e($lang === 'ar' ? 'من نحن' : 'About') ?></a></li>
-      <li><a href="<?= e($homePrefix) ?>#offers"><i class="fas fa-tag fa-sm"></i> <?= e(t('nav_offers')) ?></a></li>
-      <li><a href="<?= e($homePrefix) ?>#booking"><i class="fas fa-calendar fa-sm"></i> <?= e($lang === 'ar' ? 'الحجز' : 'Book') ?></a></li>
-      
-      <li><a href="services.php"><i class="fas fa-concierge-bell fa-sm"></i> <?= e($lang === "ar" ? "الخدمات" : "Services") ?></a></li>
-      <li><a href="fleet.php"><i class="fas fa-car-side fa-sm"></i> <?= e($lang === "ar" ? "الأسطول" : "Fleet") ?></a></li>
-      <li><a href="contact.php"><i class="fas fa-envelope fa-sm"></i> <?= e($lang === "ar" ? "اتصل بنا" : "Contact") ?></a></li>
-      <li><a href="faq.php"><i class="fas fa-question-circle fa-sm"></i> <?= e($lang === 'ar' ? 'الأسئلة الشائعة' : 'FAQ') ?></a></li>
-      <li><a href="<?= $homePrefix ?>#contact" onclick="if(window.location.href.indexOf('index.php') === -1 && window.location.href.indexOf('/') !== -1) { window.location.href = 'index.php#contact'; return false; }"><i class="fas fa-map fa-sm"></i> <?= e(t('nav_contact')) ?></a></li>
+      <li>
+        <a href="#" class="dropdown-trigger" role="button"><i class="fas fa-concierge-bell fa-sm"></i> <?= e($lang === 'ar' ? 'الخدمات' : 'Services') ?> <i class="fas fa-chevron-down arrow"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="services.php"><i class="fas fa-concierge-bell"></i> <?= e($lang === 'ar' ? 'خدماتنا' : 'Our Services') ?></a></li>
+          <li><a href="fleet.php"><i class="fas fa-car-side"></i> <?= e($lang === 'ar' ? 'أسطول السيارات' : 'Our Fleet') ?></a></li>
+          <li><a href="<?= e($homePrefix) ?>#offers"><i class="fas fa-tag"></i> <?= e(t('nav_offers')) ?></a></li>
+          <li><a href="<?= e($homePrefix) ?>#booking"><i class="fas fa-calendar-alt"></i> <?= e($lang === 'ar' ? 'الحجز' : 'Book Now') ?></a></li>
+          <li><a href="testimonials.php"><i class="fas fa-star"></i> <?= e($lang === 'ar' ? 'آراء العملاء' : 'Testimonials') ?></a></li>
+          <li><a href="my-booking.php"><i class="fas fa-search"></i> <?= e($lang === 'ar' ? 'تتبع حجزي' : 'Track Booking') ?></a></li>
+          <li><a href="faq.php"><i class="fas fa-question-circle"></i> <?= e($lang === 'ar' ? 'الأسئلة الشائعة' : 'FAQ') ?></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" class="dropdown-trigger" role="button"><i class="fas fa-info-circle fa-sm"></i> <?= e($lang === 'ar' ? 'المزيد' : 'More') ?> <i class="fas fa-chevron-down arrow"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="about.php"><i class="fas fa-info-circle"></i> <?= e($lang === 'ar' ? 'من نحن' : 'About Us') ?></a></li>
+          <li><a href="blog.php"><i class="fas fa-blog"></i> <?= e($lang === 'ar' ? 'المدونة' : 'Blog') ?></a></li>
+          <li><a href="locations.php"><i class="fas fa-map-marked-alt"></i> <?= e($lang === 'ar' ? 'فروعنا' : 'Locations') ?></a></li>
+          <li><a href="reviews.php"><i class="fas fa-star"></i> <?= e($lang === 'ar' ? 'آراء العملاء' : 'Reviews') ?></a></li>
+        </ul>
+      </li>
+      <li><a href="<?= $homePrefix ?>#contact" class="nav-highlight" onclick="if(window.location.href.indexOf('index.php') === -1 && window.location.href.indexOf('/') !== -1) { window.location.href = 'index.php#contact'; return false; }"><i class="fas fa-phone fa-sm"></i> <?= e(t('nav_contact')) ?></a></li>
     </ul>
 
     <!-- CTA -->
@@ -265,23 +277,32 @@ if ($favicon !== ''): ?>
 
 <!-- Mobile Menu -->
 <nav class="nav-mobile" id="navMobile">
-  <a href="<?= e($homePrefix) ?>#cars"><i class="fas fa-car"></i> <?= e(t('nav_cars')) ?></a>
-  <a href="special-deal.php" style="background:linear-gradient(135deg, var(--accent), var(--accent-dark));color:white;"><i class="fas fa-fire"></i> <?= e($lang === 'ar' ? 'صفقة مميزة' : 'Best Deal') ?></a>
-  <a href="blog.php"><i class="fas fa-blog"></i> <?= e($lang === 'ar' ? 'المدونة' : 'Blog') ?></a>
-  <a href="about.php"><i class="fas fa-info-circle"></i> <?= e($lang === 'ar' ? 'من نحن' : 'About') ?></a>
-  <a href="<?= e($homePrefix) ?>#offers"><i class="fas fa-tag"></i> <?= e(t('nav_offers')) ?></a>
-  <a href="<?= e($homePrefix) ?>#booking"><i class="fas fa-calendar-alt"></i> <?= e($lang === 'ar' ? 'الحجز' : 'Book') ?></a>
-  <a href="faq.php"><i class="fas fa-question-circle"></i> <?= e($lang === 'ar' ? 'الأسئلة الشائعة' : 'FAQ') ?></a>
-  <a href="my-booking.php"><i class="fas fa-search"></i> <?= e($lang === 'ar' ? 'تتبع حجزي' : 'Track Booking') ?></a>
-  
-  <a href="services.php"><i class="fas fa-concierge-bell"></i> <?= e($lang === "ar" ? "الخدمات" : "Services") ?></a>
-  <a href="fleet.php"><i class="fas fa-car-side"></i> <?= e($lang === "ar" ? "الأسطول" : "Fleet") ?></a>
-  <a href="testimonials.php"><i class="fas fa-star"></i> <?= e($lang === "ar" ? "آراء العملاء" : "Testimonials") ?></a>
-  <a href="locations.php"><i class="fas fa-map-marked-alt"></i> <?= e($lang === "ar" ? "فروعنا" : "Locations") ?></a>
-  <a href="contact.php"><i class="fas fa-envelope"></i> <?= e($lang === "ar" ? "اتصل بنا" : "Contact") ?></a>
-  <a href="reviews.php"><i class="fas fa-star"></i> <?= e($lang === 'ar' ? 'آراء العملاء' : 'Reviews') ?></a>
-  <a href="<?= e($homePrefix) ?>#contact"><i class="fas fa-phone"></i> <?= e(t('nav_contact')) ?></a>
-  <a href="admin/login.php" style="background:rgba(37,99,235,.15);border-color:rgba(37,99,235,.3);color:var(--primary-light);"><i class="fas fa-shield-alt"></i> <?= e($lang === 'ar' ? 'لوحة الإدارة' : 'Admin Panel') ?></a>
+  <div class="nav-mobile-group">
+    <div class="nav-mobile-label"><?= e($lang === 'ar' ? 'تصفح' : 'Browse') ?></div>
+    <a href="<?= e($homePrefix) ?>#cars"><i class="fas fa-car"></i> <?= e(t('nav_cars')) ?></a>
+    <a href="special-deal.php" style="background:linear-gradient(135deg, var(--accent), var(--accent-dark));color:white;"><i class="fas fa-fire"></i> <?= e($lang === 'ar' ? 'صفقة مميزة' : 'Best Deal') ?></a>
+    <a href="fleet.php"><i class="fas fa-car-side"></i> <?= e($lang === 'ar' ? 'أسطول السيارات' : 'Our Fleet') ?></a>
+  </div>
+  <div class="nav-mobile-group">
+    <div class="nav-mobile-label"><?= e($lang === 'ar' ? 'خدمات' : 'Services') ?></div>
+    <a href="services.php"><i class="fas fa-concierge-bell"></i> <?= e($lang === 'ar' ? 'خدماتنا' : 'Our Services') ?></a>
+    <a href="<?= e($homePrefix) ?>#offers"><i class="fas fa-tag"></i> <?= e(t('nav_offers')) ?></a>
+    <a href="<?= e($homePrefix) ?>#booking"><i class="fas fa-calendar-alt"></i> <?= e($lang === 'ar' ? 'الحجز' : 'Book Now') ?></a>
+    <a href="my-booking.php"><i class="fas fa-search"></i> <?= e($lang === 'ar' ? 'تتبع حجزي' : 'Track Booking') ?></a>
+  </div>
+  <div class="nav-mobile-group">
+    <div class="nav-mobile-label"><?= e($lang === 'ar' ? 'المزيد' : 'More') ?></div>
+    <a href="about.php"><i class="fas fa-info-circle"></i> <?= e($lang === 'ar' ? 'من نحن' : 'About Us') ?></a>
+    <a href="blog.php"><i class="fas fa-blog"></i> <?= e($lang === 'ar' ? 'المدونة' : 'Blog') ?></a>
+    <a href="locations.php"><i class="fas fa-map-marked-alt"></i> <?= e($lang === 'ar' ? 'فروعنا' : 'Locations') ?></a>
+    <a href="testimonials.php"><i class="fas fa-star"></i> <?= e($lang === 'ar' ? 'آراء العملاء' : 'Testimonials') ?></a>
+    <a href="faq.php"><i class="fas fa-question-circle"></i> <?= e($lang === 'ar' ? 'الأسئلة الشائعة' : 'FAQ') ?></a>
+    <a href="reviews.php"><i class="fas fa-star"></i> <?= e($lang === 'ar' ? 'التقييمات' : 'Reviews') ?></a>
+  </div>
+  <div class="nav-mobile-group">
+    <a href="<?= e($homePrefix) ?>#contact" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:transparent;color:white;"><i class="fas fa-phone"></i> <?= e(t('nav_contact')) ?></a>
+    <a href="admin/login.php" style="background:rgba(37,99,235,.15);border-color:rgba(37,99,235,.3);color:var(--primary-light);"><i class="fas fa-shield-alt"></i> <?= e($lang === 'ar' ? 'لوحة الإدارة' : 'Admin Panel') ?></a>
+  </div>
 </nav>
 
 <script>
@@ -301,6 +322,31 @@ if ($favicon !== ''): ?>
   }));
   window.addEventListener('scroll', function(){
     header && header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+  // Dropdown click toggle for touch devices
+  document.querySelectorAll('.nav-links .dropdown-trigger').forEach(function(trigger){
+    trigger.addEventListener('click', function(e){
+      var li = this.closest('li');
+      if (!li) return;
+      var menu = li.querySelector('.dropdown-menu');
+      if (!menu) return;
+      var isOpen = menu.style.display === 'block';
+      // Close all sibling dropdowns
+      li.parentNode.querySelectorAll('.dropdown-menu').forEach(function(m){
+        m.style.display = 'none';
+      });
+      menu.style.display = isOpen ? 'none' : 'block';
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  });
+  // Close dropdown on outside click
+  document.addEventListener('click', function(e){
+    if (!e.target.closest('.nav-links li')) {
+      document.querySelectorAll('.nav-links .dropdown-menu').forEach(function(m){
+        m.style.display = '';
+      });
+    }
   });
 })();
 </script>
