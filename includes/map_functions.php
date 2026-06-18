@@ -10,7 +10,7 @@ function get_map_config() {
         return $config;
     }
     
-    $stmt = db()->prepare("SELECT value FROM settings WHERE key = 'map_config'");
+    $stmt = db()->prepare("SELECT v FROM settings WHERE k = 'map_config'");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     

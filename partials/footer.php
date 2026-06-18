@@ -20,6 +20,7 @@ $socialLinks = [
   'social_instagram' => ['icon' => 'fab fa-instagram',   'label' => 'Instagram'],
   'social_tiktok'    => ['icon' => 'fab fa-tiktok',      'label' => 'TikTok'],
   'social_youtube'   => ['icon' => 'fab fa-youtube',     'label' => 'YouTube'],
+  'social_google'    => ['icon' => 'fab fa-google',      'label' => 'Google'],
 ];
 ?>
 
@@ -193,6 +194,19 @@ if (true): ?>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Floating Social Bar -->
+<div class="floating-social">
+  <?php foreach ($socialLinks as $key => $s):
+    $url = trim((string)setting($key, ''));
+    if ($url === '') continue;
+    $hoverBg = $key === 'social_facebook' ? '#1877f2' : ($key === 'social_instagram' ? '#e4405f' : ($key === 'social_tiktok' ? '#000' : ($key === 'social_youtube' ? '#ff0000' : '#4285f4')));
+  ?>
+  <a href="<?= e($url) ?>" target="_blank" rel="noopener" class="floating-social-link" title="<?= e($s['label']) ?>" style="--social-hover:<?= $hoverBg ?>;">
+    <i class="<?= e($s['icon']) ?>"></i>
+  </a>
+  <?php endforeach; ?>
 </div>
 
 <style>

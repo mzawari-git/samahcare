@@ -20,6 +20,7 @@ $siteKeys = [
     'social_instagram',
     'social_tiktok',
     'social_youtube',
+    'social_google',
 ];
 
 $pricingKeys = [
@@ -200,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'اسم الشركة مطلوب (AR/EN)';
         }
 
-        $urlKeys = ['site_url', 'social_facebook', 'social_instagram', 'social_tiktok', 'social_youtube'];
+        $urlKeys = ['site_url', 'social_facebook', 'social_instagram', 'social_tiktok', 'social_youtube', 'social_google'];
         foreach ($urlKeys as $uk) {
             $v = trim((string)($data[$uk] ?? ''));
             if ($v === '') {
@@ -683,6 +684,10 @@ include __DIR__ . '/partials/header.php';
                     <div class="col-md-6" dir="ltr">
                         <label class="form-label">YouTube</label>
                         <input class="form-control" name="social_youtube" value="<?= e((string)($current['social_youtube'] ?? '')) ?>" placeholder="https://youtube.com/@yourchannel">
+                    </div>
+                    <div class="col-md-6" dir="ltr">
+                        <label class="form-label">Google Profile</label>
+                        <input class="form-control" name="social_google" value="<?= e((string)($current['social_google'] ?? '')) ?>" placeholder="https://maps.google.com/?cid=...">
                     </div>
                 </div>
             </div>

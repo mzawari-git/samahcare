@@ -2543,6 +2543,64 @@ textarea.form-control {
     font-size: 14px;
 }
 
+/* ─── Floating Social Bar ─── */
+.floating-social {
+    position: fixed;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 999;
+}
+
+[dir="rtl"] .floating-social {
+    left: auto;
+    right: 16px;
+}
+
+.floating-social-link {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, .85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, .1);
+    color: rgba(255, 255, 255, .75);
+    font-size: 17px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .3);
+    transition: all .25s ease;
+}
+
+.floating-social-link:hover {
+    background: var(--social-hover, var(--primary));
+    border-color: var(--social-hover, var(--primary));
+    color: white;
+    transform: scale(1.15) translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .4);
+}
+
+@media (max-width: 768px) {
+    .floating-social {
+        left: 10px;
+        gap: 6px;
+    }
+    [dir="rtl"] .floating-social {
+        left: auto;
+        right: 10px;
+    }
+    .floating-social-link {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
 /* ─────────────────────────────────────────────────
    INNER PAGES (car.php, offer.php, privacy, terms)
 ───────────────────────────────────────────────── */
